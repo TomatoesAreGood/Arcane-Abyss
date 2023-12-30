@@ -25,8 +25,9 @@ public class PlayerController : MonoBehaviour
 
     //Player Stats
     public static int maxHealth;
-
     public static int health;
+    public static int maxMana;
+    public static int mana;
 
     //Virtual Cam
     [SerializeField] CinemachineVirtualCamera cam;
