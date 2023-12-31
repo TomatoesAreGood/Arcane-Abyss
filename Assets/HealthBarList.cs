@@ -13,6 +13,7 @@ public class HealthBarList : MonoBehaviour
     private GameObject _firstFullHeart;
 
     //attributes used for changing heart sprites
+    private SpriteRenderer sr;
     private Image _imageSprite;
     public Sprite EmptyHeart;
     public Sprite FullHeart;
@@ -27,8 +28,10 @@ public class HealthBarList : MonoBehaviour
     {
         InstantiateFullHeart();
         InstantiateFullHeart();
-        ChangeFullHeart();
-        ChangeFullHeart();
+        InstantiateFullHeart();
+        EmptyFullHeart();
+
+
     }
 
     // Update is called once per frame
@@ -43,9 +46,9 @@ public class HealthBarList : MonoBehaviour
         GameObject newHeart = Instantiate(HealthHeart, gameObject.transform);
         if (this.StartNode == null)
         {
-            this.StartNode = HealthHeart;
+            this.StartNode = newHeart;
             _firstFullHeart = StartNode;
-            this.EndNode = HealthHeart;
+            this.EndNode = newHeart;
         }
         else
         {
@@ -63,17 +66,43 @@ public class HealthBarList : MonoBehaviour
             EndNode = newHeart;
         }
 
-
-        _firstFullHeart = EndNode;
+        _firstFullHeart = newHeart;
     }
 
-    public void ChangeFullHeart()
+    public void EmptyFullHeart()
     {
         _imageSprite = _firstFullHeart.GetComponent<Image>();
         _imageSprite.sprite = EmptyHeart;
 
-        _firstHeartClass = GetComponent<HealthBarNode>();
-        _firstFullHeart = _firstHeartClass.Previous;
-        //WHAT IS WRONG HERE
+        _firstHeartClass = _firstFullHeart.GetComponent<HealthBarNode>();
+        if (_firstHeartClass.Previous != null)
+        {
+            _firstFullHeart = _firstHeartClass.Previous;
+        }
+
+        ChangeColor();
+
+
+    }
+
+    public void FillEmptyHeart()
+    {
+
+        _imageSprite = _firstFullHeart.GetComponent<Image>();
+        _imageSprite.sprite = FullHeart;
+
+        _firstHeartClass = _firstFullHeart.GetComponent<HealthBarNode>();
+        if (_firstHeartClass.Next != null) {
+            _firstFullHeart = _firstHeartClass.Next;
+        }
+
+    }
+
+    public IEnumerator ChangeColor()
+    {
+        Debug.Log("color");
+        sr.color = Color.red;
+        yield return new WaitForSeconds(0.20f);
+        sr.color = Color.white;
     }
 }
