@@ -69,6 +69,7 @@ public class HealthBarList : MonoBehaviour
         _firstFullHeart = newHeart;
     }
 
+    // Change Heart Gameobject Sprite to Empty Heart Spirte
     public void EmptyFullHeart()
     {
         _imageSprite = _firstFullHeart.GetComponent<Image>();
@@ -85,6 +86,7 @@ public class HealthBarList : MonoBehaviour
 
     }
 
+    // Change Heart Gameobject Sprite to Full Heart Spirte
     public void FillEmptyHeart()
     {
 
@@ -100,6 +102,8 @@ public class HealthBarList : MonoBehaviour
 
     public IEnumerator ChangeColor()
     {
+
+        sr = _firstFullHeart.GetComponent<SpriteRenderer>();
         Debug.Log("color");
         sr.color = Color.red;
         yield return new WaitForSeconds(0.20f);

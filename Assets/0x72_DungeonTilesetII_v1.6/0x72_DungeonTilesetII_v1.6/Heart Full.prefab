@@ -88,3 +88,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a01d6a3a8ae3d19488084ed53b1170bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HeartSprite: {fileID: 0}
+  Next: {fileID: 0}
+  Previous: {fileID: 0}
