@@ -26,12 +26,7 @@ public class HealthBarList : MonoBehaviour
 
     private void Start()
     {
-        InstantiateFullHeart();
-        InstantiateFullHeart();
-        InstantiateFullHeart();
-        EmptyFullHeart();
-
-
+       
     }
 
     // Update is called once per frame
@@ -41,7 +36,7 @@ public class HealthBarList : MonoBehaviour
     }
 
     //instantiate a full heart sprite into the horizontal layout group; used when player can increase max health ingame
-    public void InstantiateFullHeart()
+    public void InstantiateHeart()
     {
         GameObject newHeart = Instantiate(HealthHeart, gameObject.transform);
         if (this.StartNode == null)
@@ -81,7 +76,6 @@ public class HealthBarList : MonoBehaviour
             _firstFullHeart = _firstHeartClass.Previous;
         }
 
-        ChangeColor();
 
 
     }
@@ -100,13 +94,5 @@ public class HealthBarList : MonoBehaviour
 
     }
 
-    public IEnumerator ChangeColor()
-    {
 
-        sr = _firstFullHeart.GetComponent<SpriteRenderer>();
-        Debug.Log("color");
-        sr.color = Color.red;
-        yield return new WaitForSeconds(0.20f);
-        sr.color = Color.white;
-    }
 }

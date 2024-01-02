@@ -29,6 +29,10 @@ public class PlayerController : MonoBehaviour
     public static int maxMana;
     public static int mana;
 
+    //Different Classes
+    public HealthBarList HealthBarList;
+    public ManaBar ManaBar;
+
     //Virtual Cam
     [SerializeField] CinemachineVirtualCamera cam;
 
@@ -44,9 +48,14 @@ public class PlayerController : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         // aimPivot = transform.GetChild(0).gameObject.transform;
-        maxHealth = 500;
+
+        IncreaseMaxHealth();
+        IncreaseMaxHealth();
+        IncreaseMaxHealth();
+
         health = maxHealth;
         activeCoroutine = null;
+
     }
 
     private void Update(){    
@@ -131,7 +140,20 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(.01f);
         }
     }
-    
+
+    public void IncreaseMaxHealth()
+    {
+        HealthBarList.InstantiateHeart();
+        maxHealth++;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        HealthBarList.EmptyFullHeart();
+        health -= damage;
+        
+    }
+
 
 
 }
