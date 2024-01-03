@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     //Player Stats
     public static int maxHealth;
     public static int health;
-    public static int maxMana;
+    public static int maxMana = 100;
     public static int mana;
 
     //Different Classes
@@ -49,11 +49,23 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         // aimPivot = transform.GetChild(0).gameObject.transform;
 
-        IncreaseMaxHealth();
-        IncreaseMaxHealth();
-        IncreaseMaxHealth();
+        ManaBar.SetMaxMana(maxMana);
+        // Mana Bar UI has same max mana as player stats
 
+        IncreaseMaxHealth();
+        IncreaseMaxHealth();
+        IncreaseMaxHealth();
         health = maxHealth;
+
+        Debug.Log(health);
+
+        TakeDamage(1);
+        TakeDamage(1);
+        Debug.Log(health);
+
+
+        // after increasing max health, set current health to max health
+
         activeCoroutine = null;
 
     }
@@ -151,9 +163,18 @@ public class PlayerController : MonoBehaviour
     {
         HealthBarList.EmptyFullHeart();
         health -= damage;
-        
     }
 
+    public void GainHeart()
+    {
+        if (health < maxHealth)
+        {
+            HealthBarList.FillEmptyHeart();
+            health += 1;
+            Debug.Log(health);
+        }
+
+    }
 
 
 }

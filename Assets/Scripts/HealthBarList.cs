@@ -83,14 +83,16 @@ public class HealthBarList : MonoBehaviour
     // Change Heart Gameobject Sprite to Full Heart Spirte
     public void FillEmptyHeart()
     {
+        _firstHeartClass = _firstFullHeart.GetComponent<HealthBarNode>();
+        if (_firstHeartClass.Next != null)
+        {
+            _firstFullHeart = _firstHeartClass.Next;
+        }
 
         _imageSprite = _firstFullHeart.GetComponent<Image>();
         _imageSprite.sprite = FullHeart;
 
-        _firstHeartClass = _firstFullHeart.GetComponent<HealthBarNode>();
-        if (_firstHeartClass.Next != null) {
-            _firstFullHeart = _firstHeartClass.Next;
-        }
+
 
     }
 

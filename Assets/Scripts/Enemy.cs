@@ -28,7 +28,9 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<PlayerController>())
         {
+            Debug.Log("collision");
             _player = collision.gameObject.GetComponent<PlayerController>();
+            /*_player.GainHeart();*/
             Attack();
         }
     }
