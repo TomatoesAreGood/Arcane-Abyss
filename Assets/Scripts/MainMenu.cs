@@ -9,4 +9,5 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+    //Code from Brackey's "START MENU in Unity" from Youtube
 }

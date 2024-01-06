@@ -4,23 +4,25 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-
-    private PlayerController _player;
+    protected int _damage;
+    protected int _speed;
+    public GameObject Player;
+    protected PlayerController _playerScript;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    private void Attack()
+    protected void Attack()
     {
-        _player.TakeDamage(1);
+        _playerScript.TakeDamage(1);
 
     }
 
@@ -29,7 +31,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.GetComponent<PlayerController>())
         {
             Debug.Log("collision");
-            _player = collision.gameObject.GetComponent<PlayerController>();
+            _playerScript = collision.gameObject.GetComponent<PlayerController>();
             /*_player.GainHeart();*/
             Attack();
         }

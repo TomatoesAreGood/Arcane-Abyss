@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
         // aimPivot = transform.GetChild(0).gameObject.transform;
 
         ManaBar.SetMaxMana(maxMana);
+        ManaBar.SetMana(maxMana);
         // Mana Bar UI has same max mana as player stats
 
         IncreaseMaxHealth();
