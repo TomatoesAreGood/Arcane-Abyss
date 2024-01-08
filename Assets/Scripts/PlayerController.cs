@@ -5,21 +5,21 @@ using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 
-
 public class PlayerController : MonoBehaviour
 {   
+    //SINGLETON
+    public static PlayerController instance;
+
     //Movement
     public float moveSpeed;
     private Vector2 movementDirection;
     public ContactFilter2D contactFilter;
     private float collisionOffset = 0.04f;
-
     public static Vector3 characterPos; //used by enemy and bullet class 
 
     //Components
     private SpriteRenderer sr;
     private Animator animator;
-    private Transform aimPivot;
     private Rigidbody2D rb;
     private List<RaycastHit2D> raycastHit2Ds;
 
@@ -29,53 +29,68 @@ public class PlayerController : MonoBehaviour
     public static int maxMana = 100;
     public static int mana;
 
-    //Different Classes
+    //UI
     public HealthBarList HealthBarList;
     public ManaBar ManaBar;
 
-    //Virtual Cam
+    //For Zooming in and out
     [SerializeField] CinemachineVirtualCamera cam;
-
     private Coroutine activeCoroutine;
-
     private const float DEFAULTZOOM = 5f;
 
+    //For orienting staffs 
+    public Transform firePoint;
+    public static Transform pivot;
+    public Staff equippedStaff;
+    public Spell equippedSpell;
+    private Spell spell1;
+    private Spell spell2;
+    private Spell spell3;
+    private Spell spell4;
+
+    //Spells
+    [SerializeField] GameObject ice;
+
+
+    //Staffs
+    [SerializeField] GameObject basicStaff;
+
+    //Inventory
     
+
+
     private void Start(){
+        instance = this;
+
         moveSpeed = 5f;
         rb = GetComponent<Rigidbody2D>();
         raycastHit2Ds = new List<RaycastHit2D>(0);
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        // aimPivot = transform.GetChild(0).gameObject.transform;
+
+        pivot = transform.GetChild(0).gameObject.transform;
+        firePoint = pivot.transform.GetChild(0);
+
+        equippedStaff = basicStaff.GetComponent<Staff>();
+        equippedSpell = ice.GetComponent<Spell>();
 
         ManaBar.SetMaxMana(maxMana);
         ManaBar.SetMana(maxMana);
         // Mana Bar UI has same max mana as player stats
 
-        IncreaseMaxHealth();
-        IncreaseMaxHealth();
-        IncreaseMaxHealth();
+        SetMaxHealth(5);
         health = maxHealth;
-
-        Debug.Log(health);
-
-        TakeDamage(1);
-        TakeDamage(1);
-        Debug.Log(health);
-
 
         // after increasing max health, set current health to max health
 
         activeCoroutine = null;
-
     }
 
-    private void Update(){    
-        //for debugging
-        if (Input.GetKeyDown(KeyCode.Space)){
-            Debug.Break();
-        }
+    private void Update(){ 
+       if (Input.GetMouseButtonDown(0)){
+            equippedSpell.Fire();
+       }
+
         if (Input.GetMouseButtonDown(1)) {
             if (activeCoroutine != null) {
                 StopCoroutine(activeCoroutine);
@@ -158,6 +173,12 @@ public class PlayerController : MonoBehaviour
     {
         HealthBarList.InstantiateHeart();
         maxHealth++;
+    }
+
+    public void SetMaxHealth(int num){
+        for (int i = 0; i < num;i++){
+            IncreaseMaxHealth();
+        }
     }
 
     public void TakeDamage(int damage)
