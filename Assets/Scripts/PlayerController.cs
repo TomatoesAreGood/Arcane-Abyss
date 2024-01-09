@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
 
     //Staff
-    [SerializeField] GameObject staff;
+    [SerializeField] GameObject basicStaff;
 
     //Inventory
     
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
         pivot = transform.GetChild(0).gameObject.transform;
         firePoint = pivot.transform.GetChild(0);
 
-        equippedStaff = staff.GetComponent<Staff>();
+        equippedStaff = basicStaff.GetComponent<Staff>();
         equippedSpell = magicMissle.GetComponent<Spell>();
         
         ManaBar.SetMaxMana(maxMana);
