@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
 
     //Spells
     [SerializeField] GameObject ice;
+    [SerializeField] GameObject fire;
 
 
     //Staffs
@@ -72,7 +73,7 @@ public class PlayerController : MonoBehaviour
         firePoint = pivot.transform.GetChild(0);
 
         equippedStaff = basicStaff.GetComponent<Staff>();
-        equippedSpell = ice.GetComponent<Spell>();
+        equippedSpell = fire.GetComponent<Spell>();
 
         ManaBar.SetMaxMana(maxMana);
         ManaBar.SetMana(maxMana);

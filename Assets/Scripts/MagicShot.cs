@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class MagicShot : MonoBehaviour
 {
+    protected Animator animator;
     protected int damage;
 
     protected virtual void Start(){
-        damage = 1;   
+        damage = 1; 
+        animator = gameObject.GetComponent<Animator>();  
     }
 
     protected virtual void Update(){
@@ -22,7 +24,7 @@ public class MagicShot : MonoBehaviour
         damage += dmg;
     }
 
-    protected void OnTriggerEnter2D(Collider2D other){
+    protected virtual void OnTriggerEnter2D(Collider2D other){
         if (other.CompareTag("Player"))
         {
             return;
