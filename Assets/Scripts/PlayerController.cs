@@ -58,24 +58,41 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject basicStaff;
 
     //Inventory
-    
+    public Inventory inventory;
+    public InventoryUI inventoryUI;
+    public (int, int) inventorySize;
+    public int spellSlots;
 
 
-    private void Start(){
-        instance = this;
+    private void Awake(){
+        //Singleton
+        if (instance == null){
+            instance = this;
+        }else{
+            Destroy(this);
+        }
 
+        //set default player stats
         moveSpeed = 5f;
+        inventorySize = (4,6);
+        spellSlots = 4;
+
+        //components
         rb = GetComponent<Rigidbody2D>();
         raycastHit2Ds = new List<RaycastHit2D>(0);
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
 
+        //for shooting magic
         pivot = transform.GetChild(0).gameObject.transform;
         firePoint = pivot.transform.GetChild(0);
 
         equippedStaff = basicStaff.GetComponent<Staff>();
         equippedSpell = magicMissle.GetComponent<Spell>();
         
+        maxMana = 100;
+        mana = maxMana;
+
         ManaBar.SetMaxMana(maxMana);
         ManaBar.SetMana(maxMana);
         // Mana Bar UI has same max mana as player stats
@@ -91,6 +108,14 @@ public class PlayerController : MonoBehaviour
     private void Update(){ 
        if (Input.GetMouseButtonDown(0)){
             equippedSpell.Fire();
+       }
+
+       if(Input.GetKeyDown(KeyCode.E)){
+            if (inventoryUI.isOpen){
+                inventoryUI.Disable();
+            }else{
+                inventoryUI.Enable();
+            }
        }
 
         if (Input.GetMouseButtonDown(1)) {

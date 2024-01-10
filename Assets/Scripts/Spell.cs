@@ -15,6 +15,7 @@ public class Spell : MonoBehaviour
     {
         nextAvailFire = Time.time;
         fireRate = 2;
+        manaCost = 5;
         speed = 10;
     }
     public virtual void Fire() {
@@ -29,6 +30,7 @@ public class Spell : MonoBehaviour
             magicShot.GetComponent<Rigidbody2D>().AddForce(shootDirection * speed, ForceMode2D.Impulse);
 
             nextAvailFire = Time.time + 1/fireRate;
+            PlayerController.mana -= manaCost;
         }
     }
 }
