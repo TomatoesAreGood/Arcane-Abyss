@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NewBehaviourScript : MonoBehaviour
 {
@@ -39,4 +40,18 @@ public class NewBehaviourScript : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
     }
+
+    public void ReturntoMain()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Menu");
+    }
+
+    public void Options()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Options");
+    }
+
+
 }
