@@ -58,10 +58,9 @@ public class EnemyPouncer : Enemy
 
             case State.MoveAway:
                 _path.canMove = false;
-
-                Vector2 awayVector = new Vector2(-hit.point.x, -hit.point.y);
-                transform.position = Vector2.MoveTowards(transform.position, hit.point, -hit.distance);
-                if (Vector2.Distance(transform.position, Player.transform.position) > 2.5f)
+                transform.position = Vector2.MoveTowards(transform.position.normalized, hit.point.normalized, -3f * Time.deltaTime);
+                StartCoroutine(MoveAwayHandler());
+                if ((Vector2.Distance(transform.position, hit.point) > 2.5f))
                 {
                     state = State.ChaseTarget;
                 }

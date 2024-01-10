@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     protected bool isPouncing;
     protected bool canPounce = true;
     protected bool isPounceHandlerRunning = false;
+    protected bool isMovingAway = false;
 
     protected State state;
     protected Collider2D[] _collider;
@@ -50,8 +51,14 @@ public class Enemy : MonoBehaviour
 
             case State.MoveAway:
                 _path.canMove = false;
-
+                transform.position = Vector2.MoveTowards(transform.position.normalized, hit.point.normalized, -3f * Time.deltaTime);
+                StartCoroutine(MoveAwayHandler());
+                if ((Vector2.Distance(transform.position, hit.point) > 2.5f))
+                {
+                    state = State.ChaseTarget;
+                }
                 break;
+
         }
 
 
@@ -82,7 +89,6 @@ public class Enemy : MonoBehaviour
             if (hit.collider != null)
             {
                 state = State.MoveAway;
-                Debug.Log(hit.collider);
             }
 
             angle = angle + angleIncrement;
@@ -98,6 +104,11 @@ public class Enemy : MonoBehaviour
     {
         _playerScript.TakeDamage(1);
 
+    }
+
+    protected IEnumerator MoveAwayHandler()
+    {
+        yield return new WaitForSeconds(0.5f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
