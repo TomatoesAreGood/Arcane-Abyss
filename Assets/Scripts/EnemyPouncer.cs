@@ -6,19 +6,9 @@ using UnityEngine;
 
 public class EnemyPouncer : Enemy
 {
-    private enum State
-    {
-        Poucing,
-        ChaseTarget,
-    }
 
-    private State state;
-    private AIPath _path;
-    private float targetRange = 3f;
 
-    private bool isPouncing;
-    private bool canPounce = true;
-    private bool isPounceHandlerRunning = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +28,7 @@ public class EnemyPouncer : Enemy
             case State.ChaseTarget:
                 _path.canMove = true;
                 FindTarget();
+                FindEnemy();
                 break;
 
             case State.Poucing:
@@ -63,21 +54,29 @@ public class EnemyPouncer : Enemy
                     state = State.ChaseTarget;
                 }
                 break;
+            // state machine cited from Code Monkey's video "Simple Enemy AI in Unity (State Machine, Find Target, Chase, Attack)" from Youtube
+
+            case State.MoveAway:
+                _path.canMove = false;
+                transform.position = Vector2.MoveTowards(transform.position.normalized, hit.point.normalized, -3f * Time.deltaTime);
+                StartCoroutine(MoveAwayHandler());
+                if ((Vector2.Distance(transform.position, hit.point) > 2.5f))
+                {
+                    state = State.ChaseTarget;
+                }
+                break;
         }
-        // state machine cited from Code Monkey's video "Simple Enemy AI in Unity (State Machine, Find Target, Chase, Attack)" from Youtube
 
     }
 
-    private void FindTarget()
-    {
-        float targetRange = 2.5f;
-        if (Vector2.Distance(transform.position, Player.transform.position) < targetRange)
+
+
+    /*    private void OnDrawGizmos()
         {
-            //player is within pounching range
-            Debug.Log("within range");
-            state = State.Poucing;
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawSphere(transform.position, 2.5f);
         }
-    }
+    */
 
     IEnumerator PounceHandler()
     {
