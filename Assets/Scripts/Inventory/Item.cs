@@ -12,13 +12,13 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     public int value;
     public string title;
     public string desc;
-    private Transform parentAfterDrag;
-    public Image image;
+    [HideInInspector] public Transform parentAfterDrag;
+    private Image image;
 
     // Start is called before the first frame update
     void Awake()
     {
-        //image = gameObject.GetComponent<Image>();
+        image = gameObject.GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -35,7 +35,7 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     {
         
         transform.SetParent(parentAfterDrag);
-        image.raycastTarget = false;
+        image.raycastTarget = true;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -49,7 +49,7 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         parentAfterDrag = transform.parent; 
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
-        image.raycastTarget = true;
+        image.raycastTarget = false;
 
 
     }

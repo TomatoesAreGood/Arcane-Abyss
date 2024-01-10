@@ -40,6 +40,7 @@ public class InventoryUI : MonoBehaviour
                 if (r%2==0){
                     Instantiate(StaffItem, slot.transform);
                 }
+
             }
         }
 
@@ -66,13 +67,14 @@ public class InventoryUI : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
-    {       
-
+    private void Update() {       
         if (isOpen){
             gameObject.SetActive(true);
         }else{
             gameObject.SetActive(false);
         }
+
+
+        
     }
 }
