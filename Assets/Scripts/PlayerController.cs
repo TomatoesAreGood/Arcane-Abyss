@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
         //set default player stats
         moveSpeed = 5f;
-        inventorySize = (4,6);
+        inventorySize = (4,10);
         spellSlots = 4;
 
         //components

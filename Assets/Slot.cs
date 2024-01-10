@@ -8,9 +8,13 @@ public class Slot : MonoBehaviour, IDropHandler
 {
     public void OnDrop(PointerEventData eventData)
     {
-        GameObject dropped = eventData.pointerDrag;
-        Item item = dropped.GetComponent<Item>();
-        item.parentAfterDrag = transform;
+
+        if (transform.childCount == 0){
+            GameObject dropped = eventData.pointerDrag;
+            Item item = dropped.GetComponent<Item>();
+            item.parentAfterDrag = transform;
+        }
+        
 
     }
 
@@ -18,7 +22,7 @@ public class Slot : MonoBehaviour, IDropHandler
     void Start()
     {
     
-    
+
     }
 
     // Update is called once per frame
