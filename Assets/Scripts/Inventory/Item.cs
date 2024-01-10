@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 using UnityEngine.EventSystems;
 
 public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
@@ -11,11 +13,12 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     public string title;
     public string desc;
     private Transform parentAfterDrag;
+    public Image image;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        //image = gameObject.GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -30,12 +33,15 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        
         transform.SetParent(parentAfterDrag);
+        image.raycastTarget = false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        transform.position = Input.mousePosition;
+
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -43,6 +49,9 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         parentAfterDrag = transform.parent; 
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
+        image.raycastTarget = true;
+
+
     }
 
 

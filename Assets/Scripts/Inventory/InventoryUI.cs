@@ -36,7 +36,7 @@ public class InventoryUI : MonoBehaviour
         for (int r = 0; r < row; r++){
             for(int c = 0; c < col; c++){
                 GameObject slot = Instantiate(Slot, inventory.transform);
-                slot.transform.position = new Vector2(origin.x + c*0.9f, origin.y+ -r*0.9f);
+                slot.transform.position = new Vector2(origin.x + c*100f, origin.y+ -r*100f);
                 if (r%2==0){
                     Instantiate(StaffItem, slot.transform);
                 }
