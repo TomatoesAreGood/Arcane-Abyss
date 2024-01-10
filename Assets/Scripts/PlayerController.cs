@@ -5,21 +5,21 @@ using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 
-
 public class PlayerController : MonoBehaviour
 {   
+    //SINGLETON
+    public static PlayerController instance;
+
     //Movement
     public float moveSpeed;
     private Vector2 movementDirection;
     public ContactFilter2D contactFilter;
     private float collisionOffset = 0.04f;
-
     public static Vector3 characterPos; //used by enemy and bullet class 
 
     //Components
     private SpriteRenderer sr;
     private Animator animator;
-    private Transform aimPivot;
     private Rigidbody2D rb;
     private List<RaycastHit2D> raycastHit2Ds;
 
@@ -29,53 +29,95 @@ public class PlayerController : MonoBehaviour
     public static int maxMana = 100;
     public static int mana;
 
-    //Different Classes
+    //UI
     public HealthBarList HealthBarList;
     public ManaBar ManaBar;
 
-    //Virtual Cam
+    //For Zooming in and out
     [SerializeField] CinemachineVirtualCamera cam;
-
     private Coroutine activeCoroutine;
-
     private const float DEFAULTZOOM = 5f;
 
-    
-    private void Start(){
+    //For orienting staffs 
+    public Transform firePoint;
+    public static Transform pivot;
+    public Staff equippedStaff;
+    public Spell equippedSpell;
+    private Spell spell1;
+    private Spell spell2;
+    private Spell spell3;
+    private Spell spell4;
+
+    //Spells
+    [SerializeField] GameObject ice;
+    [SerializeField] GameObject fire;
+    [SerializeField] GameObject magicMissle;
+
+
+    //Staff
+    [SerializeField] GameObject basicStaff;
+
+    //Inventory
+    public Inventory inventory;
+    public InventoryUI inventoryUI;
+    public (int, int) inventorySize;
+    public int spellSlots;
+
+
+    private void Awake(){
+        //Singleton
+        if (instance == null){
+            instance = this;
+        }else{
+            Destroy(this);
+        }
+
+        //set default player stats
         moveSpeed = 5f;
+        inventorySize = (4,6);
+        spellSlots = 4;
+
+        //components
         rb = GetComponent<Rigidbody2D>();
         raycastHit2Ds = new List<RaycastHit2D>(0);
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        // aimPivot = transform.GetChild(0).gameObject.transform;
+
+        //for shooting magic
+        pivot = transform.GetChild(0).gameObject.transform;
+        firePoint = pivot.transform.GetChild(0);
+
+        equippedStaff = basicStaff.GetComponent<Staff>();
+        equippedSpell = magicMissle.GetComponent<Spell>();
+        
+        maxMana = 100;
+        mana = maxMana;
 
         ManaBar.SetMaxMana(maxMana);
         ManaBar.SetMana(maxMana);
         // Mana Bar UI has same max mana as player stats
 
-        IncreaseMaxHealth();
-        IncreaseMaxHealth();
-        IncreaseMaxHealth();
+        IncreaseMaxHealth(5);
         health = maxHealth;
-
-        Debug.Log(health);
-
-        TakeDamage(1);
-        TakeDamage(1);
-        Debug.Log(health);
-
 
         // after increasing max health, set current health to max health
 
         activeCoroutine = null;
-
     }
 
-    private void Update(){    
-        //for debugging
-        if (Input.GetKeyDown(KeyCode.Space)){
-            Debug.Break();
-        }
+    private void Update(){ 
+       if (Input.GetMouseButtonDown(0)){
+            equippedSpell.Fire();
+       }
+
+       if(Input.GetKeyDown(KeyCode.E)){
+            if (inventoryUI.isOpen){
+                inventoryUI.Disable();
+            }else{
+                inventoryUI.Enable();
+            }
+       }
+
         if (Input.GetMouseButtonDown(1)) {
             if (activeCoroutine != null) {
                 StopCoroutine(activeCoroutine);
@@ -158,6 +200,12 @@ public class PlayerController : MonoBehaviour
     {
         HealthBarList.InstantiateHeart();
         maxHealth++;
+    }
+
+    public void IncreaseMaxHealth(int num){
+        for (int i = 0; i < num;i++){
+            IncreaseMaxHealth();
+        }
     }
 
     public void TakeDamage(int damage)
