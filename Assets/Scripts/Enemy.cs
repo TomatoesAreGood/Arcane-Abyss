@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour
         Poucing,
         ChaseTarget,
         MoveAway,
+        Shooting,
     }
     void Start()
     {
