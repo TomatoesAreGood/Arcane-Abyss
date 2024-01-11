@@ -48,8 +48,7 @@ public class EnemyPouncer : Enemy
 
                 }
 
-                Debug.Log("moving");
-                if (distance >= targetRange && !canPounce)
+                if (distance >= 2.5 && !canPounce)
                 {
                     state = State.ChaseTarget;
                 }
@@ -59,8 +58,7 @@ public class EnemyPouncer : Enemy
             case State.MoveAway:
                 _path.canMove = false;
                 transform.position = Vector2.MoveTowards(transform.position.normalized, hit.point.normalized, -3f * Time.deltaTime);
-                StartCoroutine(MoveAwayHandler());
-                if ((Vector2.Distance(transform.position, hit.point) > 2.5f))
+                if (Vector2.Distance(transform.position, hit.point) > 2.5f)
                 {
                     state = State.ChaseTarget;
                 }
