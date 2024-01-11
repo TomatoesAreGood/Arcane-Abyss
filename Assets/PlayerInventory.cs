@@ -8,6 +8,7 @@ public class PlayerInventory : MonoBehaviour
     // Start is called before the first frame update
     public bool[] IsFull;
     public GameObject[] slots; 
+    public GameObject[] inventory;
     
     
     void Start()

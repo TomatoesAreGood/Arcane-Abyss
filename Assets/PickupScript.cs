@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
 public class PickupScript : MonoBehaviour
@@ -20,10 +21,13 @@ public class PickupScript : MonoBehaviour
             {
                 if (inventory.IsFull[i] == false)
                 {
-                    //ADD ITEM TO INVENTORY
+                    
+
                     Debug.Log("picked up item");
                     inventory.IsFull[i] = true;
-                    //Instantiate(itembutton, inventory.slots[i].transform);
+                    RectTransform resize = itembutton.GetComponent<RectTransform>();
+                    resize.sizeDelta = new Vector2(250, 250);
+                    Instantiate(itembutton, inventory.slots[i].transform, false);
                     Destroy(gameObject);
                     break;
                 }
