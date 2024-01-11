@@ -76,6 +76,10 @@ public class PlayerController : MonoBehaviour
         moveSpeed = 5f;
         inventorySize = (4,10);
         spellSlots = 4;
+        inventory = new Inventory();
+        // inventory.itemGrid[0,0] = InventoryUI.instance.StaffItem.GetComponent<Item>();
+
+     
 
         //components
         rb = GetComponent<Rigidbody2D>();
@@ -106,6 +110,10 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update(){ 
+        if(Input.GetKeyDown(KeyCode.Space)){
+            Debug.Break();
+        }
+
        if (Input.GetMouseButtonDown(0)){
             equippedSpell.Fire();
        }

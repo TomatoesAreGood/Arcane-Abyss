@@ -6,6 +6,10 @@ using UnityEngine.EventSystems;
 
 public class Slot : MonoBehaviour, IDropHandler
 {
+    
+    public bool IsEmpty(){
+        return transform.childCount == 0;
+    }
     public void OnDrop(PointerEventData eventData)
     {
 
@@ -14,8 +18,6 @@ public class Slot : MonoBehaviour, IDropHandler
             Item item = dropped.GetComponent<Item>();
             item.parentAfterDrag = transform;
         }
-        
-
     }
 
     // Start is called before the first frame update
