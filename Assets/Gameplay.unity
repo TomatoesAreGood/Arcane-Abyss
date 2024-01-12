@@ -371,8 +371,8 @@ Canvas:
   m_GameObject: {fileID: 372538832}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 887400926}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -383,7 +383,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!224 &372538836
 RectTransform:
@@ -1359,6 +1359,7 @@ MonoBehaviour:
   IsFull: 00
   slots:
   - {fileID: 1440054117}
+  inventory: []
 --- !u!1 &887400924
 GameObject:
   m_ObjectHideFlags: 0
@@ -6551,11 +6552,11 @@ PrefabInstance:
       objectReference: {fileID: 3431352438302591192, guid: 9a7c78ece87a4b64eb662ec64d4c21f6, type: 3}
     - target: {fileID: 2843424841829007199, guid: 9a7c78ece87a4b64eb662ec64d4c21f6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.88
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2843424841829007199, guid: 9a7c78ece87a4b64eb662ec64d4c21f6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.84
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2843424841829007199, guid: 9a7c78ece87a4b64eb662ec64d4c21f6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6578,6 +6579,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2843424841829007199, guid: 9a7c78ece87a4b64eb662ec64d4c21f6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 6.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843424841829007199, guid: 9a7c78ece87a4b64eb662ec64d4c21f6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843424841829007199, guid: 9a7c78ece87a4b64eb662ec64d4c21f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -6592,6 +6601,10 @@ PrefabInstance:
     - target: {fileID: 3431352438302591192, guid: 9a7c78ece87a4b64eb662ec64d4c21f6, type: 3}
       propertyPath: m_Name
       value: PlaceHolderItem
+      objectReference: {fileID: 0}
+    - target: {fileID: 3431352438302591192, guid: 9a7c78ece87a4b64eb662ec64d4c21f6, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
