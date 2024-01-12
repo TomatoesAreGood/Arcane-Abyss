@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
     public int spellSlots;
 
 
-    private void Awake(){
+    private void Start(){
         //Singleton
         if (instance == null){
             instance = this;
@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
         inventoryHeight = 4;
         inventoryWidth = 10;
         spellSlots = 4;
-        inventory = new Inventory(inventoryWidth*inventoryHeight, 4);
+        inventory = new Inventory(inventoryWidth*inventoryHeight, spellSlots);
 
         inventory.items[0] = ItemLibrary.instance.basicStaff.GetComponent<StaffItem>();
      

@@ -7,8 +7,7 @@ public class ItemLibrary : MonoBehaviour
     public static ItemLibrary instance;
     public GameObject basicStaff;
     // Start is called before the first frame update
-    private void Awake()
-    {
+    private void Awake(){
         if(instance == null){
             instance = this;
         }else{
