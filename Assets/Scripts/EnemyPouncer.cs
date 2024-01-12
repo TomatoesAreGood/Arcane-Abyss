@@ -8,13 +8,14 @@ public class EnemyPouncer : Enemy
 {
 
 
-
+    private float moveSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
         state = State.ChaseTarget;
         _path = GetComponent<AIPath>();
+        moveSpeed = _path.maxSpeed;
     }
 
 
@@ -57,7 +58,11 @@ public class EnemyPouncer : Enemy
 
             case State.MoveAway:
                 _path.canMove = false;
-                transform.position = Vector2.MoveTowards(transform.position.normalized, hit.point.normalized, -3f * Time.deltaTime);
+                if (Vector2.Distance(transform.position, hit.point) < 1)
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, hit.point.normalized, -Time.deltaTime);
+                }
+                transform.position = Vector2.MoveTowards(transform.position, hit.point, -3f * Time.deltaTime);
                 if (Vector2.Distance(transform.position, hit.point) > 2.5f)
                 {
                     state = State.ChaseTarget;
