@@ -13,7 +13,6 @@ public class Enemy : MonoBehaviour
     private LayerMask _layerMask;
 
     protected AIPath _path;
-    protected float targetRange;
 
     protected bool isPouncing;
     protected bool canPounce = true;
@@ -31,6 +30,7 @@ public class Enemy : MonoBehaviour
         Poucing,
         ChaseTarget,
         MoveAway,
+        PlayerMoveAway,
         Shooting,
     }
     void Start()
@@ -53,7 +53,6 @@ public class Enemy : MonoBehaviour
             case State.MoveAway:
                 _path.canMove = false;
                 transform.position = Vector2.MoveTowards(transform.position.normalized, hit.point.normalized, -3f * Time.deltaTime);
-                StartCoroutine(MoveAwayHandler());
                 if ((Vector2.Distance(transform.position, hit.point) > 2.5f))
                 {
                     state = State.ChaseTarget;
@@ -89,6 +88,7 @@ public class Enemy : MonoBehaviour
 
             if (hit.collider != null)
             {
+                Debug.Log("enemy detected");
                 state = State.MoveAway;
             }
 
@@ -107,10 +107,7 @@ public class Enemy : MonoBehaviour
 
     }
 
-    protected IEnumerator MoveAwayHandler()
-    {
-        yield return new WaitForSeconds(0.5f);
-    }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
