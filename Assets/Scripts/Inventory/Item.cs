@@ -7,15 +7,16 @@ using UnityEngine.EventSystems;
 
 public class Item : MonoBehaviour
 { 
-    public int length;
-    public int width;
     public int value;
     public string title;
     public string desc;
+
     [HideInInspector] public Transform parentAfterDrag;
     [HideInInspector] public Image image;
     private RectTransform rectTransform;
     public bool IsMouseOnItem => RectTransformUtility.RectangleContainsScreenPoint(rectTransform, Input.mousePosition, Camera.main);
+    public new InventoryRenderer renderer;
+    public Item[] inventory;
 
 
     // Start is called before the first frame update
@@ -24,13 +25,20 @@ public class Item : MonoBehaviour
         image = gameObject.GetComponent<Image>();
         rectTransform = gameObject.GetComponent<RectTransform>();
         parentAfterDrag = transform.parent; 
+        
+        renderer = InventoryRenderer.instance;
+        inventory = PlayerController.instance.inventory.items;
     }
 
     // Update is called once per frame
-    protected void Update()
+    protected virtual void Update()
     {
         //on click
         if(IsMouseOnItem && Input.GetMouseButtonDown(0)){
+            Vector2 coords = renderer.GetMatrixCoords(renderer.bottomLeft, Input.mousePosition);
+            int index = (int)coords.x*PlayerController.instance.inventoryWidth + (int)coords.y;
+
+            PlayerController.instance.inventory.items[index] = null;
             parentAfterDrag = transform.parent; 
             image.raycastTarget = false;
         }
@@ -42,10 +50,14 @@ public class Item : MonoBehaviour
         }
         //on drop
         if(MousePointer.instance.IsSelected(this) && Input.GetMouseButtonUp(0)){
-            Vector2 coords = InventoryUI.instance.GetMatrixCoords(Input.mousePosition);
+            Vector2 coords = renderer.GetMatrixCoords(renderer.bottomLeft, Input.mousePosition);
+            int index = (int)coords.x*PlayerController.instance.inventoryWidth + (int)coords.y;
+            Debug.Log(coords.x + " " + coords.y);
+            Debug.Log(index);
             if(!coords.Equals(Vector2.negativeInfinity)){
-                if (PlayerController.instance.inventory.itemGrid[(int)coords.y, (int)coords.x] == null){
-                    parentAfterDrag = InventoryUI.instance.inventory.transform.GetChild((int)coords.y*PlayerController.instance.inventorySize.Item2 + (int)coords.x);
+                if (inventory[index] == null){
+                    inventory[index] = this;
+                    parentAfterDrag = renderer.GetTransform(index);
                 }
             }
             transform.SetParent(parentAfterDrag);

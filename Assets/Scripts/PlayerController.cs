@@ -59,8 +59,9 @@ public class PlayerController : MonoBehaviour
 
     //Inventory
     public Inventory inventory;
-    public InventoryUI inventoryUI;
-    public (int, int) inventorySize;
+    public InventoryRenderer inventoryUI;
+    public int inventoryHeight;
+    public int inventoryWidth;
     public int spellSlots;
 
 
@@ -74,13 +75,13 @@ public class PlayerController : MonoBehaviour
 
         //set default player stats
         moveSpeed = 5f;
-        inventorySize = (4,10);
+        inventoryHeight = 4;
+        inventoryWidth = 10;
         spellSlots = 4;
-        inventory = new Inventory();
-        // inventory.itemGrid[0,0] = InventoryUI.instance.StaffItem.GetComponent<Item>();
+        inventory = new Inventory(inventoryWidth*inventoryHeight, 4);
 
+        inventory.items[0] = ItemLibrary.instance.basicStaff.GetComponent<StaffItem>();
      
-
         //components
         rb = GetComponent<Rigidbody2D>();
         raycastHit2Ds = new List<RaycastHit2D>(0);
@@ -119,6 +120,7 @@ public class PlayerController : MonoBehaviour
        }
 
        if(Input.GetKeyDown(KeyCode.E)){
+
             if (inventoryUI.isOpen){
                 inventoryUI.Disable();
             }else{
