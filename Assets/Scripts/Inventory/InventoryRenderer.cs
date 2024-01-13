@@ -8,15 +8,9 @@ using UnityEngine;
 public class InventoryRenderer : MonoBehaviour
 {
     public GameObject Slot;
-    public static InventoryRenderer instance;
     public bool isOpen;
-    public GameObject inventoryUI;
     public Vector2 bottomLeft;
-   
-
-    //items
-    public GameObject StaffItem;
-     
+        
     public Vector2 GetMatrixCoords(Vector2 bottomLeft, Vector2 screenPoint){
         bottomLeft = new Vector2(bottomLeft.x - 50, bottomLeft.y-50);
 
@@ -34,22 +28,14 @@ public class InventoryRenderer : MonoBehaviour
 
     private void Start()
     {
-        bottomLeft = Camera.main.WorldToScreenPoint(inventoryUI.transform.position);
+        bottomLeft = Camera.main.WorldToScreenPoint(transform.position);
 
-        Inventory inventory = PlayerController.instance.inventory;
 
-        if (instance == null){
-            instance = this;
-        }else{
-            Destroy(this);
-        }
-
-        inventoryUI = transform.GetChild(1).gameObject;
-        Vector2 origin = Camera.main.WorldToScreenPoint(inventoryUI.transform.position);
+        Vector2 origin = Camera.main.WorldToScreenPoint(transform.position);
 
         DrawMatrix(PlayerController.instance.inventoryHeight,PlayerController.instance.inventoryWidth);
 
-        inventoryUI.transform.position = new Vector3(inventoryUI.transform.position.x, inventoryUI.transform.position.y, inventoryUI.transform.position.z + 100);
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 100);
 
         // RectTransform rt = inventory.GetComponent<RectTransform>();
         // rt.sizeDelta = new Vector2(gridLen*100, gridRow*100);
@@ -68,7 +54,7 @@ public class InventoryRenderer : MonoBehaviour
 
         for(int r = 0; r < height; r++){
             for(int c = 0; c < width; c++){
-                 GameObject slot = Instantiate(Slot, inventoryUI.transform);
+                 GameObject slot = Instantiate(Slot, transform);
                 slot.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(bottomLeft.x + 100*c, bottomLeft.y+ 100*r));
 
                 if(inventory.items[r*PlayerController.instance.inventoryWidth + c] == null){
@@ -107,7 +93,7 @@ public class InventoryRenderer : MonoBehaviour
     }
 
     public Transform GetTransform(int index){
-        return inventoryUI.transform.GetChild(index);
+        return transform.GetChild(index);
 
     }
 }

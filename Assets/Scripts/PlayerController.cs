@@ -59,10 +59,15 @@ public class PlayerController : MonoBehaviour
 
     //Inventory
     public Inventory inventory;
+
     public InventoryRenderer inventoryUI;
+    public InventoryRenderer spellsUI;
+    public InventoryRenderer potionBagUI;
+
     public int inventoryHeight;
     public int inventoryWidth;
     public int spellSlots;
+    public int potionBagSize;
 
 
     private void Start(){
@@ -78,7 +83,8 @@ public class PlayerController : MonoBehaviour
         inventoryHeight = 4;
         inventoryWidth = 10;
         spellSlots = 4;
-        inventory = new Inventory(inventoryWidth*inventoryHeight, spellSlots);
+        potionBagSize = 4;
+        inventory = new Inventory(inventoryWidth*inventoryHeight, spellSlots, potionBagSize);
 
         inventory.items[0] = ItemLibrary.instance.basicStaff.GetComponent<StaffItem>();
      
@@ -110,7 +116,19 @@ public class PlayerController : MonoBehaviour
         activeCoroutine = null;
     }
 
-    private void Update(){ 
+    private void Update(){
+        string a = "";
+        foreach (Item item in inventory.items) {
+            if (item == null)
+            {
+                a += " ,";
+            }
+            else {
+                a += item.ToString() + ",";
+            }
+
+        }
+        Debug.Log(inventory.items);
         if(Input.GetKeyDown(KeyCode.Space)){
             Debug.Break();
         }
