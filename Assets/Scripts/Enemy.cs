@@ -88,7 +88,7 @@ public class Enemy : MonoBehaviour
 
             if (hit.collider != null)
             {
-                Debug.Log("enemy detected");
+                // Debug.Log("enemy detected");
                 state = State.MoveAway;
             }
 

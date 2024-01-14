@@ -36,15 +36,15 @@ public class Item : MonoBehaviour
         rectTransform = gameObject.GetComponent<RectTransform>();
         parentAfterDrag = transform.parent;
         if (rendererSelection == Renderers.inventory) {
-            renderer = PlayerController.instance.inventoryUI;
+            renderer = PlayerController.instance.inventoryUI.inventoryRenderer;
             inventory = PlayerController.instance.inventory.items;
         }
         else if (rendererSelection == Renderers.spells) {
-            renderer = PlayerController.instance.spellsUI;
+            renderer = PlayerController.instance.inventoryUI.spellsRenderer;
             inventory = PlayerController.instance.inventory.spells;
         }
         else if (rendererSelection == Renderers.potion) {
-            renderer = PlayerController.instance.potionBagUI;
+            renderer = PlayerController.instance.inventoryUI.potionBagRenderer;
             inventory = PlayerController.instance.inventory.potions;
         }
     }
@@ -56,12 +56,12 @@ public class Item : MonoBehaviour
         if(IsMouseOnItem && Input.GetMouseButtonDown(0)){
             Vector2 coords = renderer.GetMatrixCoords(renderer.bottomLeft, Input.mousePosition);
 
-            if (renderer == PlayerController.instance.inventoryUI) {
+            if (rendererSelection == Renderers.inventory) {
                 int index = (int)coords.x * PlayerController.instance.inventoryWidth + (int)coords.y;
                 PlayerController.instance.inventory.items[index] = null;
-            } else if (renderer == PlayerController.instance.spellsUI) {
+            } else if (rendererSelection == Renderers.spells) {
                 PlayerController.instance.inventory.spells[(int)coords.y] = null;
-            }else if (renderer == PlayerController.instance.potionBagUI) {
+            }else if (rendererSelection == Renderers.potion) {
                 PlayerController.instance.inventory.potions[(int)coords.y] = null;
             }
             parentAfterDrag = transform.parent; 
@@ -77,7 +77,7 @@ public class Item : MonoBehaviour
         if(MousePointer.instance.IsSelected(this) && Input.GetMouseButtonUp(0)){
             Vector2 coords = renderer.GetMatrixCoords(renderer.bottomLeft, Input.mousePosition);
 
-            if (renderer == PlayerController.instance.inventoryUI){
+            if (rendererSelection == Renderers.inventory){
                 int index = (int)coords.x * PlayerController.instance.inventoryWidth + (int)coords.y;
 
                 if (!coords.Equals(Vector2.negativeInfinity))
@@ -89,7 +89,7 @@ public class Item : MonoBehaviour
                     }
                 }
             }
-            else if (renderer == PlayerController.instance.spellsUI)
+            else if (rendererSelection == Renderers.spells)
             {
                 int index = (int)coords.y;
 
@@ -102,7 +102,7 @@ public class Item : MonoBehaviour
                     }
                 }
             }
-            else if (renderer == PlayerController.instance.potionBagUI)
+            else if (rendererSelection == Renderers.potion)
             {
                 int index = (int)coords.y;
 

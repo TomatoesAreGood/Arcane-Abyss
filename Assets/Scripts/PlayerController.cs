@@ -60,17 +60,17 @@ public class PlayerController : MonoBehaviour
     //Inventory
     public Inventory inventory;
 
-    public InventoryRenderer inventoryUI;
-    public InventoryRenderer spellsUI;
-    public InventoryRenderer potionBagUI;
+    public InventoryUI inventoryUI;
 
     public int inventoryHeight;
     public int inventoryWidth;
     public int spellSlots;
     public int potionBagSize;
 
+    public ItemLibrary itemLibrary;
 
-    private void Start(){
+
+    private void Awake(){
         //Singleton
         if (instance == null){
             instance = this;
@@ -84,9 +84,21 @@ public class PlayerController : MonoBehaviour
         inventoryWidth = 10;
         spellSlots = 4;
         potionBagSize = 4;
+
+        //creating data storage
         inventory = new Inventory(inventoryWidth*inventoryHeight, spellSlots, potionBagSize);
 
-        inventory.items[0] = ItemLibrary.instance.basicStaff.GetComponent<StaffItem>();
+        //creating UI
+        inventoryUI.inventoryRenderer.width = inventoryWidth;
+        inventoryUI.inventoryRenderer.height = inventoryHeight;
+
+        inventoryUI.potionBagRenderer.width = potionBagSize;
+        inventoryUI.potionBagRenderer.height = 1;
+
+        inventoryUI.spellsRenderer.width = spellSlots;
+        inventoryUI.spellsRenderer.height = 1;
+
+        inventory.items[0] = itemLibrary.basicStaff.GetComponent<StaffItem>();
      
         //components
         rb = GetComponent<Rigidbody2D>();
@@ -117,18 +129,21 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update(){
-        string a = "";
-        foreach (Item item in inventory.items) {
-            if (item == null)
-            {
-                a += " ,";
-            }
-            else {
-                a += item.ToString() + ",";
-            }
+        Debug.Log(inventoryUI.inventoryRenderer.GetMatrixCoords(inventoryUI.inventoryRenderer.bottomLeft, Input.mousePosition));
 
-        }
-        Debug.Log(inventory.items);
+        // string a = "";
+        // foreach (Item item in inventory.items) {
+        //     if (item == null)
+        //     {
+        //         a += " ,";
+        //     }
+        //     else {
+        //         a += item.ToString() + ",";
+        //     }
+
+        // }
+        // Debug.Log(a);
+        
         if(Input.GetKeyDown(KeyCode.Space)){
             Debug.Break();
         }

@@ -11,6 +11,8 @@ public class Inventory
     public Potion[] potions;
 
     public StaffItem equippedStaff;
+    public SpellItem[] equippedSpells;
+
     public int size;
 
     public Inventory(int inventorySize, int spellSize, int potionBagSize){

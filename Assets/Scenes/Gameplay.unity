@@ -2635,12 +2635,11 @@ MonoBehaviour:
   magicMissle: {fileID: 52880157}
   basicStaff: {fileID: 2060406078}
   inventoryUI: {fileID: 1019001389}
-  spellsUI: {fileID: 0}
-  potionBagUI: {fileID: 0}
   inventoryHeight: 0
   inventoryWidth: 0
   spellSlots: 0
   potionBagSize: 0
+  itemLibrary: {fileID: 1692834708}
 --- !u!4 &707362285
 Transform:
   m_ObjectHideFlags: 0
@@ -2669,6 +2668,7 @@ GameObject:
   - component: {fileID: 756136336}
   - component: {fileID: 756136335}
   - component: {fileID: 756136334}
+  - component: {fileID: 756136337}
   m_Layer: 0
   m_Name: Spells
   m_TagString: Untagged
@@ -2757,6 +2757,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 756136332}
   m_CullTransparentMesh: 1
+--- !u!114 &756136337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756136332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05fa491df071e934db2fd0530e3585ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rendererType: 1
+  Slot: {fileID: 1649969560939154655, guid: 4a56cc43cb5605a42a7f0a8e686d812b, type: 3}
+  bottomLeft: {x: 0, y: 0}
+  width: 0
+  height: 0
 --- !u!1 &782976259
 GameObject:
   m_ObjectHideFlags: 0
@@ -3355,12 +3372,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1019001384}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05fa491df071e934db2fd0530e3585ee, type: 3}
+  m_Script: {fileID: 11500000, guid: 08c25543d55b0c2488d277fc4a1383de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Slot: {fileID: 1649969560939154655, guid: 4a56cc43cb5605a42a7f0a8e686d812b, type: 3}
+  inventoryRenderer: {fileID: 1150919901}
+  potionBagRenderer: {fileID: 1956652397}
+  spellsRenderer: {fileID: 756136337}
   isOpen: 0
-  bottomLeft: {x: 0, y: 0}
 --- !u!1 &1040708632
 GameObject:
   m_ObjectHideFlags: 0
@@ -3920,6 +3938,7 @@ GameObject:
   - component: {fileID: 1150919899}
   - component: {fileID: 1150919898}
   - component: {fileID: 1150919900}
+  - component: {fileID: 1150919901}
   m_Layer: 0
   m_Name: Inventory
   m_TagString: Untagged
@@ -4008,6 +4027,23 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &1150919901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150919896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05fa491df071e934db2fd0530e3585ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rendererType: 0
+  Slot: {fileID: 1649969560939154655, guid: 4a56cc43cb5605a42a7f0a8e686d812b, type: 3}
+  bottomLeft: {x: 0, y: 0}
+  width: 0
+  height: 0
 --- !u!1 &1180014656
 GameObject:
   m_ObjectHideFlags: 0
@@ -9520,6 +9556,7 @@ GameObject:
   - component: {fileID: 1956652394}
   - component: {fileID: 1956652396}
   - component: {fileID: 1956652395}
+  - component: {fileID: 1956652397}
   m_Layer: 0
   m_Name: Potion Bag
   m_TagString: Untagged
@@ -9584,6 +9621,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1956652393}
   m_CullTransparentMesh: 1
+--- !u!114 &1956652397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956652393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05fa491df071e934db2fd0530e3585ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rendererType: 2
+  Slot: {fileID: 1649969560939154655, guid: 4a56cc43cb5605a42a7f0a8e686d812b, type: 3}
+  bottomLeft: {x: 0, y: 0}
+  width: 0
+  height: 0
 --- !u!1 &2002259239
 GameObject:
   m_ObjectHideFlags: 0
