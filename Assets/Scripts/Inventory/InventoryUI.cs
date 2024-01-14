@@ -34,6 +34,8 @@ public class InventoryUI : MonoBehaviour
         Time.timeScale = 1f;
         isOpen = false;
         gameObject.SetActive(false);
-
+        inventoryRenderer.UpdateData();
+        potionBagRenderer.UpdateData();
+        spellsRenderer.UpdateData();
     }
 }

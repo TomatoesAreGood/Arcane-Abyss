@@ -5,7 +5,9 @@ using UnityEngine;
 public class ItemLibrary : MonoBehaviour
 {
     public static ItemLibrary instance;
-    public GameObject basicStaff;
+    public StaffItem basicStaff;
+    public StaffItem forestStaff;
+
     // Start is called before the first frame update
     private void Awake(){
         if(instance == null){

@@ -26,7 +26,9 @@ public class Spell : MonoBehaviour
             float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
 
             var magicShot = Instantiate(spellShot, muzzlePos, Quaternion.Euler(0f, 0f, angle));
-            magicShot.GetComponent<MagicShot>().AddDamage(PlayerController.instance.equippedStaff.damageBonus);
+            if(PlayerController.instance.equippedStaff != null){
+                magicShot.GetComponent<MagicShot>().AddDamage(PlayerController.instance.equippedStaff.GetComponent<Staff>().damageBonus);
+            }
             magicShot.GetComponent<Rigidbody2D>().AddForce(shootDirection * speed, ForceMode2D.Impulse);
 
             nextAvailFire = Time.time + 1/fireRate;

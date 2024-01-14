@@ -53,16 +53,20 @@ public class InventoryRenderer : MonoBehaviour
                     continue;
                 }
 
-                if(inventoryData[r*width + c].GetType() == typeof(StaffItem)){
-                    GameObject obj = Instantiate(ItemLibrary.instance.basicStaff, slot.transform);
+                if(inventoryData[r*width + c].GetType() == typeof(BasicStaffItem)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.basicStaff.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }else if(inventoryData[r*width + c].GetType() == typeof(ForestStaffItem)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.forestStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
                 }
+                
             }
         }
     }
 
     private void Update(){
-        UpdateData();
+        
     }
 
     public void UpdateData(){

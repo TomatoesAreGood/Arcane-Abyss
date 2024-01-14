@@ -30,8 +30,7 @@ public class Item : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Awake()
-    {
+    protected void Awake(){
         image = gameObject.GetComponent<Image>();
         rectTransform = gameObject.GetComponent<RectTransform>();
         parentAfterDrag = transform.parent;
@@ -50,8 +49,9 @@ public class Item : MonoBehaviour
     }
 
     // Update is called once per frame
-    protected virtual void Update()
-    {
+    protected virtual void Update(){
+
+
         //on click
         if(IsMouseOnItem && Input.GetMouseButtonDown(0)){
             Vector2 coords = renderer.GetMatrixCoords(renderer.bottomLeft, Input.mousePosition);
@@ -85,6 +85,8 @@ public class Item : MonoBehaviour
         }
       
     }
+
+    
     protected void Drop(){
 
     }

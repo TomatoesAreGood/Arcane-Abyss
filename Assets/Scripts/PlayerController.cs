@@ -39,33 +39,19 @@ public class PlayerController : MonoBehaviour
     private const float DEFAULTZOOM = 5f;
 
     //For orienting staffs 
-    public Transform firePoint;
-    public static Transform pivot;
-    public Staff equippedStaff;
+    [HideInInspector] public Transform firePoint;
+    [HideInInspector] public static Transform pivot;
+    public GameObject equippedStaff;
     public Spell equippedSpell;
-    private Spell spell1;
-    private Spell spell2;
-    private Spell spell3;
-    private Spell spell4;
-
-    //Spells
-    [SerializeField] GameObject ice;
-    [SerializeField] GameObject fire;
-    [SerializeField] GameObject magicMissle;
-
-
-    //Staff
-    [SerializeField] GameObject basicStaff;
 
     //Inventory
-    public Inventory inventory;
-
+    [HideInInspector] public Inventory inventory;
     public InventoryUI inventoryUI;
 
-    public int inventoryHeight;
-    public int inventoryWidth;
-    public int spellSlots;
-    public int potionBagSize;
+    [HideInInspector] public int inventoryHeight;
+    [HideInInspector] public int inventoryWidth;
+    [HideInInspector] public int spellSlots;
+    [HideInInspector] public int potionBagSize;
 
     public ItemLibrary itemLibrary;
 
@@ -98,8 +84,12 @@ public class PlayerController : MonoBehaviour
         inventoryUI.spellsRenderer.width = spellSlots;
         inventoryUI.spellsRenderer.height = 1;
 
-        inventory.items[0] = itemLibrary.basicStaff.GetComponent<StaffItem>();
-     
+        inventory.items[0] = itemLibrary.basicStaff;
+        inventory.items[1] = itemLibrary.forestStaff;
+
+        EquipStaff((StaffItem)inventory.items[1]);
+
+
         //components
         rb = GetComponent<Rigidbody2D>();
         raycastHit2Ds = new List<RaycastHit2D>(0);
@@ -110,8 +100,7 @@ public class PlayerController : MonoBehaviour
         pivot = transform.GetChild(0).gameObject.transform;
         firePoint = pivot.transform.GetChild(0);
 
-        equippedStaff = basicStaff.GetComponent<Staff>();
-        equippedSpell = magicMissle.GetComponent<Spell>();
+        // equippedSpell = magicMissle.GetComponent<Spell>();
         
         maxMana = 100;
         mana = maxMana;
@@ -129,25 +118,28 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update(){
-        string a = "";
-        foreach (Item item in inventory.items) {
-            if (item == null)
-            {
-                a += " ,";
-            }
-            else {
-                a += item.ToString() + ",";
-            }
+        
+        // string a = "";
+        // foreach (Item item in inventory.items) {
+        //     if (item == null)
+        //     {
+        //         a += " ,";
+        //     }
+        //     else {
+        //         a += item.ToString() + ",";
+        //     }
 
-        }
-        Debug.Log(a);
+        // }
+        // Debug.Log(a);
         
         if(Input.GetKeyDown(KeyCode.Space)){
             Debug.Break();
         }
 
        if (Input.GetMouseButtonDown(0)){
-            equippedSpell.Fire();
+            if(equippedSpell != null){
+                equippedSpell.Fire();
+            }
        }
 
        if(Input.GetKeyDown(KeyCode.E)){
@@ -207,7 +199,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-   
     private bool CanMove(Vector2 direction){
         if (direction != Vector2.zero){
             int raycastHits = rb.Cast(direction, contactFilter, raycastHit2Ds, moveSpeed * Time.fixedDeltaTime + collisionOffset);
@@ -217,6 +208,11 @@ public class PlayerController : MonoBehaviour
             return false;
         }
         return false;
+    }
+
+    private void EquipStaff(StaffItem staff){
+        equippedStaff.GetComponent<SpriteRenderer>().sprite = staff.reference.GetComponent<SpriteRenderer>().sprite;
+        equippedStaff.GetComponent<Staff>().damageBonus = staff.reference.GetComponent<Staff>().damageBonus;
     }
 
     private IEnumerator ZoomOut(float maxZoom){
