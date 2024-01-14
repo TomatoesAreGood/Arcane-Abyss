@@ -20,6 +20,7 @@ public class Enemy : MonoBehaviour
     protected bool isMovingAway = false;
 
     protected State state;
+    protected Rigidbody2D _rigidbody;
     protected Collider2D[] _collider;
     protected ContactFilter2D _contactFilter;
 
@@ -41,7 +42,15 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (state)
+
+
+
+
+    }
+
+    private void FixedUpdate()
+    {
+                switch (state)
         {
             default:
             case State.ChaseTarget:
@@ -52,7 +61,9 @@ public class Enemy : MonoBehaviour
 
             case State.MoveAway:
                 _path.canMove = false;
-                transform.position = Vector2.MoveTowards(transform.position.normalized, hit.point.normalized, -3f * Time.deltaTime);
+                Vector2 pos = transform.position;
+                Vector2 dir = -(hit.point - pos);
+                _rigidbody.MovePosition(_rigidbody.position + dir * Time.fixedDeltaTime);
                 if ((Vector2.Distance(transform.position, hit.point) > 2.5f))
                 {
                     state = State.ChaseTarget;
@@ -60,8 +71,6 @@ public class Enemy : MonoBehaviour
                 break;
 
         }
-
-
     }
     protected void FindTarget()
     {
