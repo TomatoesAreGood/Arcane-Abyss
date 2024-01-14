@@ -23,7 +23,7 @@ public class InventoryRenderer : MonoBehaviour
             return Vector2.negativeInfinity;
         }
 
-        Vector2 coord = new Vector2(screenPoint.x - bottomLeft.x , screenPoint.y - bottomLeft.y + 50);
+        Vector2 coord = new Vector2(screenPoint.x - bottomLeft.x -50 , screenPoint.y - bottomLeft.y + 50);
 
         return new Vector2( Mathf.Round(coord.y/100f) -1 ,Mathf.Round(coord.x/100f));
     }
@@ -36,8 +36,6 @@ public class InventoryRenderer : MonoBehaviour
 
     public void DrawMatrix(int height, int width){
         Inventory inventory = PlayerController.instance.inventory;
-
-  
 
         if(rendererType == Renderers.inventory){
             for(int r = 0; r < height; r++){
