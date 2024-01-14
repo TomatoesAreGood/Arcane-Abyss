@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    protected int _damage;
-    protected int _speed;
+    protected int _moveSpeed;
+    protected float _timer;
     public GameObject Player;
     protected PlayerController _playerScript;
     protected RaycastHit2D hit;
@@ -14,10 +14,8 @@ public class Enemy : MonoBehaviour
 
     protected AIPath _path;
 
-    protected bool isPouncing;
-    protected bool canPounce = true;
-    protected bool isPounceHandlerRunning = false;
     protected bool isMovingAway = false;
+    protected bool isSlowedHandlerRunning = false;
 
     protected State state;
     protected Rigidbody2D _rigidbody;
@@ -33,6 +31,7 @@ public class Enemy : MonoBehaviour
         MoveAway,
         PlayerMoveAway,
         Shooting,
+        Stunned,
     }
     void Start()
     {
@@ -42,28 +41,28 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
-
-
+        _path.maxSpeed = _moveSpeed;
     }
 
     private void FixedUpdate()
     {
-                switch (state)
+            switch (state)
         {
             default:
             case State.ChaseTarget:
                 _path.canMove = true;
                 FindTarget();
                 FindEnemy();
+                if (!isSlowedHandlerRunning){
+                    StartCoroutine(SlowedHandler());
+                }
                 break;
 
             case State.MoveAway:
                 _path.canMove = false;
                 Vector2 pos = transform.position;
                 Vector2 dir = -(hit.point - pos);
-                _rigidbody.MovePosition(_rigidbody.position + dir * Time.fixedDeltaTime);
+                _rigidbody.MovePosition(_rigidbody.position + dir * _moveSpeed * Time.fixedDeltaTime);
                 if ((Vector2.Distance(transform.position, hit.point) > 2.5f))
                 {
                     state = State.ChaseTarget;
@@ -108,7 +107,25 @@ public class Enemy : MonoBehaviour
 
     }
 
+    protected void DebuffSlowed()
+    {
+        StartCoroutine(SlowedHandler());
+    }
+    protected IEnumerator SlowedHandler()
+    {
+        isSlowedHandlerRunning = true;
+        int normalSpeed = _moveSpeed;
+        _moveSpeed = _moveSpeed/2;
+        _path.maxSpeed = _moveSpeed;
 
+        Debug.Log(_moveSpeed);
+
+        yield return new WaitForSeconds(3);
+        _moveSpeed = normalSpeed;
+        _path.maxSpeed = _moveSpeed;
+
+
+    }
 
     protected void Attack()
     {

@@ -7,17 +7,21 @@ using UnityEngine;
 public class EnemyPouncer : Enemy
 {
 
-    private int pounceSpeed;
-    private float moveSpeed;
+    private int _pounceSpeed;
+    
+    private bool isPouncing;
+    private bool canPounce = true;
+    private bool isPounceHandlerRunning = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        state = State.ChaseTarget;
+        state = State.Stunned;
         _path = GetComponent<AIPath>();
         _rigidbody = GetComponent<Rigidbody2D>();
-        moveSpeed = _path.maxSpeed;
-        pounceSpeed = 8;
+        _pounceSpeed = 8;
+        _moveSpeed = (int)_path.maxSpeed;
+        Debug.Log(_moveSpeed);
     }
 
     private void FixedUpdate()
@@ -30,6 +34,10 @@ public class EnemyPouncer : Enemy
                 _path.canMove = true;
                 FindTarget();
                 FindEnemy();
+                if (!isSlowedHandlerRunning)
+                {
+                    StartCoroutine(SlowedHandler());
+                }
                 break;
 
             case State.Poucing:
@@ -62,12 +70,20 @@ public class EnemyPouncer : Enemy
                 Vector2 dir = -(hit.point - pos);
 
 
-                _rigidbody.MovePosition(_rigidbody.position + dir * Time.fixedDeltaTime);
+                _rigidbody.MovePosition(_rigidbody.position + dir * _moveSpeed * Time.fixedDeltaTime);
                 if ((Vector2.Distance(transform.position, hit.point) > 2.5f))
                 {
                     state = State.ChaseTarget;
                 }
-
+                break;
+            case State.Stunned:
+                _path.canMove = false;
+                _timer += Time.fixedDeltaTime;
+                Debug.Log(_timer);
+                if (_timer > 3)
+                {
+                    state = State.ChaseTarget;
+                }
                 break;
         }
     }
@@ -75,12 +91,10 @@ public class EnemyPouncer : Enemy
     // Update is called once per frame
     void Update()
     {
-
-
     }
 
-    
-   
+
+
 
 
     /*    private void OnDrawGizmos()

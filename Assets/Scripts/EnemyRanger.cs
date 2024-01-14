@@ -29,7 +29,7 @@ public class EnemyRanger : Enemy
     // Update is called once per frame
     void Update()
     {
-
+        _path.maxSpeed = _moveSpeed;
     }
 
     private void FixedUpdate()
