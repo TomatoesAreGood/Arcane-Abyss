@@ -7,7 +7,7 @@ using UnityEngine;
 public class EnemyPouncer : Enemy
 {
 
-
+    private int pounceSpeed;
     private float moveSpeed;
 
     // Start is called before the first frame update
@@ -15,14 +15,14 @@ public class EnemyPouncer : Enemy
     {
         state = State.ChaseTarget;
         _path = GetComponent<AIPath>();
+        _rigidbody = GetComponent<Rigidbody2D>();
         moveSpeed = _path.maxSpeed;
+        pounceSpeed = 8;
     }
 
-
-
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
+        Vector2 pos = transform.position;
         switch (state)
         {
             default:
@@ -34,8 +34,8 @@ public class EnemyPouncer : Enemy
 
             case State.Poucing:
                 _path.canMove = false;
+                Vector2 pounceDir = Player.transform.position - transform.position;
                 float distance = Vector2.Distance(transform.position, Player.transform.position);
-                /*Vector2 pounceVector = (Player.transform.position - transform.position);*/
                 if (canPounce)
                 {
                     if (!isPounceHandlerRunning)
@@ -44,7 +44,8 @@ public class EnemyPouncer : Enemy
                     }
                     if (!isPouncing)
                     {
-                        transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, distance * 8 * Time.deltaTime);
+                        _rigidbody.MovePosition(_rigidbody.position + pounceDir * 8 *  Time.fixedDeltaTime); 
+
                     }
 
                 }
@@ -58,20 +59,28 @@ public class EnemyPouncer : Enemy
 
             case State.MoveAway:
                 _path.canMove = false;
-                if (Vector2.Distance(transform.position, hit.point) < 1)
-                {
-                    transform.position = Vector2.MoveTowards(transform.position, hit.point.normalized, -Time.deltaTime);
-                }
-                transform.position = Vector2.MoveTowards(transform.position, hit.point, -3f * Time.deltaTime);
-                if (Vector2.Distance(transform.position, hit.point) > 2.5f)
+                Vector2 dir = -(hit.point - pos);
+
+
+                _rigidbody.MovePosition(_rigidbody.position + dir * Time.fixedDeltaTime);
+                if ((Vector2.Distance(transform.position, hit.point) > 2.5f))
                 {
                     state = State.ChaseTarget;
                 }
+
                 break;
         }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
 
     }
 
+    
+   
 
 
     /*    private void OnDrawGizmos()

@@ -19,6 +19,7 @@ public class EnemyRanger : Enemy
     {
         state = State.ChaseTarget;
         _path = GetComponent<AIPath>();
+        _rigidbody = GetComponent<Rigidbody2D>();
         nextAvailFire = Time.time;
         fireRate = 0.5f;
 
@@ -27,6 +28,11 @@ public class EnemyRanger : Enemy
 
     // Update is called once per frame
     void Update()
+    {
+
+    }
+
+    private void FixedUpdate()
     {
         switch (state)
         {
@@ -45,12 +51,14 @@ public class EnemyRanger : Enemy
                     state = State.ChaseTarget;
                 }
                 break;
+
             case State.Shooting:
                 _path.canMove = false;
-                if (Time.time >= nextAvailFire) {
+                if (Time.time >= nextAvailFire)
+                {
                     Debug.Log("shooting");
                     Fire();
-                    nextAvailFire = Time.time + 1/fireRate;
+                    nextAvailFire = Time.time + 1 / fireRate;
                 }
                 Debug.DrawLine(transform.position, initialArm, Color.red);
                 Debug.DrawLine(transform.position, nextArm, Color.red);
@@ -63,18 +71,20 @@ public class EnemyRanger : Enemy
                 {
                     state = State.ChaseTarget;
                 }
-
-
                 break;
-
             case State.PlayerMoveAway:
                 _path.canMove = false;
-                transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, -3f * Time.deltaTime);
+                Vector2 dir = -(Player.transform.position - transform.position);
+                _rigidbody.MovePosition(_rigidbody.position + dir * Time.fixedDeltaTime);
                 if ((Vector2.Distance(transform.position, Player.transform.position) > 5f))
                 {
                     state = State.ChaseTarget;
                 }
                 break;
+
+
+
+
         }
     }
 
