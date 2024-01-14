@@ -129,20 +129,18 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update(){
-        Debug.Log(inventoryUI.inventoryRenderer.GetMatrixCoords(inventoryUI.inventoryRenderer.bottomLeft, Input.mousePosition));
+        string a = "";
+        foreach (Item item in inventory.items) {
+            if (item == null)
+            {
+                a += " ,";
+            }
+            else {
+                a += item.ToString() + ",";
+            }
 
-        // string a = "";
-        // foreach (Item item in inventory.items) {
-        //     if (item == null)
-        //     {
-        //         a += " ,";
-        //     }
-        //     else {
-        //         a += item.ToString() + ",";
-        //     }
-
-        // }
-        // Debug.Log(a);
+        }
+        Debug.Log(a);
         
         if(Input.GetKeyDown(KeyCode.Space)){
             Debug.Break();

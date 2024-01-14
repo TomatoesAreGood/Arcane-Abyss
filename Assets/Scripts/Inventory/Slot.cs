@@ -4,26 +4,25 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 
-public class Slot : MonoBehaviour, IDropHandler
+public class Slot : MonoBehaviour
 {
-    
+    public Item item;
+
     public bool IsEmpty(){
+        //return item == null;
         return transform.childCount == 0;
     }
-    public void OnDrop(PointerEventData eventData)
-    {
+  
+    public void Dim(){
 
-        if (transform.childCount == 0){
-            GameObject dropped = eventData.pointerDrag;
-            Item item = dropped.GetComponent<Item>();
-            item.parentAfterDrag = transform;
-        }
+        
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
-    
+        
 
     }
 

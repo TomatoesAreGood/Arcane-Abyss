@@ -12,6 +12,7 @@ public class InventoryRenderer : MonoBehaviour
     public Vector2 bottomLeft;
     public int width;
     public int height;
+    private Item[] inventoryData;
         
     public Vector2 GetMatrixCoords(Vector2 bottomLeft, Vector2 screenPoint){
         bottomLeft = new Vector2(bottomLeft.x -50 ,bottomLeft.y - 50);
@@ -30,57 +31,56 @@ public class InventoryRenderer : MonoBehaviour
 
     private void Start(){
         bottomLeft = Camera.main.WorldToScreenPoint(transform.position);
+        if(rendererType == Renderers.inventory){
+            inventoryData = PlayerController.instance.inventory.items;
+        }else if(rendererType == Renderers.spells){
+            inventoryData = PlayerController.instance.inventory.spells;
+        }else if(rendererType == Renderers.potion){
+            inventoryData = PlayerController.instance.inventory.potions;
+        }
+
         DrawMatrix(height,width);
         transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 100);
     }
 
     public void DrawMatrix(int height, int width){
-        Inventory inventory = PlayerController.instance.inventory;
+        for(int r = 0; r < height; r++){
+            for(int c = 0; c < width; c++){
+                GameObject slot = Instantiate(Slot, transform);
+                slot.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(bottomLeft.x + 100*c, bottomLeft.y+ 100*r));
 
-        if(rendererType == Renderers.inventory){
-            for(int r = 0; r < height; r++){
-                for(int c = 0; c < width; c++){
-                    GameObject slot = Instantiate(Slot, transform);
-                    slot.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(bottomLeft.x + 100*c, bottomLeft.y+ 100*r));
-
-                    if(inventory.items[r*PlayerController.instance.inventoryWidth + c] == null){
-                        continue;
-                    }
-
-                    if(inventory.items[r*PlayerController.instance.inventoryWidth + c].GetType() == typeof(StaffItem)){
-                        GameObject obj = Instantiate(ItemLibrary.instance.basicStaff, slot.transform);
-                        obj.transform.position = slot.transform.position;
-                    }
+                if(inventoryData[r*width + c] == null){
+                    continue;
                 }
-            }
-        }else if (rendererType == Renderers.spells){
-            for(int r = 0; r < height; r++){
-                for(int c = 0; c < width; c++){
-                    GameObject slot = Instantiate(Slot, transform);
-                    slot.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(bottomLeft.x + 100*c, bottomLeft.y+ 100*r));
 
-                    if(inventory.spells[r*PlayerController.instance.inventoryWidth + c] == null){
-                        continue;
-                    }
-                }
-            }
-        }else if(rendererType == Renderers.potion){
-             for(int r = 0; r < height; r++){
-                for(int c = 0; c < width; c++){
-                    GameObject slot = Instantiate(Slot, transform);
-                    slot.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(bottomLeft.x + 100*c, bottomLeft.y+ 100*r));
-
-                    if(inventory.potions[r*PlayerController.instance.inventoryWidth + c] == null){
-                        continue;
-                    }
+                if(inventoryData[r*width + c].GetType() == typeof(StaffItem)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.basicStaff, slot.transform);
+                    obj.transform.position = slot.transform.position;
                 }
             }
         }
-      
     }
+
+    private void Update(){
+        UpdateData();
+    }
+
+    public void UpdateData(){
+        for(int i = 0; i < transform.childCount; i++){
+            if(transform.GetChild(i).GetComponent<Slot>().IsEmpty()){
+                inventoryData[i] = null;
+            }else{
+                inventoryData[i] = transform.GetChild(i).GetComponent<Slot>().item;
+            }
+        }
+    }
+
+    public Slot GetSlot(int index){
+        return GetTransform(index).GetComponent<Slot>();
+    }
+
 
     public Transform GetTransform(int index){
         return transform.GetChild(index);
-
     }
 }

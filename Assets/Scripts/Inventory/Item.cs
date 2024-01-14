@@ -55,15 +55,9 @@ public class Item : MonoBehaviour
         //on click
         if(IsMouseOnItem && Input.GetMouseButtonDown(0)){
             Vector2 coords = renderer.GetMatrixCoords(renderer.bottomLeft, Input.mousePosition);
+            int index = (int)coords.x*renderer.width + (int)coords.y;
+            renderer.GetSlot(index).item = null;
 
-            if (rendererSelection == Renderers.inventory) {
-                int index = (int)coords.x * PlayerController.instance.inventoryWidth + (int)coords.y;
-                PlayerController.instance.inventory.items[index] = null;
-            } else if (rendererSelection == Renderers.spells) {
-                PlayerController.instance.inventory.spells[(int)coords.y] = null;
-            }else if (rendererSelection == Renderers.potion) {
-                PlayerController.instance.inventory.potions[(int)coords.y] = null;
-            }
             parentAfterDrag = transform.parent; 
             image.raycastTarget = false;
         }
@@ -76,47 +70,14 @@ public class Item : MonoBehaviour
         //on drop
         if(MousePointer.instance.IsSelected(this) && Input.GetMouseButtonUp(0)){
             Vector2 coords = renderer.GetMatrixCoords(renderer.bottomLeft, Input.mousePosition);
+             if (!coords.Equals(Vector2.negativeInfinity)){
+                int index = (int)coords.x*renderer.width + (int)coords.y;
 
-            if (rendererSelection == Renderers.inventory){
-                int index = (int)coords.x * PlayerController.instance.inventoryWidth + (int)coords.y;
-
-                if (!coords.Equals(Vector2.negativeInfinity))
-                {
-                    if (inventory[index] == null)
-                    {
-                        inventory[index] = this;
-                        parentAfterDrag = renderer.GetTransform(index);
-                    }
+                if(renderer.GetSlot(index).IsEmpty()){
+                    renderer.GetSlot(index).item = MousePointer.instance.selectedItem;
+                    parentAfterDrag = renderer.GetTransform(index);
                 }
             }
-            else if (rendererSelection == Renderers.spells)
-            {
-                int index = (int)coords.y;
-
-                if (!coords.Equals(Vector2.negativeInfinity))
-                {
-                    if (inventory[index] == null)
-                    {
-                        inventory[index] = this;
-                        parentAfterDrag = renderer.GetTransform(index);
-                    }
-                }
-            }
-            else if (rendererSelection == Renderers.potion)
-            {
-                int index = (int)coords.y;
-
-                if (!coords.Equals(Vector2.negativeInfinity))
-                {
-                    if (inventory[index] == null)
-                    {
-                        inventory[index] = this;
-                        parentAfterDrag = renderer.GetTransform(index);
-                    }
-                }
-            }
-
-
             transform.SetParent(parentAfterDrag);
             transform.position = parentAfterDrag.position;
             image.raycastTarget = false;
