@@ -143,13 +143,16 @@ public class PlayerController : MonoBehaviour
        }
 
        if(Input.GetKeyDown(KeyCode.E)){
-
             if (inventoryUI.isOpen){
+                if(MousePointer.instance.selectedItem != null){
+                    MousePointer.instance.selectedItem.SnapBack();
+                }
                 inventoryUI.Disable();
             }else{
                 inventoryUI.Enable();
             }
        }
+          
 
         if (Input.GetMouseButtonDown(1)) {
             if (activeCoroutine != null) {
@@ -210,7 +213,7 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-    private void EquipStaff(StaffItem staff){
+    public void EquipStaff(StaffItem staff){
         equippedStaff.GetComponent<SpriteRenderer>().sprite = staff.reference.GetComponent<SpriteRenderer>().sprite;
         equippedStaff.GetComponent<Staff>().damageBonus = staff.reference.GetComponent<Staff>().damageBonus;
     }

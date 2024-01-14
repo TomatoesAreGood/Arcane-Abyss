@@ -50,7 +50,9 @@ public class Item : MonoBehaviour
 
     // Update is called once per frame
     protected virtual void Update(){
-
+        if(IsMouseOnItem && Input.GetMouseButtonDown(1)){
+            MousePointer.instance.SetInteractingItem(this);
+        }
 
         //on click
         if(IsMouseOnItem && Input.GetMouseButtonDown(0)){
@@ -70,7 +72,8 @@ public class Item : MonoBehaviour
         //on drop
         if(MousePointer.instance.IsSelected(this) && Input.GetMouseButtonUp(0)){
             Vector2 coords = renderer.GetMatrixCoords(renderer.bottomLeft, Input.mousePosition);
-             if (!coords.Equals(Vector2.negativeInfinity)){
+
+            if (!coords.Equals(Vector2.negativeInfinity)){
                 int index = (int)coords.x*renderer.width + (int)coords.y;
 
                 if(renderer.GetSlot(index).IsEmpty()){
@@ -85,9 +88,39 @@ public class Item : MonoBehaviour
         }
       
     }
+    public void SnapBack(){
+        transform.SetParent(parentAfterDrag);
+        transform.position = parentAfterDrag.position;
+        image.raycastTarget = false;
+        MousePointer.instance.DeSelectItem();
+    }
 
-    
-    protected void Drop(){
+
+    public void Drop(){
+
+    }
+    public void Use(){
+
+    }
+
+    public void Equip(){
+        PlayerController.instance.EquipStaff((StaffItem)this);
+    }
+
+    public void Sell(){
+
+    }
+
+    public void EquipSpellSlot1(){
+
+    }
+    public void EquipSpellSlot2(){
+
+    } 
+    public void EquipSpellSlot3(){
+
+    } 
+    public void EquipSpellSlot4(){
 
     }
 
