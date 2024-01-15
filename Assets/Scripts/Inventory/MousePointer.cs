@@ -25,10 +25,11 @@ public class MousePointer : MonoBehaviour
         }
 
         if(!interactPanel.IsMouseOnItem && Input.GetMouseButton(0)){
+            interactPanel.ResetPos();
+            interactPanel.transform.SetParent(transform);
+
             isInteracting = false;
             interactingItem = null;
-            interactPanel.ResetPos();    
-            interactPanel.transform.SetParent(transform);
         }
       
         if(isInteracting){

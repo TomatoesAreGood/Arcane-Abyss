@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class InteractPanel : MonoBehaviour
 {
-    private RectTransform rectTransform;
+    [SerializeField] RectTransform rectTransform;
     public bool IsMouseOnItem => RectTransformUtility.RectangleContainsScreenPoint(rectTransform, Input.mousePosition, Camera.main);
     public GameObject equipButton;
     public GameObject dropButton;

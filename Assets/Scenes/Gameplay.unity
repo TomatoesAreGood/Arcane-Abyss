@@ -4372,7 +4372,6 @@ MonoBehaviour:
   inventoryRenderer: {fileID: 1150919901}
   potionBagRenderer: {fileID: 1956652397}
   spellsRenderer: {fileID: 756136337}
-  equippedItem: {fileID: 832247}
   isOpen: 0
 --- !u!1 &1071553803
 GameObject:
@@ -6077,6 +6076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 973abee7a066f9d45b5d3a3e8a6f4f38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rectTransform: {fileID: 1417171767}
   equipButton: {fileID: 683720088}
   dropButton: {fileID: 303182783}
   sellButton: {fileID: 809441820}
@@ -6085,7 +6085,6 @@ MonoBehaviour:
   equipSpellSlot2Button: {fileID: 1297539596}
   equipSpellSlot3Button: {fileID: 596134613}
   equipSpellSlot4Button: {fileID: 323053804}
-  rectTransform: {fileID: 1417171767}
 --- !u!114 &1417171771
 MonoBehaviour:
   m_ObjectHideFlags: 0
