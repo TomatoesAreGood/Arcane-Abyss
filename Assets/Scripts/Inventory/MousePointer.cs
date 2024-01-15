@@ -24,14 +24,14 @@ public class MousePointer : MonoBehaviour
             DeSelectItem();
         }
 
-        if(!interactPanel.IsMouseOnItem && Input.GetMouseButtonDown(0)){
-            interactPanel.ResetPos();
-            interactPanel.transform.SetParent(transform);
-            interactingItem = null;
+        if(!interactPanel.IsMouseOnItem && Input.GetMouseButton(0)){
             isInteracting = false;
+            interactingItem = null;
+            interactPanel.ResetPos();    
+            interactPanel.transform.SetParent(transform);
         }
-
-        if (isInteracting){
+      
+        if(isInteracting){
             interactPanel.OpenPanel(interactingItem);
         }else{
             interactPanel.ClosePanel();
@@ -50,6 +50,7 @@ public class MousePointer : MonoBehaviour
     public void SetInteractingItem(Item item){
         isInteracting = true;
         interactingItem = item;
+        interactPanel.ResetPos();    
     }
 
     public void SelectItem(Item item){

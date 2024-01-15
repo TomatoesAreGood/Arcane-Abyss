@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
         moveSpeed = 5f;
         inventoryHeight = 4;
         inventoryWidth = 10;
-        spellSlots = 8;
+        spellSlots = 4;
         potionBagSize = 4;
 
         //creating data storage
@@ -78,8 +78,8 @@ public class PlayerController : MonoBehaviour
         inventoryUI.inventoryRenderer.width = inventoryWidth;
         inventoryUI.inventoryRenderer.height = inventoryHeight;
 
-        inventoryUI.potionBagRenderer.width = 1;
-        inventoryUI.potionBagRenderer.height = potionBagSize;
+        inventoryUI.potionBagRenderer.width = potionBagSize;
+        inventoryUI.potionBagRenderer.height = 1;
 
         inventoryUI.spellsRenderer.width = spellSlots;
         inventoryUI.spellsRenderer.height = 1;

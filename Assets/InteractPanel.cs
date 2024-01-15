@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class InteractPanel : MonoBehaviour
 {
+    private RectTransform rectTransform;
     public bool IsMouseOnItem => RectTransformUtility.RectangleContainsScreenPoint(rectTransform, Input.mousePosition, Camera.main);
     public GameObject equipButton;
     public GameObject dropButton;
@@ -14,10 +15,9 @@ public class InteractPanel : MonoBehaviour
     public GameObject equipSpellSlot2Button;
     public GameObject equipSpellSlot3Button;
     public GameObject equipSpellSlot4Button;
-    [SerializeField] RectTransform rectTransform;
-    //private void Awake(){
-    //    rectTransform = GetComponent<RectTransform>();
-    //}
+    private void Start(){
+        rectTransform = GetComponent<RectTransform>();
+    }
 
     public void OpenPanel(Item item){
         transform.SetParent(transform.root);
@@ -32,6 +32,9 @@ public class InteractPanel : MonoBehaviour
         }   
     }
 
+
+
+    
     public void ClosePanel(){
         gameObject.SetActive(false);
     }

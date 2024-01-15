@@ -1,15 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-
 
 public class InventoryUI : MonoBehaviour
 {
     public InventoryRenderer inventoryRenderer;
     public InventoryRenderer potionBagRenderer;
     public InventoryRenderer spellsRenderer;
-    public Image equippedItem;
     public bool isOpen;
 
 
@@ -19,9 +16,7 @@ public class InventoryUI : MonoBehaviour
         isOpen = false;
     }
 
-    private void Update() {
-        equippedItem.sprite = PlayerController.instance.equippedStaff.GetComponent<SpriteRenderer>().sprite;
-
+    private void Update() {    
         if (isOpen){
             gameObject.SetActive(true);
         }else{
