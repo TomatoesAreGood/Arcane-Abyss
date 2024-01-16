@@ -100,31 +100,33 @@ public class Item : MonoBehaviour
     public void Drop(){
 
     }
-    public void Use(){
-
-    }
-
-    public void Equip(){
-        PlayerController.instance.EquipStaff((StaffItem)this);
-    }
-
     public void Sell(){
 
     }
 
-    public void EquipSpellSlot1(){
-
+    public virtual void Use(){
+        throw new ArgumentException("item is not usable");
     }
-    public void EquipSpellSlot2(){
-
-    } 
-    public void EquipSpellSlot3(){
-
-    } 
-    public void EquipSpellSlot4(){
-
+  
+    public virtual void Equip(){
+        throw new ArgumentException("item is not a staff");
     }
 
+    public virtual void EquipSpellSlot1(){
+        throw new ArgumentException("item is not a spell");
+    }
+    public virtual void EquipSpellSlot2(){
+        throw new ArgumentException("item is not a spell");
+
+    } 
+    public virtual void EquipSpellSlot3(){
+        throw new ArgumentException("item is not a spell");
+
+    } 
+    public virtual void EquipSpellSlot4(){
+        throw new ArgumentException("item is not a spell");
+
+    }
 
    
 

@@ -13,16 +13,18 @@ public class Inventory
     public StaffItem equippedStaff;
     public SpellItem[] equippedSpells;
 
-    public int size;
-
     public Inventory(int inventorySize, int spellSize, int potionBagSize){
         items = new Item[inventorySize];
         spells = new SpellItem[spellSize];
         potions = new Potion[potionBagSize];
-        size = items.Length;
-        for(int i = 0; i < size; i++){
+        equippedSpells = new SpellItem[4];
+        for(int i = 0; i < items.Length; i++){
             items[i] = null;
         }
+        for(int i = 0; i < equippedSpells.Length; i++){
+            equippedSpells[i] = null;
+        }
+
     }
 
 

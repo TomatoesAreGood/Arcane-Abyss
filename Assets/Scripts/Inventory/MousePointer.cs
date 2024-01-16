@@ -27,14 +27,11 @@ public class MousePointer : MonoBehaviour
         if(!interactPanel.IsMouseHovering && Input.GetMouseButton(0)){
             interactPanel.ResetPos();
             interactPanel.transform.SetParent(transform);
-
             isInteracting = false;
             interactingItem = null;
         }
       
-        if(isInteracting){
-            interactPanel.OpenPanel(interactingItem);
-        }else{
+        if(!isInteracting){
             interactPanel.ClosePanel();
         }
 
@@ -51,7 +48,7 @@ public class MousePointer : MonoBehaviour
     public void SetInteractingItem(Item item){
         isInteracting = true;
         interactingItem = item;
-        interactPanel.ResetPos();    
+        interactPanel.OpenPanel(interactingItem);
     }
 
     public void SelectItem(Item item){
@@ -81,7 +78,9 @@ public class MousePointer : MonoBehaviour
         interactingItem.Equip();
     }
     public void EquipSpellSlot1(){
-        interactingItem.EquipSpellSlot1();
+        if(interactingItem is SpellItem){
+            interactingItem.EquipSpellSlot1();
+        }
     }
     public void EquipSpellSlot2(){
         interactingItem.EquipSpellSlot2();

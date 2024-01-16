@@ -8,9 +8,13 @@ public class InventoryUI : MonoBehaviour
     public InventoryRenderer inventoryRenderer;
     public InventoryRenderer potionBagRenderer;
     public InventoryRenderer spellsRenderer;
+
     public bool isOpen;
     [SerializeField] Image equippedStaff;
-
+    [SerializeField] Image equippedSpell1;
+    [SerializeField] Image equippedSpell2;
+    [SerializeField] Image equippedSpell3;
+    [SerializeField] Image equippedSpell4;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +25,8 @@ public class InventoryUI : MonoBehaviour
     private void Update() {    
         if (isOpen){
             equippedStaff.sprite = PlayerController.instance.equippedStaff.GetComponent<SpriteRenderer>().sprite;
+            
+            equippedSpell1.sprite = PlayerController.instance.inventory.equippedSpells[0].reference.GetComponent<SpriteRenderer>().sprite;
             gameObject.SetActive(true);
         }else{
             gameObject.SetActive(false);

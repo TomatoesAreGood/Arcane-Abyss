@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public Inventory inventory;
     [HideInInspector] public int inventoryHeight;
     [HideInInspector] public int inventoryWidth;
-    [HideInInspector] public int spellSlots;
+    [HideInInspector] public int spellInventorySize;
     [HideInInspector] public int potionBagSize;
     public ItemLibrary itemLibrary;
     public InventoryUI inventoryUI;
@@ -69,11 +69,11 @@ public class PlayerController : MonoBehaviour
         moveSpeed = 5f;
         inventoryHeight = 4;
         inventoryWidth = 10;
-        spellSlots = 8;
+        spellInventorySize = 8;
         potionBagSize = 4;
 
         //creating data storage
-        inventory = new Inventory(inventoryWidth*inventoryHeight, spellSlots, potionBagSize);
+        inventory = new Inventory(inventoryWidth*inventoryHeight, spellInventorySize, potionBagSize);
 
         //creating UI
         inventoryUI.inventoryRenderer.width = inventoryWidth;
@@ -82,11 +82,13 @@ public class PlayerController : MonoBehaviour
         inventoryUI.potionBagRenderer.width = 1;
         inventoryUI.potionBagRenderer.height = potionBagSize;
 
-        inventoryUI.spellsRenderer.width = spellSlots;
+        inventoryUI.spellsRenderer.width = spellInventorySize;
         inventoryUI.spellsRenderer.height = 1;
 
         inventory.items[0] = itemLibrary.basicStaff;
         inventory.items[1] = itemLibrary.forestStaff;
+
+        inventory.spells[0] = itemLibrary.fireball;
 
         EquipStaff((StaffItem)inventory.items[0]);
 
@@ -135,6 +137,8 @@ public class PlayerController : MonoBehaviour
         //     }
 
         // }
+
+      
         // Debug.Log(a);
         
         if(Input.GetKeyDown(KeyCode.Space)){
@@ -222,6 +226,21 @@ public class PlayerController : MonoBehaviour
         inventory.equippedStaff = staff;
         equippedStaff.GetComponent<SpriteRenderer>().sprite = staff.reference.GetComponent<SpriteRenderer>().sprite;
         equippedStaff.damageBonus = staff.reference.GetComponent<Staff>().damageBonus;
+    }
+
+    public void EquipSpell(SpellItem spell, int spellIndex){
+        if(!IsEquippedSpell(spell)){
+            inventory.equippedSpells[spellIndex] = spell;
+        }
+    }
+
+    public bool IsEquippedSpell(SpellItem spell){
+        for(int i = 0 ; i < 4 ;i++){
+            if(inventory.equippedSpells[i] == spell){
+                return true;
+            }
+        }
+        return false;
     }
 
     private IEnumerator ZoomOut(float maxZoom){

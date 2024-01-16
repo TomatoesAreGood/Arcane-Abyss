@@ -7,6 +7,8 @@ public class ItemLibrary : MonoBehaviour
     public static ItemLibrary instance;
     public StaffItem basicStaff;
     public StaffItem forestStaff;
+    public SpellItem fireball;
+
 
     // Start is called before the first frame update
     private void Awake(){

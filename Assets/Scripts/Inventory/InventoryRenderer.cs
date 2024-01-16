@@ -59,6 +59,9 @@ public class InventoryRenderer : MonoBehaviour
                 }else if(inventoryData[r*width + c].GetType() == typeof(ForestStaffItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.forestStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
+                }else if(inventoryData[r*width + c].GetType() == typeof(FireSpellItem)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.fireball.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
                 }
                 
             }
