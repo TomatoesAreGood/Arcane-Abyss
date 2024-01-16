@@ -68,7 +68,12 @@ public class InventoryRenderer : MonoBehaviour
                     GameObject obj = Instantiate(ItemLibrary.instance.iceShot.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
                 }
-                
+                else if (inventoryData[r * width + c].GetType() == typeof(DarkStaffItem))
+                {
+                    GameObject obj = Instantiate(ItemLibrary.instance.darkstaff.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }
+
             }
         }
     }

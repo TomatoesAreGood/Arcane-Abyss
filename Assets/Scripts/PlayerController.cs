@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
         inventoryUI.equippedSpellsRenderer.height = 1;
 
         inventory.items[0] = itemLibrary.basicStaff;
-        inventory.items[1] = itemLibrary.forestStaff;
+        inventory.items[2] = itemLibrary.darkstaff;
 
         inventory.spells[0] = itemLibrary.fireball;
         inventory.spells[1] = itemLibrary.iceShot;
