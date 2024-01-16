@@ -8,6 +8,7 @@ public class ItemLibrary : MonoBehaviour
     public StaffItem basicStaff;
     public StaffItem forestStaff;
     public SpellItem fireball;
+    public SpellItem iceShot;
 
 
     // Start is called before the first frame update

@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public Sprite equippedStaffSprite;
 
     public Spell equippedSpell;
+    private List<Spell> activeSpells;
 
     //Inventory
     [HideInInspector] public Inventory inventory;
@@ -66,6 +67,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //set default player stats
+        activeSpells = new List<Spell>();
         moveSpeed = 5f;
         inventoryHeight = 4;
         inventoryWidth = 10;
@@ -85,10 +87,14 @@ public class PlayerController : MonoBehaviour
         inventoryUI.spellsRenderer.width = spellInventorySize;
         inventoryUI.spellsRenderer.height = 1;
 
+        inventoryUI.equippedSpellsRenderer.width = 4;
+        inventoryUI.equippedSpellsRenderer.height = 1;
+
         inventory.items[0] = itemLibrary.basicStaff;
         inventory.items[1] = itemLibrary.forestStaff;
 
         inventory.spells[0] = itemLibrary.fireball;
+        inventory.spells[1] = itemLibrary.iceShot;
 
         EquipStaff((StaffItem)inventory.items[0]);
 
@@ -121,6 +127,7 @@ public class PlayerController : MonoBehaviour
         activeCoroutine = null;
     }
 
+
     private void Update(){
         //have to set this for inventory 
         equippedStaffSprite = equippedStaff.GetComponent<SpriteRenderer>().sprite;
@@ -139,7 +146,39 @@ public class PlayerController : MonoBehaviour
         // }
 
       
-        // Debug.Log(a);
+        // Debug.Log(a);    
+        
+
+        if(Input.GetKeyDown(KeyCode.Alpha1) && inventory.equippedSpells[0] != null){
+            if(activeSpells.Contains(inventory.equippedSpells[0].reference.GetComponent<Spell>())){
+                equippedSpell = inventory.equippedSpells[0].reference.GetComponent<Spell>();
+            }else{
+                equippedSpell = Instantiate(inventory.equippedSpells[0].reference).GetComponent<Spell>();
+                activeSpells.Add(inventory.equippedSpells[0].reference.GetComponent<Spell>());
+            }
+        }else if(Input.GetKeyDown(KeyCode.Alpha2 ) && inventory.equippedSpells[1] != null){
+            if(activeSpells.Contains(inventory.equippedSpells[1].reference.GetComponent<Spell>())){
+                equippedSpell = inventory.equippedSpells[1].reference.GetComponent<Spell>();
+            }else{
+                equippedSpell = Instantiate(inventory.equippedSpells[1].reference).GetComponent<Spell>();
+                activeSpells.Add(inventory.equippedSpells[1].reference.GetComponent<Spell>());
+            }
+        }else if(Input.GetKeyDown(KeyCode.Alpha3) && inventory.equippedSpells[2] != null){
+           if(activeSpells.Contains(inventory.equippedSpells[2].reference.GetComponent<Spell>())){
+                equippedSpell = inventory.equippedSpells[2].reference.GetComponent<Spell>();
+            }else{
+                equippedSpell = Instantiate(inventory.equippedSpells[2].reference).GetComponent<Spell>();
+                activeSpells.Add(inventory.equippedSpells[2].reference.GetComponent<Spell>());
+            }
+        }else if(Input.GetKeyDown(KeyCode.Alpha4) && inventory.equippedSpells[3] != null){
+            if(activeSpells.Contains(inventory.equippedSpells[3].reference.GetComponent<Spell>())){
+                equippedSpell = inventory.equippedSpells[3].reference.GetComponent<Spell>();
+            }else{
+                equippedSpell = Instantiate(inventory.equippedSpells[3].reference).GetComponent<Spell>();
+                activeSpells.Add(inventory.equippedSpells[3].reference.GetComponent<Spell>());
+
+            }
+        }
         
         if(Input.GetKeyDown(KeyCode.Space)){
             Debug.Break();
@@ -229,18 +268,19 @@ public class PlayerController : MonoBehaviour
     }
 
     public void EquipSpell(SpellItem spell, int spellIndex){
-        if(!IsEquippedSpell(spell)){
-            inventory.equippedSpells[spellIndex] = spell;
+        if(FindEquippedSpell(spell) != -1){
+            inventory.equippedSpells[FindEquippedSpell(spell)] = null;
         }
+        inventory.equippedSpells[spellIndex] = spell;
     }
 
-    public bool IsEquippedSpell(SpellItem spell){
+    public int FindEquippedSpell(SpellItem spell){
         for(int i = 0 ; i < 4 ;i++){
             if(inventory.equippedSpells[i] == spell){
-                return true;
+                return i;
             }
         }
-        return false;
+        return -1;
     }
 
     private IEnumerator ZoomOut(float maxZoom){

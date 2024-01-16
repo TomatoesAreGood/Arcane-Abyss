@@ -11,7 +11,7 @@ public class Spell : MonoBehaviour
     protected float nextAvailFire;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         nextAvailFire = Time.time;
         fireRate = 2;

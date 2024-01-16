@@ -9,7 +9,8 @@ using System;
 public enum Renderers { 
     inventory,
     spells,
-    potion
+    potion,
+    equippedSpells
 }
 
 public class Item : MonoBehaviour
