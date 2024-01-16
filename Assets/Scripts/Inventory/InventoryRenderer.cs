@@ -64,13 +64,14 @@ public class InventoryRenderer : MonoBehaviour
                 }else if(inventoryData[r*width + c].GetType() == typeof(FireSpellItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.fireball.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if(inventoryData[r*width + c].GetType() == typeof(IceShotItem)){
+                }else if(inventoryData[r*width + c].GetType() == typeof(IceSpellItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.iceShot.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }
-                else if (inventoryData[r * width + c].GetType() == typeof(DarkStaffItem))
-                {
+                }else if (inventoryData[r * width + c].GetType() == typeof(DarkStaffItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.darkstaff.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }else if (inventoryData[r * width + c].GetType() == typeof(MagicSpellItem)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.magicShot.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
                 }
 

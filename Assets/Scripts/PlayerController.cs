@@ -92,10 +92,12 @@ public class PlayerController : MonoBehaviour
         inventoryUI.equippedSpellsRenderer.height = 1;
 
         inventory.items[0] = itemLibrary.basicStaff;
+        inventory.items[1] = itemLibrary.forestStaff;
         inventory.items[2] = itemLibrary.darkstaff;
 
         inventory.spells[0] = itemLibrary.fireball;
         inventory.spells[1] = itemLibrary.iceShot;
+        inventory.spells[2] = itemLibrary.magicShot;
 
         EquipStaff((StaffItem)inventory.items[0]);
 
@@ -152,32 +154,31 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Alpha1) && inventory.equippedSpells[0] != null){
             if(activeSpells.Contains(inventory.equippedSpells[0].reference.GetComponent<Spell>())){
-                equippedSpell = inventory.equippedSpells[0].reference.GetComponent<Spell>();
+                equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[0].reference.GetComponent<Spell>()));
             }else{
                 equippedSpell = Instantiate(inventory.equippedSpells[0].reference).GetComponent<Spell>();
-                activeSpells.Add(inventory.equippedSpells[0].reference.GetComponent<Spell>());
+                activeSpells.Add(equippedSpell);
             }
-        }else if(Input.GetKeyDown(KeyCode.Alpha2 ) && inventory.equippedSpells[1] != null){
+        }else if(Input.GetKeyDown(KeyCode.Alpha2) && inventory.equippedSpells[1] != null){
             if(activeSpells.Contains(inventory.equippedSpells[1].reference.GetComponent<Spell>())){
-                equippedSpell = inventory.equippedSpells[1].reference.GetComponent<Spell>();
+                equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[1].reference.GetComponent<Spell>()) );
             }else{
                 equippedSpell = Instantiate(inventory.equippedSpells[1].reference).GetComponent<Spell>();
-                activeSpells.Add(inventory.equippedSpells[1].reference.GetComponent<Spell>());
+                activeSpells.Add(equippedSpell);
             }
         }else if(Input.GetKeyDown(KeyCode.Alpha3) && inventory.equippedSpells[2] != null){
-           if(activeSpells.Contains(inventory.equippedSpells[2].reference.GetComponent<Spell>())){
-                equippedSpell = inventory.equippedSpells[2].reference.GetComponent<Spell>();
+            if(activeSpells.Contains(inventory.equippedSpells[2].reference.GetComponent<Spell>())){
+                equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[2].reference.GetComponent<Spell>()) );
             }else{
                 equippedSpell = Instantiate(inventory.equippedSpells[2].reference).GetComponent<Spell>();
-                activeSpells.Add(inventory.equippedSpells[2].reference.GetComponent<Spell>());
+                activeSpells.Add(equippedSpell);
             }
         }else if(Input.GetKeyDown(KeyCode.Alpha4) && inventory.equippedSpells[3] != null){
             if(activeSpells.Contains(inventory.equippedSpells[3].reference.GetComponent<Spell>())){
-                equippedSpell = inventory.equippedSpells[3].reference.GetComponent<Spell>();
+                equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[3].reference.GetComponent<Spell>()) );
             }else{
                 equippedSpell = Instantiate(inventory.equippedSpells[3].reference).GetComponent<Spell>();
-                activeSpells.Add(inventory.equippedSpells[3].reference.GetComponent<Spell>());
-
+                activeSpells.Add(equippedSpell);
             }
         }
         
@@ -249,6 +250,15 @@ public class PlayerController : MonoBehaviour
         }else if(movementDirection.x < 0){
             sr.flipX = true;
         }
+    }
+
+    private Spell GetActiveSpell(Spell spell){
+        foreach(Spell spl in activeSpells){
+            if(spl == spell){
+                return spl;
+            }
+        }
+        throw new ArgumentException("active spell does not exist");
     }
 
     private bool CanMove(Vector2 direction){

@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6418922745210711749}
   - component: {fileID: 6931095390688009171}
   - component: {fileID: 8639812736795855959}
-  - component: {fileID: 4956674019082466470}
+  - component: {fileID: -5203602661348683615}
   m_Layer: 0
-  m_Name: MagicMissleItem
+  m_Name: MagicSpellItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 08af76ea36af8d24993f45e84a277bc3, type: 3}
+  m_Sprite: {fileID: 1959800721, guid: f7fb812ebdaf8aa48b17776875edc07f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4956674019082466470
+--- !u!114 &-5203602661348683615
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8505134985925691837}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e483d744523e4d4f88be460ab3492da, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bfff0c32c8d98c4cadba200e5df152a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   value: 0
@@ -93,6 +93,6 @@ MonoBehaviour:
   desc: 
   parentAfterDrag: {fileID: 0}
   image: {fileID: 0}
-  rendererSelection: 0
+  rendererSelection: 1
   inventory: []
   reference: {fileID: 6723478562616510228, guid: 26d631fb61c8d76419caead164e54910, type: 3}

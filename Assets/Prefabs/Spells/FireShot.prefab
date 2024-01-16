@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -7134965652358336544}
   - component: {fileID: 7924904442154435089}
   - component: {fileID: 1322178885871363846}
-  - component: {fileID: 511865694795286699}
+  - component: {fileID: 1066921337754350647}
   m_Layer: 0
   m_Name: FireShot
   m_TagString: Untagged
@@ -181,7 +181,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &511865694795286699
+--- !u!114 &1066921337754350647
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,6 +190,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1235089325048832802}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 856ee9d181f50534c9d8cf79c242c052, type: 3}
+  m_Script: {fileID: 11500000, guid: 87f3fe8ca3477d24798519f8e20549d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

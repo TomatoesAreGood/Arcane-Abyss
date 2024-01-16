@@ -9,6 +9,8 @@ public class ItemLibrary : MonoBehaviour
     public StaffItem forestStaff;
     public SpellItem fireball;
     public SpellItem iceShot;
+    public SpellItem magicShot;
+
     public StaffItem darkstaff;
 
 
