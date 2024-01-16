@@ -34,7 +34,7 @@ public class Slot : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void Update()
+    protected virtual void Update()
     {
         if(IsMouseHovering){
             SetAlpha(0.5f);

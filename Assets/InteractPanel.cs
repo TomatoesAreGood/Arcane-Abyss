@@ -6,7 +6,7 @@ using UnityEngine;
 public class InteractPanel : MonoBehaviour
 {
     [SerializeField] RectTransform rectTransform;
-    public bool IsMouseOnItem => RectTransformUtility.RectangleContainsScreenPoint(rectTransform, Input.mousePosition, Camera.main);
+    public bool IsMouseHovering => RectTransformUtility.RectangleContainsScreenPoint(rectTransform, Input.mousePosition, Camera.main);
     public GameObject equipButton;
     public GameObject dropButton;
     public GameObject sellButton;
@@ -26,15 +26,17 @@ public class InteractPanel : MonoBehaviour
         for(int i = 0; i < transform.childCount; i++){
             transform.GetChild(i).gameObject.SetActive(false);
         }
+        
         if(item is StaffItem){
             equipButton.SetActive(true);
             dropButton.SetActive(true);
-        }   
+        }  
+
     }
 
 
 
-    
+
     public void ClosePanel(){
         gameObject.SetActive(false);
     }

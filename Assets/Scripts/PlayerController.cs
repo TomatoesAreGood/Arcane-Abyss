@@ -38,22 +38,23 @@ public class PlayerController : MonoBehaviour
     private Coroutine activeCoroutine;
     private const float DEFAULTZOOM = 5f;
 
-    //For orienting staffs 
+    //Staffs 
     [HideInInspector] public Transform firePoint;
     [HideInInspector] public static Transform pivot;
-    public GameObject equippedStaff;
+    public Staff equippedStaff;
+    [HideInInspector] public Sprite equippedStaffSprite;
+
     public Spell equippedSpell;
 
     //Inventory
     [HideInInspector] public Inventory inventory;
-    public InventoryUI inventoryUI;
-
     [HideInInspector] public int inventoryHeight;
     [HideInInspector] public int inventoryWidth;
     [HideInInspector] public int spellSlots;
     [HideInInspector] public int potionBagSize;
-
     public ItemLibrary itemLibrary;
+    public InventoryUI inventoryUI;
+
 
 
     private void Awake(){
@@ -68,7 +69,7 @@ public class PlayerController : MonoBehaviour
         moveSpeed = 5f;
         inventoryHeight = 4;
         inventoryWidth = 10;
-        spellSlots = 4;
+        spellSlots = 8;
         potionBagSize = 4;
 
         //creating data storage
@@ -78,8 +79,8 @@ public class PlayerController : MonoBehaviour
         inventoryUI.inventoryRenderer.width = inventoryWidth;
         inventoryUI.inventoryRenderer.height = inventoryHeight;
 
-        inventoryUI.potionBagRenderer.width = potionBagSize;
-        inventoryUI.potionBagRenderer.height = 1;
+        inventoryUI.potionBagRenderer.width = 1;
+        inventoryUI.potionBagRenderer.height = potionBagSize;
 
         inventoryUI.spellsRenderer.width = spellSlots;
         inventoryUI.spellsRenderer.height = 1;
@@ -87,7 +88,7 @@ public class PlayerController : MonoBehaviour
         inventory.items[0] = itemLibrary.basicStaff;
         inventory.items[1] = itemLibrary.forestStaff;
 
-        EquipStaff((StaffItem)inventory.items[1]);
+        EquipStaff((StaffItem)inventory.items[0]);
 
 
         //components
@@ -95,6 +96,7 @@ public class PlayerController : MonoBehaviour
         raycastHit2Ds = new List<RaycastHit2D>(0);
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        equippedStaffSprite = equippedStaff.GetComponent<SpriteRenderer>().sprite;
 
         //for shooting magic
         pivot = transform.GetChild(0).gameObject.transform;
@@ -118,6 +120,9 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update(){
+        //have to set this for inventory 
+        equippedStaffSprite = equippedStaff.GetComponent<SpriteRenderer>().sprite;
+
         
         // string a = "";
         // foreach (Item item in inventory.items) {
@@ -214,8 +219,9 @@ public class PlayerController : MonoBehaviour
     }
 
     public void EquipStaff(StaffItem staff){
+        inventory.equippedStaff = staff;
         equippedStaff.GetComponent<SpriteRenderer>().sprite = staff.reference.GetComponent<SpriteRenderer>().sprite;
-        equippedStaff.GetComponent<Staff>().damageBonus = staff.reference.GetComponent<Staff>().damageBonus;
+        equippedStaff.damageBonus = staff.reference.GetComponent<Staff>().damageBonus;
     }
 
     private IEnumerator ZoomOut(float maxZoom){

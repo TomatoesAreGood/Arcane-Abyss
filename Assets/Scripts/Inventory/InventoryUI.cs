@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class InventoryUI : MonoBehaviour
     public InventoryRenderer potionBagRenderer;
     public InventoryRenderer spellsRenderer;
     public bool isOpen;
+    [SerializeField] Image equippedStaff;
 
 
     // Start is called before the first frame update
@@ -18,6 +20,7 @@ public class InventoryUI : MonoBehaviour
 
     private void Update() {    
         if (isOpen){
+            equippedStaff.sprite = PlayerController.instance.equippedStaff.GetComponent<SpriteRenderer>().sprite;
             gameObject.SetActive(true);
         }else{
             gameObject.SetActive(false);

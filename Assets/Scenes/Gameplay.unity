@@ -268,6 +268,8 @@ GameObject:
   - component: {fileID: 832246}
   - component: {fileID: 832248}
   - component: {fileID: 832247}
+  - component: {fileID: 832249}
+  - component: {fileID: 832250}
   m_Layer: 0
   m_Name: Equipped Staff
   m_TagString: Untagged
@@ -332,6 +334,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 832245}
   m_CullTransparentMesh: 1
+--- !u!114 &832249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832245}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beb6b613a2efb2b48b3bad9fbc6ec097, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 0}
+--- !u!114 &832250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 398e794783e490f4fbee452a9bc16500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 0}
 --- !u!1 &73549362
 GameObject:
   m_ObjectHideFlags: 0
@@ -3084,14 +3112,15 @@ MonoBehaviour:
   ManaBar: {fileID: 1451713540}
   cam: {fileID: 202615388}
   firePoint: {fileID: 0}
-  equippedStaff: {fileID: 5761087974412717441}
+  equippedStaff: {fileID: 2777940802966037062}
+  equippedStaffSprite: {fileID: 0}
   equippedSpell: {fileID: 0}
-  inventoryUI: {fileID: 1019001389}
   inventoryHeight: 0
   inventoryWidth: 0
   spellSlots: 0
   potionBagSize: 0
   itemLibrary: {fileID: 1692834708}
+  inventoryUI: {fileID: 1019001389}
 --- !u!4 &707362285
 Transform:
   m_ObjectHideFlags: 0
@@ -3312,7 +3341,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 756136332}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -4373,6 +4402,7 @@ MonoBehaviour:
   potionBagRenderer: {fileID: 1956652397}
   spellsRenderer: {fileID: 756136337}
   isOpen: 0
+  equippedStaff: {fileID: 832247}
 --- !u!1 &1071553803
 GameObject:
   m_ObjectHideFlags: 0
@@ -11324,7 +11354,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1956652393}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 

@@ -25,7 +25,6 @@ public class Item : MonoBehaviour
     public Renderers rendererSelection;
 
     private new InventoryRenderer renderer;
-
     public Item[] inventory;
 
 
@@ -50,6 +49,7 @@ public class Item : MonoBehaviour
 
     // Update is called once per frame
     protected virtual void Update(){
+        //on left click
         if(IsMouseOnItem && Input.GetMouseButtonDown(1)){
             MousePointer.instance.SetInteractingItem(this);
         }
@@ -86,8 +86,9 @@ public class Item : MonoBehaviour
             image.raycastTarget = false;
             MousePointer.instance.DeSelectItem();
         }
-      
+        
     }
+
     public void SnapBack(){
         transform.SetParent(parentAfterDrag);
         transform.position = parentAfterDrag.position;

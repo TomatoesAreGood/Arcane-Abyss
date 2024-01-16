@@ -24,7 +24,7 @@ public class MousePointer : MonoBehaviour
             DeSelectItem();
         }
 
-        if(!interactPanel.IsMouseOnItem && Input.GetMouseButton(0)){
+        if(!interactPanel.IsMouseHovering && Input.GetMouseButton(0)){
             interactPanel.ResetPos();
             interactPanel.transform.SetParent(transform);
 
