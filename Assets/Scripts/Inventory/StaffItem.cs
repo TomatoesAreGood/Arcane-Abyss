@@ -11,10 +11,5 @@ public class StaffItem : ReferencedItem
             throw new ArgumentException("object reference is not a staff");
         }
     }
-
-    public override void Equip(){
-        PlayerController.instance.EquipStaff(this);
-    }
-
   
 }

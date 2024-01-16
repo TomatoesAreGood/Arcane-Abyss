@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class InteractPanel : MonoBehaviour
 {
-    [SerializeField] RectTransform rectTransform;
-    public bool IsMouseHovering => RectTransformUtility.RectangleContainsScreenPoint(rectTransform, Input.mousePosition, Camera.main);
+    private RectTransform rectTransform;
+    public bool IsMouseOnItem => RectTransformUtility.RectangleContainsScreenPoint(rectTransform, Input.mousePosition, Camera.main);
     public GameObject equipButton;
     public GameObject dropButton;
     public GameObject sellButton;
@@ -20,35 +20,21 @@ public class InteractPanel : MonoBehaviour
     }
 
     public void OpenPanel(Item item){
-        int numActiveButtons = 0;
         transform.SetParent(transform.root);
         gameObject.SetActive(true);
 
         for(int i = 0; i < transform.childCount; i++){
             transform.GetChild(i).gameObject.SetActive(false);
         }
-
         if(item is StaffItem){
             equipButton.SetActive(true);
             dropButton.SetActive(true);
-            numActiveButtons = 2;
-        }  
-        else if(item is SpellItem){
-            equipSpellSlot1Button.SetActive(true);
-            equipSpellSlot2Button.SetActive(true);
-            equipSpellSlot3Button.SetActive(true);
-            equipSpellSlot4Button.SetActive(true);
-            numActiveButtons = 4;
-        }
-        rectTransform.sizeDelta = new Vector2(rectTransform.rect.width, numActiveButtons*30f);
-        ResetPos();
-        
-
+        }   
     }
 
 
 
-
+    
     public void ClosePanel(){
         gameObject.SetActive(false);
     }

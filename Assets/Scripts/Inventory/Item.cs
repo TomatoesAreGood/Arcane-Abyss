@@ -9,8 +9,7 @@ using System;
 public enum Renderers { 
     inventory,
     spells,
-    potion,
-    equippedSpells
+    potion
 }
 
 public class Item : MonoBehaviour
@@ -26,6 +25,7 @@ public class Item : MonoBehaviour
     public Renderers rendererSelection;
 
     private new InventoryRenderer renderer;
+
     public Item[] inventory;
 
 
@@ -50,7 +50,6 @@ public class Item : MonoBehaviour
 
     // Update is called once per frame
     protected virtual void Update(){
-        //on left click
         if(IsMouseOnItem && Input.GetMouseButtonDown(1)){
             MousePointer.instance.SetInteractingItem(this);
         }
@@ -87,9 +86,8 @@ public class Item : MonoBehaviour
             image.raycastTarget = false;
             MousePointer.instance.DeSelectItem();
         }
-        
+      
     }
-
     public void SnapBack(){
         transform.SetParent(parentAfterDrag);
         transform.position = parentAfterDrag.position;
@@ -101,33 +99,31 @@ public class Item : MonoBehaviour
     public void Drop(){
 
     }
+    public void Use(){
+
+    }
+
+    public void Equip(){
+        PlayerController.instance.EquipStaff((StaffItem)this);
+    }
+
     public void Sell(){
 
     }
 
-    public virtual void Use(){
-        throw new ArgumentException("item is not usable");
-    }
-  
-    public virtual void Equip(){
-        throw new ArgumentException("item is not a staff");
-    }
+    public void EquipSpellSlot1(){
 
-    public virtual void EquipSpellSlot1(){
-        throw new ArgumentException("item is not a spell");
     }
-    public virtual void EquipSpellSlot2(){
-        throw new ArgumentException("item is not a spell");
+    public void EquipSpellSlot2(){
 
     } 
-    public virtual void EquipSpellSlot3(){
-        throw new ArgumentException("item is not a spell");
+    public void EquipSpellSlot3(){
 
     } 
-    public virtual void EquipSpellSlot4(){
-        throw new ArgumentException("item is not a spell");
+    public void EquipSpellSlot4(){
 
     }
+
 
    
 

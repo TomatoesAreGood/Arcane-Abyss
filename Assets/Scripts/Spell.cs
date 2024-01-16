@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spell : MonoBehaviour, IEquatable<Spell>
+public class Spell : MonoBehaviour
 {
     public int manaCost;
     public float fireRate;
@@ -12,7 +11,7 @@ public class Spell : MonoBehaviour, IEquatable<Spell>
     protected float nextAvailFire;
 
     // Start is called before the first frame update
-    private void Start()
+    void Start()
     {
         nextAvailFire = Time.time;
         fireRate = 2;
@@ -35,12 +34,5 @@ public class Spell : MonoBehaviour, IEquatable<Spell>
             nextAvailFire = Time.time + 1/fireRate;
             PlayerController.mana -= manaCost;
         }
-    }
-
-    public bool Equals(Spell other )
-    {
-        // Would still want to check for null etc. first.
-        return this.spellShot == other.spellShot; 
-             
     }
 }

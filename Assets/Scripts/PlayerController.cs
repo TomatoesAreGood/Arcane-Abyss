@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     private float collisionOffset = 0.04f;
     public static Vector3 characterPos; //used by enemy and bullet class 
 
-
     //Components
     private SpriteRenderer sr;
     private Animator animator;
@@ -39,24 +38,22 @@ public class PlayerController : MonoBehaviour
     private Coroutine activeCoroutine;
     private const float DEFAULTZOOM = 5f;
 
-    //Staffs 
+    //For orienting staffs 
     [HideInInspector] public Transform firePoint;
     [HideInInspector] public static Transform pivot;
-    public Staff equippedStaff;
-    [HideInInspector] public Sprite equippedStaffSprite;
-
+    public GameObject equippedStaff;
     public Spell equippedSpell;
-    private List<Spell> activeSpells;
 
     //Inventory
     [HideInInspector] public Inventory inventory;
-    [HideInInspector] public int inventoryHeight;
-    [HideInInspector] public int inventoryWidth;
-    [HideInInspector] public int spellInventorySize;
-    [HideInInspector] public int potionBagSize;
-    public ItemLibrary itemLibrary;
     public InventoryUI inventoryUI;
 
+    [HideInInspector] public int inventoryHeight;
+    [HideInInspector] public int inventoryWidth;
+    [HideInInspector] public int spellSlots;
+    [HideInInspector] public int potionBagSize;
+
+    public ItemLibrary itemLibrary;
 
 
     private void Awake(){
@@ -68,38 +65,29 @@ public class PlayerController : MonoBehaviour
         }
 
         //set default player stats
-        activeSpells = new List<Spell>();
         moveSpeed = 5f;
         inventoryHeight = 4;
         inventoryWidth = 10;
-        spellInventorySize = 8;
+        spellSlots = 4;
         potionBagSize = 4;
 
         //creating data storage
-        inventory = new Inventory(inventoryWidth*inventoryHeight, spellInventorySize, potionBagSize);
+        inventory = new Inventory(inventoryWidth*inventoryHeight, spellSlots, potionBagSize);
 
         //creating UI
         inventoryUI.inventoryRenderer.width = inventoryWidth;
         inventoryUI.inventoryRenderer.height = inventoryHeight;
 
-        inventoryUI.potionBagRenderer.width = 1;
-        inventoryUI.potionBagRenderer.height = potionBagSize;
+        inventoryUI.potionBagRenderer.width = potionBagSize;
+        inventoryUI.potionBagRenderer.height = 1;
 
-        inventoryUI.spellsRenderer.width = spellInventorySize;
+        inventoryUI.spellsRenderer.width = spellSlots;
         inventoryUI.spellsRenderer.height = 1;
-
-        inventoryUI.equippedSpellsRenderer.width = 4;
-        inventoryUI.equippedSpellsRenderer.height = 1;
 
         inventory.items[0] = itemLibrary.basicStaff;
         inventory.items[1] = itemLibrary.forestStaff;
-        inventory.items[2] = itemLibrary.darkstaff;
 
-        inventory.spells[0] = itemLibrary.fireball;
-        inventory.spells[1] = itemLibrary.iceShot;
-        inventory.spells[2] = itemLibrary.magicShot;
-
-        EquipStaff((StaffItem)inventory.items[0]);
+        EquipStaff((StaffItem)inventory.items[1]);
 
 
         //components
@@ -107,7 +95,6 @@ public class PlayerController : MonoBehaviour
         raycastHit2Ds = new List<RaycastHit2D>(0);
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        equippedStaffSprite = equippedStaff.GetComponent<SpriteRenderer>().sprite;
 
         //for shooting magic
         pivot = transform.GetChild(0).gameObject.transform;
@@ -130,11 +117,7 @@ public class PlayerController : MonoBehaviour
         activeCoroutine = null;
     }
 
-
     private void Update(){
-        //have to set this for inventory 
-        equippedStaffSprite = equippedStaff.GetComponent<SpriteRenderer>().sprite;
-
         
         // string a = "";
         // foreach (Item item in inventory.items) {
@@ -147,40 +130,7 @@ public class PlayerController : MonoBehaviour
         //     }
 
         // }
-
-      
-        // Debug.Log(a);    
-        
-
-        if(Input.GetKeyDown(KeyCode.Alpha1) && inventory.equippedSpells[0] != null){
-            if(activeSpells.Contains(inventory.equippedSpells[0].reference.GetComponent<Spell>())){
-                equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[0].reference.GetComponent<Spell>()));
-            }else{
-                equippedSpell = Instantiate(inventory.equippedSpells[0].reference).GetComponent<Spell>();
-                activeSpells.Add(equippedSpell);
-            }
-        }else if(Input.GetKeyDown(KeyCode.Alpha2) && inventory.equippedSpells[1] != null){
-            if(activeSpells.Contains(inventory.equippedSpells[1].reference.GetComponent<Spell>())){
-                equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[1].reference.GetComponent<Spell>()) );
-            }else{
-                equippedSpell = Instantiate(inventory.equippedSpells[1].reference).GetComponent<Spell>();
-                activeSpells.Add(equippedSpell);
-            }
-        }else if(Input.GetKeyDown(KeyCode.Alpha3) && inventory.equippedSpells[2] != null){
-            if(activeSpells.Contains(inventory.equippedSpells[2].reference.GetComponent<Spell>())){
-                equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[2].reference.GetComponent<Spell>()) );
-            }else{
-                equippedSpell = Instantiate(inventory.equippedSpells[2].reference).GetComponent<Spell>();
-                activeSpells.Add(equippedSpell);
-            }
-        }else if(Input.GetKeyDown(KeyCode.Alpha4) && inventory.equippedSpells[3] != null){
-            if(activeSpells.Contains(inventory.equippedSpells[3].reference.GetComponent<Spell>())){
-                equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[3].reference.GetComponent<Spell>()) );
-            }else{
-                equippedSpell = Instantiate(inventory.equippedSpells[3].reference).GetComponent<Spell>();
-                activeSpells.Add(equippedSpell);
-            }
-        }
+        // Debug.Log(a);
         
         if(Input.GetKeyDown(KeyCode.Space)){
             Debug.Break();
@@ -252,15 +202,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private Spell GetActiveSpell(Spell spell){
-        foreach(Spell spl in activeSpells){
-            if(spl == spell){
-                return spl;
-            }
-        }
-        throw new ArgumentException("active spell does not exist");
-    }
-
     private bool CanMove(Vector2 direction){
         if (direction != Vector2.zero){
             int raycastHits = rb.Cast(direction, contactFilter, raycastHit2Ds, moveSpeed * Time.fixedDeltaTime + collisionOffset);
@@ -273,25 +214,8 @@ public class PlayerController : MonoBehaviour
     }
 
     public void EquipStaff(StaffItem staff){
-        inventory.equippedStaff = staff;
         equippedStaff.GetComponent<SpriteRenderer>().sprite = staff.reference.GetComponent<SpriteRenderer>().sprite;
-        equippedStaff.damageBonus = staff.reference.GetComponent<Staff>().damageBonus;
-    }
-
-    public void EquipSpell(SpellItem spell, int spellIndex){
-        if(FindEquippedSpell(spell) != -1){
-            inventory.equippedSpells[FindEquippedSpell(spell)] = null;
-        }
-        inventory.equippedSpells[spellIndex] = spell;
-    }
-
-    public int FindEquippedSpell(SpellItem spell){
-        for(int i = 0 ; i < 4 ;i++){
-            if(inventory.equippedSpells[i] == spell){
-                return i;
-            }
-        }
-        return -1;
+        equippedStaff.GetComponent<Staff>().damageBonus = staff.reference.GetComponent<Staff>().damageBonus;
     }
 
     private IEnumerator ZoomOut(float maxZoom){
@@ -340,8 +264,6 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-
-    
 
 
 }

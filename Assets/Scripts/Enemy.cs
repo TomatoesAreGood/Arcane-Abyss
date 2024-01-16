@@ -5,22 +5,19 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float Health;
-    protected int _moveSpeed;
-    protected float _timer;
+    protected int _damage;
+    protected int _speed;
     public GameObject Player;
     protected PlayerController _playerScript;
-    protected SpriteRenderer _graphics;
-
     protected RaycastHit2D hit;
     private LayerMask _layerMask;
 
     protected AIPath _path;
 
+    protected bool isPouncing;
+    protected bool canPounce = true;
+    protected bool isPounceHandlerRunning = false;
     protected bool isMovingAway = false;
-    protected bool isSlowedHandlerRunning = false;
-
-    private float _totalBurnDamage;
 
     protected State state;
     protected Rigidbody2D _rigidbody;
@@ -36,44 +33,37 @@ public class Enemy : MonoBehaviour
         MoveAway,
         PlayerMoveAway,
         Shooting,
-        Stunned,
-    }
-    private void Awake()
-    {
-        _graphics = GetComponentInChildren<SpriteRenderer>();
-
     }
     void Start()
     {
-        Health = 5;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        Destroy();
+
+
+
+
     }
 
     private void FixedUpdate()
     {
-            switch (state)
+                switch (state)
         {
             default:
             case State.ChaseTarget:
                 _path.canMove = true;
                 FindTarget();
                 FindEnemy();
-                if (!isSlowedHandlerRunning){
-                    StartCoroutine(SlowedHandler());
-                }
                 break;
 
             case State.MoveAway:
                 _path.canMove = false;
                 Vector2 pos = transform.position;
                 Vector2 dir = -(hit.point - pos);
-                _rigidbody.MovePosition(_rigidbody.position + dir * _moveSpeed * Time.fixedDeltaTime);
+                _rigidbody.MovePosition(_rigidbody.position + dir * Time.fixedDeltaTime);
                 if ((Vector2.Distance(transform.position, hit.point) > 2.5f))
                 {
                     state = State.ChaseTarget;
@@ -118,51 +108,15 @@ public class Enemy : MonoBehaviour
 
     }
 
-    public void DebuffSlowed()
-    {
-        StartCoroutine(SlowedHandler());
-    }
-    protected IEnumerator SlowedHandler()
-    {
-        isSlowedHandlerRunning = true;
-        int _normalSpeed = _moveSpeed;
-        _moveSpeed = _moveSpeed/2;
-        _path.maxSpeed = _moveSpeed;
 
-        Debug.Log(_moveSpeed);
-
-        yield return new WaitForSeconds(3);
-        _moveSpeed = _normalSpeed;
-        _path.maxSpeed = _moveSpeed;
-    }
-
-    public void Burn(float burnDamage, float burnTickDamage)
-    {
-        StartCoroutine(BurnHandler(burnDamage, burnTickDamage));
-    }
-
-    protected IEnumerator BurnHandler(float burnDamage, float burnTickDamage)
-    {
-
-        _totalBurnDamage += burnDamage;
-        while (_totalBurnDamage > 0)
-        {
-            Health -= burnTickDamage;
-            _graphics.material.color = Color.yellow;
-            _totalBurnDamage -= burnTickDamage;
-            yield return new WaitForSeconds(1);
-            _graphics.material.color = Color.white;
-            yield return new WaitForSeconds(1);
-
-
-        }
-    }
 
     protected void Attack()
     {
         _playerScript.TakeDamage(1);
 
     }
+
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -174,14 +128,4 @@ public class Enemy : MonoBehaviour
             Attack();
         }
     }
-
-    protected void Destroy()
-    {
-        if (Health <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
-
-
 }

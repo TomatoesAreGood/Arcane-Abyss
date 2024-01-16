@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6418922745210711749}
   - component: {fileID: 6931095390688009171}
   - component: {fileID: 8639812736795855959}
-  - component: {fileID: -6915402156221391493}
+  - component: {fileID: 4956674019082466470}
   m_Layer: 0
-  m_Name: IceSpellItem
+  m_Name: MagicMissleItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1777598489, guid: 6ecae698efb38d846a94a1e72766e70c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 08af76ea36af8d24993f45e84a277bc3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &-6915402156221391493
+--- !u!114 &4956674019082466470
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8505134985925691837}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b3898c4428e28041b5b3a95933f9c3b, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e483d744523e4d4f88be460ab3492da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   value: 0
@@ -93,6 +93,6 @@ MonoBehaviour:
   desc: 
   parentAfterDrag: {fileID: 0}
   image: {fileID: 0}
-  rendererSelection: 1
+  rendererSelection: 0
   inventory: []
-  reference: {fileID: 8080940892066560431, guid: e3ea1b6aeb89b7a4cbf7fa9febfcad7a, type: 3}
+  reference: {fileID: 6723478562616510228, guid: 26d631fb61c8d76419caead164e54910, type: 3}
