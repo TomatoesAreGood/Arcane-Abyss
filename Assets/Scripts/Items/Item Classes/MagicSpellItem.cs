@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class UsableItem : ReferencedItem
+public class MagicSpellItem : SpellItem
 {
-    public abstract void Use();
 
 }

@@ -31,10 +31,11 @@ public class Slot : MonoBehaviour
     {
         rectTransform = GetComponent<RectTransform>();
         image = GetComponent<Image>();
+        item = null;
     }
 
     // Update is called once per frame
-    private void Update()
+    protected virtual void Update()
     {
         if(IsMouseHovering){
             SetAlpha(0.5f);

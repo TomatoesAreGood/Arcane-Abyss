@@ -7,6 +7,12 @@ public class ItemLibrary : MonoBehaviour
     public static ItemLibrary instance;
     public StaffItem basicStaff;
     public StaffItem forestStaff;
+    public SpellItem fireball;
+    public SpellItem iceShot;
+    public SpellItem magicShot;
+
+    public StaffItem darkstaff;
+
 
     // Start is called before the first frame update
     private void Awake(){
