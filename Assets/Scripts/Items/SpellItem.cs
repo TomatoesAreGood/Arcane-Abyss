@@ -1,10 +1,17 @@
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public abstract class SpellItem : ReferencedItem{
-
+    protected override void Awake(){
+        base.Awake();
+        renderer = PlayerController.instance.inventoryUI.spellsRenderer;
+        inventory = PlayerController.instance.inventory.spells;
+    }
     protected override void Start(){
-        base.Start();
+         if (reference == null){
+            throw new ArgumentException("no object reference attached to item");
+        }   
         if (reference.GetComponent<Spell>() == null){
             throw new ArgumentException("object reference is not a spell");
         }

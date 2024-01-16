@@ -50,30 +50,35 @@ public class InventoryRenderer : MonoBehaviour
             for(int c = 0; c < width; c++){
                 GameObject slot = Instantiate(Slot, transform);
                 slot.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(bottomLeft.x + 100*c, bottomLeft.y+ 100*r));
+                int i = r*width + c;
 
-                if(inventoryData[r*width + c] == null){
+                if(inventoryData[i] == null){
                     continue;
                 }
 
-                if(inventoryData[r*width + c].GetType() == typeof(BasicStaffItem)){
+                if(inventoryData[i].GetType() == typeof(BasicStaffItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.basicStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if(inventoryData[r*width + c].GetType() == typeof(ForestStaffItem)){
+                }else if(inventoryData[i].GetType() == typeof(ForestStaffItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.forestStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if(inventoryData[r*width + c].GetType() == typeof(FireSpellItem)){
+                }else if(inventoryData[i].GetType() == typeof(FireSpellItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.fireball.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if(inventoryData[r*width + c].GetType() == typeof(IceSpellItem)){
+                }else if(inventoryData[i].GetType() == typeof(IceSpellItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.iceShot.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[r * width + c].GetType() == typeof(DarkStaffItem)){
+                }else if (inventoryData[i].GetType() == typeof(DarkStaffItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.darkstaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[r * width + c].GetType() == typeof(MagicSpellItem)){
+                }else if (inventoryData[i].GetType() == typeof(MagicSpellItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.magicShot.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
+                }else if (inventoryData[i].GetType() == typeof(HealthPotionItem)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.healthPotion.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
                 }
+
 
             }
         }

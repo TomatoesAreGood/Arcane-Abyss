@@ -6775,6 +6775,7 @@ MonoBehaviour:
   fireball: {fileID: 1052191688529314682, guid: 22523f418e19db6438a18c34415d6955, type: 3}
   iceShot: {fileID: -6915402156221391493, guid: 1370b1b022e1b714db371a864e2f6977, type: 3}
   magicShot: {fileID: -5203602661348683615, guid: c6daf5a38a9066c42aa241310244493c, type: 3}
+  healthPotion: {fileID: -1824762916343387062, guid: 97a13ffc9be04f445b7bd0d085703199, type: 3}
   darkstaff: {fileID: 8603673668104546730, guid: 7f2110cdfb77cd8448e3776e129895fa, type: 3}
 --- !u!4 &1692834709
 Transform:

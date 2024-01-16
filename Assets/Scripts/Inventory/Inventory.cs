@@ -8,7 +8,7 @@ public class Inventory
 {  
     public Item[] items;
     public SpellItem[] spells;
-    public Potion[] potions;
+    public PotionItem[] potions;
 
     public StaffItem equippedStaff;
     public SpellItem[] equippedSpells;
@@ -16,7 +16,7 @@ public class Inventory
     public Inventory(int inventorySize, int spellSize, int potionBagSize){
         items = new Item[inventorySize];
         spells = new SpellItem[spellSize];
-        potions = new Potion[potionBagSize];
+        potions = new PotionItem[potionBagSize];
         equippedSpells = new SpellItem[4];
         for(int i = 0; i < items.Length; i++){
             items[i] = null;

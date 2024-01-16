@@ -23,32 +23,17 @@ public class Item : MonoBehaviour
     [HideInInspector] public Image image;
     private RectTransform rectTransform;
     public bool IsMouseOnItem => RectTransformUtility.RectangleContainsScreenPoint(rectTransform, Input.mousePosition, Camera.main);
-    public Renderers rendererSelection;
-
-    private new InventoryRenderer renderer;
+    protected new InventoryRenderer renderer;
     public Item[] inventory;
 
-
-    // Start is called before the first frame update
-    protected void Awake(){
+    protected virtual void Awake(){
         image = gameObject.GetComponent<Image>();
         rectTransform = gameObject.GetComponent<RectTransform>();
         parentAfterDrag = transform.parent;
-        if (rendererSelection == Renderers.inventory) {
-            renderer = PlayerController.instance.inventoryUI.inventoryRenderer;
-            inventory = PlayerController.instance.inventory.items;
-        }
-        else if (rendererSelection == Renderers.spells) {
-            renderer = PlayerController.instance.inventoryUI.spellsRenderer;
-            inventory = PlayerController.instance.inventory.spells;
-        }
-        else if (rendererSelection == Renderers.potion) {
-            renderer = PlayerController.instance.inventoryUI.potionBagRenderer;
-            inventory = PlayerController.instance.inventory.potions;
-        }
+        renderer = PlayerController.instance.inventoryUI.inventoryRenderer;
+        inventory = PlayerController.instance.inventory.items;
     }
 
-    // Update is called once per frame
     protected virtual void Update(){
         //on left click
         if(IsMouseOnItem && Input.GetMouseButtonDown(1)){
@@ -126,7 +111,6 @@ public class Item : MonoBehaviour
     } 
     public virtual void EquipSpellSlot4(){
         throw new ArgumentException("item is not a spell");
-
     }
 
    

@@ -29,8 +29,8 @@ public class InteractPanel : MonoBehaviour
         }
 
         if(item is StaffItem){
-            equipButton.SetActive(true);
             dropButton.SetActive(true);
+            equipButton.SetActive(true);
             numActiveButtons = 2;
         }  
         else if(item is SpellItem){
@@ -39,6 +39,10 @@ public class InteractPanel : MonoBehaviour
             equipSpellSlot3Button.SetActive(true);
             equipSpellSlot4Button.SetActive(true);
             numActiveButtons = 4;
+        } else if(item is UsableItem){
+            dropButton.SetActive(true);
+            useButton.SetActive(true);
+            numActiveButtons = 2;
         }
         rectTransform.sizeDelta = new Vector2(rectTransform.rect.width, numActiveButtons*30f);
         ResetPos();

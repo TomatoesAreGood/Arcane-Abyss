@@ -10,6 +10,7 @@ public class ItemLibrary : MonoBehaviour
     public SpellItem fireball;
     public SpellItem iceShot;
     public SpellItem magicShot;
+    public PotionItem healthPotion;
 
     public StaffItem darkstaff;
 

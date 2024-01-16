@@ -99,8 +99,9 @@ public class PlayerController : MonoBehaviour
         inventory.spells[1] = itemLibrary.iceShot;
         inventory.spells[2] = itemLibrary.magicShot;
 
+        inventory.potions[0] = itemLibrary.healthPotion;
+        
         EquipStaff((StaffItem)inventory.items[0]);
-
 
         //components
         rb = GetComponent<Rigidbody2D>();
@@ -112,20 +113,17 @@ public class PlayerController : MonoBehaviour
         //for shooting magic
         pivot = transform.GetChild(0).gameObject.transform;
         firePoint = pivot.transform.GetChild(0);
-
-        // equippedSpell = magicMissle.GetComponent<Spell>();
         
         maxMana = 100;
         mana = maxMana;
 
+        // Mana Bar UI has same max mana as player stats
         ManaBar.SetMaxMana(maxMana);
         ManaBar.SetMana(maxMana);
-        // Mana Bar UI has same max mana as player stats
-
-        IncreaseMaxHealth(5);
-        health = maxHealth;
 
         // after increasing max health, set current health to max health
+        IncreaseMaxHealth(5);
+        health = maxHealth;
 
         activeCoroutine = null;
     }
