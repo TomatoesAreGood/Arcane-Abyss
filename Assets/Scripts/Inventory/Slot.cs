@@ -31,6 +31,7 @@ public class Slot : MonoBehaviour
     {
         rectTransform = GetComponent<RectTransform>();
         image = GetComponent<Image>();
+        item = null;
     }
 
     // Update is called once per frame
