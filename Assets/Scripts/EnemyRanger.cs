@@ -17,6 +17,7 @@ public class EnemyRanger : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        Health = 5;
         state = State.ChaseTarget;
         _path = GetComponent<AIPath>();
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -29,7 +30,7 @@ public class EnemyRanger : Enemy
     // Update is called once per frame
     void Update()
     {
-
+        Destroy();
     }
 
     private void FixedUpdate()

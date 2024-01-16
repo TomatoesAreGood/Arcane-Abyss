@@ -29,6 +29,13 @@ public class MagicShot : MonoBehaviour
         {
             return;
         }
+        if (other.GetComponent<Enemy>() != null) 
+        { 
+            Enemy enemyScript = other.GetComponent<Enemy>();
+            enemyScript.Health -= damage;
+            enemyScript.Burn(2, 0.3f);
+            Debug.Log(enemyScript.Health);
+        }
         Destroy(gameObject);
     }
 

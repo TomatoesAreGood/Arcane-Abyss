@@ -3979,6 +3979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d720307d233a6e5409e688e246e96581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpriteRenderer: {fileID: 0}
   Player: {fileID: 707362279}
 --- !u!212 &946107209
 SpriteRenderer:
@@ -5168,6 +5169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fedeb1e3c2cf08548a84fb58a97c7cda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Health: 0
   Player: {fileID: 707362279}
 --- !u!1 &1191360424
 GameObject:
