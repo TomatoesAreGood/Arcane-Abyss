@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private float collisionOffset = 0.04f;
     public static Vector3 characterPos; //used by enemy and bullet class 
 
+
     //Components
     private SpriteRenderer sr;
     private Animator animator;
@@ -232,6 +233,8 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+    
 
 
 }

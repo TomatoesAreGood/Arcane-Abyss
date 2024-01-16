@@ -5,10 +5,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public float Health;
     protected int _moveSpeed;
     protected float _timer;
     public GameObject Player;
     protected PlayerController _playerScript;
+    protected SpriteRenderer _graphics;
+
     protected RaycastHit2D hit;
     private LayerMask _layerMask;
 
@@ -16,6 +19,8 @@ public class Enemy : MonoBehaviour
 
     protected bool isMovingAway = false;
     protected bool isSlowedHandlerRunning = false;
+
+    private float _totalBurnDamage;
 
     protected State state;
     protected Rigidbody2D _rigidbody;
@@ -33,15 +38,21 @@ public class Enemy : MonoBehaviour
         Shooting,
         Stunned,
     }
+    private void Awake()
+    {
+        _graphics = GetComponentInChildren<SpriteRenderer>();
+
+    }
     void Start()
     {
+        Health = 5;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        _path.maxSpeed = _moveSpeed;
+        Destroy();
     }
 
     private void FixedUpdate()
@@ -107,24 +118,44 @@ public class Enemy : MonoBehaviour
 
     }
 
-    protected void DebuffSlowed()
+    public void DebuffSlowed()
     {
         StartCoroutine(SlowedHandler());
     }
     protected IEnumerator SlowedHandler()
     {
         isSlowedHandlerRunning = true;
-        int normalSpeed = _moveSpeed;
+        int _normalSpeed = _moveSpeed;
         _moveSpeed = _moveSpeed/2;
         _path.maxSpeed = _moveSpeed;
 
         Debug.Log(_moveSpeed);
 
         yield return new WaitForSeconds(3);
-        _moveSpeed = normalSpeed;
+        _moveSpeed = _normalSpeed;
         _path.maxSpeed = _moveSpeed;
+    }
+
+    public void Burn(float burnDamage, float burnTickDamage)
+    {
+        StartCoroutine(BurnHandler(burnDamage, burnTickDamage));
+    }
+
+    protected IEnumerator BurnHandler(float burnDamage, float burnTickDamage)
+    {
+
+        _totalBurnDamage += burnDamage;
+        while (_totalBurnDamage > 0)
+        {
+            Health -= burnTickDamage;
+            _graphics.material.color = Color.yellow;
+            _totalBurnDamage -= burnTickDamage;
+            yield return new WaitForSeconds(1);
+            _graphics.material.color = Color.white;
+            yield return new WaitForSeconds(1);
 
 
+        }
     }
 
     protected void Attack()
@@ -132,8 +163,6 @@ public class Enemy : MonoBehaviour
         _playerScript.TakeDamage(1);
 
     }
-
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -145,4 +174,14 @@ public class Enemy : MonoBehaviour
             Attack();
         }
     }
+
+    protected void Destroy()
+    {
+        if (Health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
 }
