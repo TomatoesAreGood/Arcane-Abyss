@@ -12,6 +12,7 @@ public class PickupScript : MonoBehaviour
     {
         
         _inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
+       
     }
 
     private void OnTriggerEnter2D(Collider2D other)

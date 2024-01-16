@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Pathfinding.Util;
 using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
@@ -37,8 +38,9 @@ public class InventoryRenderer : MonoBehaviour
             inventoryData = PlayerController.instance.inventory.spells;
         }else if(rendererType == Renderers.potion){
             inventoryData = PlayerController.instance.inventory.potions;
+        }else if(rendererType == Renderers.equippedSpells){
+            inventoryData = PlayerController.instance.inventory.equippedSpells;
         }
-
         DrawMatrix(height,width);
         transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 100);
     }
@@ -59,10 +61,29 @@ public class InventoryRenderer : MonoBehaviour
                 }else if(inventoryData[r*width + c].GetType() == typeof(ForestStaffItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.forestStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
+                }else if(inventoryData[r*width + c].GetType() == typeof(FireSpellItem)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.fireball.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }else if(inventoryData[r*width + c].GetType() == typeof(IceShotItem)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.iceShot.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
                 }
-                
+                else if (inventoryData[r * width + c].GetType() == typeof(DarkStaffItem))
+                {
+                    GameObject obj = Instantiate(ItemLibrary.instance.darkstaff.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }
+
             }
         }
+    }
+
+    public void RedrawMatrix(){
+        for(int i = 0; i < transform.childCount; i++){
+            Destroy(transform.GetChild(i).gameObject);
+        }
+        DrawMatrix(height,width);
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 100);
     }
 
     public void UpdateData(){

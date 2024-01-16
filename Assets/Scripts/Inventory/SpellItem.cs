@@ -10,4 +10,24 @@ public abstract class SpellItem : ReferencedItem{
         }
     }
 
+
+    public override void EquipSpellSlot1(){
+        PlayerController.instance.EquipSpell(this, 0);
+    }
+    public override void EquipSpellSlot2(){
+        PlayerController.instance.EquipSpell(this, 1);        
+
+
+    } 
+    public override void EquipSpellSlot3(){
+        PlayerController.instance.EquipSpell(this, 2);       
+
+
+    } 
+    public override void EquipSpellSlot4(){
+        PlayerController.instance.EquipSpell(this, 3);        
+
+
+    }
+
 }

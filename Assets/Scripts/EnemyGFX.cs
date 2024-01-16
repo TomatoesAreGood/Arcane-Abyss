@@ -6,13 +6,13 @@ public class EnemyGFX : MonoBehaviour
 {
 
     private Vector2 _direction;
-    private SpriteRenderer _spriteRenderer;
+    public SpriteRenderer SpriteRenderer;
     public GameObject Player;
 
     // Start is called before the first frame update
     void Start()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        SpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -24,11 +24,11 @@ public class EnemyGFX : MonoBehaviour
     {
         if (_direction.x < 0)
         {
-            _spriteRenderer.flipX = true;
+            SpriteRenderer.flipX = true;
         }
         else
         {
-            _spriteRenderer.flipX = false;
+            SpriteRenderer.flipX = false;
         }
     }
 }
