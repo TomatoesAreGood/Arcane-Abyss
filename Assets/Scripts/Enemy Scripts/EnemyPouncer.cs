@@ -24,7 +24,7 @@ public class EnemyPouncer : Enemy
     }
     void Update()
     {
-        Destroy();
+        DeadCheck();
     }
 
     private void FixedUpdate()
@@ -121,14 +121,4 @@ public class EnemyPouncer : Enemy
         //Code cited from Unity Forum Post "2D enemy dash movement"
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.GetComponent<PlayerController>())
-        {
-            Debug.Log("collision");
-            _playerScript = collision.gameObject.GetComponent<PlayerController>();
-            /*_player.GainHeart();*/
-            Attack();
-        }
-    }
 }

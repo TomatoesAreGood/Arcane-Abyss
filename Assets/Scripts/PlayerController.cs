@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     public static int health;
     public static int maxMana = 100;
     public static int mana;
+    public bool IsImmune;
 
     //UI
     public HealthBarList HealthBarList;
@@ -92,6 +93,8 @@ public class PlayerController : MonoBehaviour
         inventoryUI.equippedSpellsRenderer.height = 1;
 
         inventory.items[0] = itemLibrary.basicStaff;
+        inventory.items[1] = itemLibrary.forestStaff;
+
         inventory.items[2] = itemLibrary.darkstaff;
 
         inventory.spells[0] = itemLibrary.fireball;
@@ -316,8 +319,21 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        HealthBarList.EmptyFullHeart();
-        health -= damage;
+
+        if (!IsImmune)
+        {
+            HealthBarList.EmptyFullHeart();
+            health -= damage;
+        }
+        StartCoroutine(ImmunityHandler());
+
+    }
+
+    IEnumerator ImmunityHandler()
+    {
+        IsImmune = true;
+        yield return new WaitForSeconds (1);
+        IsImmune = false;
     }
 
     public void GainHeart()
