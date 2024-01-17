@@ -6,33 +6,38 @@ using UnityEngine;
 public class PickupScript : MonoBehaviour
 {
     // Start is called before the first frame update
-    private PlayerInventory _inventory;
-    public GameObject itembutton;
-    void Start()
+    private Inventory _inventory;
+    private Item[] _inventoryData;
+    [SerializeField] Item itemReference;
+
+    
+    private void Start()
     {
-        
-        _inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
-       
+        _inventory = PlayerController.instance.inventory;
+
+        if(itemReference.renderer == PlayerController.instance.inventoryUI.inventoryRenderer){
+            _inventoryData = _inventory.items;
+        }else if(itemReference.renderer == PlayerController.instance.inventoryUI.potionBagRenderer){
+            _inventoryData = _inventory.potions;
+        }
+               
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player")){
-            for (int i = 0; i < _inventory.slots.Length; i++)
-            {
-                if (_inventory.IsFull[i] == false)
-                {
-                    _inventory.inventoryData[i] = itembutton;
+            
+            // for (int i = 0; i < _inventoryData.Length; i++) {
+            //     if (_inventoryData[i] == null){
 
-                    Debug.Log("picked up item");
-                    _inventory.IsFull[i] = true;
-                    RectTransform resize = itembutton.GetComponent<RectTransform>();
-                    resize.sizeDelta = new Vector2(8, 8);
-                    Instantiate(itembutton, _inventory.slots[i].transform, false);
-                    Destroy(gameObject);
-                    break;
-                }
-            }
+            //         _inventoryData[i] = itemReference;
+
+            //         Debug.Log("picked up item");
+
+            //         Destroy(gameObject);
+            //         break;
+            //     }
+            // }
         }
     }
 

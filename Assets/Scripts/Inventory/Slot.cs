@@ -10,7 +10,7 @@ using UnityEngine.EventSystems;
 public class Slot : MonoBehaviour
 {
     public Item item;
-    private Image image;
+    public Image image;
     private bool IsMouseHovering => RectTransformUtility.RectangleContainsScreenPoint(rectTransform, Input.mousePosition, Camera.main);
     private RectTransform rectTransform;
 
@@ -37,6 +37,9 @@ public class Slot : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
+        if(!IsEmpty()){
+            item = transform.GetChild(0).GetComponent<Item>();
+        }
         if(PlayerController.instance.inventoryUI.isOpen){
             if(IsMouseHovering){
                 Dim();
@@ -45,7 +48,7 @@ public class Slot : MonoBehaviour
             } 
         }       
     }
-    
+
 
     public void Dim(){
         SetAlpha(0.5f);

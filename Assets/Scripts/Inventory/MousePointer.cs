@@ -67,31 +67,35 @@ public class MousePointer : MonoBehaviour
 
     public void Use(){
         interactingItem.Use();
+        interactPanel.ClosePanel();
     }
     public void Sell(){
         interactingItem.Sell();
+        interactPanel.ClosePanel();
     }
     public void Drop(){
         interactingItem.Drop();
+        interactPanel.ClosePanel();
     }
     public void Equip(){
         interactingItem.Equip();
+        interactPanel.ClosePanel();
     }
     public void EquipSpellSlot1(){
-        if(interactingItem is SpellItem){
-            interactingItem.EquipSpellSlot1();
-        }
+        interactingItem.EquipSpellSlot1();
+        interactPanel.ClosePanel();
     }
     public void EquipSpellSlot2(){
         interactingItem.EquipSpellSlot2();
+        interactPanel.ClosePanel();
     } 
     public void EquipSpellSlot3(){
         interactingItem.EquipSpellSlot3();
-
+        interactPanel.ClosePanel();
     } 
     public void EquipSpellSlot4(){
         interactingItem.EquipSpellSlot4();
-
+        interactPanel.ClosePanel();
     }
 
 }

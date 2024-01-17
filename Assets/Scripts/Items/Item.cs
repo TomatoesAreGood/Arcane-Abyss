@@ -18,12 +18,11 @@ public class Item : MonoBehaviour
     public int value;
     public string title;
     public string desc;
-
     [HideInInspector] public Transform parentAfterDrag;
     [HideInInspector] public Image image;
     private RectTransform rectTransform;
     public bool IsMouseOnItem => RectTransformUtility.RectangleContainsScreenPoint(rectTransform, Input.mousePosition, Camera.main);
-    protected new InventoryRenderer renderer;
+    public new InventoryRenderer renderer;
     public Item[] inventory;
 
     protected virtual void Awake(){
@@ -35,6 +34,10 @@ public class Item : MonoBehaviour
     }
 
     protected virtual void Update(){
+        if(!PlayerController.instance.inventoryUI.isOpen){
+            return;
+        }
+
         //on left click
         if(IsMouseOnItem && Input.GetMouseButtonDown(1)){
             MousePointer.instance.SetInteractingItem(this);

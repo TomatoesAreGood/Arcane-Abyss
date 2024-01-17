@@ -35,11 +35,6 @@ public class PlayerController : MonoBehaviour
     public HealthBarList HealthBarList;
     public ManaBar ManaBar;
 
-    //For Zooming in and out
-    [SerializeField] CinemachineVirtualCamera cam;
-    private Coroutine activeCoroutine;
-    private const float DEFAULTZOOM = 5f;
-
     //Staffs 
     [HideInInspector] public Transform firePoint;
     [HideInInspector] public static Transform pivot;
@@ -79,31 +74,6 @@ public class PlayerController : MonoBehaviour
         //creating data storage
         inventory = new Inventory(inventoryWidth*inventoryHeight, spellInventorySize, potionBagSize);
 
-        //creating UI
-        inventoryUI.inventoryRenderer.width = inventoryWidth;
-        inventoryUI.inventoryRenderer.height = inventoryHeight;
-
-        inventoryUI.potionBagRenderer.width = 1;
-        inventoryUI.potionBagRenderer.height = potionBagSize;
-
-        inventoryUI.spellsRenderer.width = spellInventorySize;
-        inventoryUI.spellsRenderer.height = 1;
-
-        inventoryUI.equippedSpellsRenderer.width = 4;
-        inventoryUI.equippedSpellsRenderer.height = 1;
-
-        inventory.items[0] = itemLibrary.basicStaff;
-        inventory.items[1] = itemLibrary.forestStaff;
-        inventory.items[2] = itemLibrary.darkstaff;
-
-        inventory.spells[0] = itemLibrary.fireball;
-        inventory.spells[1] = itemLibrary.iceShot;
-        inventory.spells[2] = itemLibrary.magicShot;
-
-        inventory.potions[0] = itemLibrary.healthPotion;
-        
-        EquipStaff((StaffItem)inventory.items[0]);
-
         //components
         rb = GetComponent<Rigidbody2D>();
         raycastHit2Ds = new List<RaycastHit2D>(0);
@@ -125,81 +95,94 @@ public class PlayerController : MonoBehaviour
         // after increasing max health, set current health to max health
         IncreaseMaxHealth(5);
         health = maxHealth;
-
-        activeCoroutine = null;
     }
+    private void Start(){
+        inventory.items[0] = itemLibrary.basicStaff;
+        inventory.items[1] = itemLibrary.forestStaff;
+        inventory.items[2] = itemLibrary.darkstaff;
 
+        inventory.spells[0] = itemLibrary.fireball;
+        inventory.spells[1] = itemLibrary.iceShot;
+        inventory.spells[2] = itemLibrary.magicShot;
+
+        inventory.potions[0] = itemLibrary.healthPotion;
+        
+        EquipStaff((StaffItem)inventory.items[0]);
+    }
 
     private void Update(){
         //have to set this for inventory 
         equippedStaffSprite = equippedStaff.GetComponent<SpriteRenderer>().sprite;
 
         
-        // string a = "";
-        // foreach (Item item in inventory.items) {
-        //     if (item == null)
-        //     {
-        //         a += " ,";
-        //     }
-        //     else {
-        //         a += item.ToString() + ",";
-        //     }
+        string a = "";
+        foreach (Item item in inventory.items) {
+            if (item == null)
+            {
+                a += " ,";
+            }
+            else {
+                a += item.ToString() + ",";
+            }
 
-        // }
+        }
 
       
-        // Debug.Log(a);    
+        Debug.Log(a);    
         
         //Spell switching (pain)
-        if(Input.GetKeyDown(KeyCode.Alpha1)){
-            if(inventory.equippedSpells[0] == null){
-                equippedSpell = null;
-            }else{
-                if(activeSpells.Contains(inventory.equippedSpells[0].reference.GetComponent<Spell>())){
-                    equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[0].reference.GetComponent<Spell>()));
+        if(!inventoryUI.isOpen){
+            if(Input.GetKeyDown(KeyCode.Alpha1)){
+                if(inventory.equippedSpells[0] == null){
+                    equippedSpell = null;
                 }else{
-                    equippedSpell = Instantiate(inventory.equippedSpells[0].reference).GetComponent<Spell>();
-                    activeSpells.Add(equippedSpell);
+                    if(activeSpells.Contains(inventory.equippedSpells[0].reference.GetComponent<Spell>())){
+                        equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[0].reference.GetComponent<Spell>()));
+                    }else{
+                        equippedSpell = Instantiate(inventory.equippedSpells[0].reference).GetComponent<Spell>();
+                        activeSpells.Add(equippedSpell);
+                    }
                 }
-            }
-            inventoryUI.equippedSpellsRenderer.SelectSlot(0);
-        }else if(Input.GetKeyDown(KeyCode.Alpha2)){
-            if(inventory.equippedSpells[1] == null){
-                equippedSpell = null;
-            }else{
-                if(activeSpells.Contains(inventory.equippedSpells[1].reference.GetComponent<Spell>())){
-                    equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[1].reference.GetComponent<Spell>()) );
+                inventoryUI.equippedSpellsRenderer.SelectSlot(0);
+            }else if(Input.GetKeyDown(KeyCode.Alpha2)){
+                if(inventory.equippedSpells[1] == null){
+                    equippedSpell = null;
                 }else{
-                    equippedSpell = Instantiate(inventory.equippedSpells[1].reference).GetComponent<Spell>();
-                    activeSpells.Add(equippedSpell);
+                    if(activeSpells.Contains(inventory.equippedSpells[1].reference.GetComponent<Spell>())){
+                        equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[1].reference.GetComponent<Spell>()) );
+                    }else{
+                        equippedSpell = Instantiate(inventory.equippedSpells[1].reference).GetComponent<Spell>();
+                        activeSpells.Add(equippedSpell);
+                    }
                 }
-            }
-            inventoryUI.equippedSpellsRenderer.SelectSlot(1);
-        }else if(Input.GetKeyDown(KeyCode.Alpha3)){
-            if(inventory.equippedSpells[2] == null){
-                equippedSpell = null;
-            }else{
-                if(activeSpells.Contains(inventory.equippedSpells[2].reference.GetComponent<Spell>())){
-                    equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[2].reference.GetComponent<Spell>()) );
+                inventoryUI.equippedSpellsRenderer.SelectSlot(1);
+            }else if(Input.GetKeyDown(KeyCode.Alpha3)){
+                if(inventory.equippedSpells[2] == null){
+                    equippedSpell = null;
                 }else{
-                    equippedSpell = Instantiate(inventory.equippedSpells[2].reference).GetComponent<Spell>();
-                    activeSpells.Add(equippedSpell);
+                    if(activeSpells.Contains(inventory.equippedSpells[2].reference.GetComponent<Spell>())){
+                        equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[2].reference.GetComponent<Spell>()) );
+                    }else{
+                        equippedSpell = Instantiate(inventory.equippedSpells[2].reference).GetComponent<Spell>();
+                        activeSpells.Add(equippedSpell);
+                    }
                 }
-            }
-            inventoryUI.equippedSpellsRenderer.SelectSlot(2);
-        }else if(Input.GetKeyDown(KeyCode.Alpha4)){
-            if(inventory.equippedSpells[3] == null){
-                equippedSpell = null;
-            }else{
-                if(activeSpells.Contains(inventory.equippedSpells[3].reference.GetComponent<Spell>())){
-                    equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[3].reference.GetComponent<Spell>()) );
+                inventoryUI.equippedSpellsRenderer.SelectSlot(2);
+            }else if(Input.GetKeyDown(KeyCode.Alpha4)){
+                if(inventory.equippedSpells[3] == null){
+                    equippedSpell = null;
                 }else{
-                    equippedSpell = Instantiate(inventory.equippedSpells[3].reference).GetComponent<Spell>();
-                    activeSpells.Add(equippedSpell);
+                    if(activeSpells.Contains(inventory.equippedSpells[3].reference.GetComponent<Spell>())){
+                        equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[3].reference.GetComponent<Spell>()) );
+                    }else{
+                        equippedSpell = Instantiate(inventory.equippedSpells[3].reference).GetComponent<Spell>();
+                        activeSpells.Add(equippedSpell);
+                    }
                 }
+                inventoryUI.equippedSpellsRenderer.SelectSlot(3);
             }
-            inventoryUI.equippedSpellsRenderer.SelectSlot(3);
         }
+       
         
         if(Input.GetKeyDown(KeyCode.Space)){
             Debug.Break();
@@ -216,25 +199,13 @@ public class PlayerController : MonoBehaviour
                 if(MousePointer.instance.selectedItem != null){
                     MousePointer.instance.selectedItem.SnapBack();
                 }
+                equippedSpell = null;
                 inventoryUI.Disable();
             }else{
                 inventoryUI.Enable();
             }
        }
           
-
-        if (Input.GetMouseButtonDown(1)) {
-            if (activeCoroutine != null) {
-                StopCoroutine(activeCoroutine);
-            }
-            activeCoroutine = StartCoroutine(ZoomOut(DEFAULTZOOM*2));
-        }else if (Input.GetMouseButtonUp(1)) {
-            if (activeCoroutine != null){
-                StopCoroutine(activeCoroutine);
-            }
-            activeCoroutine = StartCoroutine(ZoomIn());
-        }
-    
         //movement
         movementDirection.x = Input.GetAxisRaw("Horizontal");
         movementDirection.y = Input.GetAxisRaw("Vertical");
@@ -304,27 +275,23 @@ public class PlayerController : MonoBehaviour
         }
         return -1;
     }
-
-    private IEnumerator ZoomOut(float maxZoom){
-        float currentZoom = cam.m_Lens.OrthographicSize;
-
-        for (float i = 0; i <= 1; i+=0.05f){
-            cam.m_Lens.OrthographicSize = Mathf.Lerp(currentZoom, maxZoom, i);
-            yield return new WaitForSeconds(.01f);
+    public void TakeDamage(int damage){
+        if (!_isImmune)
+        {
+            HealthBarList.EmptyFullHeart();
+            health -= damage;
         }
+        StartCoroutine(ImmunityHandler());
+
     }
 
-    private IEnumerator ZoomIn(){
-        float currentZoom = cam.m_Lens.OrthographicSize;
-
-        for (float i = 0; i <= 1; i+=0.05f){
-            cam.m_Lens.OrthographicSize = Mathf.Lerp(currentZoom, DEFAULTZOOM, i);
-            yield return new WaitForSeconds(.01f);
-        }
+    IEnumerator ImmunityHandler(){
+        _isImmune = true;
+        yield return new WaitForSeconds(1);
+        _isImmune = false;
     }
 
-    public void IncreaseMaxHealth()
-    {
+    public void IncreaseMaxHealth(){
         HealthBarList.InstantiateHeart();
         maxHealth++;
     }
@@ -335,40 +302,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
-    {
-        if (!_isImmune)
-        {
-            HealthBarList.EmptyFullHeart();
-            health -= damage;
-        }
-        StartCoroutine(ImmunityHandler());
-
-    }
-    IEnumerator ImmunityHandler()
-    {
-        _isImmune = true;
-        yield return new WaitForSeconds(1);
-        _isImmune = false;
-    }
-
-    public void GainHeart()
-    {
+    public void GainHeart(){
         if (health < maxHealth)
         {
             HealthBarList.FillEmptyHeart();
             health += 1;
             Debug.Log(health);
         }
-
+    }
+    public void GainHeart(int num){
+        for(int i = 0;i < num; i++){
+            GainHeart();
+        }
     }
 }
-
-
-    
-
-
-
-
-
-
