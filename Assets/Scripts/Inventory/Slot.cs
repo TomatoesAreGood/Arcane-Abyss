@@ -27,7 +27,7 @@ public class Slot : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    private void Start()
+    private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         image = GetComponent<Image>();

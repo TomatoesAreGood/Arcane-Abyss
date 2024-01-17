@@ -125,4 +125,10 @@ public class InventoryRenderer : MonoBehaviour
         }
         GetSlot(index).Dim();
     }
+
+    public void InstantiateItem(Item item, int index){
+        if(GetSlot(index).IsEmpty()){
+            Instantiate(item.gameObject, GetTransform(index)).transform.position = GetTransform(index).position;
+        }
+    }
 }

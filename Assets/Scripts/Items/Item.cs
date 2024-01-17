@@ -18,6 +18,7 @@ public class Item : MonoBehaviour
     public int value;
     public string title;
     public string desc;
+    public Renderers itemType;
     [HideInInspector] public Transform parentAfterDrag;
     [HideInInspector] public Image image;
     private RectTransform rectTransform;

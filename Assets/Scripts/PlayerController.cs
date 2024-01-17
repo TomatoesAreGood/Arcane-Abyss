@@ -114,21 +114,19 @@ public class PlayerController : MonoBehaviour
         //have to set this for inventory 
         equippedStaffSprite = equippedStaff.GetComponent<SpriteRenderer>().sprite;
 
-        
-        string a = "";
-        foreach (Item item in inventory.items) {
-            if (item == null)
-            {
-                a += " ,";
-            }
-            else {
-                a += item.ToString() + ",";
-            }
+        // string a = "";
+        // foreach (Item item in inventory.items) {
+        //     if (item == null)
+        //     {
+        //         a += " ,";
+        //     }
+        //     else {
+        //         a += item.ToString() + ",";
+        //     }
 
-        }
+        // }
 
-      
-        Debug.Log(a);    
+        // Debug.Log(a);    
         
         //Spell switching (pain)
         if(!inventoryUI.isOpen){
@@ -314,5 +312,19 @@ public class PlayerController : MonoBehaviour
         for(int i = 0;i < num; i++){
             GainHeart();
         }
+    }
+
+    public bool TryPickUp(Item item){
+        if(item.itemType == Renderers.inventory){
+            for(int i = 0; i < inventory.items.Length; i++){
+                if(inventory.items[i] == null){
+                    inventoryUI.inventoryRenderer.InstantiateItem(item,i);
+                    return true;
+                }
+            }
+        }else if(item.renderer == inventoryUI.potionBagRenderer){
+
+        }
+        return false;
     }
 }
