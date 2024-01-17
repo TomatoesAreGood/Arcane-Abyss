@@ -9,7 +9,7 @@ public class InventoryUI : MonoBehaviour
     public InventoryRenderer potionBagRenderer;
     public InventoryRenderer spellsRenderer;
     public InventoryRenderer equippedSpellsRenderer;
-
+    public Transform PlayerUICanvas;
     public bool isOpen;
     [SerializeField] Image equippedStaff;
 
@@ -18,7 +18,6 @@ public class InventoryUI : MonoBehaviour
     void Start()
     {
         isOpen = false;
-   
 
     }
 
@@ -43,6 +42,7 @@ public class InventoryUI : MonoBehaviour
         isOpen = true;
         gameObject.SetActive(true);
     }
+
     public void Disable(){
         Time.timeScale = 1f;
         isOpen = false;

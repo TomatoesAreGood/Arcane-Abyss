@@ -106,8 +106,14 @@ public class InventoryRenderer : MonoBehaviour
         return GetTransform(index).GetComponent<Slot>();
     }
 
-
     public Transform GetTransform(int index){
         return transform.GetChild(index);
+    }
+
+    public void SelectSlot(int index){
+        for(int i = 0; i < transform.childCount; i++){
+           GetSlot(i).UnDim();
+        }
+        GetSlot(index).Dim();
     }
 }

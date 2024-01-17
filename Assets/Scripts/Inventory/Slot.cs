@@ -37,10 +37,20 @@ public class Slot : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        if(IsMouseHovering){
-            SetAlpha(0.5f);
-        }else{
-            SetAlpha(1f);
-        }
+        if(PlayerController.instance.inventoryUI.isOpen){
+            if(IsMouseHovering){
+                Dim();
+            }else{
+                UnDim();
+            } 
+        }       
+    }
+    
+
+    public void Dim(){
+        SetAlpha(0.5f);
+    }
+    public void UnDim(){
+        SetAlpha(1f);
     }
 }

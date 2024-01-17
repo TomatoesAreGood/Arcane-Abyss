@@ -149,35 +149,55 @@ public class PlayerController : MonoBehaviour
       
         // Debug.Log(a);    
         
-
-        if(Input.GetKeyDown(KeyCode.Alpha1) && inventory.equippedSpells[0] != null){
-            if(activeSpells.Contains(inventory.equippedSpells[0].reference.GetComponent<Spell>())){
-                equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[0].reference.GetComponent<Spell>()));
+        //Spell switching (pain)
+        if(Input.GetKeyDown(KeyCode.Alpha1)){
+            if(inventory.equippedSpells[0] == null){
+                equippedSpell = null;
             }else{
-                equippedSpell = Instantiate(inventory.equippedSpells[0].reference).GetComponent<Spell>();
-                activeSpells.Add(equippedSpell);
+                if(activeSpells.Contains(inventory.equippedSpells[0].reference.GetComponent<Spell>())){
+                    equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[0].reference.GetComponent<Spell>()));
+                }else{
+                    equippedSpell = Instantiate(inventory.equippedSpells[0].reference).GetComponent<Spell>();
+                    activeSpells.Add(equippedSpell);
+                }
             }
-        }else if(Input.GetKeyDown(KeyCode.Alpha2) && inventory.equippedSpells[1] != null){
-            if(activeSpells.Contains(inventory.equippedSpells[1].reference.GetComponent<Spell>())){
-                equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[1].reference.GetComponent<Spell>()) );
+            inventoryUI.equippedSpellsRenderer.SelectSlot(0);
+        }else if(Input.GetKeyDown(KeyCode.Alpha2)){
+            if(inventory.equippedSpells[1] == null){
+                equippedSpell = null;
             }else{
-                equippedSpell = Instantiate(inventory.equippedSpells[1].reference).GetComponent<Spell>();
-                activeSpells.Add(equippedSpell);
+                if(activeSpells.Contains(inventory.equippedSpells[1].reference.GetComponent<Spell>())){
+                    equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[1].reference.GetComponent<Spell>()) );
+                }else{
+                    equippedSpell = Instantiate(inventory.equippedSpells[1].reference).GetComponent<Spell>();
+                    activeSpells.Add(equippedSpell);
+                }
             }
-        }else if(Input.GetKeyDown(KeyCode.Alpha3) && inventory.equippedSpells[2] != null){
-            if(activeSpells.Contains(inventory.equippedSpells[2].reference.GetComponent<Spell>())){
-                equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[2].reference.GetComponent<Spell>()) );
+            inventoryUI.equippedSpellsRenderer.SelectSlot(1);
+        }else if(Input.GetKeyDown(KeyCode.Alpha3)){
+            if(inventory.equippedSpells[2] == null){
+                equippedSpell = null;
             }else{
-                equippedSpell = Instantiate(inventory.equippedSpells[2].reference).GetComponent<Spell>();
-                activeSpells.Add(equippedSpell);
+                if(activeSpells.Contains(inventory.equippedSpells[2].reference.GetComponent<Spell>())){
+                    equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[2].reference.GetComponent<Spell>()) );
+                }else{
+                    equippedSpell = Instantiate(inventory.equippedSpells[2].reference).GetComponent<Spell>();
+                    activeSpells.Add(equippedSpell);
+                }
             }
-        }else if(Input.GetKeyDown(KeyCode.Alpha4) && inventory.equippedSpells[3] != null){
-            if(activeSpells.Contains(inventory.equippedSpells[3].reference.GetComponent<Spell>())){
-                equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[3].reference.GetComponent<Spell>()) );
+            inventoryUI.equippedSpellsRenderer.SelectSlot(2);
+        }else if(Input.GetKeyDown(KeyCode.Alpha4)){
+            if(inventory.equippedSpells[3] == null){
+                equippedSpell = null;
             }else{
-                equippedSpell = Instantiate(inventory.equippedSpells[3].reference).GetComponent<Spell>();
-                activeSpells.Add(equippedSpell);
+                if(activeSpells.Contains(inventory.equippedSpells[3].reference.GetComponent<Spell>())){
+                    equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[3].reference.GetComponent<Spell>()) );
+                }else{
+                    equippedSpell = Instantiate(inventory.equippedSpells[3].reference).GetComponent<Spell>();
+                    activeSpells.Add(equippedSpell);
+                }
             }
+            inventoryUI.equippedSpellsRenderer.SelectSlot(3);
         }
         
         if(Input.GetKeyDown(KeyCode.Space)){
@@ -250,14 +270,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private Spell GetActiveSpell(Spell spell){
-        foreach(Spell spl in activeSpells){
-            if(spl == spell){
-                return spl;
-            }
-        }
-        throw new ArgumentException("active spell does not exist");
-    }
 
     private bool CanMove(Vector2 direction){
         if (direction != Vector2.zero){

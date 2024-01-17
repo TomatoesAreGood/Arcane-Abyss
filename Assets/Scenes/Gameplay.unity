@@ -1819,7 +1819,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1019001385}
+  m_Father: {fileID: 713332455}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3369,7 +3369,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 6
   m_TargetDisplay: 0
 --- !u!224 &713332455
 RectTransform:
@@ -3385,6 +3385,7 @@ RectTransform:
   m_Children:
   - {fileID: 387432858}
   - {fileID: 643631758}
+  - {fileID: 614227412}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4433,7 +4434,6 @@ RectTransform:
   - {fileID: 756136333}
   - {fileID: 1956652394}
   - {fileID: 832246}
-  - {fileID: 614227412}
   - {fileID: 1645708786}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4503,7 +4503,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!114 &1019001389
 MonoBehaviour:
@@ -4521,6 +4521,7 @@ MonoBehaviour:
   potionBagRenderer: {fileID: 1956652397}
   spellsRenderer: {fileID: 756136337}
   equippedSpellsRenderer: {fileID: 614227413}
+  PlayerUICanvas: {fileID: 713332455}
   isOpen: 0
   equippedStaff: {fileID: 832247}
 --- !u!1 &1071553803
@@ -6075,7 +6076,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1417171767
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11887,7 +11888,6 @@ SceneRoots:
   - {fileID: 1725782549}
   - {fileID: 1191360426}
   - {fileID: 707362285}
-  - {fileID: 713332455}
   - {fileID: 1180014657}
   - {fileID: 73549363}
   - {fileID: 1208038041}
@@ -11896,3 +11896,4 @@ SceneRoots:
   - {fileID: 202136315}
   - {fileID: 1019001385}
   - {fileID: 1692834709}
+  - {fileID: 713332455}

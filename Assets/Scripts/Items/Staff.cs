@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Staffs{
-    basicStaff
-}
+
 
 public class Staff : MonoBehaviour
 {
@@ -12,10 +10,6 @@ public class Staff : MonoBehaviour
     protected Vector3 mousePos;
     protected Transform aimTransform; //pivot
    
-    private void SetStaff(Staffs staff){
-        
-    }
-
     protected virtual void Start(){
         aimTransform = transform.parent;
         damageBonus = 0;
