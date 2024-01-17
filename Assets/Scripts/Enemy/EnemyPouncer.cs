@@ -14,19 +14,16 @@ public class EnemyPouncer : Enemy
     private bool isPounceHandlerRunning = false;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         Health = 4;
+        Player = PlayerController.instance.gameObject;
         _path = GetComponent<AIPath>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _pounceSpeed = 8;
         _moveSpeed = (int)_path.maxSpeed;
     }
-    void Update()
-    {
-        //DeadCheck();
-    }
-
+ 
     private void FixedUpdate()
     {
         Vector2 pos = transform.position;

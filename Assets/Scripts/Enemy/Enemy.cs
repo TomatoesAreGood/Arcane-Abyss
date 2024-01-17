@@ -41,12 +41,11 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         _graphics = GetComponentInChildren<SpriteRenderer>();
-        Player = PlayerController.instance.gameObject;
     }
-    void Start()
+    protected virtual void Start()
     {
         Health = 5;
-
+        Player = PlayerController.instance.gameObject;
     }
 
     // Update is called once per frame
