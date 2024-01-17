@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     public static int health;
     public static int maxMana = 100;
     public static int mana;
+    private bool _isImmune;
 
     //UI
     public HealthBarList HealthBarList;
@@ -316,8 +317,19 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        HealthBarList.EmptyFullHeart();
-        health -= damage;
+        if (!_isImmune)
+        {
+            HealthBarList.EmptyFullHeart();
+            health -= damage;
+        }
+        StartCoroutine(ImmunityHandler());
+
+    }
+    IEnumerator ImmunityHandler()
+    {
+        _isImmune = true;
+        yield return new WaitForSeconds(1);
+        _isImmune = false;
     }
 
     public void GainHeart()
@@ -330,11 +342,13 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+}
+
 
     
 
 
-}
+
 
 
 
