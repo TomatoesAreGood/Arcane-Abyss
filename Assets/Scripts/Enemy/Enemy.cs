@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     public float Health;
     protected float _moveSpeed;
     protected float _timer;
-    public GameObject Player;
+    protected GameObject Player;
     protected PlayerController _playerScript;
     protected SpriteRenderer _graphics;
 
@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         _graphics = GetComponentInChildren<SpriteRenderer>();
-
+        Player = PlayerController.instance.gameObject;
     }
     void Start()
     {
