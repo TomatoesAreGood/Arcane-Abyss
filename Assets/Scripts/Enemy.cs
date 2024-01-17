@@ -6,7 +6,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float Health;
-    protected float _moveSpeed;
+    protected int _moveSpeed;
     protected float _timer;
     public GameObject Player;
     protected PlayerController _playerScript;
@@ -46,16 +46,13 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         Health = 5;
-        _moveSpeed = 3;
-        _path = GetComponent<AIPath>();
-        _rigidbody = GetComponent<Rigidbody2D>();
-        _path.maxSpeed = _moveSpeed;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        DeadCheck();
+        Destroy();
     }
 
     private void FixedUpdate()
@@ -128,7 +125,7 @@ public class Enemy : MonoBehaviour
     protected IEnumerator SlowedHandler()
     {
         isSlowedHandlerRunning = true;
-        float _normalSpeed = _moveSpeed;
+        int _normalSpeed = _moveSpeed;
         _moveSpeed = _moveSpeed/2;
         _path.maxSpeed = _moveSpeed;
 
@@ -167,7 +164,7 @@ public class Enemy : MonoBehaviour
 
     }
 
-    public virtual void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<PlayerController>())
         {
@@ -178,7 +175,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    protected void DeadCheck()
+    protected void Destroy()
     {
         if (Health <= 0)
         {

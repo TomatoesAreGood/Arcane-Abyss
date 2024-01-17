@@ -30,13 +30,11 @@ public class EnemyRanger : Enemy
     // Update is called once per frame
     void Update()
     {
-        DeadCheck();
+        Destroy();
     }
 
     private void FixedUpdate()
     {
-        Vector2 dir = -(Player.transform.position - transform.position);
-
         switch (state)
         {
             default:
@@ -48,7 +46,7 @@ public class EnemyRanger : Enemy
 
             case State.MoveAway:
                 _path.canMove = false;
-                _rigidbody.MovePosition(_rigidbody.position + dir * Time.fixedDeltaTime);
+                transform.position = Vector2.MoveTowards(transform.position.normalized, hit.point.normalized, -3f * Time.deltaTime);
                 if ((Vector2.Distance(transform.position, hit.point) > 2.5f))
                 {
                     state = State.ChaseTarget;
@@ -77,6 +75,7 @@ public class EnemyRanger : Enemy
                 break;
             case State.PlayerMoveAway:
                 _path.canMove = false;
+                Vector2 dir = -(Player.transform.position - transform.position);
                 _rigidbody.MovePosition(_rigidbody.position + dir * Time.fixedDeltaTime);
                 if ((Vector2.Distance(transform.position, Player.transform.position) > 5f))
                 {
