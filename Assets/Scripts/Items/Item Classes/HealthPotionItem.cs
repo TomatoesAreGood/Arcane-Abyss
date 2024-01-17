@@ -5,7 +5,7 @@ using UnityEngine;
 public class HealthPotionItem : PotionItem
 {
     public override void Use(){
-        PlayerController.instance.IncreaseMaxHealth(2);
+        PlayerController.instance.GainHeart(2);
         Destroy(gameObject);
     }
 

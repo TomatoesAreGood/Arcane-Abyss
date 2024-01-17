@@ -15,21 +15,25 @@ public class InventoryUI : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         isOpen = false;
+        inventoryRenderer.width = PlayerController.instance.inventoryWidth;
+        inventoryRenderer.height = PlayerController.instance.inventoryHeight;
 
+        potionBagRenderer.width = 1;
+        potionBagRenderer.height = PlayerController.instance.potionBagSize;
+
+        spellsRenderer.width = PlayerController.instance.spellInventorySize;
+        spellsRenderer.height = 1;
+
+        equippedSpellsRenderer.width = 4;
+        equippedSpellsRenderer.height = 1;
     }
 
     private void Update() {    
         if (isOpen){
-            equippedStaff.sprite = PlayerController.instance.equippedStaff.GetComponent<SpriteRenderer>().sprite;
-            for(int i = 0; i < 4; i++){
-                equippedSpellsRenderer.GetSlot(i).item = PlayerController.instance.inventory.equippedSpells[i];
-            }
-            //if performance issues, move this to when spells are equipped
-            equippedSpellsRenderer.RedrawMatrix();
-           
+            equippedStaff.sprite = PlayerController.instance.equippedStaff.GetComponent<SpriteRenderer>().sprite;           
             gameObject.SetActive(true);
         }else{
             gameObject.SetActive(false);

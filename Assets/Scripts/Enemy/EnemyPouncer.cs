@@ -24,7 +24,7 @@ public class EnemyPouncer : Enemy
     }
     void Update()
     {
-        DeadCheck();
+        //DeadCheck();
     }
 
     private void FixedUpdate()

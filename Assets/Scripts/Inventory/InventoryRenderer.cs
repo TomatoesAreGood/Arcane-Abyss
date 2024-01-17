@@ -45,6 +45,15 @@ public class InventoryRenderer : MonoBehaviour
         transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 100);
     }
 
+    private void Update(){
+       if(PlayerController.instance.inventoryUI.isOpen && rendererType == Renderers.equippedSpells){
+            for(int i = 0; i < 4; i++){
+                GetSlot(i).item = PlayerController.instance.inventory.equippedSpells[i];
+            }
+            RedrawMatrix();
+       }
+    }
+
     public void DrawMatrix(int height, int width){
         for(int r = 0; r < height; r++){
             for(int c = 0; c < width; c++){
@@ -97,7 +106,7 @@ public class InventoryRenderer : MonoBehaviour
             if(transform.GetChild(i).GetComponent<Slot>().IsEmpty()){
                 inventoryData[i] = null;
             }else{
-                inventoryData[i] = transform.GetChild(i).GetComponent<Slot>().item;
+                inventoryData[i] = GetSlot(i).item;
             }
         }
     }
