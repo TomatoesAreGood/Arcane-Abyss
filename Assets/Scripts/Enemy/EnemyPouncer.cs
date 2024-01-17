@@ -22,10 +22,7 @@ public class EnemyPouncer : Enemy
         _pounceSpeed = 8;
         _moveSpeed = (int)_path.maxSpeed;
     }
-    void Update()
-    {
-        DeadCheck();
-    }
+
 
     private void FixedUpdate()
     {
