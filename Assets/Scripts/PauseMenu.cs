@@ -47,11 +47,4 @@ public class NewBehaviourScript : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
 
-    public void Options()
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("Options");
-    }
-
-
 }
