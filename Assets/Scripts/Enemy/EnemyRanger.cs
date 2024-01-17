@@ -30,7 +30,7 @@ public class EnemyRanger : Enemy
     // Update is called once per frame
     void Update()
     {
-        Destroy();
+        DeadCheck();
     }
 
     private void FixedUpdate()
