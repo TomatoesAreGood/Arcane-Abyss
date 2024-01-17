@@ -91,6 +91,8 @@ MonoBehaviour:
   value: 0
   title: 
   desc: 
+  itemType: 2
   parentAfterDrag: {fileID: 0}
   image: {fileID: 0}
+  renderer: {fileID: 0}
   inventory: []

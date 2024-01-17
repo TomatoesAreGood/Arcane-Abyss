@@ -101,6 +101,10 @@ public class PlayerController : MonoBehaviour
         inventory.items[1] = itemLibrary.forestStaff;
         inventory.items[2] = itemLibrary.darkstaff;
 
+        for(int i = 0; i < inventory.items.Length; i++){
+            inventory.items[i] = itemLibrary.basicStaff;
+        }
+
         inventory.spells[0] = itemLibrary.fireball;
         inventory.spells[1] = itemLibrary.iceShot;
         inventory.spells[2] = itemLibrary.magicShot;
@@ -322,8 +326,13 @@ public class PlayerController : MonoBehaviour
                     return true;
                 }
             }
-        }else if(item.renderer == inventoryUI.potionBagRenderer){
-
+        }else if(item.itemType == Renderers.potion){
+            for(int i = 0; i < inventory.potions.Length; i++){
+                if(inventory.potions[i] == null){
+                    inventoryUI.potionBagRenderer.InstantiateItem(item,i);
+                    return true;
+                }
+            }
         }
         return false;
     }

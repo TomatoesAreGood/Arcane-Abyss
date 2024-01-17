@@ -2,16 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 using UnityEngine.EventSystems;
 using System;
 
-public enum Renderers { 
-    inventory,
-    spells,
-    potion,
-    equippedSpells
-}
 
 public class Item : MonoBehaviour
 { 
@@ -32,6 +25,7 @@ public class Item : MonoBehaviour
         parentAfterDrag = transform.parent;
         renderer = PlayerController.instance.inventoryUI.inventoryRenderer;
         inventory = PlayerController.instance.inventory.items;
+        
     }
 
     protected virtual void Update(){

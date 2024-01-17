@@ -5,6 +5,12 @@ using Pathfinding.Util;
 using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
+public enum Renderers { 
+    inventory,
+    spells,
+    potion,
+    equippedSpells
+}
 
 public class InventoryRenderer : MonoBehaviour
 {
