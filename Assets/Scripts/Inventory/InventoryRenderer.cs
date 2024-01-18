@@ -136,7 +136,9 @@ public class InventoryRenderer : MonoBehaviour
     public void InstantiateItem(Item item, int index){
         Debug.Log(index);
         if(GetSlot(index).IsEmpty()){
-            Instantiate(item.gameObject, GetTransform(index)).transform.position = GetTransform(index).position;
+            GameObject obj = Instantiate(item.gameObject, GetTransform(index));
+            obj.transform.position = GetTransform(index).position;
+            obj.SetActive(true);
         }
     }
 }

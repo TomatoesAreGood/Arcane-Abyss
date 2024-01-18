@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
 using static UnityEditor.Progress;
+using System;
 
 
 public class ItemLibrary : MonoBehaviour
@@ -57,7 +58,26 @@ public class ItemLibrary : MonoBehaviour
         foreach (var item in itemsArray)
         {
             //Debug.Log(item.GetType().Name + ": " + item.ToString());
+       }
+    }
+
+    public Item GetItemReference(Item item){
+        if(item.GetType() == typeof(BasicStaffItem)){
+            return basicStaff;
+        }else if(item.GetType() == typeof(ForestStaffItem)){
+            return forestStaff;
+        }else if(item.GetType() == typeof(FireSpellItem)){
+            return fireball;
+        }else if(item.GetType() == typeof(IceSpellItem)){
+            return iceShot;
+        }else if (item.GetType() == typeof(DarkStaffItem)){
+            return darkstaff;
+        }else if (item.GetType() == typeof(MagicSpellItem)){
+            return magicShot;
+        }else if (item.GetType() == typeof(HealthPotionItem)){
+            return healthPotion;
         }
+        throw new ArgumentException("Could not find item reference");
     }
 
     

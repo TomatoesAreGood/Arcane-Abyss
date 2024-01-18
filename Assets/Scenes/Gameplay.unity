@@ -268,8 +268,6 @@ GameObject:
   - component: {fileID: 832246}
   - component: {fileID: 832248}
   - component: {fileID: 832247}
-  - component: {fileID: 832249}
-  - component: {fileID: 832250}
   m_Layer: 0
   m_Name: Equipped Staff
   m_TagString: Untagged
@@ -334,34 +332,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 832245}
   m_CullTransparentMesh: 1
---- !u!114 &832249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 832245}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beb6b613a2efb2b48b3bad9fbc6ec097, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 0}
-  image: {fileID: 0}
---- !u!114 &832250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 832245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 398e794783e490f4fbee452a9bc16500, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 0}
-  image: {fileID: 0}
 --- !u!1 &41352133
 GameObject:
   m_ObjectHideFlags: 0
@@ -4974,7 +4944,6 @@ MonoBehaviour:
   potionBagRenderer: {fileID: 1956652397}
   spellsRenderer: {fileID: 756136337}
   equippedSpellsRenderer: {fileID: 614227413}
-  PlayerUICanvas: {fileID: 713332455}
   isOpen: 0
   equippedStaff: {fileID: 832247}
 --- !u!1 &1031518702
@@ -5588,6 +5557,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1142447498}
+  - component: {fileID: 1142447499}
   m_Layer: 0
   m_Name: Pivot
   m_TagString: Untagged
@@ -5612,6 +5582,18 @@ Transform:
   - {fileID: 5515789523002896144}
   m_Father: {fileID: 707362285}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1142447499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142447497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af398231ace2f4949819ecb7c7c54172, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1150919896
 GameObject:
   m_ObjectHideFlags: 0

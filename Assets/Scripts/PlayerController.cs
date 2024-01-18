@@ -114,13 +114,18 @@ public class PlayerController : MonoBehaviour
 
         inventory.potions[0] = itemLibrary.healthPotion;
         
-        EquipStaff((StaffItem)inventory.items[0]);
         inventoryUI.UpdateData();
     }
 
     private void Update(){
         //have to set this for inventory 
-        equippedStaffSprite = equippedStaff.GetComponent<SpriteRenderer>().sprite;
+        if(inventory.equippedStaff != null){
+            equippedStaff.gameObject.SetActive(true);
+            equippedStaffSprite = equippedStaff.GetComponent<SpriteRenderer>().sprite;
+        }else{
+            equippedStaff.gameObject.SetActive(false);
+            equippedStaffSprite = null;
+        }   
 
         string a = "";
         foreach (Item item in inventory.items) {
@@ -133,8 +138,9 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+        Debug.Log(a);
 
-        Debug.Log(a);    
+        Debug.Log(PlayerController.instance.inventory.equippedStaff);    
 
         //Debug.Log(inventoryUI.inventoryRenderer.GetSlot(0).item);
 

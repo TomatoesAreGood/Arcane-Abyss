@@ -9,7 +9,6 @@ public class InventoryUI : MonoBehaviour
     public InventoryRenderer potionBagRenderer;
     public InventoryRenderer spellsRenderer;
     public InventoryRenderer equippedSpellsRenderer;
-    public Transform PlayerUICanvas;
     public bool isOpen;
     [SerializeField] Image equippedStaff;
 
@@ -33,7 +32,12 @@ public class InventoryUI : MonoBehaviour
 
     private void Update() {    
         if (isOpen){
-            equippedStaff.sprite = PlayerController.instance.equippedStaff.GetComponent<SpriteRenderer>().sprite;           
+            if(PlayerController.instance.inventory.equippedStaff != null){
+                equippedStaff.gameObject.SetActive(true);
+                equippedStaff.sprite = PlayerController.instance.equippedStaff.GetComponent<SpriteRenderer>().sprite;           
+            }else{
+                equippedStaff.gameObject.SetActive(false);
+            }
             gameObject.SetActive(true);
         }else{
             gameObject.SetActive(false);
@@ -44,6 +48,7 @@ public class InventoryUI : MonoBehaviour
         Time.timeScale = 0f;
         isOpen = true;
         gameObject.SetActive(true);
+        UpdateData();
     }
 
     public void Disable(){

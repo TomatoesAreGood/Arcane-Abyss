@@ -55,4 +55,6 @@ public class PickupScript : MonoBehaviour
         Vector2 difference = PlayerController.characterPos - transform.position;
         return Mathf.Sqrt(Mathf.Pow(difference.x, 2) + Mathf.Pow(difference.y, 2));
     }
+
+    
 }
