@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour
         }
 
       
-        Debug.Log(a);    
+        //Debug.Log(a);    
         
         //Spell switching (pain)
         if(!inventoryUI.isOpen){

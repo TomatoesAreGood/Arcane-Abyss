@@ -11,7 +11,8 @@ public class ShopClass : MonoBehaviour
     // Start is called before the first frame update
 
     public GameObject ShopUi;
-    private bool _isPaused; 
+    private bool _isPaused;
+    public GameObject[] Slots; 
 
 
 
@@ -20,13 +21,20 @@ public class ShopClass : MonoBehaviour
     {
         ShopUi.SetActive(false);
         _isPaused = false;
-        ItemLibrary itemsLibraryscirpt = GameObject.FindGameObjectWithTag("Player").GetComponent<ItemLibrary>();
         object[] itemlibrary = ItemLibrary.instance.itemsArray;
-        object[] shopslots = new object[8];
+        GameObject[] shopslots = new GameObject[4];
         for (int i = 0; i < 4; i++)
         {
-            int rnd = Random.Range(0, itemlibrary.Length);
-            shopslots[i] = itemlibrary[rnd];
+            if (itemlibrary[i] != null)
+            {
+                int rnd = Random.Range(0, itemlibrary.Length);
+                shopslots[i] = itemlibrary[rnd] as GameObject;
+            }
+                
+        }
+        for(int i = 0;i < Slots.Length; i++)
+        {
+            Instantiate(shopslots[i], Slots[i].transform,false);
         }
         
 
@@ -44,7 +52,7 @@ public class ShopClass : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Debug.Log("pressed Q");
+            
             
             if (_isPaused)
             {
