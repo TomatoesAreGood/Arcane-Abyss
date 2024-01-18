@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 2662446176296784351}
   - component: {fileID: 9144579698178912753}
   - component: {fileID: -2013664290798343359}
+  - component: {fileID: -719534999936000740}
   m_Layer: 6
   m_Name: EnemyShaman
   m_TagString: Untagged
@@ -306,4 +307,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 0
+  Player: {fileID: 0}
+  script: {fileID: -719534999936000740}
   EnemyShot: {fileID: 0}
+--- !u!114 &-719534999936000740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4490819353254072443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2f3a7851465ae44583de9a367ca2804, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemies: []

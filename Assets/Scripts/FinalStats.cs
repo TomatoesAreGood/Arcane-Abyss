@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class FinalStats : MonoBehaviour
 {
-    Dictionary<string, int> stats = new Dictionary<string, int>();
+    public List<string> enemies;
+    public Dictionary<string, int> pigeonHoleSortedEnemies;
 
     /*
-     * maguc spells shot
+     * magic spells shot
      * kills
      * net worth
      * 
@@ -19,7 +20,19 @@ public class FinalStats : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        enemies = new List<string>();
+        pigeonHoleSortedEnemies = new Dictionary<string, int>();
+    }
+
+    public void PigeonHoleSort()
+    {
+        foreach (string enemy in enemies)
+        {
+            if (pigeonHoleSortedEnemies.ContainsKey(enemy))
+                pigeonHoleSortedEnemies[enemy]++;
+            else
+                pigeonHoleSortedEnemies[enemy] = 1;
+        }
     }
 
     // Update is called once per frame

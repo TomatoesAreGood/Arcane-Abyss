@@ -27,6 +27,8 @@ public class Enemy : MonoBehaviour
     protected Collider2D[] _collider;
     protected ContactFilter2D _contactFilter;
 
+    public FinalStats script;
+
     // Start is called before the first frame update
 
     protected enum State
@@ -41,6 +43,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         _graphics = GetComponentInChildren<SpriteRenderer>();
+        script = GetComponent<FinalStats>();
 
     }
 
@@ -106,7 +109,7 @@ public class Enemy : MonoBehaviour
             var dir = new Vector2(Mathf.Sin(angle) + transform.position.x, Mathf.Cos(angle) + transform.position.y);
             hit = Physics2D.Raycast(transform.position, dir, 2.5f);
             Debug.DrawLine(transform.position, dir);
-            if (hit.collider.gameObject != gameObject && hit.collider.CompareTag("Enemy"))
+            if (hit.collider.gameObject != gameObject && hit.collider != null)
             {
                 Debug.Log("enemy detected");
                 state = State.MoveAway;
@@ -186,7 +189,9 @@ public class Enemy : MonoBehaviour
     {
         if (Health <= 0)
         {
+
             Destroy(gameObject);
+            script.enemies.Add(gameObject.name);
         }
     }
 
