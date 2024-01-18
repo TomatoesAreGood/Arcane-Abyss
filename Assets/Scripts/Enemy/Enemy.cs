@@ -46,8 +46,8 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        Player = PlayerController.instance.gameObject;
-        Health = 5;
+/*        Player = PlayerController.instance.gameObject;
+*/        Health = 5;
     }
 
     // Update is called once per frame
