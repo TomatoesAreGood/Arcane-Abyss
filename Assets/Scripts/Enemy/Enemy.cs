@@ -103,24 +103,23 @@ public class Enemy : MonoBehaviour
         int counter = 10;
         int angleIncrement = 360 / counter;
         int angle = 0;
-        _layerMask = LayerMask.GetMask("Enemies");
         while (counter > 0)
         {
             var dir = new Vector2(Mathf.Sin(angle) + transform.position.x, Mathf.Cos(angle) + transform.position.y);
             hit = Physics2D.Raycast(transform.position, dir, 2.5f);
             Debug.DrawLine(transform.position, dir);
-            if (hit.collider.gameObject != gameObject && hit.collider != null)
-            {
-                Debug.Log("enemy detected");
-                state = State.MoveAway;
-            }
+
 
 
             angle = angle + angleIncrement;
             counter--;
         }
-  
 
+        if (hit.collider.gameObject != gameObject && hit.collider.CompareTag("Enemy"))
+        {
+            Debug.Log("enemy detected");
+            state = State.MoveAway;
+        }
 
     }
 

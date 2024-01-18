@@ -55,6 +55,9 @@ public class PlayerController : MonoBehaviour
 
 
     private void Awake(){
+        //Dont Destroy On Load
+        DontDestroyOnLoad(this);
+
         //Singleton
         if (instance == null){
             instance = this;
