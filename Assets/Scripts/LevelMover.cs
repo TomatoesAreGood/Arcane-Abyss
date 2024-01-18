@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelMover : MonoBehaviour
 {
@@ -18,6 +19,10 @@ public class LevelMover : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision == PlayerController.instance.gameObject) { }
+        if(collision == PlayerController.instance.gameObject) 
+        {
+            SceneManager.LoadScene(3);
+        
+        }
     }
 }
