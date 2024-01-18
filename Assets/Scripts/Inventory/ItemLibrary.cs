@@ -15,7 +15,7 @@ public class ItemLibrary : MonoBehaviour
     public SpellItem iceShot;
     public SpellItem magicShot;
     public PotionItem healthPotion;
-
+    public Item[] Library;
     public StaffItem darkstaff;
 
 
@@ -23,7 +23,10 @@ public class ItemLibrary : MonoBehaviour
     private void Awake(){
         if(instance == null){
             instance = this;
+            Library = new Item[] { basicStaff, forestStaff, fireball, magicShot, iceShot, healthPotion, darkstaff };
+
             InitalizeItemToArray();
+
 
         }
         else

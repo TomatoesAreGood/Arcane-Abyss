@@ -21,20 +21,20 @@ public class ShopClass : MonoBehaviour
     {
         ShopUi.SetActive(false);
         _isPaused = false;
-        object[] itemlibrary = ItemLibrary.instance.itemsArray;
-        GameObject[] shopslots = new GameObject[4];
+        Item[] itemlibrary = ItemLibrary.instance.Library;
+        Item[] shopslots = new Item[4];
         for (int i = 0; i < 4; i++)
         {
             if (itemlibrary[i] != null)
             {
                 int rnd = Random.Range(0, itemlibrary.Length);
-                shopslots[i] = itemlibrary[rnd] as GameObject;
+                shopslots[i] = itemlibrary[rnd];
             }
                 
         }
         for(int i = 0;i < Slots.Length; i++)
         {
-            Instantiate(shopslots[i], Slots[i].transform,false);
+            Instantiate(shopslots[i].gameObject, Slots[i].transform,false);
         }
         
 
