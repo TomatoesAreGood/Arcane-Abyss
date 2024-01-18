@@ -19,7 +19,7 @@ public class LevelMover : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision == PlayerController.instance.gameObject) 
+        if(collision.gameObject == PlayerController.instance.gameObject) 
         {
             SceneManager.LoadScene(3);
         

@@ -43,6 +43,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         _graphics = GetComponentInChildren<SpriteRenderer>();
+
         script = GetComponent<FinalStats>();
 
     }
@@ -50,6 +51,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         Player = PlayerController.instance.gameObject;
+
         Health = 5;
     }
 
