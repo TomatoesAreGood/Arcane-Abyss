@@ -5,7 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
 
-
+ using System.Runtime.Serialization.Formatters.Binary;
+ using System.IO;
 public class Item : MonoBehaviour
 { 
     public int value;
@@ -25,7 +26,6 @@ public class Item : MonoBehaviour
         parentAfterDrag = transform.parent;
         renderer = PlayerController.instance.inventoryUI.inventoryRenderer;
         inventory = PlayerController.instance.inventory.items;
-        
     }
 
     protected virtual void Update(){
@@ -81,8 +81,11 @@ public class Item : MonoBehaviour
     }
 
 
-    public void Drop(){
-
+    public virtual void Drop(){
+        GameObject obj = Instantiate(PickUpController.instance.defaultDropItem);
+        obj.transform.position = PlayerController.characterPos;
+        obj.GetComponent<PickupScript>().itemReference = (Item)this.MemberwiseClone();
+        Destroy(gameObject);
     }
     public void Sell(){
 

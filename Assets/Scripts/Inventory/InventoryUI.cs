@@ -38,7 +38,6 @@ public class InventoryUI : MonoBehaviour
         }else{
             gameObject.SetActive(false);
         }
-
     }
 
     public void Enable(){
@@ -51,6 +50,10 @@ public class InventoryUI : MonoBehaviour
         Time.timeScale = 1f;
         isOpen = false;
         gameObject.SetActive(false);
+        UpdateData();
+    }
+    
+    public void UpdateData(){
         inventoryRenderer.UpdateData();
         potionBagRenderer.UpdateData();
         spellsRenderer.UpdateData();

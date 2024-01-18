@@ -37,9 +37,7 @@ public class Slot : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        if(!IsEmpty()){
-            item = transform.GetChild(0).GetComponent<Item>();
-        }
+        UpdateData();
         if(PlayerController.instance.inventoryUI.isOpen){
             if(IsMouseHovering){
                 Dim();
@@ -49,6 +47,13 @@ public class Slot : MonoBehaviour
         }       
     }
 
+    public void UpdateData(){
+        if(!IsEmpty()){
+            item = transform.GetChild(0).GetComponent<Item>();
+        }else{
+            item = null;
+        }
+    }
 
     public void Dim(){
         SetAlpha(0.5f);

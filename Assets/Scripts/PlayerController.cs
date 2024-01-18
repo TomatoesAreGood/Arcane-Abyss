@@ -17,12 +17,12 @@ public class PlayerController : MonoBehaviour
     private float collisionOffset = 0.04f;
     public static Vector3 characterPos; //used by enemy and bullet class 
 
-
     //Components
     private SpriteRenderer sr;
     private Animator animator;
     private Rigidbody2D rb;
     private List<RaycastHit2D> raycastHit2Ds;
+    public PickUpController pickUpController;
 
     //Player Stats
     public static int maxHealth;
@@ -54,7 +54,6 @@ public class PlayerController : MonoBehaviour
     public InventoryUI inventoryUI;
 
 
-
     private void Awake(){
         //Singleton
         if (instance == null){
@@ -79,6 +78,7 @@ public class PlayerController : MonoBehaviour
         raycastHit2Ds = new List<RaycastHit2D>(0);
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        pickUpController = GetComponent<PickUpController>();
         equippedStaffSprite = equippedStaff.GetComponent<SpriteRenderer>().sprite;
 
         //for shooting magic
@@ -101,9 +101,9 @@ public class PlayerController : MonoBehaviour
         inventory.items[1] = itemLibrary.forestStaff;
         inventory.items[2] = itemLibrary.darkstaff;
 
-        for(int i = 0; i < inventory.items.Length; i++){
-            inventory.items[i] = itemLibrary.basicStaff;
-        }
+        // for(int i = 0; i < inventory.items.Length; i++){
+        //     inventory.items[i] = itemLibrary.basicStaff;
+        // }
 
         inventory.spells[0] = itemLibrary.fireball;
         inventory.spells[1] = itemLibrary.iceShot;
@@ -112,25 +112,32 @@ public class PlayerController : MonoBehaviour
         inventory.potions[0] = itemLibrary.healthPotion;
         
         EquipStaff((StaffItem)inventory.items[0]);
+        inventoryUI.UpdateData();
     }
 
     private void Update(){
         //have to set this for inventory 
         equippedStaffSprite = equippedStaff.GetComponent<SpriteRenderer>().sprite;
 
-        // string a = "";
-        // foreach (Item item in inventory.items) {
-        //     if (item == null)
-        //     {
-        //         a += " ,";
-        //     }
-        //     else {
-        //         a += item.ToString() + ",";
-        //     }
+        string a = "";
+        foreach (Item item in inventory.items) {
+            if (item == null)
+            {
+                a += " ,";
+            }
+            else {
+                a += item.ToString() + ",";
+            }
 
-        // }
+        }
 
-        // Debug.Log(a);    
+        Debug.Log(a);    
+
+        //Debug.Log(inventoryUI.inventoryRenderer.GetSlot(0).item);
+
+        //might cause performance issues 
+             //inventoryUI.UpdateData();
+
         
         //Spell switching (pain)
         if(!inventoryUI.isOpen){
@@ -318,22 +325,5 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public bool TryPickUp(Item item){
-        if(item.itemType == Renderers.inventory){
-            for(int i = 0; i < inventory.items.Length; i++){
-                if(inventory.items[i] == null){
-                    inventoryUI.inventoryRenderer.InstantiateItem(item,i);
-                    return true;
-                }
-            }
-        }else if(item.itemType == Renderers.potion){
-            for(int i = 0; i < inventory.potions.Length; i++){
-                if(inventory.potions[i] == null){
-                    inventoryUI.potionBagRenderer.InstantiateItem(item,i);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+  
 }

@@ -109,7 +109,8 @@ public class InventoryRenderer : MonoBehaviour
 
     public void UpdateData(){
         for(int i = 0; i < transform.childCount; i++){
-            if(transform.GetChild(i).GetComponent<Slot>().IsEmpty()){
+            GetSlot(i).UpdateData();
+            if(GetSlot(i).IsEmpty()){
                 inventoryData[i] = null;
             }else{
                 inventoryData[i] = GetSlot(i).item;
@@ -133,6 +134,7 @@ public class InventoryRenderer : MonoBehaviour
     }
 
     public void InstantiateItem(Item item, int index){
+        Debug.Log(index);
         if(GetSlot(index).IsEmpty()){
             Instantiate(item.gameObject, GetTransform(index)).transform.position = GetTransform(index).position;
         }

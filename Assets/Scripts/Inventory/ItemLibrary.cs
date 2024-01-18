@@ -53,7 +53,7 @@ public class ItemLibrary : MonoBehaviour
 
         foreach (var item in itemsArray)
         {
-            Debug.Log(item.GetType().Name + ": " + item.ToString());
+            //Debug.Log(item.GetType().Name + ": " + item.ToString());
         }
     }
 
