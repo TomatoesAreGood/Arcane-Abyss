@@ -47,9 +47,8 @@ public class EnemyTank : Enemy
         }
     }
 
-    public override void OnCollisionEnter2D(Collision2D collision)
+    public override void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("collided");
         if (collision.gameObject.GetComponent<PlayerController>())
         {
             Debug.Log("collision");
@@ -57,6 +56,7 @@ public class EnemyTank : Enemy
             /*_player.GainHeart();*/
             Attack();
             Attack();
+
         }
     }
 }
