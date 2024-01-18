@@ -11,6 +11,7 @@ public class EnemyTank : Enemy
         Health = 8;
         _moveSpeed = 1.5f;
         _path = GetComponent<AIPath>();
+        Player = PlayerController.instance.gameObject;
         _rigidbody = GetComponent<Rigidbody2D>();
         _path.maxSpeed = _moveSpeed;
     }
