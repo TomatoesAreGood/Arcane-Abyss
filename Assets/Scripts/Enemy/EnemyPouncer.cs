@@ -14,7 +14,8 @@ public class EnemyPouncer : Enemy
     private bool isPounceHandlerRunning = false;
 
     // Start is called before the first frame update
-    protected override void Start()
+
+    void Start()
     {
         Health = 4;
         Player = PlayerController.instance.gameObject;
@@ -23,7 +24,7 @@ public class EnemyPouncer : Enemy
         _pounceSpeed = 8;
         _moveSpeed = (int)_path.maxSpeed;
     }
- 
+
     private void FixedUpdate()
     {
         Vector2 pos = transform.position;
@@ -74,7 +75,7 @@ public class EnemyPouncer : Enemy
                     dir.y = Random.Range(1, 2);
                 }
 
-                _rigidbody.MovePosition(_rigidbody.position + dir * _moveSpeed * Time.fixedDeltaTime);
+                _rigidbody.MovePosition(_rigidbody.position + dir.normalized * _moveSpeed * Time.fixedDeltaTime);
                 if ((Vector2.Distance(transform.position, hit.point) > 2.5f))
                 {
                     state = State.ChaseTarget;
@@ -122,14 +123,5 @@ public class EnemyPouncer : Enemy
         //Code cited from Unity Forum Post "2D enemy dash movement"
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.GetComponent<PlayerController>())
-        {
-            Debug.Log("collision");
-            _playerScript = collision.gameObject.GetComponent<PlayerController>();
-            /*_player.GainHeart();*/
-            Attack();
-        }
-    }
+
 }
