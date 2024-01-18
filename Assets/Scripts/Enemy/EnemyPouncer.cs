@@ -14,6 +14,7 @@ public class EnemyPouncer : Enemy
     private bool isPounceHandlerRunning = false;
 
     // Start is called before the first frame update
+
     void Start()
     {
         Health = 4;
@@ -23,7 +24,7 @@ public class EnemyPouncer : Enemy
         _pounceSpeed = 8;
         _moveSpeed = (int)_path.maxSpeed;
     }
- 
+
     private void FixedUpdate()
     {
         Vector2 pos = transform.position;
