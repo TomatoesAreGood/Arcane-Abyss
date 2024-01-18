@@ -112,8 +112,8 @@ GameObject:
   - component: {fileID: 4173649426423478683}
   - component: {fileID: 5260621571593665573}
   - component: {fileID: 2662446176296784351}
+  - component: {fileID: 4296574800354981620}
   - component: {fileID: 2462365076067792697}
-  - component: {fileID: -7610534779029625990}
   m_Layer: 6
   m_Name: EnemyPouncer
   m_TagString: Untagged
@@ -248,21 +248,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2462365076067792697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4490819353254072443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fedeb1e3c2cf08548a84fb58a97c7cda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: 0
---- !u!70 &-7610534779029625990
-CapsuleCollider2D:
+--- !u!61 &4296574800354981620
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -293,6 +280,29 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.050321743}
-  m_Size: {x: 0.71386725, y: 0.8993567}
-  m_Direction: 0
+  m_Offset: {x: 0.0024038851, y: 0.06490642}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.716335, y: 0.9374975}
+  m_EdgeRadius: 0
+--- !u!114 &2462365076067792697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4490819353254072443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fedeb1e3c2cf08548a84fb58a97c7cda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 0

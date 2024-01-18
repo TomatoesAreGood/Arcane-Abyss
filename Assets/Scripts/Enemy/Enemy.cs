@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     public float Health;
     protected float _moveSpeed;
     protected float _timer;
-    public GameObject Player;
+    protected GameObject Player;
     protected PlayerController _playerScript;
     protected SpriteRenderer _graphics;
 
@@ -41,20 +41,17 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         _graphics = GetComponentInChildren<SpriteRenderer>();
-
     }
-
-    void Start()
+    protected virtual void Start()
     {
-        Player = PlayerController.instance.gameObject;
         Health = 5;
+        Player = PlayerController.instance.gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
         DeadCheck();
-        Debug.Log(state);
     }
 
     private void FixedUpdate()
@@ -104,19 +101,18 @@ public class Enemy : MonoBehaviour
         while (counter > 0)
         {
             var dir = new Vector2(Mathf.Sin(angle) + transform.position.x, Mathf.Cos(angle) + transform.position.y);
-            hit = Physics2D.Raycast(transform.position, dir, 2.5f);
+            hit = Physics2D.Raycast(transform.position, dir, 2.5f, _layerMask);
             Debug.DrawLine(transform.position, dir);
-            if (hit.collider.gameObject != gameObject && hit.collider.CompareTag("Enemy"))
+
+            if (hit.collider != null)
             {
-                Debug.Log("enemy detected");
+                // Debug.Log("enemy detected");
                 state = State.MoveAway;
             }
-
 
             angle = angle + angleIncrement;
             counter--;
         }
-  
 
 
     }
@@ -167,14 +163,12 @@ public class Enemy : MonoBehaviour
 
     }
 
-    public virtual void OnTriggerEnter2D(Collider2D collision)
+    public virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("collision");
-
-        if (collision.CompareTag("PlayerIsTrigger"))
+        if (collision.gameObject.GetComponent<PlayerController>())
         {
             Debug.Log("collision");
-            _playerScript = PlayerController.instance.gameObject.GetComponent<PlayerController>();
+            _playerScript = collision.gameObject.GetComponent<PlayerController>();
             /*_player.GainHeart();*/
             Attack();
         }
