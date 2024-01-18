@@ -84,7 +84,7 @@ public class Item : MonoBehaviour
     public virtual void Drop(){
         GameObject obj = Instantiate(PickUpController.instance.defaultDropItem);
         obj.transform.position = PlayerController.characterPos;
-        obj.GetComponent<PickupScript>().itemReference = (Item)this.MemberwiseClone();
+        obj.GetComponent<PickupScript>().itemReference = this;
         Destroy(gameObject);
     }
     public void Sell(){
