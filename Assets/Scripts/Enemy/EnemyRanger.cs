@@ -18,6 +18,7 @@ public class EnemyRanger : Enemy
     void Start()
     {
         Health = 5;
+        Player = PlayerController.instance.gameObject;
         state = State.ChaseTarget;
         _path = GetComponent<AIPath>();
         _rigidbody = GetComponent<Rigidbody2D>();
