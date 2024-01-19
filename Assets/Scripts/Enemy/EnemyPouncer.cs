@@ -27,6 +27,7 @@ public class EnemyPouncer : Enemy
 
     private void FixedUpdate()
     {
+        Debug.Log(gameObject.name + state);
         Vector2 pos = transform.position;
         switch (state)
         {
