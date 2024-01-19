@@ -92,6 +92,9 @@ public class InventoryRenderer : MonoBehaviour
                 }else if (inventoryData[i].GetType() == typeof(HealthPotionItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.healthPotion.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
+                }else if (inventoryData[i].GetType() == typeof(FireShotSpellBook)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.fireShotSpellBook.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
                 }
 
 

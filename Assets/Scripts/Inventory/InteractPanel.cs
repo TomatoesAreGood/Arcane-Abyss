@@ -43,6 +43,10 @@ public class InteractPanel : MonoBehaviour
             dropButton.SetActive(true);
             useButton.SetActive(true);
             numActiveButtons = 2;
+        } else if(item is SpellBook){
+            dropButton.SetActive(true);
+            useButton.SetActive(true);
+            numActiveButtons = 2;
         }
         rectTransform.sizeDelta = new Vector2(rectTransform.rect.width, numActiveButtons*30f);
         ResetPos();

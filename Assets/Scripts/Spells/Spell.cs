@@ -12,12 +12,12 @@ public class Spell : MonoBehaviour, IEquatable<Spell>
     public float nextAvailFire;
 
     // Start is called before the first frame update
-    private void Start()
+    protected virtual  void Start()
     {
         nextAvailFire = Time.time;
         fireRate = 2;
         manaCost = 5;
-        speed = 10;
+        speed = 15;
     }
 
   
@@ -41,7 +41,7 @@ public class Spell : MonoBehaviour, IEquatable<Spell>
         }
     }
 
-    public bool Equals(Spell other )
+    public bool Equals(Spell other)
     {
         // Would still want to check for null etc. first.
         return this.spellShot == other.spellShot; 

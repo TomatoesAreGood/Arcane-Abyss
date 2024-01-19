@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4423183989412279659}
-  - component: {fileID: 1964998292895765007}
+  - component: {fileID: -4015161862054313079}
   m_Layer: 0
   m_Name: IceSpell
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1964998292895765007
+--- !u!114 &-4015161862054313079
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,10 +41,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8080940892066560431}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f2dcaee688ce8b438e532311536929d, type: 3}
+  m_Script: {fileID: 11500000, guid: de972065565c7784ca88649295be26c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 0
   fireRate: 0
   speed: 0
   spellShot: {fileID: 1235089325048832802, guid: 15da187cccd7f70448efb9551db5b795, type: 3}
+  nextAvailFire: 0

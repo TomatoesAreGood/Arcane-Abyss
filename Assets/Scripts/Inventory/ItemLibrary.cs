@@ -18,13 +18,14 @@ public class ItemLibrary : MonoBehaviour
     public PotionItem healthPotion;
     public Item[] Library;
     public StaffItem darkstaff;
+    public SpellBook fireShotSpellBook;
 
 
     // Start is called before the first frame update
     private void Awake(){
         if(instance == null){
             instance = this;
-            Library = new Item[] { basicStaff, forestStaff, fireball, magicShot, iceShot, healthPotion, darkstaff };
+            Library = new Item[] { basicStaff, forestStaff, fireball, magicShot, iceShot, healthPotion, darkstaff, fireShotSpellBook };
 
             InitalizeItemToArray();
 
@@ -76,6 +77,8 @@ public class ItemLibrary : MonoBehaviour
             return magicShot;
         }else if (item.GetType() == typeof(HealthPotionItem)){
             return healthPotion;
+        }else if (item.GetType() == typeof(FireShotSpellBook)){
+            return fireShotSpellBook;
         }
         throw new ArgumentException("Could not find item reference");
     }

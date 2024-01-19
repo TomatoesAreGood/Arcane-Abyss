@@ -111,6 +111,7 @@ public class PlayerController : MonoBehaviour
         inventory.items[0] = itemLibrary.basicStaff;
         inventory.items[1] = itemLibrary.forestStaff;
         inventory.items[2] = itemLibrary.darkstaff;
+        inventory.items[3] = itemLibrary.fireShotSpellBook;
 
         // for(int i = 0; i < inventory.items.Length; i++){
         //     inventory.items[i] = itemLibrary.basicStaff;

@@ -38,6 +38,7 @@ public class PickUpController : MonoBehaviour{
         Inventory inventory = PlayerController.instance.inventory;
         PlayerController playerController = PlayerController.instance;
         playerController.inventoryUI.UpdateData();
+
         if(item.itemType == Renderers.inventory){
             for(int i = 0; i < inventory.items.Length; i++){
                 if(inventory.items[i] == null){
@@ -49,6 +50,25 @@ public class PickUpController : MonoBehaviour{
             for(int i = 0; i < inventory.potions.Length; i++){
                 if(inventory.potions[i] == null){
                     playerController.inventoryUI.potionBagRenderer.InstantiateItem(item,i);
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+
+    public bool TryAddSpell(SpellItem item){
+        PlayerController playerController = PlayerController.instance;
+        Inventory inventory = PlayerController.instance.inventory;
+
+        if(item.itemType == Renderers.spells){
+            if(playerController.FindEquippedSpell(item) < 1){
+                return false;
+            }
+            for(int i = 0; i < inventory.spells.Length; i++){
+                if(inventory.spells[i] == null){
+                    playerController.inventoryUI.spellsRenderer.InstantiateItem(item,i);
                     return true;
                 }
             }
