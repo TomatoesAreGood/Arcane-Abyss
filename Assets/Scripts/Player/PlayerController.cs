@@ -105,9 +105,6 @@ public class PlayerController : MonoBehaviour
     private void Start(){
 
 
-        ManaBar = GameObject.Find("/Player UI/Mana Canvas/Mana Bar").GetComponent<ManaBar>();
-        HealthBarList = GameObject.Find("/Player UI/Heart Canvas").GetComponent<HealthBarList>();
-
         inventory.items[0] = itemLibrary.basicStaff;
         inventory.items[1] = itemLibrary.forestStaff;
         inventory.items[2] = itemLibrary.darkstaff;

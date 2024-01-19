@@ -2,10 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
+    private int[] keyArray;
 
     protected Dictionary<int, string> keyValuePairs = new Dictionary<int, string>();
     // Start is called before the first frame update
@@ -17,56 +20,62 @@ public class Chest : MonoBehaviour
         keyValuePairs.Add(2, "c");
         keyValuePairs.Add(5, "f");
         keyValuePairs.Add(6, "d");
-        SelectionSort(keyValuePairs);
-        foreach (KeyValuePair<int, string> kvp in keyValuePairs)
+        KeySort();
+        SelectionSort(keyArray);
+        foreach (KeyValuePair<int, string> kvp in KeyValueAssign(keyArray, keyValuePairs)
+)
         {
             Debug.Log(("Key: {0}, Value: {1}", kvp.Key, kvp.Value));
         }
 
     }
 
-    public void SelectionSortRevised(Dictionary<int, string> keyValuePairs)
-    {
+ //First, get a list of dict keys
+ //Second, sort the keys
+ //Third, create a new dict and assign the newly ordered keys to their values of the old dict
 
-    }
-
-    public void SelectionSort(Dictionary<int, string> keyValuePairs)
+    public void KeySort()
     {
-        for(int cursor = 0; cursor < keyValuePairs.Count; cursor++)
+        int cursor = 0;
+        keyArray = new int[keyValuePairs.Count];
+        foreach (int key in keyValuePairs.Keys)
         {
-            KeyValuePair<int, string> lowest;
-            lowest = keyValuePairs.ElementAt(cursor);
-            Debug.Log("lowest: " + lowest);
-            for (int i = cursor + 1; i < keyValuePairs.Count; i++)
+            keyArray[cursor] = key;
+            cursor++;
+        }
+    }
+    public void SelectionSort(int[] arr)
+    {
+        for(int cursor = 0; cursor < arr.Length; cursor++)
+        {
+            int lowest = cursor;
+            for (int i = cursor + 1; i < arr.Length; i++)
             {
-                Debug.Log("inspected: " + keyValuePairs.ElementAt(i));
-                KeyValuePair<int, string> inspect = keyValuePairs.ElementAt(i);
-                if (inspect.Key < lowest.Key)
+                if (arr[i] < arr[lowest])
                 {
-                    int toKey = lowest.Key;
-                    string toValue = lowest.Value;
-                    int fromKey = inspect.Key;
-                    string fromValue = inspect.Value;
-
-                    keyValuePairs[toKey] = inspect.Value;
-
-
-
-
-/*                    int toKey = keyValuePairs.ElementAt(i).Key;
-                    string fromKeyValue = keyValuePairs[lowest.Key];
-                    keyValuePairs.Remove(lowest.Key);
-                    keyValuePairs[toKey] = fromKeyValue;
-
-                    int fromKey = lowest.Key;
-                    string toKeyValue = keyValuePairs[keyValuePairs.ElementAt(i).Key];
-                    keyValuePairs.Remove(keyValuePairs.ElementAt(i).Key);
-                    keyValuePairs[fromKey] = toKeyValue;*/
-
+                    int swap = arr[lowest];
+                    arr[lowest] = arr[i];
+                    arr[i] = swap;
                 }
-                Debug.Log("Finished inner looop");
             }
         }
+    }
+
+    public Dictionary<int, string> KeyValueAssign(int[] arr, Dictionary<int, string> oldDict)
+    {
+        Dictionary<int, string> newDict = new Dictionary<int, string>();
+        for (int i = 0; i < arr.Length; ++i)
+        {
+            for (int cursor = 0; cursor < arr.Length; cursor++)
+            {
+                if (arr[i] == oldDict.ElementAt(cursor).Key)
+                {
+                    newDict.Add(oldDict.ElementAt(cursor).Key, oldDict.ElementAt(cursor).Value);
+                }
+            }
+        }
+
+        return newDict;
     }
 
     // Update is called once per frame
