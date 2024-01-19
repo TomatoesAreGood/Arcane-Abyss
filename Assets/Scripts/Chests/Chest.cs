@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Burst.Intrinsics;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -9,6 +10,7 @@ using UnityEngine;
 public class Chest : MonoBehaviour
 {
     private int[] keyArray;
+    protected string[] _rarityOrder = {"legend", "rare", "common"};
     protected Dictionary<int, string> _keyValuePairs = new Dictionary<int, string>();
     protected string _dropItem;
     // Start is called before the first frame update
@@ -34,6 +36,29 @@ public class Chest : MonoBehaviour
  //Second, sort the keys
  //Third, create a new dict and assign the newly ordered keys to their values of the old dict
 
+    //First, loop through dictionary to check for keys
+    //Input legend keys first, rare keys second, common keys third
+
+    public Dictionary<int, string> RaritySort(Dictionary<int, string> oldDict)
+    {
+        int rarityCursor = 0;
+        string selectKey = _rarityOrder[rarityCursor];
+        Dictionary<int, string> newDict = new Dictionary<int, string>();
+        for (int i = 0; i < _rarityOrder.Length; i++)
+        {
+            for (int cursor = 0; cursor < oldDict.Count; cursor++)
+            {
+                if (oldDict.ElementAt(cursor).Key == 0)// rarity string
+                {
+                    newDict.Add(oldDict.ElementAt(cursor).Key, oldDict.ElementAt(cursor).Value);
+                }
+            }
+            rarityCursor++;
+            selectKey = _rarityOrder[rarityCursor];
+        }
+
+        return newDict;
+    }
     public void KeySort()
     {
         int cursor = 0;
