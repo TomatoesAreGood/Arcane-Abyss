@@ -7867,6 +7867,7 @@ MonoBehaviour:
   healthPotion: {fileID: -1824762916343387062, guid: 97a13ffc9be04f445b7bd0d085703199, type: 3}
   Library: []
   darkstaff: {fileID: 8603673668104546730, guid: 7f2110cdfb77cd8448e3776e129895fa, type: 3}
+  fireShotSpellBook: {fileID: -8504022690600607327, guid: a33fb6fa8c3a5e641bf877a8f6df9671, type: 3}
 --- !u!4 &1692834709
 Transform:
   m_ObjectHideFlags: 0
