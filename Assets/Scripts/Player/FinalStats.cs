@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FinalStats : MonoBehaviour
 {
-    public List<string> enemies;
+    public static List<string> enemies;
     public Dictionary<string, int> pigeonHoleSortedEnemies;
 
     /*

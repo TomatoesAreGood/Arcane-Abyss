@@ -27,8 +27,6 @@ public class Enemy : MonoBehaviour
     protected Collider2D[] _collider;
     protected ContactFilter2D _contactFilter;
 
-    public FinalStats script;
-
     // Start is called before the first frame update
 
     protected enum State
@@ -40,29 +38,32 @@ public class Enemy : MonoBehaviour
         Shooting,
         Stunned,
     }
-    private void Awake()
+    protected void Awake()
     {
         _graphics = GetComponentInChildren<SpriteRenderer>();
-
-        script = GetComponent<FinalStats>();
-
+        _path = GetComponent<AIPath>();
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    void Start()
+    protected virtual void Start()
     {
         Player = PlayerController.instance.gameObject;
-
+        _moveSpeed = 3;
+        StartCoroutine(SlowedHandler(1));
         Health = 5;
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
-        DeadCheck();
-        //Debug.Log(Health);
+        if (Health <= 0)
+        {
+            FinalStats.enemies.Add(gameObject.name);
+            Destroy(gameObject);
+        }
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
             switch (state)
         {
@@ -71,9 +72,6 @@ public class Enemy : MonoBehaviour
                 _path.canMove = true;
                 FindTarget();
                 FindEnemy();
-                if (!isSlowedHandlerRunning){
-                    StartCoroutine(SlowedHandler());
-                }
                 break;
 
             case State.MoveAway:
@@ -81,7 +79,7 @@ public class Enemy : MonoBehaviour
                 Vector2 pos = transform.position;
                 Vector2 dir = -(hit.point - pos);
                 _rigidbody.MovePosition(_rigidbody.position + dir * _moveSpeed * Time.fixedDeltaTime);
-                if ((Vector2.Distance(transform.position, hit.point) > 2.5f))
+                if (Vector2.Distance(transform.position, hit.point) > 2.5f)
                 {
                     state = State.ChaseTarget;
                 }
@@ -127,20 +125,27 @@ public class Enemy : MonoBehaviour
 
     public void DebuffSlowed()
     {
-        StartCoroutine(SlowedHandler());
+        if(!isSlowedHandlerRunning){
+            StartCoroutine(SlowedHandler());
+        }
     }
     protected IEnumerator SlowedHandler()
     {
         isSlowedHandlerRunning = true;
-        float _normalSpeed = _moveSpeed;
-        _moveSpeed = _moveSpeed/2;
-        _path.maxSpeed = _moveSpeed;
-
-        //Debug.Log(_moveSpeed);
-
+        _path.maxSpeed = _moveSpeed/2;
         yield return new WaitForSeconds(3);
-        _moveSpeed = _normalSpeed;
         _path.maxSpeed = _moveSpeed;
+        isSlowedHandlerRunning = false;
+
+    }
+
+    protected IEnumerator SlowedHandler(int time)
+    {
+        isSlowedHandlerRunning = true;
+        _path.maxSpeed = _moveSpeed/2;
+        yield return new WaitForSeconds(time);
+        _path.maxSpeed = _moveSpeed;
+        isSlowedHandlerRunning   = false;
     }
 
     public void Burn(float burnDamage, float burnTickDamage)
@@ -168,9 +173,11 @@ public class Enemy : MonoBehaviour
     protected void Attack()
     {
         _playerScript.TakeDamage(1);
-
     }
 
+    public void TakeDamage(float num){
+        Health -= num;
+    }
 
 
     public virtual void OnTriggerEnter2D(Collider2D collision)
@@ -186,15 +193,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    protected void DeadCheck()
-    {
-        if (Health <= 0)
-        {
-
-            Destroy(gameObject);
-            script.enemies.Add(gameObject.name);
-        }
-    }
+   
 
 
 }

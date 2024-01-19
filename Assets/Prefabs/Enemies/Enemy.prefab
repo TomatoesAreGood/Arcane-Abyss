@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9083816065716885126}
   - component: {fileID: 8602284967156481139}
   - component: {fileID: 3742627619274782115}
+  - component: {fileID: 6749715483544977058}
   m_Layer: 6
   m_Name: EnemyGFX
   m_TagString: Untagged
@@ -99,6 +100,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpriteRenderer: {fileID: 0}
   Player: {fileID: 0}
+--- !u!95 &6749715483544977058
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6375023151854608337}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ea12d39c5d59aab4da4d687c30f39892, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6458693985022535404
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,8 +135,8 @@ GameObject:
   - component: {fileID: 8769026902826798242}
   - component: {fileID: 5264964501592643658}
   - component: {fileID: 3354427584125549490}
-  - component: {fileID: 8766490959172146660}
   - component: {fileID: -6302129671101641592}
+  - component: {fileID: 6268781185423836630}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -284,21 +306,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &8766490959172146660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6458693985022535404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fedeb1e3c2cf08548a84fb58a97c7cda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: 0
-  Player: {fileID: 0}
-  script: {fileID: -6302129671101641592}
 --- !u!114 &-6302129671101641592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,3 +319,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies: []
+--- !u!114 &6268781185423836630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6458693985022535404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 579b71a042535df479c7ed39ffa00b4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 0
+  Player: {fileID: 0}
+  script: {fileID: 0}

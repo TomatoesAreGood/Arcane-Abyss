@@ -33,7 +33,7 @@ public class MagicShot : MonoBehaviour
         if (other.GetComponent<Enemy>() != null) 
         { 
             Enemy enemyScript = other.GetComponent<Enemy>();
-            enemyScript.Health -= damage;
+            enemyScript.TakeDamage(damage);
         }
         Destroy(gameObject);
     }

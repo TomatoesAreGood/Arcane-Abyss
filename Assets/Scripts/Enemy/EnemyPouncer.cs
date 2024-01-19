@@ -15,17 +15,16 @@ public class EnemyPouncer : Enemy
 
     // Start is called before the first frame update
 
-    void Start()
+    protected override void Start()
     {
-        Health = 4;
         Player = PlayerController.instance.gameObject;
-        _path = GetComponent<AIPath>();
-        _rigidbody = GetComponent<Rigidbody2D>();
+        Health = 4;
         _pounceSpeed = 8;
         _moveSpeed = (int)_path.maxSpeed;
+        StartCoroutine(SlowedHandler(1));
     }
 
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
         Debug.Log(gameObject.name + state);
         Vector2 pos = transform.position;
@@ -36,10 +35,6 @@ public class EnemyPouncer : Enemy
                 _path.canMove = true;
                 FindTarget();
                 FindEnemy();
-                if (!isSlowedHandlerRunning)
-                {
-                    StartCoroutine(SlowedHandler());
-                }
                 break;
 
             case State.Poucing:
@@ -106,7 +101,7 @@ public class EnemyPouncer : Enemy
         }
     */
 
-    IEnumerator PounceHandler()
+    private IEnumerator PounceHandler()
     {
         isPounceHandlerRunning = true;
         canPounce = true;

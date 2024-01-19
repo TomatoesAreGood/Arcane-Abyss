@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class PlayerController : MonoBehaviour
 {   
     //SINGLETON
@@ -55,6 +56,7 @@ public class PlayerController : MonoBehaviour
     public InventoryUI inventoryUI;
 
 
+    
     private void Awake(){
 
         //Singleton
