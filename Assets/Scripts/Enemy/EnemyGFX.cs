@@ -10,9 +10,15 @@ public class EnemyGFX : MonoBehaviour
     public GameObject Player;
 
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+    }
     void Start()
     {
         SpriteRenderer = GetComponent<SpriteRenderer>();
+        Player = PlayerController.instance.gameObject;
+
     }
 
     void Update()

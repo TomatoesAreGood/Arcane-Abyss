@@ -56,8 +56,6 @@ public class PlayerController : MonoBehaviour
 
 
     private void Awake(){
-        //Dont Destroy On Load
-        DontDestroyOnLoad(this);
 
         //Singleton
         if (instance == null){
@@ -65,6 +63,10 @@ public class PlayerController : MonoBehaviour
         }else{
             Destroy(this);
         }
+
+        //Dont Destroy On Load
+        DontDestroyOnLoad(this);
+
 
         //set default player stats
         activeSpells = new List<Spell>();
@@ -101,6 +103,11 @@ public class PlayerController : MonoBehaviour
         health = maxHealth;
     }
     private void Start(){
+
+
+        ManaBar = GameObject.Find("/Player UI/Mana Canvas/Mana Bar").GetComponent<ManaBar>();
+        HealthBarList = GameObject.Find("/Player UI/Heart Canvas").GetComponent<HealthBarList>();
+
         inventory.items[0] = itemLibrary.basicStaff;
         inventory.items[1] = itemLibrary.forestStaff;
         inventory.items[2] = itemLibrary.darkstaff;
