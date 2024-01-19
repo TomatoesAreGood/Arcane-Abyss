@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {   
@@ -118,7 +119,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update(){
-        //have to set this for inventory 
+        //have to set this for equipped staff img in inventoryUI
         if(inventory.equippedStaff != null){
             equippedStaff.gameObject.SetActive(true);
             equippedStaffSprite = equippedStaff.GetComponent<SpriteRenderer>().sprite;
@@ -138,16 +139,8 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        Debug.Log(a);
+        //Debug.Log(a);
 
-        Debug.Log(PlayerController.instance.inventory.equippedStaff);    
-
-        //Debug.Log(inventoryUI.inventoryRenderer.GetSlot(0).item);
-
-        //might cause performance issues 
-             //inventoryUI.UpdateData();
-
-        
         //Spell switching (pain)
         if(!inventoryUI.isOpen){
             if(Input.GetKeyDown(KeyCode.Alpha1)){
@@ -201,33 +194,41 @@ public class PlayerController : MonoBehaviour
             }
         }
        
-        
+        //debug
         if(Input.GetKeyDown(KeyCode.Space)){
             Debug.Break();
         }
 
-       if (Input.GetMouseButtonDown(0)){
-            if(equippedSpell != null){
-                equippedSpell.Fire();
-            }
-       }
-
-       if(Input.GetKeyDown(KeyCode.E)){
-            if (inventoryUI.isOpen){
-                if(MousePointer.instance.selectedItem != null){
-                    MousePointer.instance.selectedItem.SnapBack();
+        //shooting spells
+        if (Input.GetMouseButtonDown(0)){
+                if(equippedSpell != null){
+                    equippedSpell.Fire();
                 }
-                equippedSpell = null;
-                inventoryUI.Disable();
-            }else{
-                inventoryUI.Enable();
-            }
-       }
-          
+        }
+
+        //inventory
+        if(Input.GetKeyDown(KeyCode.E)){
+                if (inventoryUI.isOpen){
+                    if(MousePointer.instance.selectedItem != null){
+                        MousePointer.instance.selectedItem.SnapBack();
+                    }
+                    equippedSpell = null;
+                    inventoryUI.Disable();
+                }else{
+                    inventoryUI.Enable();
+                }
+        }
+        
         //movement
         movementDirection.x = Input.GetAxisRaw("Horizontal");
         movementDirection.y = Input.GetAxisRaw("Vertical");
         characterPos = transform.position; 
+
+    //    if(inventory.equippedStaff != null){
+    //         Debug.Log(inventory.equippedStaff.damageBonus);
+    //    }
+
+
     }
 
 
@@ -274,8 +275,7 @@ public class PlayerController : MonoBehaviour
 
     public void EquipStaff(StaffItem staff){
         inventory.equippedStaff = staff;
-        equippedStaff.GetComponent<SpriteRenderer>().sprite = staff.reference.GetComponent<SpriteRenderer>().sprite;
-        equippedStaff.damageBonus = staff.reference.GetComponent<Staff>().damageBonus;
+        equippedStaff.GetComponent<SpriteRenderer>().sprite = staff.GetComponent<Image>().sprite;
     }
 
     public void EquipSpell(SpellItem spell, int spellIndex){

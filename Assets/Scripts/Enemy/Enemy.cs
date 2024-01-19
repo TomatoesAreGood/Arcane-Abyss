@@ -59,7 +59,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         DeadCheck();
-        Debug.Log(state);
+        //Debug.Log(Health);
     }
 
     private void FixedUpdate()

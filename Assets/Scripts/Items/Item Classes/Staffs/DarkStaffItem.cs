@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DarkStaffItem : StaffItem
 {
-    // Start is called before the first frame update
-    
+    protected override void Awake()
+    {
+        base.Awake();
+        damageBonus = 3;
+    }    
 }

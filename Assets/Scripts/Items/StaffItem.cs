@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StaffItem : ReferencedItem
+public class StaffItem : Item
 {
-    protected override void Start(){
-        base.Start();
-        if (reference.GetComponent<Staff>() == null){
-            throw new ArgumentException("object reference is not a staff");
-        }
+    public float damageBonus;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        damageBonus = 0;
     }
 
     public override void Equip(){

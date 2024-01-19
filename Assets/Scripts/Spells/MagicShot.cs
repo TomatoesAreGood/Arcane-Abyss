@@ -5,9 +5,9 @@ using UnityEngine;
 public class MagicShot : MonoBehaviour
 {
     protected Animator animator;
-    protected int damage;
+    protected float damage;
 
-    protected virtual void Start(){
+    protected virtual void Awake(){
         damage = 1; 
         animator = gameObject.GetComponent<Animator>();  
     }
@@ -18,10 +18,11 @@ public class MagicShot : MonoBehaviour
         if (distance > 35){
             Destroy(gameObject);
         }
+        Debug.Log(damage);
     }
     
-    public void AddDamage(int dmg){
-        damage += dmg;
+    public void AddDamage(float dmg){
+        this.damage += dmg;
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D other){
@@ -33,8 +34,6 @@ public class MagicShot : MonoBehaviour
         { 
             Enemy enemyScript = other.GetComponent<Enemy>();
             enemyScript.Health -= damage;
-            enemyScript.Burn(2, 0.3f);
-            Debug.Log(enemyScript.Health);
         }
         Destroy(gameObject);
     }

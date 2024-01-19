@@ -19,6 +19,8 @@ public class Spell : MonoBehaviour, IEquatable<Spell>
         manaCost = 5;
         speed = 10;
     }
+
+  
     public virtual void Fire() {
         if(Time.time >= nextAvailFire){
             Vector3 muzzlePos = PlayerController.instance.firePoint.position;
@@ -27,9 +29,11 @@ public class Spell : MonoBehaviour, IEquatable<Spell>
             float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
 
             var magicShot = Instantiate(spellShot, muzzlePos, Quaternion.Euler(0f, 0f, angle));
-            if(PlayerController.instance.equippedStaff != null){
-                magicShot.GetComponent<MagicShot>().AddDamage(PlayerController.instance.equippedStaff.GetComponent<Staff>().damageBonus);
+
+            if(PlayerController.instance.inventory.equippedStaff != null){
+                magicShot.GetComponent<MagicShot>().AddDamage(PlayerController.instance.inventory.equippedStaff.damageBonus);
             }
+
             magicShot.GetComponent<Rigidbody2D>().AddForce(shootDirection * speed, ForceMode2D.Impulse);
 
             nextAvailFire = Time.time + 1/fireRate;
