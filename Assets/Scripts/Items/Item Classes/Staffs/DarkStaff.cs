@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ForestStaffItem : StaffItem
+public class DarkStaff : StaffItem
 {
     protected override void Awake()
     {
         base.Awake();
-        damageBonus = 2;
-    }
+        damageBonus = 3;
+    }    
 }

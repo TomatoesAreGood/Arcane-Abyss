@@ -71,10 +71,10 @@ public class InventoryRenderer : MonoBehaviour
                     continue;
                 }
 
-                if(inventoryData[i].GetType() == typeof(BasicStaffItem)){
+                if(inventoryData[i].GetType() == typeof(BasicStaff)){
                     GameObject obj = Instantiate(ItemLibrary.instance.basicStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if(inventoryData[i].GetType() == typeof(ForestStaffItem)){
+                }else if(inventoryData[i].GetType() == typeof(ForestStaff)){
                     GameObject obj = Instantiate(ItemLibrary.instance.forestStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
                 }else if(inventoryData[i].GetType() == typeof(FireSpellItem)){
@@ -83,13 +83,13 @@ public class InventoryRenderer : MonoBehaviour
                 }else if(inventoryData[i].GetType() == typeof(IceSpellItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.iceShot.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(DarkStaffItem)){
+                }else if (inventoryData[i].GetType() == typeof(DarkStaff)){
                     GameObject obj = Instantiate(ItemLibrary.instance.darkstaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
                 }else if (inventoryData[i].GetType() == typeof(MagicSpellItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.magicShot.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(HealthPotionItem)){
+                }else if (inventoryData[i].GetType() == typeof(HealthPotion)){
                     GameObject obj = Instantiate(ItemLibrary.instance.healthPotion.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
                 }else if (inventoryData[i].GetType() == typeof(FireShotSpellBook)){

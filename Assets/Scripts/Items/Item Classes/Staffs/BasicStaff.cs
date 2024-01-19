@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicStaffItem : StaffItem
+public class BasicStaff : StaffItem
 {
     protected override void Awake()
     {

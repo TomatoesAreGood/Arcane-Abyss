@@ -9,6 +9,8 @@ using System;
 public class ItemLibrary : MonoBehaviour
 {
     public object[] itemsArray;
+    public Item[] Library;
+
     public static ItemLibrary instance;
     public StaffItem basicStaff;
     public StaffItem forestStaff;
@@ -16,7 +18,6 @@ public class ItemLibrary : MonoBehaviour
     public SpellItem iceShot;
     public SpellItem magicShot;
     public PotionItem healthPotion;
-    public Item[] Library;
     public StaffItem darkstaff;
     public SpellBook fireShotSpellBook;
 
@@ -63,19 +64,19 @@ public class ItemLibrary : MonoBehaviour
     }
 
     public Item GetItemReference(Item item){
-        if(item.GetType() == typeof(BasicStaffItem)){
+        if(item.GetType() == typeof(BasicStaff)){
             return basicStaff;
-        }else if(item.GetType() == typeof(ForestStaffItem)){
+        }else if(item.GetType() == typeof(ForestStaff)){
             return forestStaff;
         }else if(item.GetType() == typeof(FireSpellItem)){
             return fireball;
         }else if(item.GetType() == typeof(IceSpellItem)){
             return iceShot;
-        }else if (item.GetType() == typeof(DarkStaffItem)){
+        }else if (item.GetType() == typeof(DarkStaff)){
             return darkstaff;
         }else if (item.GetType() == typeof(MagicSpellItem)){
             return magicShot;
-        }else if (item.GetType() == typeof(HealthPotionItem)){
+        }else if (item.GetType() == typeof(HealthPotion)){
             return healthPotion;
         }else if (item.GetType() == typeof(FireShotSpellBook)){
             return fireShotSpellBook;
