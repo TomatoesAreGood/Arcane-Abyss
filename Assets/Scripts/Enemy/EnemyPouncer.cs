@@ -8,13 +8,17 @@ public class EnemyPouncer : Enemy
 {
 
     private int _pounceSpeed;
-    
+    private Animator animator;
+
     private bool isPouncing;
     private bool canPounce = true;
     private bool isPounceHandlerRunning = false;
 
     // Start is called before the first frame update
-
+    protected override void Awake(){
+        base.Awake();
+        animator = transform.GetChild(0).GetComponent<Animator>();
+    }
     protected override void Start()
     {
         Player = PlayerController.instance.gameObject;
@@ -86,12 +90,12 @@ public class EnemyPouncer : Enemy
                 }
                 break;
         }
+        if(state == State.Poucing){
+            animator.SetBool("IsPouncing", true);
+        }else{
+            animator.SetBool("IsPouncing", false);
+        }
     }
-
-    // Update is called once per frame
-
-
-
 
 
     /*    private void OnDrawGizmos()
@@ -117,6 +121,7 @@ public class EnemyPouncer : Enemy
         //ensures that the enemy is not constanly trying to pounce
 
         //Code cited from Unity Forum Post "2D enemy dash movement"
+
     }
 
 

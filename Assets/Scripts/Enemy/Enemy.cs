@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour
         Shooting,
         Stunned,
     }
-    protected void Awake()
+    protected virtual void Awake()
     {
         _graphics = GetComponentInChildren<SpriteRenderer>();
         _path = GetComponent<AIPath>();
