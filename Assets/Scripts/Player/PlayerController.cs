@@ -28,8 +28,8 @@ public class PlayerController : MonoBehaviour
     //Player Stats
     public static int maxHealth;
     public static int health;
-    public static int maxMana = 100;
-    public static int mana;
+    public static float maxMana = 100;
+    public static float mana;
     private bool _isImmune;
 
     //UI
@@ -231,10 +231,17 @@ public class PlayerController : MonoBehaviour
         movementDirection.y = Input.GetAxisRaw("Vertical");
         characterPos = transform.position; 
 
-    //    if(inventory.equippedStaff != null){
-    //         Debug.Log(inventory.equippedStaff.damageBonus);
-    //    }
+        if(equippedSpell == null){
+            if(mana < maxMana){
+                mana+= 0.1f;
 
+            }
+        }else if(Time.time - equippedSpell.nextAvailFire > 1){
+            if(mana < maxMana){
+                mana+= 0.1f;
+
+            }        
+        }
 
     }
 

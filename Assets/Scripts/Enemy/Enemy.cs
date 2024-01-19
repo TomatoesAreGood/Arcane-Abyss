@@ -136,7 +136,7 @@ public class Enemy : MonoBehaviour
         _moveSpeed = _moveSpeed/2;
         _path.maxSpeed = _moveSpeed;
 
-        Debug.Log(_moveSpeed);
+        //Debug.Log(_moveSpeed);
 
         yield return new WaitForSeconds(3);
         _moveSpeed = _normalSpeed;

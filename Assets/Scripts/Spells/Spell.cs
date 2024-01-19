@@ -9,7 +9,7 @@ public class Spell : MonoBehaviour, IEquatable<Spell>
     public float fireRate;
     public float speed;
     [SerializeField] GameObject spellShot;
-    protected float nextAvailFire;
+    public float nextAvailFire;
 
     // Start is called before the first frame update
     private void Start()
@@ -22,7 +22,7 @@ public class Spell : MonoBehaviour, IEquatable<Spell>
 
   
     public virtual void Fire() {
-        if(Time.time >= nextAvailFire){
+        if(Time.time >= nextAvailFire && PlayerController.mana - manaCost > 0){
             Vector3 muzzlePos = PlayerController.instance.firePoint.position;
             Vector2 shootDirection = PlayerController.instance.firePoint.right;
 

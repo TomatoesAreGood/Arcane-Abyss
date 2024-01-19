@@ -18,7 +18,7 @@ public class MagicShot : MonoBehaviour
         if (distance > 35){
             Destroy(gameObject);
         }
-        Debug.Log(damage);
+        
     }
     
     public void AddDamage(float dmg){
