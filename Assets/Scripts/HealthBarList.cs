@@ -23,7 +23,10 @@ public class HealthBarList : MonoBehaviour
     HealthBarNode _firstHeartClass;
     // Start is called before the first frame update
 
-
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
     private void Start()
     {
        
