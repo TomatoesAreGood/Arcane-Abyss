@@ -8,31 +8,35 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
-    private int[] keyArray;
+    public Item[] ChestLibrary;
+    protected int[] keyArray;
     protected Dictionary<int, string> _keyValuePairs = new Dictionary<int, string>();
     protected string _dropItem;
     // Start is called before the first frame update
     void Start()
     {
-        _keyValuePairs.Add(3, "a");
-        _keyValuePairs.Add(4, "e");
-        _keyValuePairs.Add(1, "b");
-        _keyValuePairs.Add(2, "c");
-        _keyValuePairs.Add(5, "f");
-        _keyValuePairs.Add(6, "d");
-        KeySort();
+        ChestLibrary = ItemLibrary.instance.Library;
+
+/*        KeySort();
         SelectionSort(keyArray);
         _keyValuePairs = KeyValueAssign(keyArray, _keyValuePairs);
         foreach (KeyValuePair<int, string> kvp in _keyValuePairs)
         {
             Debug.Log(("Key: {0}, Value: {1}", kvp.Key, kvp.Value));
-        }
+        }*/
+
 
     }
 
  //First, get a list of dict keys
  //Second, sort the keys
  //Third, create a new dict and assign the newly ordered keys to their values of the old dict
+
+    public Item RandomSelect()
+    {
+        int randomIndex = UnityEngine.Random.Range(0, ChestLibrary.Length);
+        return ChestLibrary[randomIndex];
+    }
 
     public void KeySort()
     {
@@ -76,11 +80,6 @@ public class Chest : MonoBehaviour
         }
 
         return newDict;
-    }
-
-    public void MagicFindSelect()
-    {
-        _dropItem = _keyValuePairs.ElementAt(0).Value;
     }
 
     // Update is called once per frame
