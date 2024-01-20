@@ -4,28 +4,38 @@ using UnityEngine;
 
 public class PotionChest : Chest
 {
-    private List<Item> _potionList;
+    private Item[] _potionArray;
+    private int _potionCount;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void StaffSort()
+    protected override void LibraryCleanUp()
     {
-        _potionList = new List<Item>();
-        for (int cursor = 0; cursor < ChestLibrary.Length; cursor++)
+        foreach (Item item in ItemLibrary.instance.Library)
         {
-            if (ChestLibrary[cursor].GetType() == typeof(PotionItem))
+            if (item is PotionItem)
             {
-                _potionList.Add(ChestLibrary[cursor]);
+                _potionCount++;
+            }
+        }
+
+        ChestLibrary = new Item[_potionCount];
+
+        int chestCursor = 0;
+        for (int i = 0; i < ItemLibrary.instance.Library.Length; i++)
+        {
+            if (ItemLibrary.instance.Library[i] is PotionItem)
+            {
+                Debug.Log(ItemLibrary.instance.Library[i].GetType());
+                ChestLibrary[chestCursor] = ItemLibrary.instance.Library[i];
+                chestCursor++;
             }
         }
     }

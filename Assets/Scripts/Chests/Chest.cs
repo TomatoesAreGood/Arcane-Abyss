@@ -1,7 +1,9 @@
+using Pathfinding.Ionic.Zip;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -9,14 +11,26 @@ using UnityEngine;
 public class Chest : MonoBehaviour
 {
     public Item[] ChestLibrary;
+    protected SpriteRenderer _sr;
+    public Sprite OpenSprite;
+    protected int _invalidCount;
+
+
     protected int[] keyArray;
     protected Dictionary<int, string> _keyValuePairs = new Dictionary<int, string>();
     protected string _dropItem;
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
-        ChestLibrary = ItemLibrary.instance.Library;
+        
+        LibraryCleanUp();
+        _sr = GetComponent<SpriteRenderer>();
 
+        /*        foreach (var item in ChestLibrary)
+                {
+                    Debug.Log(item);
+                }*/
+        Open();
 /*        KeySort();
         SelectionSort(keyArray);
         _keyValuePairs = KeyValueAssign(keyArray, _keyValuePairs);
@@ -28,9 +42,40 @@ public class Chest : MonoBehaviour
 
     }
 
- //First, get a list of dict keys
- //Second, sort the keys
- //Third, create a new dict and assign the newly ordered keys to their values of the old dict
+    //First, get a list of dict keys
+    //Second, sort the keys
+    //Third, create a new dict and assign the newly ordered keys to their values of the old dict
+
+
+    public void Open()
+    {
+        _sr.sprite = OpenSprite;
+        RandomSelect().Drop(transform.position);
+
+    }
+
+    protected virtual void LibraryCleanUp()
+    {
+        foreach (Item item in ItemLibrary.instance.Library)
+        {
+            if (item is SpellItem)
+            {
+                _invalidCount++;
+            }
+        }
+        ChestLibrary = new Item[ItemLibrary.instance.Library.Length - _invalidCount];
+
+        int chestCursor = 0;
+        for (int i = 0; i < ItemLibrary.instance.Library.Length; i++)
+        {
+            if (!(ItemLibrary.instance.Library[i] is SpellItem))
+            {
+                Debug.Log(ItemLibrary.instance.Library[i].GetType());
+                ChestLibrary[chestCursor] = ItemLibrary.instance.Library[i];
+                chestCursor++;
+            }
+        }
+    }
 
     public Item RandomSelect()
     {

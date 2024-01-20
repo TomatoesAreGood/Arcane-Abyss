@@ -73,6 +73,8 @@ public class Item : MonoBehaviour
         
     }
 
+
+
     public void SnapBack(){
         transform.SetParent(parentAfterDrag);
         transform.position = parentAfterDrag.position;
@@ -87,6 +89,15 @@ public class Item : MonoBehaviour
         obj.GetComponent<PickupScript>().itemReference = ItemLibrary.instance.GetItemReference(this);
         Destroy(gameObject);
     }
+
+    public virtual void Drop(Vector2 location)
+    {
+        GameObject obj = Instantiate(PickUpController.instance.defaultDropItem);
+        obj.transform.position = location;
+        obj.GetComponent<PickupScript>().itemReference = ItemLibrary.instance.GetItemReference(this);
+/*        Destroy(gameObject);
+*/    }
+
     public void Sell(){
 
     }
