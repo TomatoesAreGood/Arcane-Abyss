@@ -11,14 +11,16 @@ public class ShopClass : MonoBehaviour
     // Start is called before the first frame update
 
     public GameObject ShopUi;
+   
     private bool _isPaused;
-    public GameObject[] Slots; 
+    public GameObject[] Slots;
+    
 
 
-
-
+    
     void Start()
     {
+        
         ShopUi.SetActive(false);
         _isPaused = false;
         Item[] itemlibrary = ItemLibrary.instance.Library;
@@ -70,13 +72,9 @@ public class ShopClass : MonoBehaviour
             }
 
 
-            
-          
-
-
-
-
         }
+
+        
 
 
     }

@@ -3552,7 +3552,6 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  pickUpController: {fileID: 0}
   HealthBarList: {fileID: 643631759}
   ManaBar: {fileID: 1451713540}
   firePoint: {fileID: 0}
@@ -5102,6 +5101,7 @@ MonoBehaviour:
   - {fileID: 1598643021}
   - {fileID: 2113967095}
   - {fileID: 1509188995}
+  Coins: 0
 --- !u!1 &983261353
 GameObject:
   m_ObjectHideFlags: 0
@@ -5424,6 +5424,102 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _volumeSlider: {fileID: 1031518704}
+--- !u!1001 &1040080369
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -687780603561364715, guid: 4ad4f99d937e12746b920f687d4d7574, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2291523060286969486, guid: 4ad4f99d937e12746b920f687d4d7574, type: 3}
+      propertyPath: m_Name
+      value: Coin Pouch
+      objectReference: {fileID: 0}
+    - target: {fileID: 6042360332291288702, guid: 4ad4f99d937e12746b920f687d4d7574, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 6042360332291288702, guid: 4ad4f99d937e12746b920f687d4d7574, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 6042360332291288702, guid: 4ad4f99d937e12746b920f687d4d7574, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6042360332291288702, guid: 4ad4f99d937e12746b920f687d4d7574, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6042360332291288702, guid: 4ad4f99d937e12746b920f687d4d7574, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6042360332291288702, guid: 4ad4f99d937e12746b920f687d4d7574, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6042360332291288702, guid: 4ad4f99d937e12746b920f687d4d7574, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6042360332291288702, guid: 4ad4f99d937e12746b920f687d4d7574, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6042360332291288702, guid: 4ad4f99d937e12746b920f687d4d7574, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6042360332291288702, guid: 4ad4f99d937e12746b920f687d4d7574, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2291523060286969486, guid: 4ad4f99d937e12746b920f687d4d7574, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1042541754}
+  m_SourcePrefab: {fileID: 100100000, guid: 4ad4f99d937e12746b920f687d4d7574, type: 3}
+--- !u!1 &1042541749 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2291523060286969486, guid: 4ad4f99d937e12746b920f687d4d7574, type: 3}
+  m_PrefabInstance: {fileID: 1040080369}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &1042541754
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042541749}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1071553803
 GameObject:
   m_ObjectHideFlags: 0
@@ -13438,3 +13534,4 @@ SceneRoots:
   - {fileID: 2010498050}
   - {fileID: 861556910}
   - {fileID: 37030347}
+  - {fileID: 1040080369}
