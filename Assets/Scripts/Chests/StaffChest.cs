@@ -12,8 +12,9 @@ public class StaffChest : Chest
     {
 
         base.Start();
-/*        _sr.color = Color.black;
-*/
+        float HValue = 120 / 360;
+        _sr.color = Color.HSVToRGB(0.3f, 100 / 100, 100 / 100);
+
     }
     // Update is called once per frame
     void Update()
