@@ -12,8 +12,11 @@ public class EnemyRanger : Enemy
     protected float nextAvailFire;
     protected float fireRate;
     protected int damage;
+    protected float projectileSpeed;
     private Vector2 initialArm;
     private Vector2 nextArm;
+    protected Animator animator;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -24,6 +27,8 @@ public class EnemyRanger : Enemy
         _moveSpeed = 2.5f;
         damage = 1;
         fireRate = 0.3f;
+        projectileSpeed = 6f;
+        animator = transform.GetChild(0).GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -76,21 +81,23 @@ public class EnemyRanger : Enemy
                     state = State.ChaseTarget;
                 }
                 break;
-
-
-
-
         }
+        if(state == State.Shooting){
+            animator.SetBool("IsShooting", true);
+        }else{
+            animator.SetBool("IsShooting", false);
+        }
+
     }
 
     private void Fire() {
-        Vector3 shotDir = Player.transform.position - transform.position;
-        float angle = Mathf.Atan2(shotDir.y, shotDir.x) * Mathf.Rad2Deg;
-        GameObject clone = Instantiate(EnemyShot, transform.position + shotDir.normalized, Quaternion.Euler(0f,0f, angle));
+        Vector3 shootDir = Player.transform.position - transform.position;
+        float angle = Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg;
+        GameObject clone = Instantiate(EnemyShot, transform.position + shootDir.normalized, Quaternion.Euler(0f,0f, angle));
         shotBody = clone.GetComponent<Rigidbody2D>();
 /*        float playerAngle = Vector2.Angle(initialArm, nextArm) * Mathf.Deg2Rad;
-        Vector2 vec = new Vector2(Mathf.Cos(playerAngle), Mathf.Sin(playerAngle));*/
-        shotBody.AddForce(Player.transform.position - transform.position, ForceMode2D.Impulse);
+        Vector2 vec = new Vector2(Mathf.Cos(playerAngle), Mathf.Sin(playerAngle));*/        
+        shotBody.AddForce(shootDir.normalized * projectileSpeed, ForceMode2D.Impulse);
         clone.GetComponent<EnemyShot>().SetDamage(damage);
     }
 

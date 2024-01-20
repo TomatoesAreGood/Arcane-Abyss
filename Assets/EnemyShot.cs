@@ -31,6 +31,9 @@ public class EnemyShot : MonoBehaviour
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D other){
+        if(other.CompareTag("Enemy")){
+            return;
+        }
         if (other.CompareTag("PlayerIsTrigger")) 
         { 
             PlayerController.instance.TakeDamage(damage);
