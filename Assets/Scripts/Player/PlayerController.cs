@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        Debug.Log(a);
+        //Debug.Log(a);
 
         //Spell switching (pain)
         if(!inventoryUI.isOpen){
@@ -202,7 +202,7 @@ public class PlayerController : MonoBehaviour
        
         //debug
         if(Input.GetKeyDown(KeyCode.Space)){
-            inventoryUI.inventoryRenderer.BubbleSortValue();
+            inventoryUI.inventoryRenderer.PigeonHoleSortOcurrances();
             //Debug.Break();
         }
 

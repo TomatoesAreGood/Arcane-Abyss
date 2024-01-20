@@ -221,5 +221,55 @@ public class InventoryRenderer : MonoBehaviour
         RedrawMatrix();
     }
 
+    private bool ContainsKey( Dictionary<Item, int> itemCountDict, Item key){
+        foreach(Item item in itemCountDict.Keys){
+            if(key.GetType() == item.GetType()){
+                return true;
+            }   
+        }
+        return false;
+    }
+
+
+    //pigeonhole sorts, from most to least occurances 
+    public void PigeonHoleSortOcurrances(){
+        Dictionary<Item, int> itemCountDict = new Dictionary<Item, int>();
+        
+        for(int i = 0; i < inventoryData.Length; i++){
+            if(inventoryData[i] == null){
+                continue;
+            }
+            if(ContainsKey(itemCountDict,inventoryData[i])){
+                itemCountDict[inventoryData[i]] += 1;
+            }else{
+                itemCountDict[inventoryData[i]] = 1;
+            }
+            inventoryData[i] = null;
+        }
+
+        int index = 0;
+
+        while(itemCountDict.Count > 0){
+            int max = -1;
+            Item key = null;
+            foreach(KeyValuePair<Item, int> kvp in itemCountDict){
+                if(kvp.Value > max){
+                    max = kvp.Value;
+                    key = kvp.Key;
+                }
+            }
+            for(int i = 0; i < max; i++){
+                inventoryData[index] = key;
+                index++;
+            }
+            itemCountDict.Remove(key);
+        }
+        RedrawMatrix();
+    }
+
+    public void SortType(){
+
+    }
+
 
 }

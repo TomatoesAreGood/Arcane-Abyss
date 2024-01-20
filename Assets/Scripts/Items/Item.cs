@@ -19,6 +19,7 @@ public class Item : MonoBehaviour
     public bool IsMouseOnItem => RectTransformUtility.RectangleContainsScreenPoint(rectTransform, Input.mousePosition, Camera.main);
     public new InventoryRenderer renderer;
     public Item[] inventory;
+    private int itemID {get; set;}
 
     protected virtual void Awake(){
         image = gameObject.GetComponent<Image>();
@@ -78,8 +79,6 @@ public class Item : MonoBehaviour
         
     }
 
-
-
     public void SnapBack(){
         transform.SetParent(parentAfterDrag);
         transform.position = parentAfterDrag.position;
@@ -130,8 +129,21 @@ public class Item : MonoBehaviour
         throw new ArgumentException("item is not a spell");
     }
 
-   
+    //for PigeonholeSort
+    public override int GetHashCode()             
+    {  
+        return itemID; 
+    }
 
+   public override bool Equals(object obj) 
+    { 
+        return Equals(obj as Item); 
+    }
+
+    public bool Equals(Item obj)
+    { 
+        return this.GetType() == obj.GetType(); 
+    }
 }
 
 
