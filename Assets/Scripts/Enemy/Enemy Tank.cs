@@ -38,6 +38,12 @@ public class EnemyTank : Enemy
                 _path.canMove = false;
                 Vector2 pos = transform.position;
                 Vector2 dir = -(hit.point - pos);
+                if (dir.x == 0 && dir.y == 0)
+                {
+                    dir.x = Random.Range(1, 2);
+                    dir.y = Random.Range(1, 2);
+                }
+
                 _rigidbody.MovePosition(_rigidbody.position + dir * _moveSpeed * Time.fixedDeltaTime);
                 if ((Vector2.Distance(transform.position, hit.point) > 2.5f))
                 {

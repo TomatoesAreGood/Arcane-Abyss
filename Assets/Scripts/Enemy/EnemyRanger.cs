@@ -46,8 +46,15 @@ public class EnemyRanger : Enemy
 
             case State.MoveAway:
                 _path.canMove = false;
-                transform.position = Vector2.MoveTowards(transform.position.normalized, hit.point.normalized, -3f * Time.deltaTime);
-                if ((Vector2.Distance(transform.position, hit.point) > 2.5f))
+                Vector2 pos = transform.position;
+                Vector2 dir = -(hit.point - pos);
+                if (dir.x == 0 && dir.y == 0)
+                {
+                    dir.x = Random.Range(1, 2);
+                    dir.y = Random.Range(1, 2);
+                }
+                _rigidbody.MovePosition(_rigidbody.position + dir * _moveSpeed * Time.fixedDeltaTime);
+                if (Vector2.Distance(transform.position, hit.point) > 2.5f)
                 {
                     state = State.ChaseTarget;
                 }
@@ -74,8 +81,8 @@ public class EnemyRanger : Enemy
                 break;
             case State.PlayerMoveAway:
                 _path.canMove = false;
-                Vector2 dir = -(Player.transform.position - transform.position);
-                _rigidbody.MovePosition(_rigidbody.position + dir * Time.fixedDeltaTime);
+                Vector2 dirPlayer = -(Player.transform.position - transform.position);
+                _rigidbody.MovePosition(_rigidbody.position + dirPlayer * Time.fixedDeltaTime);
                 if ((Vector2.Distance(transform.position, Player.transform.position) > 5f))
                 {
                     state = State.ChaseTarget;
