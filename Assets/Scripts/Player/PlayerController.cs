@@ -310,7 +310,9 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(int damage){
         if (!_isImmune)
         {
-            HealthBarList.EmptyFullHeart();
+            for(int i = 0; i < damage; i++){
+                HealthBarList.EmptyFullHeart();
+            }
             health -= damage;
         }
         StartCoroutine(ImmunityHandler());

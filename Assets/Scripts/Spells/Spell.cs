@@ -12,7 +12,7 @@ public class Spell : MonoBehaviour, IEquatable<Spell>
     public float nextAvailFire;
 
     // Start is called before the first frame update
-    protected virtual  void Start()
+    protected virtual void Start()
     {
         nextAvailFire = Time.time;
         fireRate = 2;

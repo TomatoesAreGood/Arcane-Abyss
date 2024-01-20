@@ -9,28 +9,26 @@ public class EnemyRanger : Enemy
     private Rigidbody2D shotBody;
     private bool canShoot = true;
     private bool isShotHandlerRunning = false;
-    private float nextAvailFire;
-    private float fireRate;
-
+    protected float nextAvailFire;
+    protected float fireRate;
+    protected int damage;
     private Vector2 initialArm;
     private Vector2 nextArm;
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         Health = 5;
         Player = PlayerController.instance.gameObject;
         state = State.ChaseTarget;
-        _path = GetComponent<AIPath>();
-        _rigidbody = GetComponent<Rigidbody2D>();
         nextAvailFire = Time.time;
-        fireRate = 0.5f;
-
-
+        _moveSpeed = 2.5f;
+        damage = 1;
+        fireRate = 0.3f;
     }
 
     // Update is called once per frame
 
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
         switch (state)
         {
@@ -54,7 +52,6 @@ public class EnemyRanger : Enemy
                 _path.canMove = false;
                 if (Time.time >= nextAvailFire)
                 {
-                    Debug.Log("shooting");
                     Fire();
                     nextAvailFire = Time.time + 1 / fireRate;
                 }
@@ -89,23 +86,18 @@ public class EnemyRanger : Enemy
     private void Fire() {
         Vector3 shotDir = Player.transform.position - transform.position;
         float angle = Mathf.Atan2(shotDir.y, shotDir.x) * Mathf.Rad2Deg;
-        Debug.Log(angle);
         GameObject clone = Instantiate(EnemyShot, transform.position + shotDir.normalized, Quaternion.Euler(0f,0f, angle));
         shotBody = clone.GetComponent<Rigidbody2D>();
-
-
-        
 /*        float playerAngle = Vector2.Angle(initialArm, nextArm) * Mathf.Deg2Rad;
         Vector2 vec = new Vector2(Mathf.Cos(playerAngle), Mathf.Sin(playerAngle));*/
         shotBody.AddForce(Player.transform.position - transform.position, ForceMode2D.Impulse);
+        clone.GetComponent<EnemyShot>().SetDamage(damage);
     }
 
     private void FindTargetRanger()
     {
         if (Vector2.Distance(transform.position, Player.transform.position) < 6)
         {
-            //player is within pounching range
-            Debug.Log("within range");
             state = State.Shooting;
         }
     }
