@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
-
+using TMPro;
 
 public class ShopClass : MonoBehaviour
 {
@@ -14,6 +14,7 @@ public class ShopClass : MonoBehaviour
    
     private bool _isPaused;
     public GameObject[] Slots;
+    public TextMeshProUGUI Balance; 
     
 
 
@@ -70,7 +71,7 @@ public class ShopClass : MonoBehaviour
                 Time.timeScale = 0f;
                 _isPaused = true;
             }
-
+            Balance.text = "Coins: " + PlayerController.instance.money.ToString();
 
         }
 
