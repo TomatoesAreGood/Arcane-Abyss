@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyTank : Enemy
 {
     // Start is called before the first frame update
-    protected override void Start()
+    void Start()
     {
         Health = 8;
         _moveSpeed = 2.5f;
@@ -17,7 +17,7 @@ public class EnemyTank : Enemy
     // Update is called once per frame
 
 
-    protected override void FixedUpdate()
+    private void FixedUpdate()
     {
         switch (state)
         {
@@ -36,17 +36,14 @@ public class EnemyTank : Enemy
                 _path.canMove = false;
                 Vector2 pos = transform.position;
                 Vector2 dir = -(hit.point - pos);
-
-                //if the direction is zero(edge case), select a random direction
                 if (dir.x == 0 && dir.y == 0)
                 {
                     dir.x = Random.Range(1, 2);
                     dir.y = Random.Range(1, 2);
                 }
 
-                //move enemy away in opposite direction of direction to player
                 _rigidbody.MovePosition(_rigidbody.position + dir * _moveSpeed * Time.fixedDeltaTime);
-                if (Vector2.Distance(transform.position, hit.point) > 2.5f)
+                if ((Vector2.Distance(transform.position, hit.point) > 2.5f))
                 {
                     state = State.ChaseTarget;
                 }
