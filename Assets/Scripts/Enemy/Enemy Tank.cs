@@ -9,10 +9,8 @@ public class EnemyTank : Enemy
     protected override void Start()
     {
         Health = 8;
-        _moveSpeed = 1.5f;
-        _path = GetComponent<AIPath>();
+        _moveSpeed = 2.5f;
         Player = PlayerController.instance.gameObject;
-        _rigidbody = GetComponent<Rigidbody2D>();
         _path.maxSpeed = _moveSpeed;
     }
 
