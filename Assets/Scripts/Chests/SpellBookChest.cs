@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class SpellBookChest : Chest
 {
-    private List<Item> _bookList;
+    private Item[] _bookArray;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
 
     // Update is called once per frame
     void Update()
@@ -18,14 +15,27 @@ public class SpellBookChest : Chest
         
     }
 
-    public void StaffSort()
+    protected override void LibraryCleanUp()
     {
-        _bookList = new List<Item>();
-        for (int cursor = 0; cursor < ChestLibrary.Length; cursor++)
+        int bookCount = 0;
+        foreach (Item item in ItemLibrary.instance.Library)
         {
-            if (ChestLibrary[cursor].GetType() == typeof(SpellBook))
+            if (item is SpellBook)
             {
-                _bookList.Add(ChestLibrary[cursor]);
+                bookCount++;
+            }
+        }
+
+        ChestLibrary = new Item[bookCount];
+
+        int chestCursor = 0;
+        for (int i = 0; i < ItemLibrary.instance.Library.Length; i++)
+        {
+            if (ItemLibrary.instance.Library[i] is SpellBook)
+            {
+                Debug.Log(ItemLibrary.instance.Library[i].GetType());
+                ChestLibrary[chestCursor] = ItemLibrary.instance.Library[i];
+                chestCursor++;
             }
         }
     }

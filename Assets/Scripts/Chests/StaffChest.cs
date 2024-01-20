@@ -7,25 +7,41 @@ public class StaffChest : Chest
 {
     private List<Item> _staffList;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
+    protected override void Start()
+    {
+
+        base.Start();
+/*        _sr.color = Color.black;
+*/
+    }
     // Update is called once per frame
     void Update()
     {
         
     }
 
-    public void StaffSort()
+    protected override void LibraryCleanUp()
     {
-        _staffList = new List<Item>();
-        for (int cursor = 0; cursor < ChestLibrary.Length; cursor++)
+        int bookCount = 0;
+        foreach (Item item in ItemLibrary.instance.Library)
         {
-            if (ChestLibrary[cursor].GetType() == typeof(StaffItem))
+            if (item is StaffItem)
             {
-                _staffList.Add(ChestLibrary[cursor]);
+                bookCount++;
+            }
+        }
+
+        ChestLibrary = new Item[bookCount];
+
+        int chestCursor = 0;
+        for (int i = 0; i < ItemLibrary.instance.Library.Length; i++)
+        {
+            if (ItemLibrary.instance.Library[i] is StaffItem)
+            {
+                Debug.Log(ItemLibrary.instance.Library[i].GetType());
+                ChestLibrary[chestCursor] = ItemLibrary.instance.Library[i];
+                chestCursor++;
             }
         }
     }
