@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     public static float maxMana = 100;
     public static float mana;
     private bool _isImmune;
+    public int money;
 
     //UI
     public HealthBarList HealthBarList;
@@ -75,6 +76,7 @@ public class PlayerController : MonoBehaviour
         inventoryWidth = 10;
         spellInventorySize = 8;
         potionBagSize = 4;
+        money = 0;
 
         //creating data storage
         inventory = new Inventory(inventoryWidth*inventoryHeight, spellInventorySize, potionBagSize);
