@@ -8,7 +8,12 @@ public class PotionChest : Chest
     private int _potionCount;
 
     // Start is called before the first frame update
+    protected override void Start()
+    {
+        base.Start();
+        _sr.color = Color.HSVToRGB(0f, 100 / 100, 100 / 100);
 
+    }
 
     // Update is called once per frame
     void Update()

@@ -7,7 +7,12 @@ public class SpellBookChest : Chest
     private Item[] _bookArray;
 
     // Start is called before the first frame update
+    protected override void Start()
+    {
+        base.Start();
+        _sr.color = Color.HSVToRGB(0.5f, 100 / 100, 100 / 100);
 
+    }
 
     // Update is called once per frame
     void Update()
