@@ -69,14 +69,17 @@ public class EnemyPouncer : Enemy
             case State.MoveAway:
                 _path.canMove = false;
                 Vector2 dir = -(hit.point - pos);
+
+                //if the direction is zero(edge case), select a random direction
                 if (dir.x == 0 && dir.y == 0)
                 {
                     dir.x = Random.Range(1, 2);
                     dir.y = Random.Range(1, 2);
                 }
 
-                _rigidbody.MovePosition(_rigidbody.position + dir.normalized * _moveSpeed * Time.fixedDeltaTime);
-                if ((Vector2.Distance(transform.position, hit.point) > 2.5f))
+                //move enemy away in opposite direction of direction to player
+                _rigidbody.MovePosition(_rigidbody.position + dir * _moveSpeed * Time.fixedDeltaTime);
+                if (Vector2.Distance(transform.position, hit.point) > 2.5f)
                 {
                     state = State.ChaseTarget;
                 }

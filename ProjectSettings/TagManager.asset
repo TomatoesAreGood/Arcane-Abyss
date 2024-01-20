@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - PlayerIsTrigger
+  - Enemy
+  - Obstacle
   layers:
   - Default
   - TransparentFX

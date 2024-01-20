@@ -38,6 +38,11 @@ public class Enemy : MonoBehaviour
         Shooting,
         Stunned,
     }
+
+    public static Vector2 AsVector2(Vector3 vec)
+    {
+        return new Vector2 (vec.x, vec.y);
+    }
     protected virtual void Awake()
     {
         _graphics = GetComponentInChildren<SpriteRenderer>();
@@ -78,11 +83,15 @@ public class Enemy : MonoBehaviour
                 _path.canMove = false;
                 Vector2 pos = transform.position;
                 Vector2 dir = -(hit.point - pos);
+
+                //if the direction is zero(edge case), select a random direction
                 if (dir.x == 0 && dir.y == 0)
                 {
                     dir.x = Random.Range(1, 2);
                     dir.y = Random.Range(1, 2);
                 }
+
+                //move enemy away in opposite direction of direction to player
                 _rigidbody.MovePosition(_rigidbody.position + dir * _moveSpeed * Time.fixedDeltaTime);
                 if (Vector2.Distance(transform.position, hit.point) > 2.5f)
                 {
@@ -92,6 +101,7 @@ public class Enemy : MonoBehaviour
 
         }
     }
+
     protected void FindTarget()
     {
         float targetRange = 2.5f;
@@ -183,6 +193,8 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float num){
         Health -= num;
     }
+
+
 
 
     public virtual void OnTriggerEnter2D(Collider2D collision)
