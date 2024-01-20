@@ -20,7 +20,8 @@ public class InventoryRenderer : MonoBehaviour
     public int width;
     public int height;
     private Item[] inventoryData;
-        
+    
+    //gets coords of a 2d array from a screenpoint
     public Vector2 GetMatrixCoords(Vector2 bottomLeft, Vector2 screenPoint){
         bottomLeft = new Vector2(bottomLeft.x -50 ,bottomLeft.y - 50);
 
@@ -37,6 +38,7 @@ public class InventoryRenderer : MonoBehaviour
     }
 
     private void Start(){
+        //set inventory data which it writes to/updates
         bottomLeft = Camera.main.WorldToScreenPoint(transform.position);
         if(rendererType == Renderers.inventory){
             inventoryData = PlayerController.instance.inventory.items;
@@ -48,10 +50,13 @@ public class InventoryRenderer : MonoBehaviour
             inventoryData = PlayerController.instance.inventory.equippedSpells;
         }
         DrawMatrix(height,width);
+        //bring to the front
         transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 100);
     }
 
     private void Update(){
+
+        //update equipped spell icons
        if(PlayerController.instance.inventoryUI.isOpen && rendererType == Renderers.equippedSpells){
             for(int i = 0; i < 4; i++){
                 GetSlot(i).item = PlayerController.instance.inventory.equippedSpells[i];
@@ -60,6 +65,7 @@ public class InventoryRenderer : MonoBehaviour
        }
     }
 
+    //draws a matrix from bottom left, given hieght and width
     public void DrawMatrix(int height, int width){
         for(int r = 0; r < height; r++){
             for(int c = 0; c < width; c++){
@@ -102,6 +108,7 @@ public class InventoryRenderer : MonoBehaviour
         }
     }
 
+    //used if the data is updated & UI needs to be redrawn
     public void RedrawMatrix(){
         for(int i = 0; i < transform.childCount; i++){
             Destroy(transform.GetChild(i).gameObject);
@@ -110,6 +117,7 @@ public class InventoryRenderer : MonoBehaviour
         transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 100);
     }
 
+    //writes data into the inventory 
     public void UpdateData(){
         for(int i = 0; i < transform.childCount; i++){
             GetSlot(i).UpdateData();
@@ -129,6 +137,7 @@ public class InventoryRenderer : MonoBehaviour
         return transform.GetChild(index);
     }
 
+    //for equipped spells
     public void SelectSlot(int index){
         for(int i = 0; i < transform.childCount; i++){
            GetSlot(i).UnDim();
@@ -136,8 +145,8 @@ public class InventoryRenderer : MonoBehaviour
         GetSlot(index).Dim();
     }
 
+    //used when player picks up an item
     public void InstantiateItem(Item item, int index){
-        Debug.Log(index);
         if(GetSlot(index).IsEmpty()){
             GameObject obj = Instantiate(item.gameObject, GetTransform(index));
             obj.transform.position = GetTransform(index).position;

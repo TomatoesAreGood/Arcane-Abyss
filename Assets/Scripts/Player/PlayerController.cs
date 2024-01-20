@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private Rigidbody2D rb;
     private List<RaycastHit2D> raycastHit2Ds;
-    public PickUpController pickUpController;
 
     //Player Stats
     public static int maxHealth;
@@ -43,7 +42,7 @@ public class PlayerController : MonoBehaviour
     public Staff equippedStaff;
     [HideInInspector] public Sprite equippedStaffSprite;
 
-    public Spell equippedSpell;
+    [HideInInspector]public Spell equippedSpell;
     private List<Spell> activeSpells;
 
     //Inventory
@@ -56,7 +55,6 @@ public class PlayerController : MonoBehaviour
     public InventoryUI inventoryUI;
 
 
-    
     private void Awake(){
 
         //Singleton
@@ -86,7 +84,6 @@ public class PlayerController : MonoBehaviour
         raycastHit2Ds = new List<RaycastHit2D>(0);
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        pickUpController = GetComponent<PickUpController>();
         equippedStaffSprite = equippedStaff.GetComponent<SpriteRenderer>().sprite;
 
         //for shooting magic
@@ -146,7 +143,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        //Debug.Log(a);
+        Debug.Log(a);
 
         //Spell switching (pain)
         if(!inventoryUI.isOpen){

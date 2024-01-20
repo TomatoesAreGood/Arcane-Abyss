@@ -32,8 +32,8 @@ public class PickUpController : MonoBehaviour{
         }
             
         canPickUp = false;
-
     }
+    
     public bool TryPickUp(Item item){
         Inventory inventory = PlayerController.instance.inventory;
         PlayerController playerController = PlayerController.instance;

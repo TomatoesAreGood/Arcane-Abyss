@@ -31,10 +31,10 @@ public class EnemyShot : MonoBehaviour
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D other){
-        if(other.CompareTag("Enemy")){
+        if(other.CompareTag("Enemy") || other.CompareTag("Item")){
             return;
         }
-        if (other.CompareTag("PlayerIsTrigger")) 
+        if (other.CompareTag("PlayerIsTrigger") || other.CompareTag("Player")) 
         { 
             PlayerController.instance.TakeDamage(damage);
         }
