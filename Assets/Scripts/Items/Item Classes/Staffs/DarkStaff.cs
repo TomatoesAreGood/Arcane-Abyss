@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class DarkStaff : StaffItem
 {
-    protected override void Awake()
+    protected override void Start()
     {
-        base.Awake();
+        base.Start();
         damageBonus = 3;
-    }    
+        value = 100;
+        desc = "";
+        title = this.ToString();
+    }
 }

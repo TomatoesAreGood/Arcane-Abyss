@@ -202,7 +202,8 @@ public class PlayerController : MonoBehaviour
        
         //debug
         if(Input.GetKeyDown(KeyCode.Space)){
-            Debug.Break();
+            inventoryUI.inventoryRenderer.BubbleSortValue();
+            //Debug.Break();
         }
 
         //shooting spells

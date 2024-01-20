@@ -110,11 +110,53 @@ public class InventoryRenderer : MonoBehaviour
 
     //used if the data is updated & UI needs to be redrawn
     public void RedrawMatrix(){
-        for(int i = 0; i < transform.childCount; i++){
-            Destroy(transform.GetChild(i).gameObject);
+          for(int r = 0; r < height; r++){
+            for(int c = 0; c < width; c++){
+                int i = r*width + c;
+
+                GameObject slot = GetTransform(i).gameObject;
+
+                if(!GetSlot(i).IsEmpty()){
+                    Destroy(GetTransform(i).GetChild(0).gameObject);
+                }
+                
+                if(inventoryData[i] == null){
+                    continue;
+                }
+
+                if(inventoryData[i].GetType() == typeof(BasicStaff)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.basicStaff.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }else if(inventoryData[i].GetType() == typeof(ForestStaff)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.forestStaff.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }else if(inventoryData[i].GetType() == typeof(FireSpellItem)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.fireball.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }else if(inventoryData[i].GetType() == typeof(IceSpellItem)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.iceShot.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }else if (inventoryData[i].GetType() == typeof(DarkStaff)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.darkstaff.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }else if (inventoryData[i].GetType() == typeof(MagicSpellItem)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.magicShot.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }else if (inventoryData[i].GetType() == typeof(HealthPotion)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.healthPotion.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }else if (inventoryData[i].GetType() == typeof(FireShotSpellBook)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.fireShotSpellBook.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }
+            }
         }
-        DrawMatrix(height,width);
-        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 100);
+
+        // for(int i = 0; i < transform.childCount; i++){
+        //     Destroy(transform.GetChild(i).gameObject);
+        // }
+        // DrawMatrix(height,width);
+        // transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 100);
     }
 
     //writes data into the inventory 
@@ -153,4 +195,31 @@ public class InventoryRenderer : MonoBehaviour
             obj.SetActive(true);
         }
     }
+
+    //bubble sorts items by value, decreasing
+    public void BubbleSortValue(){
+        for(int j = 0; j < inventoryData.Length; j++){
+            for(int i = 0; i < inventoryData.Length-1; i++){
+                int value1 = 0;
+                int value2 = 0;
+
+                //if item == null, assign it a value of 0
+                if(inventoryData[i+1] != null){
+                    value2 = inventoryData[i+1].value;
+                }
+                if(inventoryData[i] != null){
+                    value1 = inventoryData[i].value;
+                }
+
+                if(value1 < value2){
+                    var temp = inventoryData[i];
+                    inventoryData[i] = inventoryData[i+1];
+                    inventoryData[i+1] = temp;
+                }
+            }
+        }
+        RedrawMatrix();
+    }
+
+
 }

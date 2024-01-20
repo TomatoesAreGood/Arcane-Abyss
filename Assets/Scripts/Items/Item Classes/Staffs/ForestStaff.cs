@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class ForestStaff : StaffItem
 {
-    protected override void Awake()
+    protected override void Start()
     {
-        base.Awake();
+        base.Start();
         damageBonus = 2;
+        value = 50;
+        desc = "";
+        title = this.ToString();
     }
 }

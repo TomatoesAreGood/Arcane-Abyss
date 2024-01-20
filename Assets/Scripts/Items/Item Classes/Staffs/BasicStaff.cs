@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class BasicStaff : StaffItem
 {
-    protected override void Awake()
+    protected override void Start()
     {
-        base.Awake();
+        base.Start();
         damageBonus = 1;
+        value = 10;
+        desc = "";
+        title = this.ToString();
     }
 }

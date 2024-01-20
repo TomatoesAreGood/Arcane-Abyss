@@ -26,6 +26,11 @@ public class Item : MonoBehaviour
         parentAfterDrag = transform.parent;
         renderer = PlayerController.instance.inventoryUI.inventoryRenderer;
         inventory = PlayerController.instance.inventory.items;
+    }    
+    protected virtual void Start(){
+        value = 0;
+        desc = "";
+        title = this.ToString();
     }
 
     protected virtual void Update(){

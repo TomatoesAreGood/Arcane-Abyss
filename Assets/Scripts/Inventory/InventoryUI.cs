@@ -17,6 +17,7 @@ public class InventoryUI : MonoBehaviour
     private void Awake()
     {
         isOpen = false;
+        
         inventoryRenderer.width = PlayerController.instance.inventoryWidth;
         inventoryRenderer.height = PlayerController.instance.inventoryHeight;
 
@@ -38,6 +39,8 @@ public class InventoryUI : MonoBehaviour
             }else{
                 equippedStaff.gameObject.SetActive(false);
             }
+            UpdateData();
+            
             gameObject.SetActive(true);
         }else{
             gameObject.SetActive(false);

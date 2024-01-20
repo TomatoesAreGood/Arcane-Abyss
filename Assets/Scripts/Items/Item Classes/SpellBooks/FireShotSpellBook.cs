@@ -10,4 +10,11 @@ public class FireShotSpellBook : SpellBook
             Destroy(gameObject);
         }
     }
+    protected override void Start()
+    {
+        base.Start();
+        value = 200;
+        desc = "";
+        title = this.ToString();
+    }
 }
