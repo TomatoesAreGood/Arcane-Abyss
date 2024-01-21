@@ -25,14 +25,20 @@ public class Chest : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
+
         LibraryCleanUp();
+        Debug.Log(ChestLibrary.Length);
+
         PigeonHoleSort();
         SetChestText();
         _sr = GetComponent<SpriteRenderer>();
+        foreach (KeyValuePair<string, float> kvp in _itemChances)
+        {
+            Debug.Log(("Key: {0}, Value: {1}", kvp.Key, kvp.Value));
+        }
 
 
 
-        
         /*        KeySort();
                 SelectionSort(keyArray);
                 _keyValuePairs = KeyValueAssign(keyArray, _keyValuePairs);*/
@@ -66,19 +72,15 @@ public class Chest : MonoBehaviour
         {
             for (int i = 0; i < ChestLibrary.Length; i++)
             {
-                Debug.Log(FindName(ChestLibrary[i].GetType().Name, itemTypes[j]));
-
                 if (FindName(ChestLibrary[i].GetType().Name, itemTypes[j]))
                 {
                     if (_itemChances.ContainsKey(itemTypes[j]))
                     {
-
                         _itemChances[itemTypes[j]]++;
                     }
                     else
                     {
                         Debug.Log("Added key");
-
                         _itemChances.Add(itemTypes[j], 1);
                     }
                 }
@@ -129,7 +131,7 @@ public class Chest : MonoBehaviour
             {
 /*                Debug.Log(ItemLibrary.instance.Library[i].GetType());
 */                ChestLibrary[chestCursor] = ItemLibrary.instance.Library[i];
-                chestCursor++;
+                  chestCursor++;
             }
         }
     }

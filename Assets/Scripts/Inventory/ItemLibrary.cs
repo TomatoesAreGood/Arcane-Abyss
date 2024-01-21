@@ -29,7 +29,7 @@ public class ItemLibrary : MonoBehaviour
     private void Awake(){
         if(instance == null){
             instance = this;
-            Library = new Item[] { basicStaff, forestStaff, fireball, magicShot, iceShot, healthPotion, darkstaff, fireShotSpellBook };
+            Library = new Item[] { basicStaff, forestStaff, fireball, magicShot, iceShot, windShot, healthPotion, darkstaff, fireShotSpellBook, smallHealthPot };
 
             InitalizeItemToArray();
 

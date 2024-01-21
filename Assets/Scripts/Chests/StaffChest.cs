@@ -19,7 +19,7 @@ public class StaffChest : Chest
         LibraryCleanUp();
         PigeonHoleSort();
         SetChestText();
-        _sr.color = Color.HSVToRGB(0.3f, 100 / 100, 100 / 100);
+/*        _sr.color = Color.HSVToRGB(0.3f, 100 / 100, 100 / 100);*/
         foreach (KeyValuePair<Item, float> kvp in _staffItemChances)
         {
             Debug.Log(("Key: {0}, Value: {1}", kvp.Key, kvp.Value));
@@ -76,8 +76,8 @@ public class StaffChest : Chest
         {
             if (ItemLibrary.instance.Library[i] is StaffItem)
             {
-                Debug.Log(ItemLibrary.instance.Library[i].GetType());
-                ChestLibrary[chestCursor] = ItemLibrary.instance.Library[i];
+/*                Debug.Log(ItemLibrary.instance.Library[i].GetType());
+*/                ChestLibrary[chestCursor] = ItemLibrary.instance.Library[i];
                 chestCursor++;
             }
         }
