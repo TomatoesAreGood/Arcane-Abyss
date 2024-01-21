@@ -16,28 +16,29 @@ public class Chest : MonoBehaviour
     protected int _invalidCount;
 
 
-    protected int[] keyArray;
-    protected Dictionary<int, string> _keyValuePairs = new Dictionary<int, string>();
+    private Dictionary<string, int> _itemChances;
+    public string[] itemTypes = { "Staff", "SpellBook", "Potion" };
+    protected List<Item> _pigeonItems;
     protected string _dropItem;
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        
         LibraryCleanUp();
+        PigeonHoleSort();
+
         _sr = GetComponent<SpriteRenderer>();
 
-        /*        foreach (var item in ChestLibrary)
+
+
+        /*        foreach (var item in ItemLibrary.instance.Library)
                 {
                     Debug.Log(item);
                 }*/
-        Open();
-/*        KeySort();
-        SelectionSort(keyArray);
-        _keyValuePairs = KeyValueAssign(keyArray, _keyValuePairs);
-        foreach (KeyValuePair<int, string> kvp in _keyValuePairs)
-        {
-            Debug.Log(("Key: {0}, Value: {1}", kvp.Key, kvp.Value));
-        }*/
+        /*        KeySort();
+                SelectionSort(keyArray);
+                _keyValuePairs = KeyValueAssign(keyArray, _keyValuePairs);*/
+
+ 
 
 
     }
@@ -46,7 +47,53 @@ public class Chest : MonoBehaviour
     //Second, sort the keys
     //Third, create a new dict and assign the newly ordered keys to their values of the old dict
 
+    //sort item types(staff, spellbook, potion) in # of frequincies with pigeonhole sort
+    public virtual void PigeonHoleSort()
+    {
+        _itemChances = new Dictionary<string, int>();
+        for (int j = 0; j < itemTypes.Length; j++)
+        {
+            for (int i = 0; i < ChestLibrary.Length; i++)
+            {
+                Debug.Log(FindName(ChestLibrary[i].GetType().Name, itemTypes[j]));
 
+                if (FindName(ChestLibrary[i].GetType().Name, itemTypes[j]))
+                {
+                    if (_itemChances.ContainsKey(itemTypes[j]))
+                    {
+
+                        _itemChances[itemTypes[j]]++;
+                    }
+                    else
+                    {
+                        Debug.Log("Added key");
+
+                        _itemChances.Add(itemTypes[j], 1);
+                    }
+                }
+            }
+        }
+    }
+
+    public bool FindName(string item, string target)
+    {
+
+
+        if (item.Substring(0, target.Length) == target)
+        {
+            return true;
+        }
+
+        if (item.Length <= target.Length)
+        {
+            return false;
+        }
+
+        else
+        {
+            return FindName(item.Substring(1), target);
+        }
+    }
     public void Open()
     {
         _sr.sprite = OpenSprite;
@@ -70,8 +117,8 @@ public class Chest : MonoBehaviour
         {
             if (!(ItemLibrary.instance.Library[i] is SpellItem))
             {
-                Debug.Log(ItemLibrary.instance.Library[i].GetType());
-                ChestLibrary[chestCursor] = ItemLibrary.instance.Library[i];
+/*                Debug.Log(ItemLibrary.instance.Library[i].GetType());
+*/                ChestLibrary[chestCursor] = ItemLibrary.instance.Library[i];
                 chestCursor++;
             }
         }
@@ -83,49 +130,12 @@ public class Chest : MonoBehaviour
         return ChestLibrary[randomIndex];
     }
 
-    public void KeySort()
-    {
-        int cursor = 0;
-        keyArray = new int[_keyValuePairs.Count];
-        foreach (int key in _keyValuePairs.Keys)
-        {
-            keyArray[cursor] = key;
-            cursor++;
-        }
-    }
-    public void SelectionSort(int[] arr)
-    {
-        for(int cursor = 0; cursor < arr.Length; cursor++)
-        {
-            int lowest = cursor;
-            for (int i = cursor + 1; i < arr.Length; i++)
-            {
-                if (arr[i] < arr[lowest])
-                {
-                    int swap = arr[lowest];
-                    arr[lowest] = arr[i];
-                    arr[i] = swap;
-                }
-            }
-        }
-    }
+ // 1. Pigeon Hole Sort all of the items in chest by Script Type
+ // 2. Then, Calculate Percentage Chance of getting a item type
+ // 3. Display calculations in game
+    
 
-    public Dictionary<int, string> KeyValueAssign(int[] arr, Dictionary<int, string> oldDict)
-    {
-        Dictionary<int, string> newDict = new Dictionary<int, string>();
-        for (int i = 0; i < arr.Length; ++i)
-        {
-            for (int cursor = 0; cursor < arr.Length; cursor++)
-            {
-                if (arr[i] == oldDict.ElementAt(cursor).Key)
-                {
-                    newDict.Add(oldDict.ElementAt(cursor).Key, oldDict.ElementAt(cursor).Value);
-                }
-            }
-        }
 
-        return newDict;
-    }
 
     // Update is called once per frame
     void Update()

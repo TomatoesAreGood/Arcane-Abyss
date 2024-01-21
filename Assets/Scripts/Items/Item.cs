@@ -149,8 +149,10 @@ public class Item : MonoBehaviour
 
     public bool Equals(Item obj)
     { 
-        return this.GetType() == obj.GetType(); 
+        return GetType() == obj.GetType(); 
     }
+
+
 }
 
 

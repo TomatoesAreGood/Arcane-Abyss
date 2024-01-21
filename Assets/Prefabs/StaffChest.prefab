@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8117735599316205605}
   - component: {fileID: 8560511364836889090}
-  - component: {fileID: -1084246792370734114}
+  - component: {fileID: 6821933173520488576}
   m_Layer: 0
-  m_Name: Chest
+  m_Name: StaffChest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-1084246792370734114
+--- !u!114 &6821933173520488576
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,8 +94,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7639890762844449182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e472ecea6f16a43948035c6c2e8db6, type: 3}
+  m_Script: {fileID: 11500000, guid: c2216092d4e03334b883064af77d3b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ChestLibrary: []
   OpenSprite: {fileID: 21300000, guid: 90f0af5c6941cd54c9818a43db05af08, type: 3}
+  itemTypes:
+  - Staff
+  - SpellBook
+  - Potion
