@@ -10,6 +10,6 @@ public class ForestStaff : StaffItem
         damageBonus = 2;
         value = 50;
         desc = "";
-        title = this.ToString();
+        title = GetType().Name;
     }
 }

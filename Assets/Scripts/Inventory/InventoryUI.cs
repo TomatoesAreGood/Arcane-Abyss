@@ -17,7 +17,7 @@ public class InventoryUI : MonoBehaviour
     private void Awake()
     {
         isOpen = false;
-        
+
         inventoryRenderer.width = PlayerController.instance.inventoryWidth;
         inventoryRenderer.height = PlayerController.instance.inventoryHeight;
 
@@ -40,7 +40,6 @@ public class InventoryUI : MonoBehaviour
                 equippedStaff.gameObject.SetActive(false);
             }
             UpdateData();
-            
             gameObject.SetActive(true);
         }else{
             gameObject.SetActive(false);
@@ -65,5 +64,16 @@ public class InventoryUI : MonoBehaviour
         inventoryRenderer.UpdateData();
         potionBagRenderer.UpdateData();
         spellsRenderer.UpdateData();
+    }
+
+    public void MergeSortSortAlpha(){
+        inventoryRenderer.MergeSortSortAlpha();
+    }
+    public void BubbleSortValue(){
+        inventoryRenderer.BubbleSortValue();
+    }
+
+    public void PigeonHoleSortOcurrances(){
+        inventoryRenderer.PigeonHoleSortOcurrances();
     }
 }

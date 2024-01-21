@@ -10,6 +10,6 @@ public class DarkStaff : StaffItem
         damageBonus = 3;
         value = 100;
         desc = "";
-        title = this.ToString();
+        title = GetType().Name;
     }
 }

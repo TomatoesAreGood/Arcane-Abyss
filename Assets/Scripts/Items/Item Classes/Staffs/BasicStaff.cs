@@ -10,6 +10,6 @@ public class BasicStaff : StaffItem
         damageBonus = 1;
         value = 10;
         desc = "";
-        title = this.ToString();
+        title = GetType().Name;
     }
 }

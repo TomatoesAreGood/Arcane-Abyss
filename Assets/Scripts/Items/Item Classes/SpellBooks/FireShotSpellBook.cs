@@ -15,6 +15,6 @@ public class FireShotSpellBook : SpellBook
         base.Start();
         value = 200;
         desc = "";
-        title = this.ToString();
+        title = GetType().Name;
     }
 }

@@ -267,8 +267,69 @@ public class InventoryRenderer : MonoBehaviour
         RedrawMatrix();
     }
 
-    public void SortType(){
+    public void MergeSortSortAlpha(){
+        MergeSortSortAlpha(inventoryData);
+        RedrawMatrix();
+    }
 
+     public void MergeSortSortAlpha(Item[] arr){
+        if(arr.Length <= 1){
+            return;
+        }
+       
+        int mid = arr.Length / 2;
+
+        Item[] leftArr = new Item[mid];
+        Item[] rightArr = new Item[arr.Length - mid];
+
+        for(int a = 0; a < leftArr.Length; a++){
+            leftArr[a] = arr[a];
+        }
+
+        for(int b = 0; b < rightArr.Length; b++){
+            rightArr[b] = arr[mid + b];
+        }
+        MergeSortSortAlpha(leftArr);
+        MergeSortSortAlpha(rightArr);
+
+        int i = 0;
+        int j = 0;
+        int k = 0;
+
+        while(i < leftArr.Length && j < rightArr.Length){
+            string leftString = "zzzzzzzzzzzzzzzzz";
+            string rightString = "zzzzzzzzzzzzzzzzz";
+
+
+            if(leftArr[i] != null){
+                leftString = leftArr[i].title;
+            }
+            if(rightArr[j] != null){
+                rightString = rightArr[j].title;
+            }
+
+            if(String.Compare(leftString, rightString) < 0){
+                arr[k] = leftArr[i];
+                i++;
+            }else{
+                arr[k] = rightArr[j];
+                j++;
+            }
+            k++;
+        }
+
+        while(i < leftArr.Length){
+            arr[k] = leftArr[i];
+            i++;
+            k++;
+        }
+
+        while(j < rightArr.Length){
+            arr[k] = rightArr[j];
+            j++;
+            k++;
+        }
+        
     }
 
 

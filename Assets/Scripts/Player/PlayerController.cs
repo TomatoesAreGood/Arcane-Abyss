@@ -202,7 +202,7 @@ public class PlayerController : MonoBehaviour
        
         //debug
         if(Input.GetKeyDown(KeyCode.Space)){
-            inventoryUI.inventoryRenderer.PigeonHoleSortOcurrances();
+            inventoryUI.inventoryRenderer.MergeSortSortAlpha();
             //Debug.Break();
         }
 
