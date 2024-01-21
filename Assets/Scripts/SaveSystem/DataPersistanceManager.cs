@@ -10,7 +10,6 @@ public class DataPersistanceManager : MonoBehaviour
     public static DataPersistanceManager instance;
     private GameData gameData;
     private List<IDataPersistance> dataPersistanceObjects;
-
     private void Awake(){
         if(instance == null){
             instance = this;
@@ -21,7 +20,7 @@ public class DataPersistanceManager : MonoBehaviour
     private void Start(){
         dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         dataPersistanceObjects = FindAllSaveObjects();
-        LoadGame();
+        NewGame();
     }
 
     private void OnApplicationQuit(){
@@ -29,6 +28,7 @@ public class DataPersistanceManager : MonoBehaviour
     }
 
     public void LoadGame(){
+        
         //retreives data
         gameData = dataHandler.Load();
 

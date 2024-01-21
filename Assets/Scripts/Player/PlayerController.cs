@@ -65,10 +65,6 @@ public class PlayerController : MonoBehaviour, IDataPersistance
             Destroy(this);
         }
 
-        //Dont Destroy On Load
-        DontDestroyOnLoad(this);
-
-
         //set default player stats
         activeSpells = new List<Spell>();
         moveSpeed = 5f;

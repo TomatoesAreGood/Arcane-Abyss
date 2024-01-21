@@ -56,7 +56,7 @@ public class InventoryRenderer : MonoBehaviour
 
     private void Update(){
 
-        //update equipped spell icons
+       // update equipped spell icons
        if(PlayerController.instance.inventoryUI.isOpen && rendererType == Renderers.equippedSpells){
             for(int i = 0; i < 4; i++){
                 GetSlot(i).item = PlayerController.instance.inventory.equippedSpells[i];
