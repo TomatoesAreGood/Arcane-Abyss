@@ -41,7 +41,7 @@ public class EnemyRanger : Enemy
     {
         Vector2 losDir = Player.transform.position - transform.position;
         var dis = Vector2.Distance(Player.transform.position, transform.position);
-        _hit1 = Physics2D.CircleCast(AsVector2(transform.position) + losDir.normalized, 1,losDir, dis);
+        _hit1 = Physics2D.Raycast(AsVector2(transform.position) + losDir.normalized, losDir, dis);
        /* hit2 = Physics2D.Raycast(AsVector2(transform.position) + Vector2.Perpendicular(transform.position).normalized + losDir.normalized, losDir + Vector2.Perpendicular(transform.position).normalized, dis);
         hit3 = Physics2D.Raycast(AsVector2(transform.position) + -Vector2.Perpendicular(transform.position).normalized + losDir.normalized, losDir + Vector2.Perpendicular(transform.position).normalized, dis);*/
         /*Debug.DrawLine(transform.position, losDir);
