@@ -6,13 +6,17 @@ public class PotionChest : Chest
 {
     private Item[] _potionArray;
     private int _potionCount;
+    private Dictionary<Item, int> _potionItemChances;
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
         _sr.color = Color.HSVToRGB(0f, 100 / 100, 100 / 100);
-
+        foreach (KeyValuePair<Item, int> kvp in _potionItemChances)
+        {
+            Debug.Log(("Key: {0}, Value: {1}", kvp.Key, kvp.Value));
+        }
     }
 
     // Update is called once per frame
@@ -20,7 +24,22 @@ public class PotionChest : Chest
     {
 
     }
-
+    public override void PigeonHoleSort()
+    {
+        _potionItemChances = new Dictionary<Item, int>();
+        for (int i = 0; i < ChestLibrary.Length; i++)
+        {
+            if (_potionItemChances.ContainsKey(ChestLibrary[i]))
+            {
+                _potionItemChances[ChestLibrary[i]]++;
+            }
+            else
+            {
+                _potionItemChances.Add(ChestLibrary[i], 1);
+            }
+        }
+    }
+    
     protected override void LibraryCleanUp()
     {
         foreach (Item item in ItemLibrary.instance.Library)

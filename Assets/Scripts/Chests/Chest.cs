@@ -16,7 +16,7 @@ public class Chest : MonoBehaviour
     protected int _invalidCount;
 
 
-    public Dictionary<string, int> itemChances;
+    private Dictionary<string, int> _itemChances;
     public string[] itemTypes = { "Staff", "SpellBook", "Potion" };
     protected List<Item> _pigeonItems;
     protected string _dropItem;
@@ -38,10 +38,7 @@ public class Chest : MonoBehaviour
                 SelectionSort(keyArray);
                 _keyValuePairs = KeyValueAssign(keyArray, _keyValuePairs);*/
 
-        foreach (KeyValuePair<string, int> kvp in itemChances)
-        {
-            Debug.Log(("Key: {0}, Value: {1}", kvp.Key, kvp.Value));
-        }
+ 
 
 
     }
@@ -51,9 +48,9 @@ public class Chest : MonoBehaviour
     //Third, create a new dict and assign the newly ordered keys to their values of the old dict
 
     //sort item types(staff, spellbook, potion) in # of frequincies with pigeonhole sort
-    public void PigeonHoleSort()
+    public virtual void PigeonHoleSort()
     {
-        itemChances = new Dictionary<string, int>();
+        _itemChances = new Dictionary<string, int>();
         for (int j = 0; j < itemTypes.Length; j++)
         {
             for (int i = 0; i < ChestLibrary.Length; i++)
@@ -62,16 +59,16 @@ public class Chest : MonoBehaviour
 
                 if (FindName(ChestLibrary[i].GetType().Name, itemTypes[j]))
                 {
-                    if (itemChances.ContainsKey(itemTypes[j]))
+                    if (_itemChances.ContainsKey(itemTypes[j]))
                     {
 
-                        itemChances[itemTypes[j]]++;
+                        _itemChances[itemTypes[j]]++;
                     }
                     else
                     {
                         Debug.Log("Added key");
 
-                        itemChances.Add(itemTypes[j], 1);
+                        _itemChances.Add(itemTypes[j], 1);
                     }
                 }
             }
