@@ -136,7 +136,6 @@ GameObject:
   - component: {fileID: 3529922576202647534}
   - component: {fileID: 2662446176296784351}
   - component: {fileID: -2013664290798343359}
-  - component: {fileID: 3780668646103715299}
   m_Layer: 6
   m_Name: EnemySkeleton
   m_TagString: Enemy
@@ -321,15 +320,3 @@ MonoBehaviour:
   Health: 0
   Player: {fileID: 0}
   EnemyShot: {fileID: 5175494424521411775, guid: 28b3240b0b9f2db4884d2c0cda323287, type: 3}
---- !u!114 &3780668646103715299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4490819353254072443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2f3a7851465ae44583de9a367ca2804, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

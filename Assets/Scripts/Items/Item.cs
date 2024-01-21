@@ -7,6 +7,8 @@ using System;
 
  using System.Runtime.Serialization.Formatters.Binary;
  using System.IO;
+ 
+[Serializable]
 public class Item : MonoBehaviour
 { 
     public int value;

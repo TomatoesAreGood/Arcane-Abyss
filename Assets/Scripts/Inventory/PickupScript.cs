@@ -43,6 +43,7 @@ public class PickupScript : MonoBehaviour
                 PickUpController.instance.isPickingUp = false;
                 if(PickUpController.instance.TryPickUp(itemReference)){
                     Debug.Log("picked up: " + itemReference.ToString());
+                    PlayerController.instance.inventoryUI.UpdateData();
                     Destroy(gameObject);
                 }else{
                     StartCoroutine(FullInventory());

@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDataPersistance
 {   
     //SINGLETON
     public static PlayerController instance;
@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
         potionBagSize = 4;
         money = 0;
 
-        //creating data storage
+        //creating data storage (for saving)
         inventory = new Inventory(inventoryWidth*inventoryHeight, spellInventorySize, potionBagSize);
 
         //components
@@ -104,12 +104,10 @@ public class PlayerController : MonoBehaviour
         health = maxHealth;
     }
     private void Start(){
-
-
-        inventory.items[0] = itemLibrary.basicStaff;
-        inventory.items[1] = itemLibrary.forestStaff;
-        inventory.items[2] = itemLibrary.darkstaff;
-        inventory.items[3] = itemLibrary.fireShotSpellBook;
+        // inventory.items[0] = itemLibrary.basicStaff;
+        // inventory.items[1] = itemLibrary.forestStaff;
+        // inventory.items[2] = itemLibrary.darkstaff;
+        // inventory.items[3] = itemLibrary.fireShotSpellBook;
 
         // for(int i = 0; i < inventory.items.Length; i++){
         //     inventory.items[i] = itemLibrary.basicStaff;
@@ -136,18 +134,18 @@ public class PlayerController : MonoBehaviour
             equippedStaffSprite = null;
         }   
 
-        string a = "";
-        foreach (Item item in inventory.items) {
-            if (item == null)
-            {
-                a += " ,";
-            }
-            else {
-                a += item.ToString() + ",";
-            }
+        // string a = "";
+        // foreach (Item item in inventory.items) {
+        //     if (item == null)
+        //     {
+        //         a += " ,";
+        //     }
+        //     else {
+        //         a += item.ToString() + ",";
+        //     }
 
-        }
-        //Debug.Log(a);
+        // }
+        // Debug.Log(a);
 
         //Spell switching (pain)
         if(!inventoryUI.isOpen){
@@ -351,6 +349,29 @@ public class PlayerController : MonoBehaviour
         for(int i = 0;i < num; i++){
             GainHeart();
         }
+    }
+
+    public void LoadData(GameData data){
+        inventory.items = data.items;
+
+                string a = "";
+        foreach (Item item in data.items) {
+            if (item == null)
+            {
+                a += " ,";
+            }
+            else {
+                a += item.ToString() + ",";
+            }
+
+        }
+        Debug.Log(a);
+
+
+    }
+
+    public void SaveData(ref GameData data){
+        data.items = inventory.items;
     }
 
   

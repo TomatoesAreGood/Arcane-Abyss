@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FinalStats : MonoBehaviour
+public class FinalStats : MonoBehaviour, IDataPersistance
 {
     public static List<string> enemies;
     public Dictionary<string, int> pigeonHoleSortedEnemies;
@@ -35,9 +35,12 @@ public class FinalStats : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void LoadData(GameData data){
+        enemies = data.enemies;
     }
+
+    public void SaveData(ref GameData data){
+        data.enemies = enemies;
+    }
+
 }

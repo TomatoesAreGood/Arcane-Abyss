@@ -38,7 +38,7 @@ public class SpellBookChest : Chest
         {
             if (ItemLibrary.instance.Library[i] is SpellBook)
             {
-                Debug.Log(ItemLibrary.instance.Library[i].GetType());
+                //Debug.Log(ItemLibrary.instance.Library[i].GetType());
                 ChestLibrary[chestCursor] = ItemLibrary.instance.Library[i];
                 chestCursor++;
             }

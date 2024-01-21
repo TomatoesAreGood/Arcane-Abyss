@@ -18,12 +18,12 @@ public class Inventory
         spells = new SpellItem[spellSize];
         potions = new PotionItem[potionBagSize];
         equippedSpells = new SpellItem[4];
-        for(int i = 0; i < items.Length; i++){
-            items[i] = null;
-        }
-        for(int i = 0; i < equippedSpells.Length; i++){
-            equippedSpells[i] = null;
-        }
+        // for(int i = 0; i < items.Length; i++){
+        //     items[i] = null;
+        // }
+        // for(int i = 0; i < equippedSpells.Length; i++){
+        //     equippedSpells[i] = null;
+        // }
 
     }
 
