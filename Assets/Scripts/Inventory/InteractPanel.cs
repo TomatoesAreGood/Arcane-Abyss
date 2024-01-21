@@ -55,6 +55,7 @@ public class InteractPanel : MonoBehaviour
 
     public void ClosePanel(){
         gameObject.SetActive(false);
+        MousePointer.instance.interactingItem = null;
     }
 
     public void ResetPos(){

@@ -30,13 +30,17 @@ public class Item : MonoBehaviour
     }    
     protected virtual void Start(){
         value = 0;
-        desc = "";
-        title = this.ToString();
+        desc = "bro forgor description";
+        title = GetType().Name;;
     }
 
     protected virtual void Update(){
         if(!PlayerController.instance.inventoryUI.isOpen){
             return;
+        }
+
+        if(IsMouseOnItem){
+            MousePointer.instance.hoveringItem = this;
         }
 
         //on left click
@@ -58,6 +62,7 @@ public class Item : MonoBehaviour
             if(MousePointer.instance.selectedItem == null){
                 MousePointer.instance.SelectItem(this);
             }
+            MousePointer.instance.hoveringItem = null;
         }
         //on drop
         if(MousePointer.instance.IsSelected(this) && Input.GetMouseButtonUp(0)){

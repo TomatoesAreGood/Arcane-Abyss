@@ -8,5 +8,5 @@ public class HealthPotion : PotionItem
         PlayerController.instance.GainHeart(2);
         Destroy(gameObject);
     }
-
+    
 }

@@ -5,10 +5,12 @@ using UnityEngine;
 public class MousePointer : MonoBehaviour
 {
     public InteractPanel interactPanel;
+    public InfoPanel infoPanel;
     public static MousePointer instance;
     public Item selectedItem;
     public bool isInteracting;
     public Item interactingItem;
+    public Item hoveringItem;
 
     private void Start(){
         instance = this;
@@ -19,6 +21,14 @@ public class MousePointer : MonoBehaviour
     private void Update(){
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = new Vector3(mousePos.x, mousePos.y, 10f);
+
+        if(hoveringItem == null || interactingItem != null){
+            infoPanel.ClosePanel();
+        }
+
+        if(interactingItem == null && hoveringItem != null){
+            infoPanel.OpenPanel(hoveringItem);
+        }
 
         if(Input.GetKeyUp(KeyCode.E) && selectedItem != null){
             DeSelectItem();
@@ -35,14 +45,7 @@ public class MousePointer : MonoBehaviour
             interactPanel.ClosePanel();
         }
 
-        // if(selectedItem != null){
-        //     selectedItem.transform.SetParent(transform);
-        // }
-
-        // if(Input.GetMouseButton(0)){
-
-        // }
-
+        hoveringItem = null;
     }
 
     public void SetInteractingItem(Item item){
@@ -57,7 +60,6 @@ public class MousePointer : MonoBehaviour
 
     }
     public void DeSelectItem(){
-        
         selectedItem = null;
     }
 
