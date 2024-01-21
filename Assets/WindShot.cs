@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireShot : MagicShot
+public class WindShot : MagicShot
 {
-   protected override void Awake()
-    {
+    protected override void Awake(){
         base.Awake();
         damage = 2;
     }
-    protected override void OnTriggerEnter2D(Collider2D other){
+
+   protected override void OnTriggerEnter2D(Collider2D other){
         if (other.CompareTag("Player")|| other.CompareTag("Item"))
         {
             return;
@@ -18,9 +18,10 @@ public class FireShot : MagicShot
         { 
             Enemy enemyScript = other.GetComponent<Enemy>();
             enemyScript.Health -= damage;
-            enemyScript.Burn(2, 0.3f);
-            Debug.Log(enemyScript.Health);
-        }
-        Destroy(gameObject);
+
+        }        
+        animator.SetBool("OnDestroy", true);
+        gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        Destroy(gameObject, 0.25f);
     }
 }

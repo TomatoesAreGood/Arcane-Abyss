@@ -344,6 +344,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySkeleton
       objectReference: {fileID: 0}
+    - target: {fileID: 4490819353254072443, guid: 1a9699b11eb26084bb0855990c738dce, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8838766983709221349, guid: 1a9699b11eb26084bb0855990c738dce, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.640288
@@ -6236,6 +6240,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyShaman (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4490819353254072443, guid: 0a50affffbf8ace4d9f74d03659fa8a8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8838766983709221349, guid: 0a50affffbf8ace4d9f74d03659fa8a8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.6702583
@@ -10289,11 +10297,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Library: []
-  basicStaff: {fileID: 4956674019082466470, guid: d95f69441dceae44e9fcd4912a480c79, type: 3}
-  forestStaff: {fileID: -5377832785174019472, guid: acc3ee9f1eeacb14491d2dd3e60bd2a3, type: 3}
   fireball: {fileID: 1052191688529314682, guid: 22523f418e19db6438a18c34415d6955, type: 3}
   iceShot: {fileID: -6915402156221391493, guid: 1370b1b022e1b714db371a864e2f6977, type: 3}
   magicShot: {fileID: -5203602661348683615, guid: c6daf5a38a9066c42aa241310244493c, type: 3}
+  windShot: {fileID: 9107081953936008048, guid: 9b003eda5ca1904468ec3f65351491eb, type: 3}
+  basicStaff: {fileID: 4956674019082466470, guid: d95f69441dceae44e9fcd4912a480c79, type: 3}
+  forestStaff: {fileID: -5377832785174019472, guid: acc3ee9f1eeacb14491d2dd3e60bd2a3, type: 3}
   healthPotion: {fileID: -1824762916343387062, guid: 97a13ffc9be04f445b7bd0d085703199, type: 3}
   darkstaff: {fileID: 8603673668104546730, guid: 7f2110cdfb77cd8448e3776e129895fa, type: 3}
   fireShotSpellBook: {fileID: -8504022690600607327, guid: a33fb6fa8c3a5e641bf877a8f6df9671, type: 3}

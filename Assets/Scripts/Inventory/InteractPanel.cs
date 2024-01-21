@@ -46,12 +46,7 @@ public class InteractPanel : MonoBehaviour
         } 
         rectTransform.sizeDelta = new Vector2(rectTransform.rect.width, numActiveButtons*30f);
         ResetPos();
-        
-
     }
-
-
-
 
     public void ClosePanel(){
         gameObject.SetActive(false);

@@ -12,11 +12,13 @@ public class ItemLibrary : MonoBehaviour
     public Item[] Library;
 
     public static ItemLibrary instance;
-    public StaffItem basicStaff;
-    public StaffItem forestStaff;
+    
     public SpellItem fireball;
     public SpellItem iceShot;
     public SpellItem magicShot;
+    public SpellItem windShot;
+    public StaffItem basicStaff;
+    public StaffItem forestStaff;
     public PotionItem healthPotion;
     public StaffItem darkstaff;
     public SpellBook fireShotSpellBook;
@@ -80,6 +82,8 @@ public class ItemLibrary : MonoBehaviour
             return healthPotion;
         }else if (item.GetType() == typeof(FireShotSpellBook)){
             return fireShotSpellBook;
+        }else if (item.GetType() == typeof(WindSpellItem)){
+            return windShot;
         }
         throw new ArgumentException("Could not find item reference");
     }

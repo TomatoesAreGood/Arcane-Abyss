@@ -118,6 +118,7 @@ public class PlayerController : MonoBehaviour
         inventory.spells[0] = itemLibrary.fireball;
         inventory.spells[1] = itemLibrary.iceShot;
         inventory.spells[2] = itemLibrary.magicShot;
+        inventory.spells[3] = itemLibrary.windShot;
 
         inventory.potions[0] = itemLibrary.healthPotion;
         
@@ -202,8 +203,8 @@ public class PlayerController : MonoBehaviour
        
         //debug
         if(Input.GetKeyDown(KeyCode.Space)){
-            inventoryUI.inventoryRenderer.MergeSortSortAlpha();
-            //Debug.Break();
+            // inventoryUI.inventoryRenderer.MergeSortSortAlpha();
+            Debug.Break();
         }
 
         //shooting spells
@@ -297,6 +298,7 @@ public class PlayerController : MonoBehaviour
             inventory.equippedSpells[FindEquippedSpell(spell)] = null;
         }
         inventory.equippedSpells[spellIndex] = spell;
+
     }
 
     public int FindEquippedSpell(SpellItem spell){
