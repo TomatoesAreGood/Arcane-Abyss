@@ -8,5 +8,13 @@ public class HealthPotion : PotionItem
         PlayerController.instance.GainHeart(2);
         Destroy(gameObject);
     }
+     protected override void Start()
+    {
+        base.Start();
+        value = 20;
+        desc = "A red-colored potion which restores vitality. Heal 2 hearts.";
+        title = GetType().Name;
+        itemID = 7;
+    }
     
 }

@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         //     inventory.items[i] = itemLibrary.basicStaff;
         // }
 
-        inventory.spells[0] = itemLibrary.fireball;
+        inventory.spells[0] = itemLibrary.fireShot;
         inventory.spells[1] = itemLibrary.iceShot;
         inventory.spells[2] = itemLibrary.magicShot;
         inventory.spells[3] = itemLibrary.windShot;
@@ -134,18 +134,18 @@ public class PlayerController : MonoBehaviour, IDataPersistance
             equippedStaffSprite = null;
         }   
 
-        // string a = "";
-        // foreach (Item item in inventory.items) {
-        //     if (item == null)
-        //     {
-        //         a += " ,";
-        //     }
-        //     else {
-        //         a += item.ToString() + ",";
-        //     }
+        string a = "";
+        foreach (Item item in inventory.items) {
+            if (item == null)
+            {
+                a += " ,";
+            }
+            else {
+                a += item.GetHashCode()  + ",";
+            }
 
-        // }
-        // Debug.Log(a);
+        }
+        Debug.Log(a);
 
         //Spell switching (pain)
         if(!inventoryUI.isOpen){
@@ -352,26 +352,21 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     }
 
     public void LoadData(GameData data){
-        inventory.items = data.items;
-
-                string a = "";
-        foreach (Item item in data.items) {
-            if (item == null)
-            {
-                a += " ,";
-            }
-            else {
-                a += item.ToString() + ",";
-            }
-
+        int[] itemIDs = data.itemsIDs;
+        for(int i = 0; i < itemIDs.Length; i++){
+            inventory.items[i] = itemLibrary.GetReferenceFromID(itemIDs[i]);
         }
-        Debug.Log(a);
-
-
+        // inventory.items = data.items;
+        
     }
 
     public void SaveData(ref GameData data){
-        data.items = inventory.items;
+        for(int i = 0; i < inventory.items.Length; i++){
+            if(inventory.items[i] != null){
+                data.itemsIDs[i] = inventory.items[i].itemID;
+            }
+        }
+        //data.items = inventory.items;
     }
 
   

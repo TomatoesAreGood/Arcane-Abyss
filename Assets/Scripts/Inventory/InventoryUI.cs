@@ -76,4 +76,6 @@ public class InventoryUI : MonoBehaviour
     public void PigeonHoleSortOcurrances(){
         inventoryRenderer.PigeonHoleSortOcurrances();
     }
+
+   
 }

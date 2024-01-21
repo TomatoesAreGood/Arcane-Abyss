@@ -9,6 +9,7 @@ public abstract class SpellItem : ReferencedItem{
         inventory = PlayerController.instance.inventory.spells;
     }
     protected override void Start(){
+        base.Start();
          if (reference == null){
             throw new ArgumentException("no object reference attached to item");
         }   

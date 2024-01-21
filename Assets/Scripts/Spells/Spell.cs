@@ -8,7 +8,7 @@ public class Spell : MonoBehaviour, IEquatable<Spell>
     public int manaCost;
     public float fireRate;
     public float speed;
-    [SerializeField] GameObject spellShot;
+    [SerializeField] public GameObject spellShot;
     public float nextAvailFire;
 
     // Start is called before the first frame update

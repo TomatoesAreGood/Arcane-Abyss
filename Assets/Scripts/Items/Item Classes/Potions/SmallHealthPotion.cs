@@ -8,5 +8,12 @@ public class SmallHealthPotion : PotionItem
         PlayerController.instance.GainHeart();
         Destroy(gameObject);
     }
-
+    protected override void Start()
+    {
+        base.Start();
+        value = 10;
+        desc = "Contains a vibrant, red liquid in a vial. Heals 1 heart.";
+        title = GetType().Name;
+        itemID = 10;
+    }
 }

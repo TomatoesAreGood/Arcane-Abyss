@@ -6,7 +6,7 @@ public class FireShotSpellBook : SpellBook
 {
     public override void Use()
     {
-        if(PickUpController.instance.TryAddSpell(ItemLibrary.instance.fireball)){
+        if(PickUpController.instance.TryAddSpell(ItemLibrary.instance.fireShot)){
             Destroy(gameObject);
         }
     }
@@ -14,7 +14,8 @@ public class FireShotSpellBook : SpellBook
     {
         base.Start();
         value = 200;
-        desc = "";
+        desc = "Use to learn FireBall spell";
         title = GetType().Name;
+        itemID = 9;
     }
 }

@@ -9,7 +9,8 @@ public class DarkStaff : StaffItem
         base.Start();
         damageBonus = 3;
         value = 100;
-        desc = "";
+        desc = "A dark staff of mysterious origin. It emanates with powerful magic.";
         title = GetType().Name;
+        itemID = 8;
     }
 }

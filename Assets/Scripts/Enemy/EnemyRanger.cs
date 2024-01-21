@@ -49,7 +49,7 @@ public class EnemyRanger : Enemy
         Debug.DrawLine(AsVector2(transform.position) + Vector2.Perpendicular(transform.position).normalized, losDir + Vector2.Perpendicular(transform.position).normalized);
         Debug.DrawLine(AsVector2(transform.position) + -Vector2.Perpendicular(transform.position).normalized + losDir.normalized, losDir + -Vector2.Perpendicular(transform.position).normalized);*/
 
-        Debug.Log(state);
+        //Debug.Log(state);
 
         switch (state)
         {

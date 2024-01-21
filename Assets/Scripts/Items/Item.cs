@@ -21,7 +21,7 @@ public class Item : MonoBehaviour
     public bool IsMouseOnItem => RectTransformUtility.RectangleContainsScreenPoint(rectTransform, Input.mousePosition, Camera.main);
     public new InventoryRenderer renderer;
     public Item[] inventory;
-    private int itemID {get; set;}
+    public int itemID {get; set;}
 
     protected virtual void Awake(){
         image = gameObject.GetComponent<Image>();
@@ -33,7 +33,8 @@ public class Item : MonoBehaviour
     protected virtual void Start(){
         value = 0;
         desc = "bro forgor description";
-        title = GetType().Name;;
+        title = GetType().Name;
+        itemID = 0;
     }
 
     protected virtual void Update(){

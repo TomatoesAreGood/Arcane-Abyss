@@ -84,7 +84,7 @@ public class InventoryRenderer : MonoBehaviour
                     GameObject obj = Instantiate(ItemLibrary.instance.forestStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
                 }else if(inventoryData[i].GetType() == typeof(FireSpellItem)){
-                    GameObject obj = Instantiate(ItemLibrary.instance.fireball.gameObject, slot.transform);
+                    GameObject obj = Instantiate(ItemLibrary.instance.fireShot.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
                 }else if(inventoryData[i].GetType() == typeof(IceSpellItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.iceShot.gameObject, slot.transform);
@@ -137,7 +137,7 @@ public class InventoryRenderer : MonoBehaviour
                     GameObject obj = Instantiate(ItemLibrary.instance.forestStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
                 }else if(inventoryData[i].GetType() == typeof(FireSpellItem)){
-                    GameObject obj = Instantiate(ItemLibrary.instance.fireball.gameObject, slot.transform);
+                    GameObject obj = Instantiate(ItemLibrary.instance.fireShot.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
                 }else if(inventoryData[i].GetType() == typeof(IceSpellItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.iceShot.gameObject, slot.transform);
@@ -343,6 +343,7 @@ public class InventoryRenderer : MonoBehaviour
         }
         
     }
+ 
 
 
 }

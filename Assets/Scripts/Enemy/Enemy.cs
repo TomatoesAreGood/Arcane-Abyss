@@ -118,7 +118,7 @@ public class Enemy : MonoBehaviour
         if (Vector2.Distance(transform.position, Player.transform.position) < targetRange)
         {
             //player is within pounching range
-            Debug.Log("within range");
+            //Debug.Log("within range");
             state = State.Poucing;
         }
     }

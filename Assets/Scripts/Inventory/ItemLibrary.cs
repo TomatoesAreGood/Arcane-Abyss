@@ -4,16 +4,16 @@ using UnityEngine;
 using System.Reflection;
 using static UnityEditor.Progress;
 using System;
+using System.Linq;
 
 
 public class ItemLibrary : MonoBehaviour
 {
     public object[] itemsArray;
     public Item[] Library;
-
     public static ItemLibrary instance;
-    
-    public SpellItem fireball;
+    private Dictionary<Item, int> itemIDToReference;
+    public SpellItem fireShot;
     public SpellItem iceShot;
     public SpellItem magicShot;
     public SpellItem windShot;
@@ -29,11 +29,12 @@ public class ItemLibrary : MonoBehaviour
     private void Awake(){
         if(instance == null){
             instance = this;
-            Library = new Item[] { basicStaff, forestStaff, fireball, magicShot, iceShot, healthPotion, darkstaff, fireShotSpellBook };
+            Library = new Item[] { basicStaff, forestStaff, fireShot, magicShot, iceShot, healthPotion, darkstaff, fireShotSpellBook };
+            itemIDToReference = new Dictionary<Item, int>{
+                {fireShot,1}, {iceShot,2},{magicShot,3},{windShot,4},{basicStaff,5},{forestStaff,6},{healthPotion,7},{darkstaff,8},{fireShotSpellBook,9},{smallHealthPot,10}
+            };
 
             InitalizeItemToArray();
-
-
         }
         else
         {
@@ -42,10 +43,13 @@ public class ItemLibrary : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
+    public Item GetReferenceFromID(int id){
+        if(itemIDToReference.ContainsValue(id)){
+            return itemIDToReference.FirstOrDefault(x=>x.Value == id).Key;
+        }
+        return null;
     }
+
 
     public void InitalizeItemToArray()
     {
@@ -72,7 +76,7 @@ public class ItemLibrary : MonoBehaviour
         }else if(item.GetType() == typeof(ForestStaff)){
             return forestStaff;
         }else if(item.GetType() == typeof(FireSpellItem)){
-            return fireball;
+            return fireShot;
         }else if(item.GetType() == typeof(IceSpellItem)){
             return iceShot;
         }else if (item.GetType() == typeof(DarkStaff)){

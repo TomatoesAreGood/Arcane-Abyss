@@ -9,7 +9,8 @@ public class BasicStaff : StaffItem
         base.Start();
         damageBonus = 1;
         value = 10;
-        desc = "";
+        desc = "A pretty simple looking staff which mildly enhances spell power";
         title = GetType().Name;
+        itemID = 5;
     }
 }

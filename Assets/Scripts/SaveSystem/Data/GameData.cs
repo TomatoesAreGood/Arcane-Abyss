@@ -7,11 +7,11 @@ using UnityEngine;
 
 public class GameData 
 {
-    public Item[] items;
+    public int[] itemsIDs;
     public List<string> enemies;
     
     public GameData(){
         enemies = new List<string>();
-        items = new Item[40];
+        itemsIDs = new int[40];
     }
 }
