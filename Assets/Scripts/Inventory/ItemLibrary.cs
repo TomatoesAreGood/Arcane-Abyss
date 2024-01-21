@@ -22,6 +22,7 @@ public class ItemLibrary : MonoBehaviour
     public PotionItem healthPotion;
     public StaffItem darkstaff;
     public SpellBook fireShotSpellBook;
+    public PotionItem smallHealthPot;
 
 
     // Start is called before the first frame update
@@ -84,6 +85,8 @@ public class ItemLibrary : MonoBehaviour
             return fireShotSpellBook;
         }else if (item.GetType() == typeof(WindSpellItem)){
             return windShot;
+        }else if (item.GetType() == typeof(SmallHealthPotion)){
+            return smallHealthPot;
         }
         throw new ArgumentException("Could not find item reference");
     }

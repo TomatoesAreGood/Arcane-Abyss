@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmallHealthPotionItem : PotionItem
+public class SmallHealthPotion : PotionItem
 {
     public override void Use(){
-        PlayerController.instance.IncreaseMaxHealth();
+        PlayerController.instance.GainHeart();
         Destroy(gameObject);
     }
 

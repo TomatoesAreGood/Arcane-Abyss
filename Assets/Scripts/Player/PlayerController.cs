@@ -121,7 +121,8 @@ public class PlayerController : MonoBehaviour
         inventory.spells[3] = itemLibrary.windShot;
 
         inventory.potions[0] = itemLibrary.healthPotion;
-        
+        inventory.potions[1] = itemLibrary.smallHealthPot;
+
         inventoryUI.UpdateData();
     }
 

@@ -104,6 +104,9 @@ public class InventoryRenderer : MonoBehaviour
                 }else if (inventoryData[i].GetType() == typeof(WindSpellItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.windShot.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
+                }else if (inventoryData[i].GetType() == typeof(SmallHealthPotion)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.smallHealthPot.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
                 }
 
 
@@ -153,6 +156,9 @@ public class InventoryRenderer : MonoBehaviour
                     obj.transform.position = slot.transform.position;
                 }else if (inventoryData[i].GetType() == typeof(WindSpellItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.windShot.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }else if (inventoryData[i].GetType() == typeof(SmallHealthPotion)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.smallHealthPot.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
                 }
             }
