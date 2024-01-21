@@ -26,7 +26,7 @@ public class MagicShot : MonoBehaviour
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D other){
-        if (other.CompareTag("Player") || other.CompareTag("Item"))
+        if (other.CompareTag("Player") || other.CompareTag("Item") || other.CompareTag("PlayerShot" ))
         {
             return;
         }

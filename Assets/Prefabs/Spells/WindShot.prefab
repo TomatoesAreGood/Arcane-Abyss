@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9207125468915541975}
   m_Layer: 0
   m_Name: WindShot
-  m_TagString: Untagged
+  m_TagString: PlayerShot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

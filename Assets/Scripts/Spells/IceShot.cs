@@ -13,7 +13,7 @@ public class IceShot : MagicShot
         damage = 2;
     }
    protected override void OnTriggerEnter2D(Collider2D other){
-        if (other.CompareTag("Player") || other.CompareTag("Item"))
+        if (other.CompareTag("Player") || other.CompareTag("Item")|| other.CompareTag("PlayerShot" ))
         {
             return;
         }
