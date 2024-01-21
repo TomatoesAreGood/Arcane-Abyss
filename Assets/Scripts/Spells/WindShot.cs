@@ -18,7 +18,7 @@ public class WindShot : MagicShot
         { 
             Enemy enemyScript = other.GetComponent<Enemy>();
             enemyScript.Health -= damage;
-
+            enemyScript.state = Enemy.State.Stunned;
         }        
         animator.SetBool("OnDestroy", true);
         gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;

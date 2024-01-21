@@ -39,9 +39,10 @@ public class EnemyRanger : Enemy
 
     protected override void FixedUpdate()
     {
+        LayerMask mask = LayerMask.GetMask("Obstacle");
         Vector2 losDir = Player.transform.position - transform.position;
         var dis = Vector2.Distance(Player.transform.position, transform.position);
-        _hit1 = Physics2D.Raycast(AsVector2(transform.position) + losDir.normalized, losDir, dis);
+        _hit1 = Physics2D.CircleCast(AsVector2(transform.position) + losDir.normalized, 1,  losDir, dis, mask);
        /* hit2 = Physics2D.Raycast(AsVector2(transform.position) + Vector2.Perpendicular(transform.position).normalized + losDir.normalized, losDir + Vector2.Perpendicular(transform.position).normalized, dis);
         hit3 = Physics2D.Raycast(AsVector2(transform.position) + -Vector2.Perpendicular(transform.position).normalized + losDir.normalized, losDir + Vector2.Perpendicular(transform.position).normalized, dis);*/
         /*Debug.DrawLine(transform.position, losDir);
@@ -57,7 +58,7 @@ public class EnemyRanger : Enemy
                 _path.canMove = true;
 
                 //if there is no obstacle blocking Line Of Sight of circle cast, find target
-                if (!_hit1.collider.CompareTag("Obstacle") && _hit1.collider.gameObject != gameObject)
+                if (_hit1.collider == null)
                 {
                     Debug.Log(_hit1.collider);
                     FindTargetRanger();
@@ -91,7 +92,7 @@ public class EnemyRanger : Enemy
                 _path.canMove = false;
 
                 //to check if there is Line Of Sight towards Player
-                if (_hit1.collider.CompareTag("Obstacle") && _hit1.collider.gameObject != gameObject)
+                if (_hit1.collider != null)
                 {
                     Debug.Log(hit.collider);
                     state = State.ChaseTarget;
@@ -100,6 +101,10 @@ public class EnemyRanger : Enemy
                 //to delay each fire a bit
                 if (Time.time >= nextAvailFire)
                 {
+/*                    if (Vector2.Distance(transform.position, Player.transform.position) < 3)
+                    {
+                        state = State.PlayerMoveAway;
+                    }*/
                     Fire();
                     nextAvailFire = Time.time + 1 / fireRate;
                 }
@@ -107,10 +112,7 @@ public class EnemyRanger : Enemy
                 Debug.DrawLine(transform.position, nextArm, Color.red);
 
                 //to move away if player is too close
-                if (Vector2.Distance(transform.position, Player.transform.position) < 3)
-                {
-                    state = State.PlayerMoveAway;
-                }
+
                 //to move towards if player is too far
                 if (Vector2.Distance(transform.position, Player.transform.position) > 6)
                 {
@@ -130,6 +132,17 @@ public class EnemyRanger : Enemy
                 {
                     state = State.ChaseTarget;
                 }
+                break;
+            case State.Stunned:
+                _path.canMove = false;
+                _timer += Time.fixedDeltaTime;
+                if (_timer > 1)
+                {
+                    state = State.ChaseTarget;
+                    _timer = 0;
+
+                }
+
                 break;
         }
         if(state == State.Shooting){

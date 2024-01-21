@@ -87,10 +87,11 @@ public class EnemyPouncer : Enemy
             case State.Stunned:
                 _path.canMove = false;
                 _timer += Time.fixedDeltaTime;
-                if (_timer > 3)
+                if (_timer > 1)
                 {
                     state = State.ChaseTarget;
                 }
+                _timer = 0;
                 break;
         }
         if(state == State.Poucing){

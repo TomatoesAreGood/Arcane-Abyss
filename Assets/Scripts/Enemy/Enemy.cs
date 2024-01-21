@@ -22,14 +22,14 @@ public class Enemy : MonoBehaviour
 
     private float _totalBurnDamage;
 
-    protected State state;
+    public State state;
     protected Rigidbody2D _rigidbody;
     protected Collider2D[] _collider;
     protected ContactFilter2D _contactFilter;
 
     // Start is called before the first frame update
 
-    protected enum State
+    public enum State
     {
         Poucing,
         ChaseTarget,
@@ -98,7 +98,17 @@ public class Enemy : MonoBehaviour
                     state = State.ChaseTarget;
                 }
                 break;
+            case State.Stunned:
+                _path.canMove = false;
+                _timer += Time.fixedDeltaTime;
+                if (_timer > 1)
+                {
+                    state = State.ChaseTarget;
+                    _timer = 0;
 
+                }
+
+                break;
         }
     }
 
@@ -121,7 +131,7 @@ public class Enemy : MonoBehaviour
         while (counter > 0)
         {
             var dir = new Vector2(Mathf.Sin(angle) + transform.position.x, Mathf.Cos(angle) + transform.position.y);
-            hit = Physics2D.Raycast(transform.position, dir, 2.5f);
+            hit = Physics2D.Raycast(transform.position, dir, 0.5f);
             Debug.DrawLine(transform.position, dir);
 
 
