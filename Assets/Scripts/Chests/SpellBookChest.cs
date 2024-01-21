@@ -1,22 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class SpellBookChest : Chest
 {
     private Item[] _bookArray;
-    private Dictionary<Item, float> _bookItemChances;
-    public TextMeshProUGUI _bookText;
+    private Dictionary<Item, int> _bookItemChances;
 
 
     // Start is called before the first frame update
     protected override void Start()
     {
-        LibraryCleanUp();
-        PigeonHoleSort();
+        base.Start();
         _sr.color = Color.HSVToRGB(0.5f, 100 / 100, 100 / 100);
-        foreach (KeyValuePair<Item, float> kvp in _bookItemChances)
+        foreach (KeyValuePair<Item, int> kvp in _bookItemChances)
         {
             Debug.Log(("Key: {0}, Value: {1}", kvp.Key, kvp.Value));
         }
@@ -27,20 +24,9 @@ public class SpellBookChest : Chest
     {
         
     }
-
-    protected override void SetChestText()
-    {
-        float dictLength = _bookItemChances.Count;
-        _percentString = "";
-        foreach (KeyValuePair<Item, float> keyValuePair in _bookItemChances)
-        {
-            _percentString += $"{keyValuePair.Key} : {(keyValuePair.Value / dictLength) * 100} % \n";
-        }
-        _bookText.text = _percentString;
-    }
     public override void PigeonHoleSort()
     {
-        _bookItemChances = new Dictionary<Item, float>();
+        _bookItemChances = new Dictionary<Item, int>();
         for (int i = 0; i < ChestLibrary.Length; i++)
         {
             if (_bookItemChances.ContainsKey(ChestLibrary[i]))

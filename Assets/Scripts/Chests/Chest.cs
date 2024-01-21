@@ -15,10 +15,8 @@ public class Chest : MonoBehaviour
     public Sprite OpenSprite;
     protected int _invalidCount;
 
-    public TextMeshProUGUI _chestText;
-    protected string _percentString;
 
-    private Dictionary<string, float> _itemChances;
+    private Dictionary<string, int> _itemChances;
     public string[] itemTypes = { "Staff", "SpellBook", "Potion" };
     protected List<Item> _pigeonItems;
     protected string _dropItem;
@@ -27,15 +25,22 @@ public class Chest : MonoBehaviour
     {
         LibraryCleanUp();
         PigeonHoleSort();
-        SetChestText();
+
         _sr = GetComponent<SpriteRenderer>();
 
 
 
-        
+        /*        foreach (var item in ItemLibrary.instance.Library)
+                {
+                    Debug.Log(item);
+                }*/
         /*        KeySort();
                 SelectionSort(keyArray);
                 _keyValuePairs = KeyValueAssign(keyArray, _keyValuePairs);*/
+
+ 
+
+
     }
 
     //First, get a list of dict keys
@@ -43,25 +48,9 @@ public class Chest : MonoBehaviour
     //Third, create a new dict and assign the newly ordered keys to their values of the old dict
 
     //sort item types(staff, spellbook, potion) in # of frequincies with pigeonhole sort
-
-    private void CalcChancePercent()
-    {
-        float dictLength = _itemChances.Count;
-        _percentString = "";
-        foreach(KeyValuePair<string, float> keyValuePair in _itemChances)
-        {
-            _percentString += $"{keyValuePair.Key} : {(keyValuePair.Value / dictLength) * 100} % \n";
-        }
-    }
-
-    protected virtual void SetChestText()
-    {
-        CalcChancePercent();
-        _chestText.text = _percentString;
-    }
     public virtual void PigeonHoleSort()
     {
-        _itemChances = new Dictionary<string, float>();
+        _itemChances = new Dictionary<string, int>();
         for (int j = 0; j < itemTypes.Length; j++)
         {
             for (int i = 0; i < ChestLibrary.Length; i++)
@@ -88,6 +77,7 @@ public class Chest : MonoBehaviour
 
     public bool FindName(string item, string target)
     {
+
 
         if (item.Substring(0, target.Length) == target)
         {

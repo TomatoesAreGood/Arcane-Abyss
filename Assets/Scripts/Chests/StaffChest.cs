@@ -1,26 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class StaffChest : Chest
 {
     private List<Item> _staffList;
-    private Dictionary<Item, float> _staffItemChances;
-    public TextMeshProUGUI _staffText;
-
+    private Dictionary<Item, int> _staffItemChances;
 
     // Start is called before the first frame update
 
     protected override void Start()
     {
 
-        LibraryCleanUp();
-        PigeonHoleSort();
-        SetChestText();
+        base.Start();
         _sr.color = Color.HSVToRGB(0.3f, 100 / 100, 100 / 100);
-        foreach (KeyValuePair<Item, float> kvp in _staffItemChances)
+        foreach (KeyValuePair<Item, int> kvp in _staffItemChances)
         {
             Debug.Log(("Key: {0}, Value: {1}", kvp.Key, kvp.Value));
         }
@@ -31,21 +26,9 @@ public class StaffChest : Chest
         
     }
 
-    protected override void SetChestText()
-    {
-        float dictLength = _staffItemChances.Count;
-        _percentString = "";
-        foreach (KeyValuePair<Item, float> keyValuePair in _staffItemChances)
-        {
-            _percentString += $"{keyValuePair.Key} : {(keyValuePair.Value / dictLength) * 100} % \n";
-
-        }
-        _staffText.text = _percentString;
-    }
-
     public override void PigeonHoleSort()
     {
-        _staffItemChances = new Dictionary<Item, float>();
+        _staffItemChances = new Dictionary<Item, int>();
         for (int i = 0; i < ChestLibrary.Length; i++)
         {
             if (_staffItemChances.ContainsKey(ChestLibrary[i]))

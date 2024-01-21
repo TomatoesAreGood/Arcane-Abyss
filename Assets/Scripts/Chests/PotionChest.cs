@@ -1,25 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PotionChest : Chest
 {
     private Item[] _potionArray;
     private int _potionCount;
-    public TextMeshProUGUI _potionText;
-
-    private Dictionary<Item, float> _potionItemChances;
+    private Dictionary<Item, int> _potionItemChances;
 
     // Start is called before the first frame update
     protected override void Start()
     {
-        LibraryCleanUp();
-        PigeonHoleSort();
+        base.Start();
         _sr.color = Color.HSVToRGB(0f, 100 / 100, 100 / 100);
-        SetChestText();
-        foreach (KeyValuePair<Item, float> kvp in _potionItemChances)
+        foreach (KeyValuePair<Item, int> kvp in _potionItemChances)
         {
             Debug.Log(("Key: {0}, Value: {1}", kvp.Key, kvp.Value));
         }
@@ -30,20 +24,9 @@ public class PotionChest : Chest
     {
 
     }
-
-    protected override void SetChestText()
-    {
-        float dictLength = _potionItemChances.Count;
-        _percentString = "";
-        foreach (KeyValuePair<Item, float> keyValuePair in _potionItemChances)
-        {
-            _percentString += $"{keyValuePair.Key} : {(keyValuePair.Value / dictLength) * 100} % \n";
-        }
-        _potionText.text = _percentString;
-    }
     public override void PigeonHoleSort()
     {
-        _potionItemChances = new Dictionary<Item, float>();
+        _potionItemChances = new Dictionary<Item, int>();
         for (int i = 0; i < ChestLibrary.Length; i++)
         {
             if (_potionItemChances.ContainsKey(ChestLibrary[i]))
