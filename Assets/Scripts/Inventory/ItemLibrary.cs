@@ -29,7 +29,7 @@ public class ItemLibrary : MonoBehaviour
     private void Awake(){
         if(instance == null){
             instance = this;
-            Library = new Item[] { basicStaff, forestStaff, fireShot, magicShot, iceShot, healthPotion, darkstaff, fireShotSpellBook };
+            Library = new Item[] { basicStaff, forestStaff, fireShot, magicShot, iceShot, windShot, healthPotion, darkstaff, fireShotSpellBook, smallHealthPot };
             itemIDToReference = new Dictionary<Item, int>{
                 {fireShot,1}, {iceShot,2},{magicShot,3},{windShot,4},{basicStaff,5},{forestStaff,6},{healthPotion,7},{darkstaff,8},{fireShotSpellBook,9},{smallHealthPot,10}
             };
