@@ -60,8 +60,8 @@ public class EnemyRanger : Enemy
                 //if there is no obstacle blocking Line Of Sight of circle cast, find target
                 if (_hit1.collider == null)
                 {
-                    Debug.Log(_hit1.collider);
-                    FindTargetRanger();
+/*                    Debug.Log(_hit1.collider);
+*/                    FindTargetRanger();
                 }
                
                 FindEnemy();
@@ -94,8 +94,8 @@ public class EnemyRanger : Enemy
                 //to check if there is Line Of Sight towards Player
                 if (_hit1.collider != null)
                 {
-                    Debug.Log(hit.collider);
-                    state = State.ChaseTarget;
+/*                    Debug.Log(hit.collider);
+*/                    state = State.ChaseTarget;
                 }
 
                 //to delay each fire a bit
