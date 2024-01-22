@@ -348,6 +348,8 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     }
 
     public void LoadData(GameData data){
+        transform.position = data.playerPos;
+
         int[] itemIDs = data.itemsIDs;
         for(int i = 0; i < itemIDs.Length; i++){
             inventory.items[i] = itemLibrary.GetReferenceFromID(itemIDs[i]);
@@ -357,6 +359,8 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     }
 
     public void SaveData(ref GameData data){
+        data.playerPos = transform.position;
+
         for(int i = 0; i < inventory.items.Length; i++){
             if(inventory.items[i] != null){
                 data.itemsIDs[i] = inventory.items[i].itemID;
