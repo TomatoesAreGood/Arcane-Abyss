@@ -7,7 +7,12 @@ using System;
 
 public class SpawnManager : MonoBehaviour
 {
-
+    public GameObject Enemy;
+    public GameObject EnemyPouncer;
+    public GameObject EnemyRanger;
+    public GameObject EnemySpellCaster;
+    public GameObject EnemyTank;
+    private GameObject[] _enemyPool;
     public Tilemap Tilemap;
     public GameObject TestSpawn;
     private List<Vector3> _availablePlaces;
@@ -15,9 +20,12 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _enemyPool = new GameObject[]{Enemy, EnemyPouncer, EnemyRanger, EnemySpellCaster , EnemyTank};
+
         FindAvailablePlaces();
         Debug.Log("start test");
     }
+
 
     public void FindAvailablePlaces()
     {
@@ -34,22 +42,29 @@ public class SpawnManager : MonoBehaviour
 
                 Vector3 place = Tilemap.CellToWorld(localPlace);
 
-                if (!Physics2D.OverlapBox(place, new Vector2(1, 1), 0))
-                {
-                    _availablePlaces.Add(place);
+                var sprite = Tilemap.GetSprite(localPlace);
+                var tile = Tilemap.GetTile(localPlace);
+                if (tile != null && sprite != null) {
+                    if (!Physics2D.OverlapBox(place, new Vector2(1, 1), 0))
+                    {
+                        _availablePlaces.Add(place);
 
+                    }
                 }
+
             }
         }
     }
 
     public void SpawnEnemy()
     {
+
         _spawnTimer += Time.deltaTime;
         if (_spawnTimer > 1)
         {
+            GameObject randomEnemy = _enemyPool[UnityEngine.Random.Range(0, _enemyPool.Length - 1)];
             Vector3 randomSpawn = _availablePlaces[UnityEngine.Random.Range(0, _availablePlaces.Count)];
-            Instantiate(TestSpawn, randomSpawn, Quaternion.Euler(0, 0, 0));
+            Instantiate(randomEnemy, randomSpawn, Quaternion.Euler(0, 0, 0));
             Debug.Log("instantiated");
             _spawnTimer = 0;
         }
