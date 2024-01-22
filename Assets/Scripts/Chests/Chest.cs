@@ -10,18 +10,20 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
-    public Item[] ChestLibrary;
     protected SpriteRenderer _sr;
-    public Sprite OpenSprite;
-    protected int _invalidCount;
-
-    public TextMeshProUGUI _chestText;
     protected string _percentString;
-
-    private Dictionary<string, float> _itemChances;
-    public string[] itemTypes = { "Staff", "SpellBook", "Potion" };
     protected List<Item> _pigeonItems;
     protected string _dropItem;
+
+    private int _invalidCount;
+    private Dictionary<string, float> _itemChances;
+    private string[] itemTypes = { "Staff", "SpellBook", "Potion" };
+
+    public Item[] ChestLibrary;
+    public Sprite OpenSprite;
+    public TextMeshProUGUI _chestText;
+
+
     // Start is called before the first frame update
     protected virtual void Start()
     {

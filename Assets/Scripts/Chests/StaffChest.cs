@@ -6,9 +6,7 @@ using UnityEngine;
 
 public class StaffChest : Chest
 {
-    private List<Item> _staffList;
     private Dictionary<Item, float> _staffItemChances;
-    public TextMeshProUGUI _staffText;
 
 
     // Start is called before the first frame update
@@ -40,7 +38,7 @@ public class StaffChest : Chest
             _percentString += $"{keyValuePair.Key} : {(keyValuePair.Value / dictLength) * 100} % \n";
 
         }
-        _staffText.text = _percentString;
+        _chestText.text = _percentString;
     }
 
     public override void PigeonHoleSort()
