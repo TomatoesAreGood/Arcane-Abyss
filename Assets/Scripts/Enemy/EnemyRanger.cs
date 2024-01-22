@@ -33,6 +33,7 @@ public class EnemyRanger : Enemy
         fireRate = 0.3f;
         projectileSpeed = 6f;
         animator = transform.GetChild(0).GetComponent<Animator>();
+        enemyID = 3;
     }
 
     // Update is called once per frame

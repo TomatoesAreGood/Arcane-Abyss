@@ -12,7 +12,7 @@ public class FileDataHandler{
     public FileDataHandler(string dataPath, string dataFileName){
         this.dataPath = dataPath;
         this.dataFileName = dataFileName;
-        this.fullPath = Path.Combine(dataPath, dataFileName);
+        fullPath = Path.Combine(dataPath, dataFileName);
     }
 
     public GameData Load(){

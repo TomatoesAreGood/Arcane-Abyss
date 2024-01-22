@@ -12,6 +12,7 @@ public class EnemyTank : Enemy
         _moveSpeed = 2.5f;
         Player = PlayerController.instance.gameObject;
         _path.maxSpeed = _moveSpeed;
+        enemyID = 4;
     }
 
     // Update is called once per frame

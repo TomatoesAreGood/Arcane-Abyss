@@ -11,6 +11,7 @@ public class EnemySpellCaster : EnemyRanger
         damage = 2;
         fireRate = 0.6f;
         projectileSpeed = 3;
+        enemyID = 2;
     }
 
    protected override void FixedUpdate()

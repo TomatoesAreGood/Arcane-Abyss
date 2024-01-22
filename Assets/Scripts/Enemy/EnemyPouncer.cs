@@ -25,6 +25,7 @@ public class EnemyPouncer : Enemy
         Health = 4;
         _pounceSpeed = 8;
         _moveSpeed = (int)_path.maxSpeed;
+        enemyID = 1;
         StartCoroutine(SlowedHandler(1));
     }
 

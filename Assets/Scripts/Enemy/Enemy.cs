@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour
     protected Rigidbody2D _rigidbody;
     protected Collider2D[] _collider;
     protected ContactFilter2D _contactFilter;
+    public int enemyID;
 
     // Start is called before the first frame update
 
@@ -48,6 +49,10 @@ public class Enemy : MonoBehaviour
         _graphics = GetComponentInChildren<SpriteRenderer>();
         _path = GetComponent<AIPath>();
         _rigidbody = GetComponent<Rigidbody2D>();
+        EnemySaveManager.instance.allEnemies.Add(this);
+    }
+    protected void OnDisable(){
+        EnemySaveManager.instance.allEnemies.Remove(this);
     }
 
     protected virtual void Start()
@@ -56,6 +61,7 @@ public class Enemy : MonoBehaviour
         _moveSpeed = 3;
         StartCoroutine(SlowedHandler(1));
         Health = 5;
+        enemyID = 0;
     }
 
     // Update is called once per frame
@@ -138,6 +144,9 @@ public class Enemy : MonoBehaviour
 
             angle = angle + angleIncrement;
             counter--;
+        }
+        if(!hit){
+            return;
         }
 
         if (hit.collider.gameObject != gameObject && hit.collider.CompareTag("Enemy"))
