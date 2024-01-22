@@ -4,6 +4,7 @@ using UnityEngine.Tilemaps;
 using UnityEngine;
 
 using System;
+using System.ComponentModel.Design.Serialization;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -17,11 +18,15 @@ public class SpawnManager : MonoBehaviour
     public GameObject TestSpawn;
     private List<Vector3> _availablePlaces;
     private float _spawnTimer;
+    private float _waveTimer;
+    private float _spawnRate;
+    private float _waveNum;
     // Start is called before the first frame update
     void Start()
     {
         _enemyPool = new GameObject[]{Enemy, EnemyPouncer, EnemyRanger, EnemySpellCaster , EnemyTank};
-
+        _spawnRate = 10;
+        _waveNum = 0;
         FindAvailablePlaces();
         Debug.Log("start test");
     }
@@ -56,11 +61,23 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    public void WaveManager()
+    {
+        _waveTimer += Time.deltaTime;
+        if (_waveTimer > 15 ) {
+            if (_spawnRate > 2) {
+                _spawnRate -= 1;
+            }
+            Debug.Log(_waveNum);
+            _waveNum += 1;
+        }
+    }
+
     public void SpawnEnemy()
     {
 
         _spawnTimer += Time.deltaTime;
-        if (_spawnTimer > 1)
+        if (_spawnTimer > _spawnRate)
         {
             GameObject randomEnemy = _enemyPool[UnityEngine.Random.Range(0, _enemyPool.Length)];
             Vector3 randomSpawn = _availablePlaces[UnityEngine.Random.Range(0, _availablePlaces.Count)];
@@ -74,6 +91,7 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        WaveManager();
         SpawnEnemy();
     }
 }
