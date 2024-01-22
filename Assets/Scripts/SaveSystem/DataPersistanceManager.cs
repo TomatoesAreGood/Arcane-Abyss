@@ -6,7 +6,7 @@ using System.Linq;
 public class DataPersistanceManager : MonoBehaviour
 {
     [SerializeField] string fileName;
-    private FileDataHandler dataHandler;
+    public FileDataHandler dataHandler;
     public static DataPersistanceManager instance;
     private GameData gameData;
     private List<IDataPersistance> dataPersistanceObjects;
@@ -20,7 +20,7 @@ public class DataPersistanceManager : MonoBehaviour
     private void Start(){
         dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         dataPersistanceObjects = FindAllSaveObjects();
-        NewGame();
+        LoadGame();
     }
 
     private void OnApplicationQuit(){

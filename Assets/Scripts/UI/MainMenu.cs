@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,15 +9,13 @@ public class MainMenu : MonoBehaviour
     public GameObject optionsMenu;
     public void NewGame()
     {
-
+        File.Delete(DataPersistanceManager.instance.dataHandler.fullPath);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        DataPersistanceManager.instance.NewGame();
 
     }
     public void Load()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        DataPersistanceManager.instance.LoadGame();
 
     }
     public void OpenOptionsMenu()
