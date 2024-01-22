@@ -36,11 +36,11 @@ public class FinalStats : MonoBehaviour, IDataPersistance
     }
 
     public void LoadData(GameData data){
-        enemies = data.enemies;
+        enemies = data.killedEnemies;
     }
 
     public void SaveData(ref GameData data){
-        data.enemies = enemies;
+        data.killedEnemies = enemies;
     }
 
 }

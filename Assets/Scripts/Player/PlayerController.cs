@@ -313,7 +313,6 @@ public class PlayerController : MonoBehaviour, IDataPersistance
             health -= damage;
         }
         StartCoroutine(ImmunityHandler());
-
     }
 
     IEnumerator ImmunityHandler(){
@@ -349,6 +348,15 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
     public void LoadData(GameData data){
         transform.position = data.playerPos;
+        
+
+        int difference = health - data.health;
+        for(int i = 0; i < difference; i++){
+            HealthBarList.EmptyFullHeart();
+            health--;
+        }
+        
+        mana = data.mana;
 
         int[] itemIDs = data.itemsIDs;
         for(int i = 0; i < itemIDs.Length; i++){
@@ -360,6 +368,8 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
     public void SaveData(ref GameData data){
         data.playerPos = transform.position;
+        data.health = health;
+        data.mana = mana;
 
         for(int i = 0; i < inventory.items.Length; i++){
             if(inventory.items[i] != null){
