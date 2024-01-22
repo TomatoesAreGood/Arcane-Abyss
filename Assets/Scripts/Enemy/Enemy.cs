@@ -209,8 +209,8 @@ public class Enemy : MonoBehaviour
 
     public virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("collision");
-
+/*        Debug.Log("collision");
+*/
         if (collision.CompareTag("PlayerIsTrigger"))
         {
             Debug.Log("collision");

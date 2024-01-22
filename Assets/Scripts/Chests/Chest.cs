@@ -29,15 +29,15 @@ public class Chest : MonoBehaviour
     {
 
         LibraryCleanUp();
-        Debug.Log(ChestLibrary.Length);
+
 
         PigeonHoleSort();
         SetChestText();
         _sr = GetComponent<SpriteRenderer>();
-        foreach (KeyValuePair<string, float> kvp in _itemChances)
+/*        foreach (KeyValuePair<string, float> kvp in _itemChances)
         {
             Debug.Log(("Key: {0}, Value: {1}", kvp.Key, kvp.Value));
-        }
+        }*/
 
 
 
@@ -82,8 +82,8 @@ public class Chest : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("Added key");
-                        _itemChances.Add(itemTypes[j], 1);
+/*                        Debug.Log("Added key");
+*/                        _itemChances.Add(itemTypes[j], 1);
                     }
                 }
             }
