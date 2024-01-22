@@ -17,6 +17,7 @@ public class EnemyPouncer : Enemy
     // Start is called before the first frame update
     protected override void Awake(){
         base.Awake();
+        state = State.ChaseTarget;
         animator = transform.GetChild(0).GetComponent<Animator>();
     }
     protected override void Start()

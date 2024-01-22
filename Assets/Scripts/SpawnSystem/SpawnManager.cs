@@ -62,7 +62,7 @@ public class SpawnManager : MonoBehaviour
         _spawnTimer += Time.deltaTime;
         if (_spawnTimer > 1)
         {
-            GameObject randomEnemy = _enemyPool[UnityEngine.Random.Range(0, _enemyPool.Length - 1)];
+            GameObject randomEnemy = _enemyPool[UnityEngine.Random.Range(0, _enemyPool.Length)];
             Vector3 randomSpawn = _availablePlaces[UnityEngine.Random.Range(0, _availablePlaces.Count)];
             Instantiate(randomEnemy, randomSpawn, Quaternion.Euler(0, 0, 0));
             Debug.Log("instantiated");
