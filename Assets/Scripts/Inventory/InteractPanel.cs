@@ -31,7 +31,8 @@ public class InteractPanel : MonoBehaviour
         if(item is StaffItem){
             dropButton.SetActive(true);
             equipButton.SetActive(true);
-            numActiveButtons = 2;
+            sellButton.SetActive(true);
+            numActiveButtons = 3;
         }  
         else if(item is SpellItem){
             equipSpellSlot1Button.SetActive(true);
@@ -42,7 +43,8 @@ public class InteractPanel : MonoBehaviour
         } else if(item is UsableItem){
             dropButton.SetActive(true);
             useButton.SetActive(true);
-            numActiveButtons = 2;
+            sellButton.SetActive(true);
+            numActiveButtons = 3;
         } 
         rectTransform.sizeDelta = new Vector2(rectTransform.rect.width, numActiveButtons*30f);
         ResetPos();

@@ -111,7 +111,8 @@ public class Item : MonoBehaviour
 */    }
 
     public void Sell(){
-
+        PlayerController.instance.coins += value;
+        Destroy(gameObject);
     }
 
     public virtual void Use(){

@@ -25,7 +25,7 @@ public class CoinPouch : MonoBehaviour
     {
         if (other.CompareTag("PlayerIsTrigger"))
         {
-            PlayerController.instance.money += _coinPatchValue;
+            PlayerController.instance.coins += _coinPatchValue;
             Destroy(gameObject);
             SoundManager.instance.PlayCoinPickUpSFX();
         }

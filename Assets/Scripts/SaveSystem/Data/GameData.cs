@@ -19,6 +19,7 @@ public class GameData
     public float mana;
     public float musicVolume;
     public int maxHealth;
+    public int coins;
 
     public GameData(){
         killedEnemies = new List<string>();
@@ -35,5 +36,6 @@ public class GameData
         itemsIDs[0] = 5;
         spellsIDs[0] = 3;
         potionIDs[0] = 10;
+        coins = 0;
     }
 }

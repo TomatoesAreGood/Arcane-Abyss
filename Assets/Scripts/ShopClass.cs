@@ -14,13 +14,13 @@ public class ShopClass : MonoBehaviour
    
     private bool _isPaused;
     public GameObject[] Slots;
-    
+
     public TextMeshProUGUI Balance; 
     
 
 
     
-    void Start()
+    private void Start()
     {
         
         ShopUi.SetActive(false);
@@ -40,20 +40,14 @@ public class ShopClass : MonoBehaviour
         {
             Instantiate(shopslots[i].gameObject, Slots[i].transform,false);
         }
-        
-
-
-
-
-
-
-
     }
 
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        Balance.text = "" + PlayerController.instance.coins;
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
             
@@ -72,7 +66,6 @@ public class ShopClass : MonoBehaviour
                 Time.timeScale = 0f;
                 _isPaused = true;
             }
-            Balance.text = "Coins: " + PlayerController.instance.money.ToString();
 
         }
 

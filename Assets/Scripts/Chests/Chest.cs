@@ -16,7 +16,7 @@ public class Chest : MonoBehaviour
     protected string _dropItem;
 
     private int _invalidCount;
-    private Dictionary<string, float> _itemChances;
+    private Dictionary<string, float> _potionItemChances;
     private string[] itemTypes = { "Staff", "SpellBook", "Potion" };
 
     public Item[] ChestLibrary;
@@ -52,11 +52,15 @@ public class Chest : MonoBehaviour
 
     private void CalcChancePercent()
     {
-        float dictLength = _itemChances.Count;
-        _percentString = "";
-        foreach(KeyValuePair<string, float> keyValuePair in _itemChances)
+        float dictLength = 0;
+        foreach(int value in _potionItemChances.Values)
         {
-            _percentString += $"{keyValuePair.Key} : {(keyValuePair.Value / dictLength) * 100} % \n";
+            dictLength += value;
+        }
+        _percentString = "";
+        foreach(KeyValuePair<string, float> keyValuePair in _potionItemChances)
+        {
+            _percentString += $"{keyValuePair.Key} : {Mathf.Round((keyValuePair.Value / dictLength) * 100)} % \n";
         }
     }
 
@@ -69,26 +73,47 @@ public class Chest : MonoBehaviour
     //pigeonhole sort to sort throw an array of Items and add them to a Dictionary<Item, int> sorting by frequincy Items
     public virtual void PigeonHoleSort()
     {
-        _itemChances = new Dictionary<string, float>();
+        _potionItemChances = new Dictionary<string, float>();
+        Dictionary<string, float> tempDict = new Dictionary<string, float>(); 
         for (int j = 0; j < itemTypes.Length; j++)
         {
             for (int i = 0; i < ChestLibrary.Length; i++)
             {
                 if (FindName(ChestLibrary[i].GetType().Name, itemTypes[j]))
                 {
-                    if (_itemChances.ContainsKey(itemTypes[j]))
+                    if (_potionItemChances.ContainsKey(itemTypes[j]))
                     {
-                        _itemChances[itemTypes[j]]++;
+                        _potionItemChances[itemTypes[j]]++;
                     }
                     else
                     {
 /*                        Debug.Log("Added key");
-*/                        _itemChances.Add(itemTypes[j], 1);
+*/                        _potionItemChances.Add(itemTypes[j], 1);
                     }
                 }
             }
         }
+
+        while(_potionItemChances.Count > 0)
+        {
+            float max = -1;
+            string key = "";
+            foreach (KeyValuePair<string, float> kvp in _potionItemChances)
+            {
+                if (kvp.Value > max)
+                {
+                    max = kvp.Value;
+                    key = kvp.Key;
+                }
+            }
+            tempDict.Add(key, max);
+            _potionItemChances.Remove(key);
+        }
+        _potionItemChances = tempDict;
+        Debug.Log(_potionItemChances);
     }
+
+        
 
     //Recursive Loop to find a specific substring from a string
     public bool FindName(string item, string target)
