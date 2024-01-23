@@ -44,6 +44,9 @@ public class PickupScript : MonoBehaviour
                 if(PickUpController.instance.TryPickUp(itemReference)){
                     Debug.Log("picked up: " + itemReference.ToString());
                     PlayerController.instance.inventoryUI.UpdateData();
+
+                    SoundManager.instance.PlayItemPickUpSFX();
+
                     Destroy(gameObject);
                 }else{
                     StartCoroutine(FullInventory());

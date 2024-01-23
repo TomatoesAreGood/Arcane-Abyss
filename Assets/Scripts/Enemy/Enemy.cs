@@ -207,10 +207,12 @@ public class Enemy : MonoBehaviour
     protected void Attack()
     {
         _playerScript.TakeDamage(1);
+        SoundManager.instance.PlayPlayerDamageSFX();
     }
 
     public void TakeDamage(float num){
         Health -= num;
+        SoundManager.instance.PlayEnemyDamageSFX();
     }
 
 
