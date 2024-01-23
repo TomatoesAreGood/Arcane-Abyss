@@ -24,8 +24,9 @@ public class ItemLibrary : MonoBehaviour
     public SpellBook fireShotSpellBook;
     public PotionItem smallHealthPot;
     public PotionItem smallManaPot;
-
     public PotionItem manaPotion;
+    public SpellBook iceShotSpellBook;
+    public SpellBook windShotSpellBook;
 
     // Start is called before the first frame update
     private void Awake(){
@@ -33,7 +34,7 @@ public class ItemLibrary : MonoBehaviour
             instance = this;
             Library = new Item[] { basicStaff, forestStaff, fireShot, magicShot, iceShot, windShot, healthPotion, darkstaff, fireShotSpellBook, smallHealthPot };
             itemIDToReference = new Dictionary<Item, int>{
-                {fireShot,1}, {iceShot,2},{magicShot,3},{windShot,4},{basicStaff,5},{forestStaff,6},{healthPotion,7},{darkstaff,8},{fireShotSpellBook,9},{smallHealthPot,10} , {smallManaPot, 11}, {manaPotion, 12}
+                {fireShot,1}, {iceShot,2},{magicShot,3},{windShot,4},{basicStaff,5},{forestStaff,6},{healthPotion,7},{darkstaff,8},{fireShotSpellBook,9},{smallHealthPot,10} , {smallManaPot, 11}, {manaPotion, 12}, {iceShotSpellBook, 13 }, {windShotSpellBook, 14 }
             };
 
             InitalizeItemToArray();
@@ -97,6 +98,10 @@ public class ItemLibrary : MonoBehaviour
             return smallManaPot;
         }else if (item.GetType() == typeof(ManaPotion)){
             return manaPotion;
+        }else if (item.GetType() == typeof(IceShotSpellBook)){
+            return iceShotSpellBook;
+        }else if (item.GetType() == typeof(WindShotSpellBook)){
+            return windShotSpellBook;
         }
         throw new ArgumentException("Could not find item reference");
     }

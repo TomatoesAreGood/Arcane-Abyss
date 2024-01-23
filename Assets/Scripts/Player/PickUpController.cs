@@ -63,7 +63,7 @@ public class PickUpController : MonoBehaviour{
         Inventory inventory = PlayerController.instance.inventory;
 
         if(item.itemType == Renderers.spells){
-            if(playerController.FindEquippedSpell(item) < 1){
+            if(playerController.FindEquippedSpell(item) > 0){
                 return false;
             }
             for(int i = 0; i < inventory.spells.Length; i++){

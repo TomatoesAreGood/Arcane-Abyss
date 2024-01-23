@@ -113,6 +113,12 @@ public class InventoryRenderer : MonoBehaviour
                 }else if (inventoryData[i].GetType() == typeof(ManaPotion)){
                     GameObject obj = Instantiate(ItemLibrary.instance.manaPotion.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
+                }else if (inventoryData[i].GetType() == typeof(IceShotSpellBook)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.iceShotSpellBook.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }else if (inventoryData[i].GetType() == typeof(WindShotSpellBook)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.windShotSpellBook.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
                 }
 
 
@@ -171,6 +177,12 @@ public class InventoryRenderer : MonoBehaviour
                     obj.transform.position = slot.transform.position;
                 }else if (inventoryData[i].GetType() == typeof(ManaPotion)){
                     GameObject obj = Instantiate(ItemLibrary.instance.manaPotion.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }else if (inventoryData[i].GetType() == typeof(IceShotSpellBook)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.iceShotSpellBook.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }else if (inventoryData[i].GetType() == typeof(WindShotSpellBook)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.windShotSpellBook.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
                 }
             }

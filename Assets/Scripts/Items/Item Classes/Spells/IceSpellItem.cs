@@ -9,7 +9,7 @@ public class IceSpellItem : SpellItem
         base.Start();
         itemID = 2;
         desc = "Shoots icicle projectiles that slow enemies on contact.";
-        title = "Icicle Bullet";
+        title = "Icicle Spear";
         itemID = 2;
     }
 }
