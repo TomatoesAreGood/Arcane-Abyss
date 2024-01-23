@@ -98,14 +98,14 @@ public class Chest : MonoBehaviour
         {
             float max = -1;
             string key = "";
-            foreach (KeyValuePair<string, float> kvp in _potionItemChances)
-            {
-                if (kvp.Value > max)
+                foreach (KeyValuePair<string, float> kvp in _potionItemChances)
                 {
-                    max = kvp.Value;
-                    key = kvp.Key;
+                    if (kvp.Value > max)
+                    {
+                        max = kvp.Value;
+                        key = kvp.Key;
+                    }
                 }
-            }
             tempDict.Add(key, max);
             _potionItemChances.Remove(key);
         }
@@ -134,6 +134,7 @@ public class Chest : MonoBehaviour
             return FindName(item.Substring(1), target);
         }
     }
+    //change sprite to open chest and drop item
     public void Open()
     {
         _sr.sprite = OpenSprite;
@@ -141,6 +142,7 @@ public class Chest : MonoBehaviour
 
     }
 
+    //removes objects with inherited class "SpellItem"
     protected virtual void LibraryCleanUp()
     {
         foreach (Item item in ItemLibrary.instance.Library)
@@ -169,12 +171,6 @@ public class Chest : MonoBehaviour
         int randomIndex = UnityEngine.Random.Range(0, ChestLibrary.Length);
         return ChestLibrary[randomIndex];
     }
-
- // 1. Pigeon Hole Sort all of the items in chest by Script Type
- // 2. Then, Calculate Percentage Chance of getting a item type
- // 3. Display calculations in game
-    
-
 
 
     // Update is called once per frame
