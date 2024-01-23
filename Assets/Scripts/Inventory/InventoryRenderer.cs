@@ -107,6 +107,12 @@ public class InventoryRenderer : MonoBehaviour
                 }else if (inventoryData[i].GetType() == typeof(SmallHealthPotion)){
                     GameObject obj = Instantiate(ItemLibrary.instance.smallHealthPot.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
+                }else if (inventoryData[i].GetType() == typeof(SmallManaPotion)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.smallManaPot.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }else if (inventoryData[i].GetType() == typeof(ManaPotion)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.manaPotion.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
                 }
 
 
@@ -160,6 +166,12 @@ public class InventoryRenderer : MonoBehaviour
                 }else if (inventoryData[i].GetType() == typeof(SmallHealthPotion)){
                     GameObject obj = Instantiate(ItemLibrary.instance.smallHealthPot.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
+                }else if (inventoryData[i].GetType() == typeof(SmallManaPotion)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.smallManaPot.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }else if (inventoryData[i].GetType() == typeof(ManaPotion)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.manaPotion.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
                 }
             }
         }
@@ -173,6 +185,7 @@ public class InventoryRenderer : MonoBehaviour
 
     //writes data into the inventory 
     public void UpdateData(){
+        //Debug.Log("updated: " + rendererType);
         for(int i = 0; i < transform.childCount; i++){
             GetSlot(i).UpdateData();
             if(GetSlot(i).IsEmpty()){

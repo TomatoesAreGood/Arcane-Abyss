@@ -8,6 +8,7 @@ using UnityEngine;
 public class GameData 
 {
     public int[] itemsIDs;
+    public int[] potionIDs;
     public List<string> killedEnemies;
     public Vector3 playerPos;
     public List<Vector3> enemyPositions;
@@ -18,6 +19,7 @@ public class GameData
     public GameData(){
         killedEnemies = new List<string>();
         itemsIDs = new int[40];
+        potionIDs = new int[4];
         playerPos = Vector3.zero;
         enemyPositions = new List<Vector3>();
         enemyTypes = new List<int>();

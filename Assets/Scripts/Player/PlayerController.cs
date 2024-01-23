@@ -100,10 +100,10 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         health = maxHealth;
     }
     private void Start(){
-        // inventory.items[0] = itemLibrary.basicStaff;
-        // inventory.items[1] = itemLibrary.forestStaff;
-        // inventory.items[2] = itemLibrary.darkstaff;
-        // inventory.items[3] = itemLibrary.fireShotSpellBook;
+        inventory.items[0] = itemLibrary.basicStaff;
+        inventory.items[1] = itemLibrary.forestStaff;
+        inventory.items[2] = itemLibrary.darkstaff;
+        inventory.items[3] = itemLibrary.fireShotSpellBook;
 
         // for(int i = 0; i < inventory.items.Length; i++){
         //     inventory.items[i] = itemLibrary.basicStaff;
@@ -114,8 +114,10 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         inventory.spells[2] = itemLibrary.magicShot;
         inventory.spells[3] = itemLibrary.windShot;
 
-        inventory.potions[0] = itemLibrary.healthPotion;
-        inventory.potions[1] = itemLibrary.smallHealthPot;
+        // inventory.potions[0] = itemLibrary.healthPotion;
+        // inventory.potions[1] = itemLibrary.smallHealthPot;+
+        // inventory.potions[2] = itemLibrary.smallManaPot;
+        // inventory.potions[3] = itemLibrary.manaPotion;
 
         inventoryUI.UpdateData();
     }
@@ -129,19 +131,6 @@ public class PlayerController : MonoBehaviour, IDataPersistance
             equippedStaff.gameObject.SetActive(false);
             equippedStaffSprite = null;
         }   
-
-        string a = "";
-        foreach (Item item in inventory.items) {
-            if (item == null)
-            {
-                a += " ,";
-            }
-            else {
-                a += item.GetHashCode()  + ",";
-            }
-
-        }
-        Debug.Log(a);
 
         //Spell switching (pain)
         if(!inventoryUI.isOpen){
@@ -238,6 +227,18 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
             }        
         }
+          string a = "";
+        foreach (Item item in inventory.potions) {
+            if (item == null)
+            {
+                a += " ,";
+            }
+            else {
+                a += item.ToString()  + ",";
+            }
+
+        }
+        Debug.Log(a);
 
     }
 
@@ -346,27 +347,41 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         }
     }
 
+
+    public void AddMana(float num){
+        if(mana + num > maxMana){
+            mana = maxMana;
+        }else{
+            mana += num;
+        }
+    }
+
     public void LoadData(GameData data){
         transform.position = data.playerPos;
         
-
         int difference = health - data.health;
         for(int i = 0; i < difference; i++){
             HealthBarList.EmptyFullHeart();
             health--;
         }
-        
+
         mana = data.mana;
 
         int[] itemIDs = data.itemsIDs;
         for(int i = 0; i < itemIDs.Length; i++){
             inventory.items[i] = itemLibrary.GetReferenceFromID(itemIDs[i]);
         }
-        // inventory.items = data.items;
+
+        int[] potionIDs = data.potionIDs;
+        for(int i = 0; i < potionIDs.Length; i++){
+            inventory.potions[i] = (PotionItem)itemLibrary.GetReferenceFromID(potionIDs[i]);
+        }
         
     }
 
     public void SaveData(ref GameData data){
+      
+        
         data.playerPos = transform.position;
         data.health = health;
         data.mana = mana;
@@ -374,10 +389,18 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         for(int i = 0; i < inventory.items.Length; i++){
             if(inventory.items[i] != null){
                 data.itemsIDs[i] = inventory.items[i].itemID;
+            }else{
+                data.itemsIDs[i] = 0;
             }
         }
-        //data.items = inventory.items;
+
+        for(int i = 0; i < inventory.potions.Length; i++){
+            if(inventory.potions[i] != null){
+                data.potionIDs[i] = inventory.potions[i].itemID;
+            }else{
+                data.potionIDs[i] = 0;
+            }
+        }
     }
 
-  
 }

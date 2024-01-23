@@ -23,7 +23,9 @@ public class ItemLibrary : MonoBehaviour
     public StaffItem darkstaff;
     public SpellBook fireShotSpellBook;
     public PotionItem smallHealthPot;
+    public PotionItem smallManaPot;
 
+    public PotionItem manaPotion;
 
     // Start is called before the first frame update
     private void Awake(){
@@ -31,7 +33,7 @@ public class ItemLibrary : MonoBehaviour
             instance = this;
             Library = new Item[] { basicStaff, forestStaff, fireShot, magicShot, iceShot, windShot, healthPotion, darkstaff, fireShotSpellBook, smallHealthPot };
             itemIDToReference = new Dictionary<Item, int>{
-                {fireShot,1}, {iceShot,2},{magicShot,3},{windShot,4},{basicStaff,5},{forestStaff,6},{healthPotion,7},{darkstaff,8},{fireShotSpellBook,9},{smallHealthPot,10}
+                {fireShot,1}, {iceShot,2},{magicShot,3},{windShot,4},{basicStaff,5},{forestStaff,6},{healthPotion,7},{darkstaff,8},{fireShotSpellBook,9},{smallHealthPot,10} , {smallManaPot, 11}, {manaPotion, 12}
             };
 
             InitalizeItemToArray();
@@ -91,6 +93,10 @@ public class ItemLibrary : MonoBehaviour
             return windShot;
         }else if (item.GetType() == typeof(SmallHealthPotion)){
             return smallHealthPot;
+        }else if (item.GetType() == typeof(SmallManaPotion)){
+            return smallManaPot;
+        }else if (item.GetType() == typeof(ManaPotion)){
+            return manaPotion;
         }
         throw new ArgumentException("Could not find item reference");
     }

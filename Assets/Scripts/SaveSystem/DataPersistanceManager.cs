@@ -8,7 +8,7 @@ public class DataPersistanceManager : MonoBehaviour
     [SerializeField] string fileName;
     public FileDataHandler dataHandler;
     public static DataPersistanceManager instance;
-    private GameData gameData;
+    public GameData gameData;
     private List<IDataPersistance> dataPersistanceObjects;
     private void Awake(){
         if(instance == null){
