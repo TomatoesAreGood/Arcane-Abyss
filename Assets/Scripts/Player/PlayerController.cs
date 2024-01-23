@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     public static float maxMana = 100;
     public static float mana;
     private bool _isImmune;
-    public int money;
+    public int coins;
 
     //UI
     public HealthBarList HealthBarList;
@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         inventoryWidth = 10;
         spellInventorySize = 8;
         potionBagSize = 4;
-        money = 0;
+        coins = 0;
 
         //creating data storage (for saving)
         inventory = new Inventory(inventoryWidth*inventoryHeight, spellInventorySize, potionBagSize);
@@ -344,6 +344,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         maxHealth = data.maxHealth;
         health = data.health;
         mana = data.mana;
+        coins = data.coins;
 
         int[] itemIDs = data.itemsIDs;
         for(int i = 0; i < itemIDs.Length; i++){
@@ -368,6 +369,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         data.maxHealth = maxHealth;
         data.health = health;
         data.mana = mana;
+        data.coins = coins;
 
         for(int i = 0; i < inventory.items.Length; i++){
             if(inventory.items[i] != null){
