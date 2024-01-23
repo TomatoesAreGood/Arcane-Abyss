@@ -69,6 +69,10 @@ public class SpawnManager : MonoBehaviour
 
     public void SetWaveNum(float waveNum)
     {
+        if (waveNum < 0)
+        {
+            throw new ArgumentException("ERROR : _waveNum cannot be negative")
+        }
         _waveNum = waveNum;
     }
 
@@ -79,6 +83,10 @@ public class SpawnManager : MonoBehaviour
 
     public void SetSpawnRate(float spawnRate)
     {
+        if (spawnRate < 2)
+        {
+            throw new ArgumentException("ERROR: _spawnRate cannot be below 2");
+        }
         _spawnRate = spawnRate;
     }
 
