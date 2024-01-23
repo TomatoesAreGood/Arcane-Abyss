@@ -7,6 +7,9 @@ public abstract class PotionItem : UsableItem{
         renderer = PlayerController.instance.inventoryUI.potionBagRenderer;
         inventory = PlayerController.instance.inventory.potions;
     }
-    public abstract override void Use();
+    public override void Use()
+    {
+        SoundManager.instance.PlaySippingSFX();
+    }
     
 }

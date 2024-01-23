@@ -7,6 +7,7 @@ public class ManaPotion : PotionItem
     public override void Use(){
         PlayerController.instance.AddMana(50);
         Destroy(gameObject);
+        base.Use();
     }
     protected override void Start()
     {

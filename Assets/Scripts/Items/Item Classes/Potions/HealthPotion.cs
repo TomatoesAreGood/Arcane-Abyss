@@ -7,6 +7,7 @@ public class HealthPotion : PotionItem
     public override void Use(){
         PlayerController.instance.GainHeart(2);
         Destroy(gameObject);
+        base.Use();
     }
      protected override void Start()
     {
