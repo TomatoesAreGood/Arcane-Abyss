@@ -1737,6 +1737,7 @@ MonoBehaviour:
     health: 5
     mana: 100
     musicVolume: 0.75
+    maxHealth: 5
 --- !u!4 &373800875
 Transform:
   m_ObjectHideFlags: 0

@@ -71,7 +71,7 @@ public class SpawnManager : MonoBehaviour
     {
         if (waveNum < 0)
         {
-            throw new ArgumentException("ERROR : _waveNum cannot be negative")
+            throw new ArgumentException("ERROR : _waveNum cannot be negative");
         }
         _waveNum = waveNum;
     }

@@ -45,6 +45,8 @@ public class StaffChest : Chest
     public override void PigeonHoleSort()
     {
         _staffItemChances = new Dictionary<Item, float>();
+        Dictionary<Item, float> tempDict = new Dictionary<Item, float>();
+
         for (int i = 0; i < ChestLibrary.Length; i++)
         {
             if (_staffItemChances.ContainsKey(ChestLibrary[i]))
@@ -56,6 +58,23 @@ public class StaffChest : Chest
                 _staffItemChances.Add(ChestLibrary[i], 1);
             }
         }
+        while (_staffItemChances.Count > 0)
+        {
+            float max = -1;
+            Item key = null;
+            foreach (KeyValuePair<Item, float> kvp in _staffItemChances)
+            {
+                if (kvp.Value > max)
+                {
+                    max = kvp.Value;
+                    key = kvp.Key;
+                }
+            }
+            tempDict.Add(key, max);
+            _staffItemChances.Remove(key);
+        }
+        _staffItemChances = tempDict;
+        Debug.Log(_staffItemChances);
     }
     //search through the ItemLibrary array of Items and add Items that derive from StaffItem to a Item Array
     protected override void LibraryCleanUp()
