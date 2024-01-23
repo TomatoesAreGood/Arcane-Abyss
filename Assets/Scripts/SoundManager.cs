@@ -10,17 +10,17 @@ public class SoundManager : MonoBehaviour, IDataPersistance
 
 
     [SerializeField] private AudioSource _source;
-    [SerializeField] private AudioClip _playerDamageSFX, _fireBallSFX, _iceSpellSFX, _windSpellSFX, _magicShotSFX, _coinPickUpSFX, _itemPickUpSFX, _enemyDamageSFX;
+    [SerializeField] private AudioClip _playerDamageSFX, _fireBallSFX, _iceSpellSFX, _windSpellSFX, _magicShotSFX, _coinPickUpSFX, _itemPickUpSFX, _enemyDamageSFX, _sippingSFX, _buyItemSFX, _sellItemSFX;
 
     // Start is called before the first frame update
     private void Start()
     {
-        if(instance == null){
+        if (instance == null) {
             instance = this;
-        }else{
+        } else {
             Destroy(gameObject);
         }
-        
+
     }
 
     public void ChangeVolume()
@@ -84,6 +84,24 @@ public class SoundManager : MonoBehaviour, IDataPersistance
     public void PlayEnemyDamageSFX()
     {
         _source.clip = _enemyDamageSFX;
+        _source.Play();
+    }
+
+    public void PlaySippingSFX()
+    {
+        _source.clip = _sippingSFX;
+        _source.Play();
+    }
+
+    public void PlayBuyItemSFX()
+    {
+        _source.clip = _buyItemSFX;
+        _source.Play();
+    }
+
+    public void PlaySellItemSFX()
+    {
+        _source.clip = _sellItemSFX;
         _source.Play();
     }
 
