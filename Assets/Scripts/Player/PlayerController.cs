@@ -100,25 +100,6 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         health = maxHealth;
     }
     private void Start(){
-        inventory.items[0] = itemLibrary.basicStaff;
-        inventory.items[1] = itemLibrary.forestStaff;
-        inventory.items[2] = itemLibrary.darkstaff;
-        inventory.items[3] = itemLibrary.fireShotSpellBook;
-
-        // for(int i = 0; i < inventory.items.Length; i++){
-        //     inventory.items[i] = itemLibrary.basicStaff;
-        // }
-
-        inventory.spells[0] = itemLibrary.fireShot;
-        inventory.spells[1] = itemLibrary.iceShot;
-        inventory.spells[2] = itemLibrary.magicShot;
-        inventory.spells[3] = itemLibrary.windShot;
-
-        // inventory.potions[0] = itemLibrary.healthPotion;
-        // inventory.potions[1] = itemLibrary.smallHealthPot;+
-        // inventory.potions[2] = itemLibrary.smallManaPot;
-        // inventory.potions[3] = itemLibrary.manaPotion;
-
         inventoryUI.UpdateData();
     }
 
@@ -376,6 +357,11 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         for(int i = 0; i < potionIDs.Length; i++){
             inventory.potions[i] = (PotionItem)itemLibrary.GetReferenceFromID(potionIDs[i]);
         }
+
+        int[] spellsIDs = data.spellsIDs;
+        for(int i = 0; i < spellsIDs.Length; i++){
+            inventory.spells[i] = (SpellItem)itemLibrary.GetReferenceFromID(spellsIDs[i]);
+        }
         
     }
 
@@ -399,6 +385,14 @@ public class PlayerController : MonoBehaviour, IDataPersistance
                 data.potionIDs[i] = inventory.potions[i].itemID;
             }else{
                 data.potionIDs[i] = 0;
+            }
+        }
+
+        for(int i = 0; i < inventory.spells.Length; i++){
+            if(inventory.spells[i] != null){
+                data.spellsIDs[i] = inventory.spells[i].itemID;
+            }else{
+                data.spellsIDs[i] = 0;
             }
         }
     }

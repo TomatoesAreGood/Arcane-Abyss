@@ -9,6 +9,8 @@ public class GameData
 {
     public int[] itemsIDs;
     public int[] potionIDs;
+    public int[] spellsIDs;
+
     public List<string> killedEnemies;
     public Vector3 playerPos;
     public List<Vector3> enemyPositions;
@@ -20,10 +22,14 @@ public class GameData
         killedEnemies = new List<string>();
         itemsIDs = new int[40];
         potionIDs = new int[4];
+        spellsIDs = new int[8];
         playerPos = Vector3.zero;
         enemyPositions = new List<Vector3>();
         enemyTypes = new List<int>();
         health = 5;
         mana = 100;
+        itemsIDs[0] = 5;
+        spellsIDs[0] = 3;
+        potionIDs[0] = 10;
     }
 }
