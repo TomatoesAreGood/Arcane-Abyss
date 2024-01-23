@@ -12,7 +12,7 @@ public class EnemyTank : Enemy
         _moveSpeed = 2.5f;
         Player = PlayerController.instance.gameObject;
         _path.maxSpeed = _moveSpeed;
-        enemyID = 4;
+        EnemyID = 4;
     }
 
     // Update is called once per frame
@@ -20,14 +20,14 @@ public class EnemyTank : Enemy
 
     protected override void FixedUpdate()
     {
-        switch (state)
+        switch (EnemyState)
         {
             default:
             case State.ChaseTarget:
                 _path.canMove = true;
                 FindTarget();
                 FindEnemy();
-                if (!isSlowedHandlerRunning)
+                if (!_isSlowedHandlerRunning)
                 {
                     StartCoroutine(SlowedHandler());
                 }
@@ -36,7 +36,7 @@ public class EnemyTank : Enemy
             case State.MoveAway:
                 _path.canMove = false;
                 Vector2 pos = transform.position;
-                Vector2 dir = -(hit.point - pos);
+                Vector2 dir = -(_hit.point - pos);
 
                 //if the direction is zero(edge case), select a random direction
                 if (dir.x == 0 && dir.y == 0)
@@ -47,9 +47,9 @@ public class EnemyTank : Enemy
 
                 //move enemy away in opposite direction of direction to player
                 _rigidbody.MovePosition(_rigidbody.position + dir * _moveSpeed * Time.fixedDeltaTime);
-                if (Vector2.Distance(transform.position, hit.point) > 2.5f)
+                if (Vector2.Distance(transform.position, _hit.point) > 2.5f)
                 {
-                    state = State.ChaseTarget;
+                    EnemyState = State.ChaseTarget;
                 }
                 break;
 

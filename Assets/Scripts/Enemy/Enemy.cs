@@ -12,21 +12,21 @@ public class Enemy : MonoBehaviour
     protected PlayerController _playerScript;
     protected SpriteRenderer _graphics;
 
-    protected RaycastHit2D hit;
+    protected RaycastHit2D _hit;
     private LayerMask _layerMask;
 
     protected AIPath _path;
 
-    protected bool isMovingAway = false;
-    protected bool isSlowedHandlerRunning = false;
+    protected bool _isMovingAway = false;
+    protected bool _isSlowedHandlerRunning = false;
 
     private float _totalBurnDamage;
 
-    public State state;
+    public State EnemyState;
     protected Rigidbody2D _rigidbody;
     protected Collider2D[] _collider;
     protected ContactFilter2D _contactFilter;
-    public int enemyID;
+    public int EnemyID;
 
     // Start is called before the first frame update
 
@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour
         _moveSpeed = 3;
         StartCoroutine(SlowedHandler(1));
         Health = 5;
-        enemyID = 0;
+        EnemyID = 0;
     }
 
     // Update is called once per frame
@@ -76,7 +76,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-            switch (state)
+            switch (EnemyState)
         {
             default:
             case State.ChaseTarget:
@@ -88,7 +88,7 @@ public class Enemy : MonoBehaviour
             case State.MoveAway:
                 _path.canMove = false;
                 Vector2 pos = transform.position;
-                Vector2 dir = -(hit.point - pos);
+                Vector2 dir = -(_hit.point - pos);
 
                 //if the direction is zero(edge case), select a random direction
                 if (dir.x == 0 && dir.y == 0)
@@ -99,9 +99,9 @@ public class Enemy : MonoBehaviour
 
                 //move enemy away in opposite direction of direction to player
                 _rigidbody.MovePosition(_rigidbody.position + dir * _moveSpeed * Time.fixedDeltaTime);
-                if (Vector2.Distance(transform.position, hit.point) > 2.5f)
+                if (Vector2.Distance(transform.position, _hit.point) > 2.5f)
                 {
-                    state = State.ChaseTarget;
+                    EnemyState = State.ChaseTarget;
                 }
                 break;
             case State.Stunned:
@@ -109,7 +109,7 @@ public class Enemy : MonoBehaviour
                 _timer += Time.fixedDeltaTime;
                 if (_timer > 1)
                 {
-                    state = State.ChaseTarget;
+                    EnemyState = State.ChaseTarget;
                     _timer = 0;
 
                 }
@@ -125,7 +125,7 @@ public class Enemy : MonoBehaviour
         {
             //player is within pounching range
             //Debug.Log("within range");
-            state = State.Poucing;
+            EnemyState = State.Poucing;
         }
     }
 
@@ -137,7 +137,7 @@ public class Enemy : MonoBehaviour
         while (counter > 0)
         {
             var dir = new Vector2(Mathf.Sin(angle) + transform.position.x, Mathf.Cos(angle) + transform.position.y);
-            hit = Physics2D.Raycast(transform.position, dir, 0.5f);
+            _hit = Physics2D.Raycast(transform.position, dir, 0.5f);
             Debug.DrawLine(transform.position, dir);
 
 
@@ -145,41 +145,41 @@ public class Enemy : MonoBehaviour
             angle = angle + angleIncrement;
             counter--;
         }
-        if(!hit){
+        if(!_hit){
             return;
         }
 
-        if (hit.collider.gameObject != gameObject && hit.collider.CompareTag("Enemy"))
+        if (_hit.collider.gameObject != gameObject && _hit.collider.CompareTag("Enemy"))
         {
             Debug.Log("enemy detected");
-            state = State.MoveAway;
+            EnemyState = State.MoveAway;
         }
 
     }
 
     public void DebuffSlowed()
     {
-        if(!isSlowedHandlerRunning){
+        if(!_isSlowedHandlerRunning){
             StartCoroutine(SlowedHandler());
         }
     }
     protected IEnumerator SlowedHandler()
     {
-        isSlowedHandlerRunning = true;
+        _isSlowedHandlerRunning = true;
         _path.maxSpeed = _moveSpeed/2;
         yield return new WaitForSeconds(3);
         _path.maxSpeed = _moveSpeed;
-        isSlowedHandlerRunning = false;
+        _isSlowedHandlerRunning = false;
 
     }
 
     protected IEnumerator SlowedHandler(int time)
     {
-        isSlowedHandlerRunning = true;
+        _isSlowedHandlerRunning = true;
         _path.maxSpeed = _moveSpeed/2;
         yield return new WaitForSeconds(time);
         _path.maxSpeed = _moveSpeed;
-        isSlowedHandlerRunning   = false;
+        _isSlowedHandlerRunning   = false;
     }
 
     public void Burn(float burnDamage, float burnTickDamage)

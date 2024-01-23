@@ -41,6 +41,7 @@ public class StaffChest : Chest
         _chestText.text = _percentString;
     }
 
+    //pigeonhole sort to sort throw an array of Items and add them to a Dictionary<Item, int> sorting by frequincy Items
     public override void PigeonHoleSort()
     {
         _staffItemChances = new Dictionary<Item, float>();
@@ -56,6 +57,7 @@ public class StaffChest : Chest
             }
         }
     }
+    //search through the ItemLibrary array of Items and add Items that derive from StaffItem to a Item Array
     protected override void LibraryCleanUp()
     {
         int bookCount = 0;

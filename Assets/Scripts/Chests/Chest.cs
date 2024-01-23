@@ -67,6 +67,8 @@ public class Chest : MonoBehaviour
         CalcChancePercent();
         _chestText.text = _percentString;
     }
+
+    //pigeonhole sort to sort throw an array of Items and add them to a Dictionary<Item, int> sorting by frequincy Items
     public virtual void PigeonHoleSort()
     {
         _itemChances = new Dictionary<string, float>();
@@ -90,6 +92,7 @@ public class Chest : MonoBehaviour
         }
     }
 
+    //Recursive Loop to find a specific substring from a string
     public bool FindName(string item, string target)
     {
 

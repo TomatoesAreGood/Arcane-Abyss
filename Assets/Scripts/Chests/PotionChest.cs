@@ -37,6 +37,8 @@ public class PotionChest : Chest
         _chestText.text = _percentString;
     }
 
+
+    //pigeonhole sort to sort throw an array of Items and add them to a Dictionary<Item, int> sorting by frequincy Items
     public override void PigeonHoleSort()
     {
         _potionItemChances = new Dictionary<Item, float>();
@@ -52,7 +54,8 @@ public class PotionChest : Chest
             }
         }
     }
-    
+
+    //search through the ItemLibrary array of Items and add Items that derive from PotionItem to a Item Array
     protected override void LibraryCleanUp()
     {
         foreach (Item item in ItemLibrary.instance.Library)
