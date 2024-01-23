@@ -47,15 +47,15 @@ public class InventoryUI : MonoBehaviour
     }
 
     public void Enable(){
-        Time.timeScale = 0f;
         isOpen = true;
+        PauseManager.instance.Pause();
         gameObject.SetActive(true);
         UpdateData();
     }
 
     public void Disable(){
-        Time.timeScale = 1f;
         isOpen = false;
+        PauseManager.instance.Resume();
         gameObject.SetActive(false);
         UpdateData();
     }
