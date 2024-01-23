@@ -22,11 +22,6 @@ public class SoundManager : MonoBehaviour, IDataPersistance
         }
         
     }
-     private List<Slider> FindSliders(){
-        IEnumerable<Slider> slidersInScene = FindObjectsOfType<MonoBehaviour>().OfType<Slider>();
-        
-        return new List<Slider>(slidersInScene);
-    }
 
     public void ChangeVolume()
     {
