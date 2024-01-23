@@ -93,12 +93,14 @@ public class SpawnManager : MonoBehaviour
     public void WaveManager()
     {
         _waveTimer += Time.deltaTime;
-        if (_waveTimer > 15 ) {
+        
+        if (_waveTimer > 10) {
             if (_spawnRate > 2) {
                 _spawnRate -= 1;
             }
             Debug.Log(_waveNum);
             _waveNum += 1;
+            _waveTimer = 0;
         }
     }
 
