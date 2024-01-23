@@ -122,6 +122,18 @@ public class InventoryRenderer : MonoBehaviour
                 }else if (inventoryData[i].GetType() == typeof(IceStaff)){
                     GameObject obj = Instantiate(ItemLibrary.instance.iceStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
+                }else if (inventoryData[i].GetType() == typeof(DemonicEyeStaff)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.demonicEyeStaff.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }else if (inventoryData[i].GetType() == typeof(HolyStaff)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.holyStaff.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }else if (inventoryData[i].GetType() == typeof(UndeadStaff)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.undeadStaff.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }else if (inventoryData[i].GetType() == typeof(TridentStaff)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.tridentStaff.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
                 }
 
 
@@ -189,6 +201,18 @@ public class InventoryRenderer : MonoBehaviour
                     obj.transform.position = slot.transform.position;
                 }else if (inventoryData[i].GetType() == typeof(IceStaff)){
                     GameObject obj = Instantiate(ItemLibrary.instance.iceStaff.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }else if (inventoryData[i].GetType() == typeof(DemonicEyeStaff)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.demonicEyeStaff.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }else if (inventoryData[i].GetType() == typeof(HolyStaff)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.holyStaff.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }else if (inventoryData[i].GetType() == typeof(UndeadStaff)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.undeadStaff.gameObject, slot.transform);
+                    obj.transform.position = slot.transform.position;
+                }else if (inventoryData[i].GetType() == typeof(TridentStaff)){
+                    GameObject obj = Instantiate(ItemLibrary.instance.tridentStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
                 }
             }

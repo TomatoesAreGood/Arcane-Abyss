@@ -28,6 +28,10 @@ public class ItemLibrary : MonoBehaviour
     public SpellBook iceShotSpellBook;
     public SpellBook windShotSpellBook;
     public StaffItem iceStaff;
+    public StaffItem demonicEyeStaff;
+    public StaffItem holyStaff;
+    public StaffItem tridentStaff;
+    public StaffItem undeadStaff;
 
     // Start is called before the first frame update
     private void Awake(){
@@ -35,7 +39,10 @@ public class ItemLibrary : MonoBehaviour
             instance = this;
             Library = new Item[] { basicStaff, forestStaff, fireShot, magicShot, iceShot, windShot, healthPotion, darkStaff, fireShotSpellBook, smallHealthPot };
             itemIDToReference = new Dictionary<Item, int>{
-                {fireShot,1}, {iceShot,2},{magicShot,3},{windShot,4},{basicStaff,5},{forestStaff,6},{healthPotion,7},{darkStaff,8},{fireShotSpellBook,9},{smallHealthPot,10} , {smallManaPot, 11}, {manaPotion, 12}, {iceShotSpellBook, 13 }, {windShotSpellBook, 14 }, {iceStaff, 15 }
+                {fireShot,1}, {iceShot,2},{magicShot,3},{windShot,4},{basicStaff,5},
+                {forestStaff,6},{healthPotion,7},{darkStaff,8},{fireShotSpellBook,9},{smallHealthPot,10} , 
+                {smallManaPot, 11}, {manaPotion, 12}, {iceShotSpellBook, 13}, {windShotSpellBook, 14 }, {iceStaff, 15},
+                {demonicEyeStaff, 16}, {holyStaff, 17}, {tridentStaff, 18}, {undeadStaff, 19}
             };
 
             InitalizeItemToArray();
@@ -105,6 +112,14 @@ public class ItemLibrary : MonoBehaviour
             return windShotSpellBook;
         }else if (item.GetType() == typeof(IceStaff)){
             return iceStaff;
+        }else if (item.GetType() == typeof(DemonicEyeStaff)){
+            return demonicEyeStaff;
+        }else if (item.GetType() == typeof(HolyStaff)){
+            return holyStaff;
+        }else if (item.GetType() == typeof(TridentStaff)){
+            return tridentStaff;
+        }else if (item.GetType() == typeof(UndeadStaff)){
+            return undeadStaff;
         }
         throw new ArgumentException("Could not find item reference");
     }
