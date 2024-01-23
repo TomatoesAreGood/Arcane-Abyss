@@ -13442,13 +13442,14 @@ MonoBehaviour:
   basicStaff: {fileID: 4956674019082466470, guid: d95f69441dceae44e9fcd4912a480c79, type: 3}
   forestStaff: {fileID: -5377832785174019472, guid: acc3ee9f1eeacb14491d2dd3e60bd2a3, type: 3}
   healthPotion: {fileID: -1824762916343387062, guid: 97a13ffc9be04f445b7bd0d085703199, type: 3}
-  darkstaff: {fileID: 8603673668104546730, guid: 7f2110cdfb77cd8448e3776e129895fa, type: 3}
+  darkStaff: {fileID: 8603673668104546730, guid: 7f2110cdfb77cd8448e3776e129895fa, type: 3}
   fireShotSpellBook: {fileID: -8504022690600607327, guid: a33fb6fa8c3a5e641bf877a8f6df9671, type: 3}
   smallHealthPot: {fileID: 5224235059255415971, guid: 2a0e8cd5f93ac8647ba84e63ca0386e8, type: 3}
   smallManaPot: {fileID: -6771470366788148983, guid: cb85971e9a9e36a40ac752bb488eb35f, type: 3}
   manaPotion: {fileID: -712657501847305557, guid: 9ec295c5ecbf12a44b0f93fbe3824adb, type: 3}
   iceShotSpellBook: {fileID: 5429313104082345633, guid: 0a2ee80eeaf721143a55605bdcd691ba, type: 3}
   windShotSpellBook: {fileID: 5221524372238082242, guid: 55c1f51bf4ddf7444bf98fd23dc61cb4, type: 3}
+  iceStaff: {fileID: -4028381308903162690, guid: 7e42567c58a72e24f9ac56fd759344e0, type: 3}
 --- !u!4 &1692834709
 Transform:
   m_ObjectHideFlags: 0

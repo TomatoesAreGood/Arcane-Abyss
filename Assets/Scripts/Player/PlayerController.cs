@@ -212,13 +212,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
             }        
         }
-        Debug.Log(health);
-
-        if (Input.GetKeyDown(KeyCode.C)) {
-            HealthBarList.EmptyFullHeart();
-            health -= 1;
-        }
-
+        
         //if (health <= 0) {
         //    Debug.Break();
         //}

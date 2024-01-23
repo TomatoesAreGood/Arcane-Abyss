@@ -7,7 +7,7 @@ public class DarkStaff : StaffItem
     protected override void Start()
     {
         base.Start();
-        damageBonus = 3;
+        damageBonus = 6;
         value = 100;
         desc = "A dark staff of mysterious origin. It emanates with powerful magic.";
         title = GetType().Name;

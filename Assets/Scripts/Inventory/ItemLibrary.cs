@@ -20,21 +20,22 @@ public class ItemLibrary : MonoBehaviour
     public StaffItem basicStaff;
     public StaffItem forestStaff;
     public PotionItem healthPotion;
-    public StaffItem darkstaff;
+    public StaffItem darkStaff;
     public SpellBook fireShotSpellBook;
     public PotionItem smallHealthPot;
     public PotionItem smallManaPot;
     public PotionItem manaPotion;
     public SpellBook iceShotSpellBook;
     public SpellBook windShotSpellBook;
+    public StaffItem iceStaff;
 
     // Start is called before the first frame update
     private void Awake(){
         if(instance == null){
             instance = this;
-            Library = new Item[] { basicStaff, forestStaff, fireShot, magicShot, iceShot, windShot, healthPotion, darkstaff, fireShotSpellBook, smallHealthPot };
+            Library = new Item[] { basicStaff, forestStaff, fireShot, magicShot, iceShot, windShot, healthPotion, darkStaff, fireShotSpellBook, smallHealthPot };
             itemIDToReference = new Dictionary<Item, int>{
-                {fireShot,1}, {iceShot,2},{magicShot,3},{windShot,4},{basicStaff,5},{forestStaff,6},{healthPotion,7},{darkstaff,8},{fireShotSpellBook,9},{smallHealthPot,10} , {smallManaPot, 11}, {manaPotion, 12}, {iceShotSpellBook, 13 }, {windShotSpellBook, 14 }
+                {fireShot,1}, {iceShot,2},{magicShot,3},{windShot,4},{basicStaff,5},{forestStaff,6},{healthPotion,7},{darkStaff,8},{fireShotSpellBook,9},{smallHealthPot,10} , {smallManaPot, 11}, {manaPotion, 12}, {iceShotSpellBook, 13 }, {windShotSpellBook, 14 }, {iceStaff, 15 }
             };
 
             InitalizeItemToArray();
@@ -83,7 +84,7 @@ public class ItemLibrary : MonoBehaviour
         }else if(item.GetType() == typeof(IceSpellItem)){
             return iceShot;
         }else if (item.GetType() == typeof(DarkStaff)){
-            return darkstaff;
+            return darkStaff;
         }else if (item.GetType() == typeof(MagicSpellItem)){
             return magicShot;
         }else if (item.GetType() == typeof(HealthPotion)){
@@ -102,6 +103,8 @@ public class ItemLibrary : MonoBehaviour
             return iceShotSpellBook;
         }else if (item.GetType() == typeof(WindShotSpellBook)){
             return windShotSpellBook;
+        }else if (item.GetType() == typeof(IceStaff)){
+            return iceStaff;
         }
         throw new ArgumentException("Could not find item reference");
     }
