@@ -260,6 +260,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VolumeSlider: {fileID: 1053776663}
+  _source: {fileID: 0}
+  _playerDamageSFX: {fileID: 0}
+  _fireBallSFX: {fileID: 0}
+  _iceSpellSFX: {fileID: 0}
+  _windSpellSFX: {fileID: 0}
+  _magicShotSFX: {fileID: 0}
+  _coinPickUpSFX: {fileID: 0}
+  _itemPickUpSFX: {fileID: 0}
+  _enemyDamageSFX: {fileID: 0}
 --- !u!4 &274996513
 Transform:
   m_ObjectHideFlags: 0
