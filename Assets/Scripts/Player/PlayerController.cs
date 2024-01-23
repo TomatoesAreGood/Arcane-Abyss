@@ -95,12 +95,16 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         ManaBar.SetMaxMana(maxMana);
         ManaBar.SetMana(maxMana);
 
-        // after increasing max health, set current health to max health
-        IncreaseMaxHealth(5);
-        health = maxHealth;
     }
     private void Start(){
         inventoryUI.UpdateData();
+
+        // after increasing max health, set current health to max health
+        InstantiateHeart(maxHealth);
+        int difference = maxHealth - health;
+        for (int i = 0; i < difference; i++) {
+            HealthBarList.EmptyFullHeart();
+        }
     }
 
     private void Update(){
@@ -208,18 +212,16 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
             }        
         }
-          string a = "";
-        foreach (Item item in inventory.potions) {
-            if (item == null)
-            {
-                a += " ,";
-            }
-            else {
-                a += item.ToString()  + ",";
-            }
+        Debug.Log(health);
 
+        if (Input.GetKeyDown(KeyCode.C)) {
+            HealthBarList.EmptyFullHeart();
+            health -= 1;
         }
-        Debug.Log(a);
+
+        //if (health <= 0) {
+        //    Debug.Break();
+        //}
 
     }
 
@@ -308,6 +310,12 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         maxHealth++;
     }
 
+    public void InstantiateHeart(int num) {
+        for (int i = 0; i < num; i++) {
+            HealthBarList.InstantiateHeart();
+        }
+    }
+
     public void IncreaseMaxHealth(int num){
         for (int i = 0; i < num;i++){
             IncreaseMaxHealth();
@@ -339,13 +347,8 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
     public void LoadData(GameData data){
         transform.position = data.playerPos;
-        
-        int difference = health - data.health;
-        for(int i = 0; i < difference; i++){
-            HealthBarList.EmptyFullHeart();
-            health--;
-        }
-
+        maxHealth = data.maxHealth;
+        health = data.health;
         mana = data.mana;
 
         int[] itemIDs = data.itemsIDs;
@@ -366,9 +369,9 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     }
 
     public void SaveData(ref GameData data){
-      
-        
         data.playerPos = transform.position;
+        data.health = health;
+        data.maxHealth = maxHealth;
         data.health = health;
         data.mana = mana;
 
