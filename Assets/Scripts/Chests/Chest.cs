@@ -29,8 +29,6 @@ public class Chest : MonoBehaviour
     {
 
         LibraryCleanUp();
-
-
         PigeonHoleSort();
         SetChestText();
         _sr = GetComponent<SpriteRenderer>();

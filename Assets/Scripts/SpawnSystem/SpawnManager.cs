@@ -5,6 +5,7 @@ using UnityEngine;
 
 using System;
 using System.ComponentModel.Design.Serialization;
+using System.Data;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -59,6 +60,26 @@ public class SpawnManager : MonoBehaviour
 
             }
         }
+    }
+
+    public float GetWaveNum()
+    {
+        return _waveNum;
+    }
+
+    public void SetWaveNum(float waveNum)
+    {
+        _waveNum = waveNum;
+    }
+
+    public float GetSpawnRate()
+    {
+        return _spawnRate;
+    }
+
+    public void SetSpawnRate(float spawnRate)
+    {
+        _spawnRate = spawnRate;
     }
 
     public void WaveManager()
