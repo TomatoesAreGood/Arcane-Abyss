@@ -151,7 +151,7 @@ public class Enemy : MonoBehaviour
 
         if (_hit.collider.gameObject != gameObject && _hit.collider.CompareTag("Enemy"))
         {
-            Debug.Log("enemy detected");
+            //Debug.Log("enemy detected");
             EnemyState = State.MoveAway;
         }
 
@@ -222,7 +222,7 @@ public class Enemy : MonoBehaviour
 */
         if (collision.CompareTag("PlayerIsTrigger"))
         {
-            Debug.Log("collision");
+            //Debug.Log("collision");
             _playerScript = PlayerController.instance.gameObject.GetComponent<PlayerController>();
             /*_player.GainHeart();*/
             Attack();

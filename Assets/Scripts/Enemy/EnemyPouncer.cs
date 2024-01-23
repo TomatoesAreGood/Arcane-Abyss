@@ -31,7 +31,7 @@ public class EnemyPouncer : Enemy
 
     protected override void FixedUpdate()
     {
-        Debug.Log(gameObject.name + EnemyState);
+       // Debug.Log(gameObject.name + EnemyState);
         Vector2 pos = transform.position;
         switch (EnemyState)
         {

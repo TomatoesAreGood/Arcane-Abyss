@@ -61,7 +61,7 @@ public class EnemyTank : Enemy
     {
         if (collision.gameObject.GetComponent<PlayerController>())
         {
-            Debug.Log("collision");
+            //Debug.Log("collision");
             _playerScript = collision.gameObject.GetComponent<PlayerController>();
             /*_player.GainHeart();*/
             Attack();
