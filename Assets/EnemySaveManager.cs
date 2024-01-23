@@ -51,7 +51,7 @@ public class EnemySaveManager : MonoBehaviour, IDataPersistance
     {
         for(int i = 0; i < allEnemies.Count ;i++){
             enemyPositions.Add(allEnemies[i].transform.position);
-            enemyIDs.Add(allEnemies[i].enemyID);
+            enemyIDs.Add(allEnemies[i].EnemyID);
         }
         data.enemyPositions = enemyPositions;
         data.enemyTypes = enemyIDs;

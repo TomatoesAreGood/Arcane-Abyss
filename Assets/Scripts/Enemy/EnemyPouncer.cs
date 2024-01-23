@@ -8,17 +8,16 @@ public class EnemyPouncer : Enemy
 {
 
     private int _pounceSpeed;
-    private Animator animator;
-
-    private bool isPouncing;
-    private bool canPounce = true;
-    private bool isPounceHandlerRunning = false;
+    private Animator _animator;
+    private bool _isPouncing;
+    private bool _canPounce = true;
+    private bool _isPounceHandlerRunning = false;
 
     // Start is called before the first frame update
     protected override void Awake(){
         base.Awake();
-        state = State.ChaseTarget;
-        animator = transform.GetChild(0).GetComponent<Animator>();
+        EnemyState = State.ChaseTarget;
+        _animator = transform.GetChild(0).GetComponent<Animator>();
     }
     protected override void Start()
     {
@@ -26,15 +25,15 @@ public class EnemyPouncer : Enemy
         Health = 4;
         _pounceSpeed = 8;
         _moveSpeed = (int)_path.maxSpeed;
-        enemyID = 1;
+        EnemyID = 1;
         StartCoroutine(SlowedHandler(1));
     }
 
     protected override void FixedUpdate()
     {
-        Debug.Log(gameObject.name + state);
+        Debug.Log(gameObject.name + EnemyState);
         Vector2 pos = transform.position;
-        switch (state)
+        switch (EnemyState)
         {
             default:
             case State.ChaseTarget:
@@ -47,13 +46,13 @@ public class EnemyPouncer : Enemy
                 _path.canMove = false;
                 Vector2 pounceDir = Player.transform.position - transform.position;
                 float distance = Vector2.Distance(transform.position, Player.transform.position);
-                if (canPounce)
+                if (_canPounce)
                 {
-                    if (!isPounceHandlerRunning)
+                    if (!_isPounceHandlerRunning)
                     {
                         StartCoroutine(PounceHandler());
                     }
-                    if (!isPouncing)
+                    if (!_isPouncing)
                     {
                         _rigidbody.MovePosition(_rigidbody.position + pounceDir * 8 *  Time.fixedDeltaTime); 
 
@@ -61,16 +60,16 @@ public class EnemyPouncer : Enemy
 
                 }
 
-                if (distance >= 2.5 && !canPounce)
+                if (distance >= 2.5 && !_canPounce)
                 {
-                    state = State.ChaseTarget;
+                    EnemyState = State.ChaseTarget;
                 }
                 break;
             // state machine cited from Code Monkey's video "Simple Enemy AI in Unity (State Machine, Find Target, Chase, Attack)" from Youtube
 
             case State.MoveAway:
                 _path.canMove = false;
-                Vector2 dir = -(hit.point - pos);
+                Vector2 dir = -(_hit.point - pos);
 
                 //if the direction is zero(edge case), select a random direction
                 if (dir.x == 0 && dir.y == 0)
@@ -81,9 +80,9 @@ public class EnemyPouncer : Enemy
 
                 //move enemy away in opposite direction of direction to player
                 _rigidbody.MovePosition(_rigidbody.position + dir * _moveSpeed * Time.fixedDeltaTime);
-                if (Vector2.Distance(transform.position, hit.point) > 2.5f)
+                if (Vector2.Distance(transform.position, _hit.point) > 2.5f)
                 {
-                    state = State.ChaseTarget;
+                    EnemyState = State.ChaseTarget;
                 }
                 break;
             case State.Stunned:
@@ -91,15 +90,15 @@ public class EnemyPouncer : Enemy
                 _timer += Time.fixedDeltaTime;
                 if (_timer > 1)
                 {
-                    state = State.ChaseTarget;
+                    EnemyState = State.ChaseTarget;
                 }
                 _timer = 0;
                 break;
         }
-        if(state == State.Poucing){
-            animator.SetBool("IsPouncing", true);
+        if(EnemyState == State.Poucing){
+            _animator.SetBool("IsPouncing", true);
         }else{
-            animator.SetBool("IsPouncing", false);
+            _animator.SetBool("IsPouncing", false);
         }
     }
 
@@ -113,16 +112,16 @@ public class EnemyPouncer : Enemy
 
     private IEnumerator PounceHandler()
     {
-        isPounceHandlerRunning = true;
-        canPounce = true;
+        _isPounceHandlerRunning = true;
+        _canPounce = true;
         yield return new WaitForSeconds(0.5f);
-        isPouncing = false;
+        _isPouncing = false;
         yield return new WaitForSeconds(0.2f);
-        canPounce = false;
-        isPouncing = true;
+        _canPounce = false;
+        _isPouncing = true;
         yield return new WaitForSeconds(2);
-        canPounce = true;
-        isPounceHandlerRunning = false;
+        _canPounce = true;
+        _isPounceHandlerRunning = false;
         //function controls when the enemy can and should pounce and relays that information back to the update loop
         //ensures that the enemy is not constanly trying to pounce
 

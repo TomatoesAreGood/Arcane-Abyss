@@ -35,6 +35,8 @@ public class SpellBookChest : Chest
     {
         
     }
+
+    //pigeonhole sort to sort throw an array of Items and add them to a Dictionary<Item, int> sorting by frequincy Items
     public override void PigeonHoleSort()
     {
         _bookItemChances = new Dictionary<Item, float>();
@@ -50,6 +52,8 @@ public class SpellBookChest : Chest
             }
         }
     }
+
+    //search through the ItemLibrary array of Items and add Items that derive from SpellBook to a Item Array
     protected override void LibraryCleanUp()
     {
         int bookCount = 0;

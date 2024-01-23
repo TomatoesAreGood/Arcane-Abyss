@@ -8,10 +8,10 @@ public class EnemySpellCaster : EnemyRanger
         base.Start();
         Health = 7;
         _moveSpeed = 3f;
-        damage = 2;
-        fireRate = 0.6f;
-        projectileSpeed = 3;
-        enemyID = 2;
+        _damage = 2;
+        _fireRate = 0.6f;
+        _projectileSpeed = 3;
+        EnemyID = 2;
     }
 
    protected override void FixedUpdate()
