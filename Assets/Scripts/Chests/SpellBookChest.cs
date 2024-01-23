@@ -40,6 +40,8 @@ public class SpellBookChest : Chest
     public override void PigeonHoleSort()
     {
         _bookItemChances = new Dictionary<Item, float>();
+        Dictionary<Item, float> tempDict = new Dictionary<Item, float>();
+
         for (int i = 0; i < ChestLibrary.Length; i++)
         {
             if (_bookItemChances.ContainsKey(ChestLibrary[i]))
@@ -51,6 +53,23 @@ public class SpellBookChest : Chest
                 _bookItemChances.Add(ChestLibrary[i], 1);
             }
         }
+        while (_bookItemChances.Count > 0)
+        {
+            float max = -1;
+            Item key = null;
+            foreach (KeyValuePair<Item, float> kvp in _bookItemChances)
+            {
+                if (kvp.Value > max)
+                {
+                    max = kvp.Value;
+                    key = kvp.Key;
+                }
+            }
+            tempDict.Add(key, max);
+            _bookItemChances.Remove(key);
+        }
+        _bookItemChances = tempDict;
+        Debug.Log(_bookItemChances);
     }
 
     //search through the ItemLibrary array of Items and add Items that derive from SpellBook to a Item Array
