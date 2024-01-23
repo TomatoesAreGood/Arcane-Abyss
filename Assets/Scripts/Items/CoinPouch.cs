@@ -27,6 +27,7 @@ public class CoinPouch : MonoBehaviour
         {
             PlayerController.instance.money += _coinPatchValue;
             Destroy(gameObject);
+            SoundManager.instance.PlayCoinPickUpSFX();
         }
     }
 
