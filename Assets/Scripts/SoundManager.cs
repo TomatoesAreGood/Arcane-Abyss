@@ -2,38 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class SoundManager : MonoBehaviour
+using System.Linq;
+public class SoundManager : MonoBehaviour, IDataPersistance
 {
-    [SerializeField] Slider _volumeSlider;
+    [SerializeField] Slider VolumeSlider;
+    public static SoundManager instance;
     
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        if(!PlayerPrefs.HasKey("musicVolume"))
-        {
-            PlayerPrefs.SetFloat("musicVolume", 1);
-            Load();
+        if(instance == null){
+            instance = this;
+        }else{
+            Destroy(gameObject);
         }
-        else
-        {
-            Load();
-        }
+        
+    }
+     private List<Slider> FindSliders(){
+        IEnumerable<Slider> slidersInScene = FindObjectsOfType<MonoBehaviour>().OfType<Slider>();
+        
+        return new List<Slider>(slidersInScene);
     }
 
     public void ChangeVolume()
     {
-        AudioListener.volume = _volumeSlider.value;
-        Save();
+        AudioListener.volume = VolumeSlider.value;
     }
 
-    private void Load()
+    public void LoadData(GameData data)
     {
-        _volumeSlider.value = PlayerPrefs.GetFloat("musicVolume");
+        VolumeSlider.value = data.musicVolume;
+        AudioListener.volume = data.musicVolume;
     }
 
-    private void Save()
+    public void SaveData(ref GameData data)
     {
-        PlayerPrefs.SetFloat("musicVolume", _volumeSlider.value);
+        data.musicVolume = VolumeSlider.value;
     }
 }

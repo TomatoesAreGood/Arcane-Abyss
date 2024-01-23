@@ -17,6 +17,7 @@ public class GameData
     public List<int> enemyTypes;
     public int health;
     public float mana;
+    public float musicVolume;
 
     public GameData(){
         killedEnemies = new List<string>();
@@ -28,6 +29,7 @@ public class GameData
         enemyTypes = new List<int>();
         health = 5;
         mana = 100;
+        musicVolume = 0.75f;
         itemsIDs[0] = 5;
         spellsIDs[0] = 3;
         potionIDs[0] = 10;
