@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ public class InventoryUI : MonoBehaviour
     public InventoryRenderer equippedSpellsRenderer;
     public bool isOpen;
     [SerializeField] Image equippedStaff;
-
+    [SerializeField] TextMeshProUGUI damageBonus;
 
     // Start is called before the first frame update
     private void Awake()
@@ -35,9 +36,11 @@ public class InventoryUI : MonoBehaviour
         if (isOpen){
             if(PlayerController.instance.inventory.equippedStaff != null){
                 equippedStaff.gameObject.SetActive(true);
-                equippedStaff.sprite = PlayerController.instance.equippedStaff.GetComponent<SpriteRenderer>().sprite;           
+                equippedStaff.sprite = PlayerController.instance.equippedStaff.GetComponent<SpriteRenderer>().sprite;        
+                damageBonus.text = "+" + PlayerController.instance.inventory.equippedStaff.damageBonus + " Damage Bonus";   
             }else{
                 equippedStaff.gameObject.SetActive(false);
+                damageBonus.text = "+0 Damage Bonus";
             }
             UpdateData();
             gameObject.SetActive(true);

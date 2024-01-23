@@ -14,6 +14,7 @@ public class ShopClass : MonoBehaviour
    
     private bool _isPaused;
     public GameObject[] Slots;
+    
     public TextMeshProUGUI Balance; 
     
 
