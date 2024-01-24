@@ -166,5 +166,11 @@ public class ShopUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public void BackToGame(){
+        gameObject.SetActive(false);
+        ShopManager.instance.IsPaused = false;
+        PauseManager.instance.Resume();
+    }
+
     
 }
