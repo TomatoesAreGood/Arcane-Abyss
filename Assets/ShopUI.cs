@@ -1,22 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ShopUI : MonoBehaviour
 {
     public GameObject ShopItemPrefab;
     public Item[] shopItems;
     public Transform scrollableList;
-    private int numItems;
-
-    private void Awake(){
+    public int numItems;
+    public Item[] itemlibrary;
+    public virtual void Awake(){
      
         numItems = 10;
         shopItems = new Item[numItems];
+        itemlibrary = ItemLibrary.instance.Library;
+
     }
     private void Start(){
-        Item[] itemlibrary = ItemLibrary.instance.Library;
-        for(int i = 0; i < shopItems.Length; i++){
+        
+        for (int i = 0; i < shopItems.Length; i++){
             int rand = Random.Range(0, itemlibrary.Length);
 
             while(itemlibrary[rand] is SpellItem){
@@ -25,7 +28,24 @@ public class ShopUI : MonoBehaviour
 
             shopItems[i] = itemlibrary[rand];
         }
+        SortByPrice();
         RedrawList();
+    }
+
+    public void SortByPrice()
+    {
+        for (int i = 0; i < shopItems.Length; i++)
+        {
+            for(int j = 0; j < shopItems.Length-1; j++)
+            {
+                if (shopItems[j].value > shopItems[j +1].value)
+                {
+                    int value = shopItems[j].value;
+                    shopItems[j].value = shopItems[j +1].value;
+                    shopItems[j +1].value = value;
+                }
+            }
+        }
     }
     
     public void RedrawList(){
@@ -42,8 +62,12 @@ public class ShopUI : MonoBehaviour
     public void RemoveItem(Item item){
         for(int i = 0; i < shopItems.Length; i++){
             if(shopItems[i] == item){
+
+
                 shopItems[i] = null;
                 break;
+                
+               
             }
         }
     }

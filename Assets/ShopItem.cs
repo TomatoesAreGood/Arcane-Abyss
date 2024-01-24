@@ -41,9 +41,10 @@ public class ShopItem : MonoBehaviour
         }
 
         if(IsMouseOnItem && Input.GetMouseButtonDown(0)){
-            Debug.Log("bought item: " + itemRef.ToString());
-            ShopManager.instance.ShopUI.RemoveItem(itemRef);
-            ShopManager.instance.ShopUI.RedrawList();
+                
+                Debug.Log("bought item: " + itemRef.ToString());
+                ShopManager.instance.ShopUI.RemoveItem(itemRef);
+                ShopManager.instance.ShopUI.RedrawList();
         }
     }
       private void SetAlpha(float alpha){
