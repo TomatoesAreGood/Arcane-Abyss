@@ -41,7 +41,7 @@ public class ItemLibrary : MonoBehaviour
             instance = this;
             Library = new Item[] { basicStaff, forestStaff, healthPotion, darkStaff, fireShotSpellBook, 
             smallHealthPot, iceStaff, demonicEyeStaff, holyStaff,tridentStaff,manaPotion,smallManaPot,
-            iceShotSpellBook, windShotSpellBook
+            iceShotSpellBook, windShotSpellBook, key, undeadStaff
             };
             itemIDToReference = new Dictionary<Item, int>{
                 {fireShot,1}, {iceShot,2},{magicShot,3},{windShot,4},{basicStaff,100},

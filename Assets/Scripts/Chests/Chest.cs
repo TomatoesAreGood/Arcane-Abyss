@@ -192,6 +192,7 @@ public class Chest : MonoBehaviour
         if (collision.CompareTag("PlayerIsTrigger")) {
             if (_isLocked == true && PlayerController.instance.HasKey())
             {
+                PlayerController.instance.RemoveKey();
                 Open();
             }
             else if (_isLocked == false)

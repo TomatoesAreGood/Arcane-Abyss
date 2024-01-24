@@ -23,10 +23,6 @@ public class ShopUI : MonoBehaviour
         for (int i = 0; i < _shopItems.Length; i++){
             int rand = Random.Range(0, _itemlibrary.Length);
             bool isDupelicate = false;
-            while (_itemlibrary[rand] is SpellItem){
-                rand = Random.Range(0, _itemlibrary.Length);
-            }
-        
             _shopItems[i] = _itemlibrary[rand];
             for(int j = 0;  j < _shopItems.Length; j++)
             {
@@ -38,9 +34,6 @@ public class ShopUI : MonoBehaviour
                         rand = Random.Range(0, _itemlibrary.Length);
                     }
                     _shopItems[j] = _itemlibrary[rand];
-                    
-
-
                 }
                 break;
             }

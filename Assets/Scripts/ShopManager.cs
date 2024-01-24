@@ -41,27 +41,15 @@ public class ShopManager : MonoBehaviour
             }
 
         }
-
-
-
-
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("PlayerIsTrigger"))
         {
-            
                 IsPaused = true;
                 ShopUI.Enable();
                 PauseManager.instance.Pause();
-            
-           
-
-
-
-
-
         }
     }
 }
