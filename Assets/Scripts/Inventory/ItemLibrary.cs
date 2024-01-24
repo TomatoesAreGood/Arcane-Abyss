@@ -37,7 +37,10 @@ public class ItemLibrary : MonoBehaviour
     private void Awake(){
         if(instance == null){
             instance = this;
-            Library = new Item[] { basicStaff, forestStaff, fireShot, magicShot, iceShot, windShot, healthPotion, darkStaff, fireShotSpellBook, smallHealthPot };
+            Library = new Item[] { basicStaff, forestStaff, healthPotion, darkStaff, fireShotSpellBook, 
+            smallHealthPot, iceStaff, demonicEyeStaff, holyStaff,tridentStaff,manaPotion,smallManaPot,
+            iceShotSpellBook, windShotSpellBook
+            };
             itemIDToReference = new Dictionary<Item, int>{
                 {fireShot,1}, {iceShot,2},{magicShot,3},{windShot,4},{basicStaff,5},
                 {forestStaff,6},{healthPotion,7},{darkStaff,8},{fireShotSpellBook,9},{smallHealthPot,10} , 
