@@ -22,7 +22,6 @@ public class WaveManager : MonoBehaviour
         _waveDisplay = GetComponent<TextMeshProUGUI>();
         _waveDisplay.enabled = !_waveDisplay.enabled;
          currentWaveNum = SpawnManager.GetWaveNum();
-
     }
 
     // Update is called once per frame
@@ -45,4 +44,6 @@ public class WaveManager : MonoBehaviour
         _waveDisplay.enabled = false;
 
     }
+
+  
 }

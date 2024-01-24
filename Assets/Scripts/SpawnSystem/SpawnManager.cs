@@ -7,7 +7,7 @@ using System;
 using System.ComponentModel.Design.Serialization;
 using System.Data;
 
-public class SpawnManager : MonoBehaviour
+public class SpawnManager : MonoBehaviour, IDataPersistance
 {
     public GameObject Enemy;
     public GameObject EnemyPouncer;
@@ -150,5 +150,17 @@ public class SpawnManager : MonoBehaviour
         WaveManager();
         SpawnEnemy();
         SpawnChest();
+    }
+
+    public void LoadData(GameData data)
+    {
+        _waveNum = data.waveNum;
+        _spawnRate = data.spawnRate;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.spawnRate = _spawnRate;
+        data.waveNum = _waveNum;
     }
 }
