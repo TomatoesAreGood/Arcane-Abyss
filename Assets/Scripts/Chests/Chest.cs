@@ -20,10 +20,16 @@ public class Chest : MonoBehaviour
     private string[] _itemTypes = { "Staff", "SpellBook", "Potion" };
 
     public Item[] ChestLibrary;
-    public Sprite OpenSprite;   
+    public Sprite OpenSprite;
+    public Canvas Canvas;
     public TextMeshProUGUI ChestText;
     
 
+    protected virtual void Awake()
+    {
+        Canvas.worldCamera = Camera.main;
+
+    }
 
     // Start is called before the first frame update
     protected virtual void Start()
