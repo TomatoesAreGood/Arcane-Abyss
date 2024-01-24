@@ -213,6 +213,10 @@ public class PlayerController : MonoBehaviour, IDataPersistance
             }        
         }
 
+        if (Input.GetKeyDown(KeyCode.K)) {
+            health = -1;
+        }
+
         if (health <= 0)
         {
             DeathMenu.instance.isDead = true;

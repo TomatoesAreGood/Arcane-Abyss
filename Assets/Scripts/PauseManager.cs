@@ -7,6 +7,7 @@ public class PauseManager : MonoBehaviour
     public static PauseManager instance;
     private void Awake()
     {
+        Time.timeScale = 1f;
         if(instance == null){
             instance = this;
         }else{
