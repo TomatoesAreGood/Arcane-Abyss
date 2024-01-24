@@ -212,10 +212,11 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
             }        
         }
-        
-        //if (health <= 0) {
-        //    Debug.Break();
-        //}
+
+        if (health <= 0)
+        {
+            DeathMenu.instance.isDead = true;
+        }
 
     }
 
