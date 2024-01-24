@@ -54,6 +54,9 @@ public class Enemy : MonoBehaviour
     }
     protected void OnDisable(){
         EnemySaveManager.instance.allEnemies.Remove(this);
+    }
+
+    private void OnDeath(){
         int randInt = Random.Range(1, 100);
         if(randInt % 2 == 0){
             DropCoins(Random.Range(1,3));
@@ -79,6 +82,7 @@ public class Enemy : MonoBehaviour
         if (Health <= 0)
         {
             FinalStats.enemies.Add(gameObject.name);
+            OnDeath();
             Destroy(gameObject);
         }
     }
