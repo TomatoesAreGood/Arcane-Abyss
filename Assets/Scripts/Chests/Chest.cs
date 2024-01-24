@@ -118,17 +118,17 @@ public class Chest : MonoBehaviour
     //Recursive Loop to find a specific substring from a string
     public bool FindName(string item, string target)
     {
+        if (item.Length < target.Length)
+        {
+            return false;
+        }
 
         if (item.Substring(0, target.Length) == target)
         {
             return true;
         }
 
-        if (item.Length <= target.Length)
-        {
-            return false;
-        }
-
+       
         else
         {
             return FindName(item.Substring(1), target);

@@ -29,17 +29,6 @@ public class ShopUI : MonoBehaviour
     }
     
     public void RedrawList(){
-        string a = "";
-
-        foreach(Item item in shopItems){
-            if(item != null){
-                a+= item + ", ";
-            }else{
-                a += "  ";
-            }
-        }
-        Debug.Log(a);
-
         for(int i = 0; i < scrollableList.childCount; i++){
             Destroy(scrollableList.GetChild(i).gameObject);
         }
