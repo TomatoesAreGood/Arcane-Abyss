@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ShopItem : MonoBehaviour
 {
-    private static Dictionary<string, int> itemPrices = new Dictionary<string, int>{
+    public static Dictionary<string, int> itemPrices = new Dictionary<string, int>{
         {"BasicStaff", 10}, {"ForestStaff", 50},{"HealthPotion", 20},{"DarkStaff", 500},
         {"FireShotSpellBook", 200},{"IceShotSpellBook", 200},{"WindShotSpellBook", 200},{"SmallHealthPotion", 10},
         {"SmallManaPotion", 15},{"ManaPotion", 25},{"IceStaff", 85},{"DemonicEyeStaff", 100},{"HolyStaff", 100},{"UndeadStaff", 85},
@@ -41,10 +41,18 @@ public class ShopItem : MonoBehaviour
         }
 
         if(IsMouseOnItem && Input.GetMouseButtonDown(0)){
-                
-                Debug.Log("bought item: " + itemRef.ToString());
-                ShopManager.instance.ShopUI.RemoveItem(itemRef);
-                ShopManager.instance.ShopUI.RedrawList();
+            if(PlayerController.instance.coins > itemPrices[itemRef.GetType().Name])
+            {
+
+                if (PickUpController.instance.TryPickUp(itemRef))
+                {
+                    PlayerController.instance.coins -= itemPrices[itemRef.GetType().Name];
+                    Debug.Log("bought item: " + itemRef.ToString());
+                    ShopManager.instance.ShopUI.RemoveItem(itemRef);
+                    ShopManager.instance.ShopUI.RedrawList();
+                }
+            }
+               
         }
     }
       private void SetAlpha(float alpha){
