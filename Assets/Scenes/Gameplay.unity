@@ -16905,6 +16905,7 @@ MonoBehaviour:
   holyStaff: {fileID: -2915667874696672025, guid: 72f93fd916d46db4ca24731601fd1624, type: 3}
   tridentStaff: {fileID: -3414586682557056482, guid: f4c9b8237e401294ebeebe7eac808d56, type: 3}
   undeadStaff: {fileID: -6628916760746618475, guid: 43d14d7d3c2f0eb4ab8e593355ad2572, type: 3}
+  key: {fileID: 5900743334539911671, guid: 1612830300ec4df4ba4819e8d2052a6e, type: 3}
 --- !u!4 &1692834709
 Transform:
   m_ObjectHideFlags: 0

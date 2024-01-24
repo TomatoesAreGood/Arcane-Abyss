@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6418922745210711749}
   - component: {fileID: 6931095390688009171}
   - component: {fileID: 8639812736795855959}
-  - component: {fileID: -6628916760746618475}
   - component: {fileID: 5900743334539911671}
   m_Layer: 0
   m_Name: Key
@@ -77,27 +76,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &-6628916760746618475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8505134985925691837}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf05db7ae06cce440baf65101d647a91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  value: 0
-  title: 
-  desc: 
-  itemType: 0
-  parentAfterDrag: {fileID: 0}
-  image: {fileID: 0}
-  renderer: {fileID: 0}
-  inventory: []
-  damageBonus: 0
 --- !u!114 &5900743334539911671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,3 +88,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eefec87fc28f2f4cb78df89e1923d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 0
+  title: 
+  desc: 
+  itemType: 0
+  parentAfterDrag: {fileID: 0}
+  image: {fileID: 0}
+  renderer: {fileID: 0}
+  inventory: []

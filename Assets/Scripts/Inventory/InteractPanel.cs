@@ -45,7 +45,12 @@ public class InteractPanel : MonoBehaviour
             useButton.SetActive(true);
             sellButton.SetActive(true);
             numActiveButtons = 3;
-        } 
+        }else{
+            dropButton.SetActive(true);
+            sellButton.SetActive(true);
+            numActiveButtons = 2;
+        }  
+
         rectTransform.sizeDelta = new Vector2(rectTransform.rect.width, numActiveButtons*30f);
         ResetPos();
     }

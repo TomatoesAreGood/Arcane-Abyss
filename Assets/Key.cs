@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Key : MonoBehaviour
+public class Key : Item
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        
+        base.Start();
+        value = 50;
+        desc = "A shiny gold key! Maybe it unlocks something of value?";
+        title = GetType().Name;
+        itemID = 20;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
