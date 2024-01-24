@@ -8,6 +8,7 @@ public class EnemyTank : Enemy
     // Start is called before the first frame update
     protected override void Start()
     {
+        base.Start();
         Health = 8;
         _moveSpeed = 2.5f;
         Player = PlayerController.instance.gameObject;

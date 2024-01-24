@@ -17,8 +17,6 @@ public class EnemySpellCaster : EnemyRanger
    protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        
-
     }
     
 }

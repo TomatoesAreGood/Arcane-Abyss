@@ -13,6 +13,7 @@ public class ItemLibrary : MonoBehaviour
     public Item[] Library;
     public static ItemLibrary instance;
     private Dictionary<Item, int> itemIDToReference;
+    public GameObject coinPrefab;
     public SpellItem fireShot;
     public SpellItem iceShot;
     public SpellItem magicShot;

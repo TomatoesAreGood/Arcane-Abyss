@@ -21,7 +21,7 @@ public class EnemyPouncer : Enemy
     }
     protected override void Start()
     {
-        Player = PlayerController.instance.gameObject;
+        base.Start();
         Health = 4;
         _pounceSpeed = 8;
         _moveSpeed = (int)_path.maxSpeed;

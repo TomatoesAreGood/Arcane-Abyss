@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour
     protected Collider2D[] _collider;
     protected ContactFilter2D _contactFilter;
     public int EnemyID;
+    private GameObject coinPrefab;
 
     // Start is called before the first frame update
 
@@ -53,11 +54,13 @@ public class Enemy : MonoBehaviour
     }
     protected void OnDisable(){
         EnemySaveManager.instance.allEnemies.Remove(this);
+        DropCoins(Random.Range(1,3));
     }
 
     protected virtual void Start()
     {
         Player = PlayerController.instance.gameObject;
+        coinPrefab = ItemLibrary.instance.coinPrefab;
         _moveSpeed = 3;
         StartCoroutine(SlowedHandler(1));
         Health = 5;
@@ -228,6 +231,12 @@ public class Enemy : MonoBehaviour
             _playerScript = PlayerController.instance.gameObject.GetComponent<PlayerController>();
             /*_player.GainHeart();*/
             Attack();
+        }
+    }
+
+    protected void DropCoins(int num){
+        for(int i = 0; i < num; i++){
+            Instantiate(coinPrefab).transform.position = new Vector2(transform.position.x + i*0.5f, transform.position.y);
         }
     }
 

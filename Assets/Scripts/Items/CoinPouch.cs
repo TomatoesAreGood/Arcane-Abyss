@@ -11,9 +11,7 @@ public class CoinPouch : MonoBehaviour
    
     void Start()
     {
-        _coinPatchValue = Random.Range(5, 10);
-        
-
+        _coinPatchValue = Random.Range(10, 20);
     }
 
     // Update is called once per frame

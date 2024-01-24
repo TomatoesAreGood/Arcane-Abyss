@@ -21,8 +21,8 @@ public class EnemyRanger : Enemy
     // Start is called before the first frame update
     protected override void Start()
     {
+        base.Start();
         Health = 5;
-        Player = PlayerController.instance.gameObject;
         EnemyState = State.ChaseTarget;
         _nextAvailFire = Time.time;
         _moveSpeed = 2.5f;
