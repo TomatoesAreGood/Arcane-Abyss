@@ -14,6 +14,9 @@ public class ItemLibrary : MonoBehaviour
     public static ItemLibrary instance;
     private Dictionary<Item, int> itemIDToReference;
     public GameObject coinPrefab;
+    public GameObject moneyPouchPrefab;
+
+
     public SpellItem fireShot;
     public SpellItem iceShot;
     public SpellItem magicShot;

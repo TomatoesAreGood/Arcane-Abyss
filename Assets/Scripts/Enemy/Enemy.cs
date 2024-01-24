@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
     protected ContactFilter2D _contactFilter;
     public int EnemyID;
     private GameObject coinPrefab;
+    private GameObject moneyPouchPrefab;
 
     // Start is called before the first frame update
 
@@ -59,7 +60,11 @@ public class Enemy : MonoBehaviour
     private void OnDeath(){
         int randInt = Random.Range(1, 100);
         if(randInt % 2 == 0){
-            DropCoins(Random.Range(1,3));
+            if(Random.Range(1,11) % 2 == 0){
+                DropCoins(Random.Range(1,5));
+            }else{
+                DropMoneyPouch();
+            }
         }
         if(randInt % 3 == 0){
             ItemLibrary.instance.Library[Random.Range(0,ItemLibrary.instance.Library.Length)].Drop(transform.position);
@@ -70,6 +75,7 @@ public class Enemy : MonoBehaviour
     {
         Player = PlayerController.instance.gameObject;
         coinPrefab = ItemLibrary.instance.coinPrefab;
+        moneyPouchPrefab = ItemLibrary.instance.moneyPouchPrefab;
         _moveSpeed = 3;
         StartCoroutine(SlowedHandler(1));
         Health = 5;
@@ -248,6 +254,10 @@ public class Enemy : MonoBehaviour
         for(int i = 0; i < num; i++){
             Instantiate(coinPrefab).transform.position = new Vector2(transform.position.x + i*0.5f, transform.position.y);
         }
+    }
+
+    protected void DropMoneyPouch(){
+        Instantiate(moneyPouchPrefab).transform.position = transform.position;
     }
 
    

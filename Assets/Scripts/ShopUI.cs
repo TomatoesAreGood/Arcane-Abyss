@@ -19,7 +19,7 @@ public class ShopUI : MonoBehaviour
         _itemlibrary = ItemLibrary.instance.Library;
 
     }
-      private void Start(){
+    private void Start(){
         for (int i = 0; i < _shopItems.Length; i++){
             int rand = Random.Range(0, _itemlibrary.Length);
             bool isDupelicate = false;

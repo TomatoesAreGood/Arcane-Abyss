@@ -26,7 +26,6 @@ public class EnemyPouncer : Enemy
         _pounceSpeed = 8;
         _moveSpeed = (int)_path.maxSpeed;
         EnemyID = 1;
-        StartCoroutine(SlowedHandler(1));
     }
 
     protected override void FixedUpdate()
