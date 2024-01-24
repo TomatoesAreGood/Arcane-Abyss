@@ -11,7 +11,7 @@ public class SoundManager : MonoBehaviour, IDataPersistance
     public static SoundManager instance;
     public List<AudioSource> SFXSources;
     [SerializeField] private AudioSource BGMAudioSource;
-    [SerializeField] private AudioClip _playerDamageSFX, _fireBallSFX, _iceSpellSFX, _windSpellSFX, _magicShotSFX, _coinPickUpSFX, _itemPickUpSFX, _enemyDamageSFX, _sippingSFX, _buyItemSFX, _sellItemSFX;
+    [SerializeField] private AudioClip _playerDamageSFX, _fireBallSFX, _iceSpellSFX, _windSpellSFX, _magicShotSFX, _coinPickUpSFX, _itemPickUpSFX, _enemyDamageSFX, _enemyDeathSFX, _sippingSFX, _buyItemSFX, _sellItemSFX;
 
     // Start is called before the first frame update
     private void Start()
@@ -113,6 +113,13 @@ public class SoundManager : MonoBehaviour, IDataPersistance
     {
         AudioSource audioSource = GetAvailAudioSource();
         audioSource.clip = _enemyDamageSFX;
+        audioSource.Play();
+    }
+
+    public void PlayEnemyDeathSFX()
+    {
+        AudioSource audioSource = GetAvailAudioSource();
+        audioSource.clip = _enemyDeathSFX;
         audioSource.Play();
     }
 

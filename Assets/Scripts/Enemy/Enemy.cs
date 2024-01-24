@@ -84,6 +84,7 @@ public class Enemy : MonoBehaviour
             FinalStats.enemies.Add(gameObject.name);
             OnDeath();
             Destroy(gameObject);
+            SoundManager.instance.PlayEnemyDeathSFX();
         }
     }
 
