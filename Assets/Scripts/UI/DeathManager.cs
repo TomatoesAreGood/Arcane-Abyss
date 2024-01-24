@@ -24,6 +24,7 @@ public class DeathManager : MonoBehaviour, IDataPersistance
         }
         deathMenu.Disable();
         isDead = false;
+        timeAlive = 0f;
     }
    
     private void Update()
