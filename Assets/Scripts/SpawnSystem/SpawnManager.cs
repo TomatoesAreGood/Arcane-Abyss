@@ -22,6 +22,8 @@ public class SpawnManager : MonoBehaviour
     private float _waveTimer;
     private float _spawnRate;
     private float _waveNum;
+    private float _waveTime;
+    private bool _isStart = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +32,7 @@ public class SpawnManager : MonoBehaviour
         _waveNum = 0;
         FindAvailablePlaces();
         Debug.Log("start test");
+        _waveTime = 7;
     }
 
 
@@ -95,13 +98,14 @@ public class SpawnManager : MonoBehaviour
     public void WaveManager()
     {
         _waveTimer += Time.deltaTime;
-        
-        if (_waveTimer > 60) {
+
+        if (_waveTimer > _waveTime) {
             if (_spawnRate > 2) {
                 _spawnRate -= 1;
             }
             Debug.Log(_waveNum);
             _waveNum += 1;
+            _waveTime = 60;
             _waveTimer = 0;
         }
     }
