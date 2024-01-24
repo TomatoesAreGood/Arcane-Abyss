@@ -233,7 +233,6 @@ public class InventoryRenderer : MonoBehaviour
 
     //writes data into the inventory 
     public void UpdateData(){
-        //Debug.Log("updated: " + rendererType);
         for(int i = 0; i < transform.childCount; i++){
             GetSlot(i).UpdateData();
             if(GetSlot(i).IsEmpty()){
@@ -271,7 +270,9 @@ public class InventoryRenderer : MonoBehaviour
 
     //bubble sorts items by value, decreasing
     public void BubbleSortValue(){
-        for(int j = 0; j < inventoryData.Length; j++){
+        UpdateData();
+
+        for (int j = 0; j < inventoryData.Length; j++){
             for(int i = 0; i < inventoryData.Length-1; i++){
                 int value1 = 0;
                 int value2 = 0;
@@ -292,6 +293,7 @@ public class InventoryRenderer : MonoBehaviour
             }
         }
         RedrawMatrix();
+        UpdateData();
     }
 
     private bool ContainsKey( Dictionary<Item, int> itemCountDict, Item key){
@@ -306,6 +308,8 @@ public class InventoryRenderer : MonoBehaviour
 
     //pigeonhole sorts, from most to least occurances 
     public void PigeonHoleSortOcurrances(){
+        UpdateData();
+
         Dictionary<Item, int> itemCountDict = new Dictionary<Item, int>();
         
         for(int i = 0; i < inventoryData.Length; i++){
@@ -338,14 +342,17 @@ public class InventoryRenderer : MonoBehaviour
             itemCountDict.Remove(key);
         }
         RedrawMatrix();
+        UpdateData();
     }
 
     public void MergeSortSortAlpha(){
+        UpdateData();
         MergeSortSortAlpha(inventoryData);
         RedrawMatrix();
+        UpdateData();
     }
 
-     public void MergeSortSortAlpha(Item[] arr){
+    public void MergeSortSortAlpha(Item[] arr){
         if(arr.Length <= 1){
             return;
         }

@@ -42,7 +42,6 @@ public class InventoryUI : MonoBehaviour
                 equippedStaff.gameObject.SetActive(false);
                 damageBonus.text = "+0 Damage Bonus";
             }
-            UpdateData();
             gameObject.SetActive(true);
         }else{
             gameObject.SetActive(false);

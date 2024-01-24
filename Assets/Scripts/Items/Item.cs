@@ -59,6 +59,7 @@ public class Item : MonoBehaviour
 
             parentAfterDrag = transform.parent; 
             image.raycastTarget = false;
+            renderer.UpdateData();
         }
         //on drag
         if(Input.GetMouseButton(0) && IsMouseOnItem){
@@ -83,8 +84,9 @@ public class Item : MonoBehaviour
             transform.position = parentAfterDrag.position;
             image.raycastTarget = false;
             MousePointer.instance.DeSelectItem();
+            renderer.UpdateData();
         }
-        
+
     }
 
     public void SnapBack(){
