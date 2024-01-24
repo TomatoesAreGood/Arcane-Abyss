@@ -213,17 +213,6 @@ public class PlayerController : MonoBehaviour, IDataPersistance
             }        
         }
 
-       string a = "";
-
-       foreach(SpellItem item in inventory.spells){
-        if(item != null){
-            a += item.ToString() + ", ";
-        }else{
-            a+= "  ,";
-        }
-       }
-       Debug.Log(a);
-
         if (Input.GetKeyDown(KeyCode.K)) {
             health = -1;
         }
