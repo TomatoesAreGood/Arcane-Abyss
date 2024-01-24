@@ -53,7 +53,17 @@ public class EnemyTank : Enemy
                     EnemyState = State.ChaseTarget;
                 }
                 break;
+            case State.Stunned:
+                _path.canMove = false;
+                _timer += Time.fixedDeltaTime;
+                if (_timer > 1)
+                {
+                    EnemyState = State.ChaseTarget;
+                    _timer = 0;
 
+                }
+
+                break;
         }
     }
 
