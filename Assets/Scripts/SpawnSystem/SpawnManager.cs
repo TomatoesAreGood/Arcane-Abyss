@@ -135,7 +135,7 @@ public class SpawnManager : MonoBehaviour
     public void SpawnChest()
     {
         _chestTimer += Time.deltaTime;
-        if (_chestTimer > 7)
+        if (_chestTimer > 12)
         {
             GameObject randomChest = _chestPool[UnityEngine.Random.Range(0, _chestPool.Length)];
             Vector3 randomSpawn = _availablePlaces[UnityEngine.Random.Range(0, _availablePlaces.Count)];
