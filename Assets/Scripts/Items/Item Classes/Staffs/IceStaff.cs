@@ -11,6 +11,6 @@ public class IceStaff : StaffItem
         value = 85;
         desc = "An eloquently carved staff of ice. The crystal at the top shines with power";
         title = GetType().Name;
-        itemID = 15;
+        itemID = 103;
     }
 }

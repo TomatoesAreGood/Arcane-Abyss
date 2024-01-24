@@ -15,7 +15,7 @@ public class HealthPotion : PotionItem
         value = 20;
         desc = "A red-colored potion which restores vitality. Heal 2 hearts.";
         title = GetType().Name;
-        itemID = 7;
+        itemID = 10;
     }
     
 }

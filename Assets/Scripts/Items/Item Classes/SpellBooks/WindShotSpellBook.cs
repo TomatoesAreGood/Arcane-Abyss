@@ -17,6 +17,6 @@ public class WindShotSpellBook : SpellBook
         value = 200;
         desc = "Use to learn Wind Blade spell";
         title = GetType().Name;
-        itemID = 14;
+        itemID = 22;
     }
 }

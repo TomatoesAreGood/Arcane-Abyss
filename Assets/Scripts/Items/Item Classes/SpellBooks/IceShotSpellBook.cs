@@ -16,6 +16,6 @@ public class IceShotSpellBook : SpellBook
         value = 200;
         desc = "Use to learn Icicle Spear spell";
         title = GetType().Name;
-        itemID = 13;
+        itemID = 21;
     }
 }

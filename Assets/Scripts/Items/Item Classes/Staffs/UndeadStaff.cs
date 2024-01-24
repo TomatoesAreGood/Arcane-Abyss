@@ -11,6 +11,6 @@ public class UndeadStaff : StaffItem
         value = 85;
         desc = "An ominous looking staff topped with a skull";
         title = GetType().Name;
-        itemID = 19;
+        itemID = 107;
     }
 }

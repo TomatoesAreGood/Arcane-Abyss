@@ -11,6 +11,6 @@ public class HolyStaff : StaffItem
         value = 100;
         desc = "A divine staff that has wings sprouting from its sides";
         title = GetType().Name;
-        itemID = 17;
+        itemID = 105;
     }
 }

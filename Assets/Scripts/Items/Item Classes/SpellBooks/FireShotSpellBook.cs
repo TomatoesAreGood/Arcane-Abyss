@@ -16,6 +16,6 @@ public class FireShotSpellBook : SpellBook
         value = 200;
         desc = "Use to learn FireBall spell";
         title = GetType().Name;
-        itemID = 9;
+        itemID = 20;
     }
 }

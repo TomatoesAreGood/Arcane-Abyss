@@ -11,6 +11,6 @@ public class TridentStaff : StaffItem
         value = 300;
         desc = "A three-pronged staff that releases three times more magic";
         title = GetType().Name;
-        itemID = 18;
+        itemID = 106;
     }
 }

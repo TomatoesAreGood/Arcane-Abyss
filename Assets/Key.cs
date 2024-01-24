@@ -10,7 +10,7 @@ public class Key : Item
         value = 50;
         desc = "A shiny gold key! Maybe it unlocks something of value?";
         title = GetType().Name;
-        itemID = 20;
+        itemID = 200;
     }
 
 }

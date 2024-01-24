@@ -11,6 +11,6 @@ public class BasicStaff : StaffItem
         value = 10;
         desc = "A pretty simple looking staff which mildly enhances spell power";
         title = GetType().Name;
-        itemID = 5;
+        itemID = 100;
     }
 }

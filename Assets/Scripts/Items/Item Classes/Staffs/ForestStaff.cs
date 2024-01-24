@@ -11,6 +11,6 @@ public class ForestStaff : StaffItem
         value = 50;
         desc = "A staff carved from high quality wood, and imbued with a shiny mana crystal at the top";
         title = GetType().Name;
-        itemID = 6;
+        itemID = 101;
     }
 }

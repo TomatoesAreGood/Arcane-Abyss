@@ -44,10 +44,10 @@ public class ItemLibrary : MonoBehaviour
             iceShotSpellBook, windShotSpellBook
             };
             itemIDToReference = new Dictionary<Item, int>{
-                {fireShot,1}, {iceShot,2},{magicShot,3},{windShot,4},{basicStaff,5},
-                {forestStaff,6},{healthPotion,7},{darkStaff,8},{fireShotSpellBook,9},{smallHealthPot,10} , 
-                {smallManaPot, 11}, {manaPotion, 12}, {iceShotSpellBook, 13}, {windShotSpellBook, 14 }, {iceStaff, 15},
-                {demonicEyeStaff, 16}, {holyStaff, 17}, {tridentStaff, 18}, {undeadStaff, 19}, {key, 20}
+                {fireShot,1}, {iceShot,2},{magicShot,3},{windShot,4},{basicStaff,100},
+                {forestStaff,101},{healthPotion,10},{darkStaff,102},{fireShotSpellBook,20},{smallHealthPot,12} , 
+                {smallManaPot, 13}, {manaPotion, 11}, {iceShotSpellBook, 21}, {windShotSpellBook, 22}, {iceStaff, 103},
+                {demonicEyeStaff, 104}, {holyStaff, 105}, {tridentStaff, 106}, {undeadStaff, 107}, {key, 200}
             };
 
             InitalizeItemToArray();

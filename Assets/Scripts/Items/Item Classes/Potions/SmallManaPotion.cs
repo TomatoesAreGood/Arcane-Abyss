@@ -15,6 +15,6 @@ public class SmallManaPotion : PotionItem
         value = 15;
         desc = "Contains a cool-looking blue liquid in a vial. Regenerates 25 mana.";
         title = GetType().Name;
-        itemID = 11;
+        itemID = 13;
     }
 }
