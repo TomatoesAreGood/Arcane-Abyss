@@ -41,7 +41,7 @@ public class DeathMenu : MonoBehaviour
     }
 
     private void UpdateTimeText(){
-        _timeText.text = "Time survived: " + Time.time;
+        _timeText.text = "Time survived: " + DeathManager.instance.timeAlive;
     }
 
 }

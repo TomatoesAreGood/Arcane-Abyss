@@ -295,6 +295,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
                 HealthBarList.EmptyFullHeart();
             }
             health -= damage;
+            SoundManager.instance.PlayPlayerDamageSFX();
         }
         StartCoroutine(ImmunityHandler());
     }

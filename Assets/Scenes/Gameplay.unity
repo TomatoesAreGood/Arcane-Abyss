@@ -2109,6 +2109,9 @@ MonoBehaviour:
     SFXVolume: 0.4
     maxHealth: 5
     coins: 0
+    waveNum: 0
+    spawnRate: 10
+    timeAlive: 0
 --- !u!4 &373800875
 Transform:
   m_ObjectHideFlags: 0
@@ -2537,53 +2540,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4791982908797173196, guid: 5db2329b55b72a747aa5d140d9e30215, type: 3}
   m_PrefabInstance: {fileID: 489808215}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &491409149
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 491409151}
-  - component: {fileID: 491409150}
-  m_Layer: 0
-  m_Name: ShopManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &491409150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 491409149}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 416a083f59454614a88b8bd98b50f40b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsPaused: 0
-  Balance: {fileID: 863046902}
-  ShopUI: {fileID: 2087377023}
---- !u!4 &491409151
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 491409149}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.7168688, y: -0.98145103, z: 109.51949}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &518696536
 GameObject:
   m_ObjectHideFlags: 0
@@ -12494,7 +12450,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &858513868
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12590,9 +12546,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f33211352159a1543bdbf02e3af673c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemiesText: {fileID: 0}
-  _wavesText: {fileID: 0}
-  _timeText: {fileID: 0}
+  _enemiesText: {fileID: 574649178}
+  _wavesText: {fileID: 1017445384}
+  _timeText: {fileID: 1764176630}
 --- !u!1 &863046900
 GameObject:
   m_ObjectHideFlags: 0
@@ -18562,8 +18518,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a359a29d43e0824dad33d9208948d44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathMenu: {fileID: 0}
+  deathMenu: {fileID: 858513872}
   isDead: 0
+  timeAlive: 0
 --- !u!4 &1841287952
 Transform:
   m_ObjectHideFlags: 0
@@ -45376,9 +45333,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShopItemPrefab: {fileID: 8004762476182054884, guid: 5db2329b55b72a747aa5d140d9e30215, type: 3}
-  shopItems: []
+  _shopItems: []
   scrollableList: {fileID: 1554564536}
-  itemlibrary: []
+  _itemlibrary: []
 --- !u!114 &2087377024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50072,7 +50029,6 @@ SceneRoots:
   - {fileID: 884844536}
   - {fileID: 1177099159}
   - {fileID: 1841287952}
-  - {fileID: 491409151}
   - {fileID: 1293992645}
   - {fileID: 202136315}
   - {fileID: 1019001385}

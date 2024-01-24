@@ -21,6 +21,9 @@ public class GameData
     public float SFXVolume;
     public int maxHealth;
     public int coins;
+    public float waveNum;
+    public float spawnRate;
+    public float timeAlive;
 
     public GameData(){
         killedEnemies = new List<string>();
@@ -36,6 +39,10 @@ public class GameData
         musicVolume = 0.5f;
         SFXVolume = 0.5f;
         coins = 0;
+        spawnRate = 10;
+        waveNum = 0;
+        timeAlive = 0;
+
         itemsIDs[0] = 100;
         itemsIDs[1] = 200;
         spellsIDs[0] = 3;

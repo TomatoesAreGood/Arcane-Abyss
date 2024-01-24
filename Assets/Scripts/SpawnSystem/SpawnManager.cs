@@ -7,7 +7,7 @@ using System;
 using System.ComponentModel.Design.Serialization;
 using System.Data;
 
-public class SpawnManager : MonoBehaviour
+public class SpawnManager : MonoBehaviour, IDataPersistance
 {
     public GameObject Enemy;
     public GameObject EnemyPouncer;
@@ -135,7 +135,7 @@ public class SpawnManager : MonoBehaviour
     public void SpawnChest()
     {
         _chestTimer += Time.deltaTime;
-        if (_chestTimer > 12)
+        if (_chestTimer > 3)
         {
             GameObject randomChest = _chestPool[UnityEngine.Random.Range(0, _chestPool.Length)];
             Vector3 randomSpawn = _availablePlaces[UnityEngine.Random.Range(0, _availablePlaces.Count)];
@@ -150,5 +150,17 @@ public class SpawnManager : MonoBehaviour
         WaveManager();
         SpawnEnemy();
         SpawnChest();
+    }
+
+    public void LoadData(GameData data)
+    {
+        _waveNum = data.waveNum;
+        _spawnRate = data.spawnRate;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.spawnRate = _spawnRate;
+        data.waveNum = _waveNum;
     }
 }
