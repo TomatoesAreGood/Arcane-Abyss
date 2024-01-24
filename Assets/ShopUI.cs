@@ -8,7 +8,7 @@ public class ShopUI : MonoBehaviour
     public GameObject ShopItemPrefab;
     public Item[] shopItems;
     public Transform scrollableList;
-    public int numItems;
+    private int numItems;
     public Item[] itemlibrary;
     public virtual void Awake(){
      
@@ -38,16 +38,34 @@ public class ShopUI : MonoBehaviour
         {
             for(int j = 0; j < shopItems.Length-1; j++)
             {
-                if (shopItems[j].value > shopItems[j +1].value)
+                
+                if (ShopItem.itemPrices[shopItems[j].GetType().Name] > ShopItem.itemPrices[shopItems[j +1].GetType().Name])
                 {
-                    int value = shopItems[j].value;
-                    shopItems[j].value = shopItems[j +1].value;
-                    shopItems[j +1].value = value;
+                    Item value = shopItems[j];
+                    shopItems[j] = shopItems[j +1];
+                    shopItems[j +1] = value;
                 }
             }
         }
     }
-    
+
+    public void SortByType()
+    {
+        for (int i = 0; i < shopItems.Length; i++)
+        {
+            for (int j = 0; j < shopItems.Length - 1; j++)
+            {
+
+                if (ShopItem.itemPrices[shopItems[j].GetType().Name] > ShopItem.itemPrices[shopItems[j + 1].GetType().Name])
+                {
+                    Item value = shopItems[j];
+                    shopItems[j] = shopItems[j + 1];
+                    shopItems[j + 1] = value;
+                }
+            }
+        }
+    }
+
     public void RedrawList(){
         for(int i = 0; i < scrollableList.childCount; i++){
             Destroy(scrollableList.GetChild(i).gameObject);
@@ -78,4 +96,6 @@ public class ShopUI : MonoBehaviour
     public void Disable(){
         gameObject.SetActive(false);
     }
+
+    
 }
