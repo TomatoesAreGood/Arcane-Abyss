@@ -12590,9 +12590,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f33211352159a1543bdbf02e3af673c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemiesText: {fileID: 0}
-  _wavesText: {fileID: 0}
-  _timeText: {fileID: 0}
+  _enemiesText: {fileID: 574649178}
+  _wavesText: {fileID: 1017445384}
+  _timeText: {fileID: 1764176630}
 --- !u!1 &863046900
 GameObject:
   m_ObjectHideFlags: 0
@@ -18562,7 +18562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a359a29d43e0824dad33d9208948d44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathMenu: {fileID: 0}
+  deathMenu: {fileID: 858513872}
   isDead: 0
 --- !u!4 &1841287952
 Transform:
@@ -45376,9 +45376,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShopItemPrefab: {fileID: 8004762476182054884, guid: 5db2329b55b72a747aa5d140d9e30215, type: 3}
-  shopItems: []
+  _shopItems: []
   scrollableList: {fileID: 1554564536}
-  itemlibrary: []
+  _itemlibrary: []
 --- !u!114 &2087377024
 MonoBehaviour:
   m_ObjectHideFlags: 0
