@@ -6,83 +6,130 @@ using UnityEngine.UIElements;
 public class ShopUI : MonoBehaviour
 {
     public GameObject ShopItemPrefab;
-    public Item[] shopItems;
+    public Item[] _shopItems;
     public Transform scrollableList;
-    private int numItems;
-    public Item[] itemlibrary;
+    private int _numItems;
+    public Item[] _itemlibrary;
+    
     public virtual void Awake(){
-     
-        numItems = 10;
-        shopItems = new Item[numItems];
-        itemlibrary = ItemLibrary.instance.Library;
+
+        _numItems = 10;
+        _shopItems = new Item[_numItems];
+        _itemlibrary = ItemLibrary.instance.Library;
 
     }
     private void Start(){
         
-        for (int i = 0; i < shopItems.Length; i++){
-            int rand = Random.Range(0, itemlibrary.Length);
+        for (int i = 0; i < _shopItems.Length; i++){
+            int rand = Random.Range(0, _itemlibrary.Length);
 
-            while(itemlibrary[rand] is SpellItem){
-                rand = Random.Range(0, itemlibrary.Length);
+            while(_itemlibrary[rand] is SpellItem){
+                rand = Random.Range(0, _itemlibrary.Length);
             }
+            
 
-            shopItems[i] = itemlibrary[rand];
+            _shopItems[i] = _itemlibrary[rand];
         }
-        SortByPrice();
         RedrawList();
     }
 
     public void SortByPrice()
     {
-        for (int i = 0; i < shopItems.Length; i++)
+        for (int i = 0; i < _shopItems.Length; i++)
         {
-            for(int j = 0; j < shopItems.Length-1; j++)
+            for(int j = 0; j < _shopItems.Length-1; j++)
             {
                 
-                if (ShopItem.itemPrices[shopItems[j].GetType().Name] > ShopItem.itemPrices[shopItems[j +1].GetType().Name])
+                if (ShopItem.itemPrices[_shopItems[j].GetType().Name] > ShopItem.itemPrices[_shopItems[j +1].GetType().Name])
                 {
-                    Item value = shopItems[j];
-                    shopItems[j] = shopItems[j +1];
-                    shopItems[j +1] = value;
+                    Item value = _shopItems[j];
+                    _shopItems[j] = _shopItems[j +1];
+                    _shopItems[j +1] = value;
                 }
             }
         }
+        RedrawList();
+
     }
 
-    public void SortByType()
+    public void MergeSort()
     {
-        for (int i = 0; i < shopItems.Length; i++)
-        {
-            for (int j = 0; j < shopItems.Length - 1; j++)
-            {
+        MergeSortSortAlphabetically(_shopItems);
+        RedrawList();
+    }
+    public void MergeSortSortAlphabetically(Item[] Array)
+    {
 
-                if (ShopItem.itemPrices[shopItems[j].GetType().Name] > ShopItem.itemPrices[shopItems[j + 1].GetType().Name])
-                {
-                    Item value = shopItems[j];
-                    shopItems[j] = shopItems[j + 1];
-                    shopItems[j + 1] = value;
-                }
+        if (Array.Length <= 1)
+        {
+            return;
+        }
+
+        int Midpoint = Array.Length / 2;
+
+        Item[] LeftArray = new Item[Midpoint];
+        Item[] RightArray = new Item[Array.Length - LeftArray.Length];
+
+        for (int i = 0; i < LeftArray.Length; i++)
+        {
+            LeftArray[i] = Array[i];
+        }
+
+        for (int j = 0; j < RightArray.Length; j++)
+        {
+            RightArray[j] = Array[LeftArray.Length + j];
+        }
+        MergeSortSortAlphabetically(LeftArray);
+        MergeSortSortAlphabetically(RightArray);
+
+
+        int Cursor = 0; int LeftMarker = 0; int RightMarker = 0;
+
+        while (LeftMarker < LeftArray.Length && RightMarker < RightArray.Length)
+        {
+            if (LeftArray[LeftMarker].name.CompareTo(RightArray[RightMarker].name) < 0)
+            {
+                Array[Cursor] = LeftArray[LeftMarker]; Cursor++; LeftMarker++;
+
+            }
+            else
+            {
+                Array[Cursor] = RightArray[RightMarker]; Cursor++; RightMarker++;
+
             }
         }
+
+        while (LeftMarker < LeftArray.Length)
+        {
+            Array[Cursor] = LeftArray[LeftMarker]; Cursor++; LeftMarker++;
+        }
+        while (RightMarker < RightArray.Length)
+        {
+            Array[Cursor] = RightArray[RightMarker]; Cursor++; RightMarker++;
+
+        }
+
     }
+
+    
 
     public void RedrawList(){
         for(int i = 0; i < scrollableList.childCount; i++){
             Destroy(scrollableList.GetChild(i).gameObject);
         }
-        for(int i = 0; i < shopItems.Length; i++){
-            if(shopItems[i] != null){
-                Instantiate(ShopItemPrefab, scrollableList).GetComponent<ShopItem>().itemRef = shopItems[i];
+        for(int i = 0; i < _shopItems.Length; i++){
+            if(_shopItems[i] != null){
+                Instantiate(ShopItemPrefab, scrollableList).GetComponent<ShopItem>().itemRef = _shopItems[i];
             }
         }
     }
 
     public void RemoveItem(Item item){
-        for(int i = 0; i < shopItems.Length; i++){
-            if(shopItems[i] == item){
+        for(int i = 0; i < _shopItems.Length; i++){
+            if(_shopItems[i] == item){
 
 
-                shopItems[i] = null;
+                _shopItems[i] = null;
                 break;
                 
                
