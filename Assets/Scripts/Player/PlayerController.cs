@@ -213,13 +213,24 @@ public class PlayerController : MonoBehaviour, IDataPersistance
             }        
         }
 
+       string a = "";
+
+       foreach(SpellItem item in inventory.spells){
+        if(item != null){
+            a += item.ToString() + ", ";
+        }else{
+            a+= "  ,";
+        }
+       }
+       Debug.Log(a);
+
         if (Input.GetKeyDown(KeyCode.K)) {
             health = -1;
         }
 
         if (health <= 0)
         {
-            DeathMenu.instance.isDead = true;
+            DeathManager.instance.isDead = true;
         }
 
     }
@@ -278,10 +289,21 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         inventory.equippedSpells[spellIndex] = spell;
 
     }
-
     public int FindEquippedSpell(SpellItem spell){
         for(int i = 0 ; i < 4 ;i++){
             if(inventory.equippedSpells[i] == spell){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public int FindSpellInInventory(SpellItem spell){
+        for(int i = 0 ; i < inventory.spells.Length ;i++){
+            if(inventory.spells[i] == null){
+                continue;
+            }   
+            if(inventory.spells[i].GetType().Name == spell.GetType().Name){
                 return i;
             }
         }
@@ -409,7 +431,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     {
         for (int i = 0; i < inventory.items.Length; i++)
         {
-            if (inventory.items[i].GetType() is Key)
+            if (inventory.items[i] is Key)
             {
                 return true;
             }

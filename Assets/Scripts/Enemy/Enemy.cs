@@ -81,10 +81,10 @@ public class Enemy : MonoBehaviour
     {
         if (Health <= 0)
         {
-            FinalStats.enemies.Add(gameObject.name);
+            FinalStats.instance.AddEnemy(this);
             OnDeath();
-            Destroy(gameObject);
             SoundManager.instance.PlayEnemyDeathSFX();
+            Destroy(gameObject);
         }
     }
 

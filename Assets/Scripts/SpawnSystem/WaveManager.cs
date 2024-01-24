@@ -5,11 +5,19 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
+    public static WaveManager instance;
     public SpawnManager SpawnManager;
     private TextMeshProUGUI _waveDisplay;
-    private float currentWaveNum;
-    // Start is called before the first frame update
-    void Start()
+    public float currentWaveNum;
+
+    private void Awake(){
+        if(instance == null){
+            instance = this;
+        }else{
+            Destroy(gameObject);
+        }
+    }
+    private void Start()
     {
         _waveDisplay = GetComponent<TextMeshProUGUI>();
         _waveDisplay.enabled = !_waveDisplay.enabled;
@@ -18,7 +26,7 @@ public class WaveManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (SpawnManager.GetWaveNum() != currentWaveNum)
         {

@@ -5,8 +5,7 @@ using UnityEngine;
 public class FinalStats : MonoBehaviour, IDataPersistance
 {
     public static FinalStats instance;
-    
-    public static List<string> enemies;
+    public List<string> killedEnemies;
     public Dictionary<string, int> pigeonHoleSortedEnemies;
 
     /*
@@ -24,27 +23,17 @@ public class FinalStats : MonoBehaviour, IDataPersistance
         {
             Destroy(gameObject);
         }
-        enemies = new List<string>();
+        killedEnemies = new List<string>();
         pigeonHoleSortedEnemies = new Dictionary<string, int>();
     }
 
-
-
-    //void Start()
-    //{
-        
-    //}
+    public void AddEnemy(Enemy enemy){
+        killedEnemies.Add(enemy.GetType().Name);
+    }
 
     public void PigeonHoleSort()
     {
-        string a = "";
-        foreach (string enemy in enemies)
-        {
-            a += enemy + ", ";
-        }
-        Debug.Log(a);
-
-        foreach (string enemy in enemies)
+        foreach (string enemy in killedEnemies)
         {
             if (pigeonHoleSortedEnemies.ContainsKey(enemy)){
                 pigeonHoleSortedEnemies[enemy] += 1;
@@ -55,11 +44,11 @@ public class FinalStats : MonoBehaviour, IDataPersistance
     }
 
     public void LoadData(GameData data){
-        enemies = data.killedEnemies;
+        killedEnemies = data.killedEnemies;
     }
 
     public void SaveData(ref GameData data){
-        data.killedEnemies = enemies;
+        data.killedEnemies = killedEnemies;
     }
 
 }
