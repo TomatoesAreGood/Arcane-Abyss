@@ -564,7 +564,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 41566962}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2087377023}
+        m_TargetAssemblyTypeName: ShopUI, Assembly-CSharp
+        m_MethodName: SortByPrice
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &41566962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12392,7 +12404,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 840143192}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2087377023}
+        m_TargetAssemblyTypeName: ShopUI, Assembly-CSharp
+        m_MethodName: MergeSort
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &840143192
 MonoBehaviour:
   m_ObjectHideFlags: 0
