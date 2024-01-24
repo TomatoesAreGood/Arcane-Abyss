@@ -15,6 +15,12 @@ public class SpawnManager : MonoBehaviour
     public GameObject EnemySpellCaster;
     public GameObject EnemyTank;
     private GameObject[] _enemyPool;
+    public GameObject Chest;
+    public GameObject StaffChest;
+    public GameObject SpellBookChest;
+    public GameObject PotionChest;
+    private GameObject[] _chestPool;
+
     public Tilemap Tilemap;
     public GameObject TestSpawn;
     private List<Vector3> _availablePlaces;
@@ -23,11 +29,13 @@ public class SpawnManager : MonoBehaviour
     private float _spawnRate;
     private float _waveNum;
     private float _waveTime;
+    private float _chestTimer;
     private bool _isStart = true;
     // Start is called before the first frame update
     void Start()
     {
         _enemyPool = new GameObject[]{Enemy, EnemyPouncer, EnemyRanger, EnemySpellCaster , EnemyTank};
+        _chestPool = new GameObject[] {Chest, PotionChest, SpellBookChest, StaffChest};
         _spawnRate = 10;
         _waveNum = 0;
         FindAvailablePlaces();
@@ -119,10 +127,21 @@ public class SpawnManager : MonoBehaviour
             GameObject randomEnemy = _enemyPool[UnityEngine.Random.Range(0, _enemyPool.Length)];
             Vector3 randomSpawn = _availablePlaces[UnityEngine.Random.Range(0, _availablePlaces.Count)];
             Instantiate(randomEnemy, randomSpawn, Quaternion.Euler(0, 0, 0));
-            Debug.Log("instantiated");
             _spawnTimer = 0;
         }
         
+    }
+
+    public void SpawnChest()
+    {
+        _chestTimer += Time.deltaTime;
+        if (_chestTimer > 10)
+        {
+            GameObject randomChest = _chestPool[UnityEngine.Random.Range(0, _chestPool.Length)];
+            Vector3 randomSpawn = _availablePlaces[UnityEngine.Random.Range(0, _availablePlaces.Count)];
+            Instantiate(randomChest, randomSpawn, Quaternion.Euler(0, 0, 0));
+            _chestTimer = 0;
+        }
     }
 
     // Update is called once per frame
@@ -130,5 +149,6 @@ public class SpawnManager : MonoBehaviour
     {
         WaveManager();
         SpawnEnemy();
+        SpawnChest();
     }
 }

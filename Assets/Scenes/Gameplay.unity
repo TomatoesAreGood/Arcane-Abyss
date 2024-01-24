@@ -12225,6 +12225,10 @@ MonoBehaviour:
   EnemyRanger: {fileID: 4490819353254072443, guid: 1a9699b11eb26084bb0855990c738dce, type: 3}
   EnemySpellCaster: {fileID: 4490819353254072443, guid: 0a50affffbf8ace4d9f74d03659fa8a8, type: 3}
   EnemyTank: {fileID: 4490819353254072443, guid: 3480bfacbd35e1e44aff6819c9f7e003, type: 3}
+  Chest: {fileID: 7639890762844449182, guid: 1f324bac7b48d724c8d316741fa9520f, type: 3}
+  StaffChest: {fileID: 7639890762844449182, guid: b445520aca4725c47832281875a87565, type: 3}
+  SpellBookChest: {fileID: 7639890762844449182, guid: c4d8c7a9b4d4c0d41948030ff807fd5f, type: 3}
+  PotionChest: {fileID: 7639890762844449182, guid: db1734d8b8590d54a9afff88f89ea4b9, type: 3}
   Tilemap: {fileID: 1905105520}
   TestSpawn: {fileID: 366568672486645526, guid: 5daf6a7f89a6cea41a9ac905bd7638c6, type: 3}
 --- !u!1 &858513867

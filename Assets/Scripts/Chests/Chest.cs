@@ -14,7 +14,6 @@ public class Chest : MonoBehaviour
     protected string _percentString;
     protected List<Item> _pigeonItems;
     protected string _dropItem;
-    protected bool _isOpened = false;
 
     private int _invalidCount;
     private Dictionary<string, float> _itemChances;
@@ -136,7 +135,7 @@ public class Chest : MonoBehaviour
     {
         _sr.sprite = OpenSprite;
         RandomSelect().Drop(transform.position);
-        _isOpened = true;
+        Destroy(gameObject);
     }
 
     //removes objects with inherited class "SpellItem"
@@ -171,7 +170,7 @@ public class Chest : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("PlayerIsTrigger") && !_isOpened) {
+        if (collision.CompareTag("PlayerIsTrigger")) {
             Open();
             Debug.Log("open");
         }
