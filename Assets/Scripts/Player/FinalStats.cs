@@ -4,34 +4,53 @@ using UnityEngine;
 
 public class FinalStats : MonoBehaviour, IDataPersistance
 {
+    public static FinalStats instance;
+    
     public static List<string> enemies;
     public Dictionary<string, int> pigeonHoleSortedEnemies;
 
     /*
-     * magic spells shot
-     * kills
-     * net worth
-     * 
-     * 
      * - Make an array of strings - for each monster killed, add the name/label of that monster into the array. At the end, loop through and create 
      *  a dictionary (just like socks code) and have keys and values.
     */
-    
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         enemies = new List<string>();
         pigeonHoleSortedEnemies = new Dictionary<string, int>();
     }
 
+
+
+    //void Start()
+    //{
+        
+    //}
+
     public void PigeonHoleSort()
     {
+        string a = "";
         foreach (string enemy in enemies)
         {
-            if (pigeonHoleSortedEnemies.ContainsKey(enemy))
-                pigeonHoleSortedEnemies[enemy]++;
-            else
+            a += enemy + ", ";
+        }
+        Debug.Log(a);
+
+        foreach (string enemy in enemies)
+        {
+            if (pigeonHoleSortedEnemies.ContainsKey(enemy)){
+                pigeonHoleSortedEnemies[enemy] += 1;
+            } else {
                 pigeonHoleSortedEnemies[enemy] = 1;
+            }
         }
     }
 
