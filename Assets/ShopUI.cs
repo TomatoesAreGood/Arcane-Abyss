@@ -19,22 +19,31 @@ public class ShopUI : MonoBehaviour
         _itemlibrary = ItemLibrary.instance.Library;
 
     }
-    private void Start(){
-        List<Item> itemPool = _itemlibrary.ToList();
-
+      private void Start(){
         for (int i = 0; i < _shopItems.Length; i++){
-            if(itemPool.Count == 0){
+            int rand = Random.Range(0, _itemlibrary.Length);
+            bool isDupelicate = false;
+            while (_itemlibrary[rand] is SpellItem){
+                rand = Random.Range(0, _itemlibrary.Length);
+            }
+        
+            _shopItems[i] = _itemlibrary[rand];
+            for(int j = 0;  j < _shopItems.Length; j++)
+            {
+                if (_shopItems[j] == _itemlibrary[rand])
+                {
+                    isDupelicate = true;
+                    if (isDupelicate)
+                    {
+                        rand = Random.Range(0, _itemlibrary.Length);
+                    }
+                    _shopItems[j] = _itemlibrary[rand];
+                    
+
+
+                }
                 break;
             }
-
-            int rand = Random.Range(0, itemPool.Count);
-
-            if (itemPool[rand] is SpellItem){
-                itemPool.Remove(itemPool[rand]);
-            }
-            
-            _shopItems[i] = itemPool[rand];
-            itemPool.Remove(itemPool[rand]);
         }
         RedrawList();
     }
