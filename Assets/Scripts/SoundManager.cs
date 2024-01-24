@@ -7,9 +7,8 @@ public class SoundManager : MonoBehaviour, IDataPersistance
 {
     [SerializeField] Slider VolumeSlider;
     public static SoundManager instance;
-
-
-    [SerializeField] private AudioSource _source;
+    public List<AudioSource> SFXSources;
+    [SerializeField] private AudioSource BGMAudioSource;
     [SerializeField] private AudioClip _playerDamageSFX, _fireBallSFX, _iceSpellSFX, _windSpellSFX, _magicShotSFX, _coinPickUpSFX, _itemPickUpSFX, _enemyDamageSFX, _sippingSFX, _buyItemSFX, _sellItemSFX;
 
     // Start is called before the first frame update
@@ -20,10 +19,17 @@ public class SoundManager : MonoBehaviour, IDataPersistance
         } else {
             Destroy(gameObject);
         }
-
+    }
+    private AudioSource GetAvailAudioSource(){
+        for(int i = 0 ; i < SFXSources.Count; i++){
+            if(!SFXSources[i].isPlaying){
+                return SFXSources[i];
+            }
+        }
+        return SFXSources[0];
     }
 
-    public void ChangeVolume()
+    public void ChangeBGMVolume()
     {
         AudioListener.volume = VolumeSlider.value;
     }
@@ -41,68 +47,79 @@ public class SoundManager : MonoBehaviour, IDataPersistance
 
     public void PlayPlayerDamageSFX()
     {
-        _source.clip = _playerDamageSFX;
-        _source.Play();
+        AudioSource audioSource = GetAvailAudioSource();
+        audioSource.clip = _playerDamageSFX;
+        audioSource.Play();
     }
 
     public void PlayFireBallSFX()
     {
-        _source.clip = _fireBallSFX;
-        _source.Play();
+        AudioSource audioSource = GetAvailAudioSource();
+        audioSource.clip = _fireBallSFX;
+        audioSource.Play();
     }
 
     public void PlayIceSpellSFX()
     {
-        _source.clip = _iceSpellSFX;
-        _source.Play();
+        AudioSource audioSource = GetAvailAudioSource();
+        audioSource.clip = _iceSpellSFX;
+        audioSource.Play();
     }
 
     public void PlayWindSpellSFX()
     {
-        _source.clip = _windSpellSFX;
-        _source.Play();
+        AudioSource audioSource = GetAvailAudioSource();
+        audioSource.clip = _windSpellSFX;
+        audioSource.Play();
     }
 
     public void PlayMagicShotSFX()
     {
-        _source.clip = _magicShotSFX;
-        _source.Play();
+        AudioSource audioSource = GetAvailAudioSource();
+        audioSource.clip = _magicShotSFX;
+        audioSource.Play();
     }
 
     public void PlayCoinPickUpSFX()
     {
-        _source.clip = _coinPickUpSFX;
-        _source.Play();
+        AudioSource audioSource = GetAvailAudioSource();
+        audioSource.clip = _coinPickUpSFX;
+        audioSource.Play();
     }
 
     public void PlayItemPickUpSFX()
     {
-        _source.clip = _itemPickUpSFX;
-        _source.Play();
+        AudioSource audioSource = GetAvailAudioSource();
+        audioSource.clip = _itemPickUpSFX;
+        audioSource.Play();
     }
 
     public void PlayEnemyDamageSFX()
     {
-        _source.clip = _enemyDamageSFX;
-        _source.Play();
+        AudioSource audioSource = GetAvailAudioSource();
+        audioSource.clip = _enemyDamageSFX;
+        audioSource.Play();
     }
 
     public void PlaySippingSFX()
     {
-        _source.clip = _sippingSFX;
-        _source.Play();
+        AudioSource audioSource = GetAvailAudioSource();
+        audioSource.clip = _sippingSFX;
+        audioSource.Play();
     }
 
     public void PlayBuyItemSFX()
     {
-        _source.clip = _buyItemSFX;
-        _source.Play();
+        AudioSource audioSource = GetAvailAudioSource();
+        audioSource.clip = _buyItemSFX;
+        audioSource.Play();
     }
 
     public void PlaySellItemSFX()
     {
-        _source.clip = _sellItemSFX;
-        _source.Play();
+        AudioSource audioSource = GetAvailAudioSource();
+        audioSource.clip = _sellItemSFX;
+        audioSource.Play();
     }
 
 }
