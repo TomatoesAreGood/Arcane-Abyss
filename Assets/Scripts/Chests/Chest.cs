@@ -14,6 +14,7 @@ public class Chest : MonoBehaviour
     protected string _percentString;
     protected List<Item> _pigeonItems;
     protected string _dropItem;
+    protected bool _isLocked;
 
     private int _invalidCount;
     private Dictionary<string, float> _itemChances;
@@ -37,6 +38,7 @@ public class Chest : MonoBehaviour
         LibraryCleanUp();
         PigeonHoleSort();
         SetChestText();
+        RandomizeLock();
         _sr = GetComponent<SpriteRenderer>();
 /*        foreach (KeyValuePair<string, float> kvp in _itemChances)
         {
@@ -56,6 +58,14 @@ public class Chest : MonoBehaviour
 
     //sort item types(staff, spellbook, potion) in # of frequincies with pigeonhole sort
 
+    protected void RandomizeLock()
+    {
+        int randomNum = UnityEngine.Random.Range(1, 3);
+        if (randomNum == 1) { 
+            _isLocked = true;
+            ChestText.text = "****LOCKED****";
+        }
+    }
 
     protected virtual void SetChestText()
     {
@@ -177,9 +187,11 @@ public class Chest : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("PlayerIsTrigger")/* && PlayerController.instance.HasKey()*/) {
-            Open();
-            Debug.Log("open");
+        if (collision.CompareTag("PlayerIsTrigger")) {
+            if (_isLocked == true && PlayerController.instance.HasKey())
+            {
+                Open();
+            }
         }
 
         
