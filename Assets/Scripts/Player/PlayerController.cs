@@ -405,4 +405,16 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         }
     }
 
+    public bool HasKey()
+    {
+        for (int i = 0; i < inventory.items.Length; i++)
+        {
+            if (inventory.items[i].GetType() is Key)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
