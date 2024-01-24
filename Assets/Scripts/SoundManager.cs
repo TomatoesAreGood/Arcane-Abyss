@@ -5,7 +5,9 @@ using UnityEngine.UI;
 using System.Linq;
 public class SoundManager : MonoBehaviour, IDataPersistance
 {
-    [SerializeField] Slider VolumeSlider;
+    [SerializeField] Slider BGMVolumeSlider;
+    [SerializeField] Slider SFXVolumeSlider;
+
     public static SoundManager instance;
     public List<AudioSource> SFXSources;
     [SerializeField] private AudioSource BGMAudioSource;
@@ -31,18 +33,31 @@ public class SoundManager : MonoBehaviour, IDataPersistance
 
     public void ChangeBGMVolume()
     {
-        AudioListener.volume = VolumeSlider.value;
+        BGMAudioSource.volume = BGMVolumeSlider.value;
+    }
+
+    public void ChangeSFXVolume(){
+
+        for(int i = 0; i < SFXSources.Count; i++){
+            SFXSources[i].volume = SFXVolumeSlider.value;
+        }
     }
 
     public void LoadData(GameData data)
     {
-        VolumeSlider.value = data.musicVolume;
-        AudioListener.volume = data.musicVolume;
+        BGMVolumeSlider.value = data.musicVolume;
+        BGMAudioSource.volume = data.musicVolume;
+
+        SFXVolumeSlider.value = data.SFXVolume;
+        for(int i = 0; i < SFXSources.Count; i++){
+            SFXSources[i].volume = data.SFXVolume;
+        }
     }
 
     public void SaveData(ref GameData data)
     {
-        data.musicVolume = VolumeSlider.value;
+        data.musicVolume = BGMVolumeSlider.value;
+        data.SFXVolume = SFXVolumeSlider.value;
     }
 
     public void PlayPlayerDamageSFX()

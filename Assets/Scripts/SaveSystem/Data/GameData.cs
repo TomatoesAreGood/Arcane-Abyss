@@ -18,6 +18,7 @@ public class GameData
     public int health;
     public float mana;
     public float musicVolume;
+    public float SFXVolume;
     public int maxHealth;
     public int coins;
 
@@ -32,7 +33,8 @@ public class GameData
         health = 5;
         maxHealth = 5;
         mana = 100;
-        musicVolume = 0.75f;
+        musicVolume = 0.5f;
+        SFXVolume = 0.4f;
         itemsIDs[0] = 100;
         itemsIDs[1] = 200;
 
