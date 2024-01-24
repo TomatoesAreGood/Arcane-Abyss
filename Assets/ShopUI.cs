@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Expressions;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -20,37 +20,21 @@ public class ShopUI : MonoBehaviour
 
     }
     private void Start(){
+        List<Item> itemPool = _itemlibrary.ToList();
 
         for (int i = 0; i < _shopItems.Length; i++){
-            int rand = Random.Range(0, _itemlibrary.Length);
-            bool isDupelicate = false;
-            while (_itemlibrary[rand] is SpellItem){
-                rand = Random.Range(0, _itemlibrary.Length);
-            }
-            
-
-            _shopItems[i] = _itemlibrary[rand];
-            for(int j = 0;  j < _shopItems.Length; j++)
-            {
-                if (_shopItems[j] == _itemlibrary[rand])
-                {
-                    isDupelicate = true;
-                    if (isDupelicate)
-                    {
-                        rand = Random.Range(0, _itemlibrary.Length);
-                    }
-                    _shopItems[j] = _itemlibrary[rand];
-                    
-
-
-                }
+            if(itemPool.Count == 0){
                 break;
             }
-            
-            
-            
 
+            int rand = Random.Range(0, itemPool.Count);
 
+            if (itemPool[rand] is SpellItem){
+                itemPool.Remove(itemPool[rand]);
+            }
+            
+            _shopItems[i] = itemPool[rand];
+            itemPool.Remove(itemPool[rand]);
         }
         RedrawList();
     }
