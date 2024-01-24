@@ -66,6 +66,15 @@ public class ItemLibrary : MonoBehaviour
         return null;
     }
 
+    public int GetIDFromReference(Item item) {
+        foreach (KeyValuePair<Item, int> kvp in itemIDToReference) {
+            if (kvp.Key.GetType().Name == item.GetType().Name) {
+                return kvp.Value;
+            }
+        }
+        return 0;
+    }
+
 
     public void InitalizeItemToArray()
     {

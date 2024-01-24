@@ -372,9 +372,11 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         data.mana = mana;
         data.coins = coins;
 
+
         for(int i = 0; i < inventory.items.Length; i++){
             if(inventory.items[i] != null){
-                data.itemsIDs[i] = inventory.items[i].itemID;
+                int itemID = ItemLibrary.instance.GetIDFromReference(inventory.items[i]);
+                data.itemsIDs[i] = itemID;
             }else{
                 data.itemsIDs[i] = 0;
             }
@@ -382,7 +384,8 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
         for(int i = 0; i < inventory.potions.Length; i++){
             if(inventory.potions[i] != null){
-                data.potionIDs[i] = inventory.potions[i].itemID;
+                int itemID = ItemLibrary.instance.GetIDFromReference(inventory.potions[i]);
+                data.potionIDs[i] = itemID;
             }else{
                 data.potionIDs[i] = 0;
             }
@@ -390,7 +393,8 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
         for(int i = 0; i < inventory.spells.Length; i++){
             if(inventory.spells[i] != null){
-                data.spellsIDs[i] = inventory.spells[i].itemID;
+                int itemID = ItemLibrary.instance.GetIDFromReference(inventory.spells[i]);
+                data.spellsIDs[i] = itemID;
             }else{
                 data.spellsIDs[i] = 0;
             }
