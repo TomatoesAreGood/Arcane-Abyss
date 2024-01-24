@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -13,26 +14,47 @@ public class ShopUI : MonoBehaviour
     
     public virtual void Awake(){
 
-        _numItems = 10;
+        _numItems = 15;
         _shopItems = new Item[_numItems];
         _itemlibrary = ItemLibrary.instance.Library;
 
     }
     private void Start(){
-        
+
         for (int i = 0; i < _shopItems.Length; i++){
             int rand = Random.Range(0, _itemlibrary.Length);
-
-            while(_itemlibrary[rand] is SpellItem){
+            bool isDupelicate = false;
+            while (_itemlibrary[rand] is SpellItem){
                 rand = Random.Range(0, _itemlibrary.Length);
             }
             
 
             _shopItems[i] = _itemlibrary[rand];
+            for(int j = 0;  j < _shopItems.Length; j++)
+            {
+                if (_shopItems[j] == _itemlibrary[rand])
+                {
+                    isDupelicate = true;
+                    if (isDupelicate)
+                    {
+                        rand = Random.Range(0, _itemlibrary.Length);
+                    }
+                    _shopItems[j] = _itemlibrary[rand];
+                    
+
+
+                }
+                break;
+            }
+            
+            
+            
+
+
         }
         RedrawList();
     }
-
+    //Sorts By Price
     public void SortByPrice()
     {
         for (int i = 0; i < _shopItems.Length; i++)
@@ -57,6 +79,7 @@ public class ShopUI : MonoBehaviour
         MergeSortSortAlphabetically(_shopItems);
         RedrawList();
     }
+    //Sorts Array Alphebetically 
     public void MergeSortSortAlphabetically(Item[] Array)
     {
 
@@ -127,7 +150,6 @@ public class ShopUI : MonoBehaviour
     public void RemoveItem(Item item){
         for(int i = 0; i < _shopItems.Length; i++){
             if(_shopItems[i] == item){
-
 
                 _shopItems[i] = null;
                 break;
