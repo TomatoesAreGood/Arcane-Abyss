@@ -18,7 +18,7 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
-        
+        //Creates an instance that allows other scripts to refrence this class
         if (instance == null){
             instance = this;
         }else{
