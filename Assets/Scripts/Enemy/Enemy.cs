@@ -54,7 +54,13 @@ public class Enemy : MonoBehaviour
     }
     protected void OnDisable(){
         EnemySaveManager.instance.allEnemies.Remove(this);
-        DropCoins(Random.Range(1,3));
+        int randInt = Random.Range(1, 100);
+        if(randInt % 2 == 0){
+            DropCoins(Random.Range(1,3));
+        }
+        if(randInt % 3 == 0){
+            ItemLibrary.instance.Library[Random.Range(0,ItemLibrary.instance.Library.Length)].Drop(transform.position);
+        }
     }
 
     protected virtual void Start()

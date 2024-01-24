@@ -321,4 +321,15 @@ MonoBehaviour:
   Player: {fileID: 0}
   EnemyState: 0
   EnemyID: 0
-  coinPrefab: {fileID: 2291523060286969486, guid: 410e54412449d814aab4f03653c1c13c, type: 3}
+  dropPool:
+  - {fileID: 4956674019082466470, guid: d95f69441dceae44e9fcd4912a480c79, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
