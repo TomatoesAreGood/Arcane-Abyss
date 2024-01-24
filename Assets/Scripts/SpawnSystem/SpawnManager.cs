@@ -61,12 +61,6 @@ public class SpawnManager : MonoBehaviour
             }
         }
     }
-
-    public float GetWaveNum()
-    {
-        return _waveNum;
-    }
-
     public void SetWaveNum(float waveNum)
     {
         if (waveNum < 0)
@@ -74,11 +68,6 @@ public class SpawnManager : MonoBehaviour
             throw new ArgumentException("ERROR : _waveNum cannot be negative");
         }
         _waveNum = waveNum;
-    }
-
-    public float GetSpawnRate()
-    {
-        return _spawnRate;
     }
 
     public void SetSpawnRate(float spawnRate)
@@ -90,11 +79,24 @@ public class SpawnManager : MonoBehaviour
         _spawnRate = spawnRate;
     }
 
+    public float GetWaveNum()
+    {
+        return _waveNum;
+    }
+
+
+    public float GetSpawnRate()
+    {
+        return _spawnRate;
+    }
+
+
+
     public void WaveManager()
     {
         _waveTimer += Time.deltaTime;
         
-        if (_waveTimer > 10) {
+        if (_waveTimer > 60) {
             if (_spawnRate > 2) {
                 _spawnRate -= 1;
             }

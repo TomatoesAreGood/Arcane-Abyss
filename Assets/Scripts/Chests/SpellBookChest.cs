@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class SpellBookChest : Chest
 {
-    private Dictionary<Item, float> _bookItemChances;
+    private Dictionary<string, float> _bookItemChances;
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
         _sr.color = Color.HSVToRGB(0.5f, 100 / 100, 100 / 100);
-        foreach (KeyValuePair<Item, float> kvp in _bookItemChances)
+        foreach (KeyValuePair<string, float> kvp in _bookItemChances)
         {
             Debug.Log(("Key: {0}, Value: {1}", kvp.Key, kvp.Value));
         }
@@ -22,9 +22,9 @@ public class SpellBookChest : Chest
     {
         float dictLength = _bookItemChances.Count;
         _percentString = "";
-        foreach (KeyValuePair<Item, float> keyValuePair in _bookItemChances)
+        foreach (KeyValuePair<string, float> keyValuePair in _bookItemChances)
         {
-            _percentString += $"{keyValuePair.Key} : {(keyValuePair.Value / dictLength) * 100} % \n";
+            _percentString += $"{keyValuePair.Key} : {Mathf.Round((keyValuePair.Value / dictLength) * 100)} % \n";
 
         }
         _chestText.text = _percentString;
@@ -39,25 +39,25 @@ public class SpellBookChest : Chest
     //pigeonhole sort to sort throw an array of Items and add them to a Dictionary<Item, int> sorting by frequincy Items
     public override void PigeonHoleSort()
     {
-        _bookItemChances = new Dictionary<Item, float>();
-        Dictionary<Item, float> tempDict = new Dictionary<Item, float>();
+        _bookItemChances = new Dictionary<string, float>();
+        Dictionary<string, float> tempDict = new Dictionary<string, float>();
 
         for (int i = 0; i < ChestLibrary.Length; i++)
         {
-            if (_bookItemChances.ContainsKey(ChestLibrary[i]))
+            if (_bookItemChances.ContainsKey(ChestLibrary[i].GetType().Name))
             {
-                _bookItemChances[ChestLibrary[i]]++;
+                _bookItemChances[ChestLibrary[i].GetType().Name]++;
             }
             else
             {
-                _bookItemChances.Add(ChestLibrary[i], 1);
+                _bookItemChances.Add(ChestLibrary[i].GetType().Name, 1);
             }
         }
         while (_bookItemChances.Count > 0)
         {
             float max = -1;
-            Item key = null;
-            foreach (KeyValuePair<Item, float> kvp in _bookItemChances)
+            string key = "";
+            foreach (KeyValuePair<string, float> kvp in _bookItemChances)
             {
                 if (kvp.Value > max)
                 {

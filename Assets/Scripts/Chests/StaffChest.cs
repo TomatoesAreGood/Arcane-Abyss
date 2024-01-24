@@ -6,19 +6,17 @@ using UnityEngine;
 
 public class StaffChest : Chest
 {
-    private Dictionary<Item, float> _staffItemChances;
+    private Dictionary<string, float> _staffItemChances;
 
 
     // Start is called before the first frame update
 
     protected override void Start()
     {
+        base.Start();
 
-        LibraryCleanUp();
-        PigeonHoleSort();
-        SetChestText();
-/*        _sr.color = Color.HSVToRGB(0.3f, 100 / 100, 100 / 100);*/
-        foreach (KeyValuePair<Item, float> kvp in _staffItemChances)
+        _sr.color = Color.HSVToRGB(0.8f, 100 / 100, 100 / 100);
+        foreach (KeyValuePair<string, float> kvp in _staffItemChances)
         {
             Debug.Log(("Key: {0}, Value: {1}", kvp.Key, kvp.Value));
         }
@@ -33,9 +31,9 @@ public class StaffChest : Chest
     {
         float dictLength = _staffItemChances.Count;
         _percentString = "";
-        foreach (KeyValuePair<Item, float> keyValuePair in _staffItemChances)
+        foreach (KeyValuePair<string, float> keyValuePair in _staffItemChances)
         {
-            _percentString += $"{keyValuePair.Key} : {(keyValuePair.Value / dictLength) * 100} % \n";
+            _percentString += $"{keyValuePair.Key} : {Mathf.Round((keyValuePair.Value / dictLength) * 100)} % \n";
 
         }
         _chestText.text = _percentString;
@@ -44,25 +42,25 @@ public class StaffChest : Chest
     //pigeonhole sort to sort throw an array of Items and add them to a Dictionary<Item, int> sorting by frequincy Items
     public override void PigeonHoleSort()
     {
-        _staffItemChances = new Dictionary<Item, float>();
-        Dictionary<Item, float> tempDict = new Dictionary<Item, float>();
+        _staffItemChances = new Dictionary<string, float>();
+        Dictionary<string, float> tempDict = new Dictionary<string, float>();
 
         for (int i = 0; i < ChestLibrary.Length; i++)
         {
-            if (_staffItemChances.ContainsKey(ChestLibrary[i]))
+            if (_staffItemChances.ContainsKey(ChestLibrary[i].GetType().Name))
             {
-                _staffItemChances[ChestLibrary[i]]++;
+                _staffItemChances[ChestLibrary[i].GetType().Name]++;
             }
             else
             {
-                _staffItemChances.Add(ChestLibrary[i], 1);
+                _staffItemChances.Add(ChestLibrary[i].GetType().Name, 1);
             }
         }
         while (_staffItemChances.Count > 0)
         {
             float max = -1;
-            Item key = null;
-            foreach (KeyValuePair<Item, float> kvp in _staffItemChances)
+            string key = "";
+            foreach (KeyValuePair<string, float> kvp in _staffItemChances)
             {
                 if (kvp.Value > max)
                 {
