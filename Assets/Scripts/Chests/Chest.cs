@@ -14,7 +14,7 @@ public class Chest : MonoBehaviour
     protected string _percentString;
     protected List<Item> _pigeonItems;
     protected string _dropItem;
-    protected bool _isLocked;
+    protected bool _isLocked = false;
 
     private int _invalidCount;
     private Dictionary<string, float> _itemChances;
@@ -35,10 +35,13 @@ public class Chest : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        _percentString = "";
+
         LibraryCleanUp();
         PigeonHoleSort();
-        SetChestText();
         RandomizeLock();
+
+        SetChestText();
         _sr = GetComponent<SpriteRenderer>();
 /*        foreach (KeyValuePair<string, float> kvp in _itemChances)
         {
@@ -63,7 +66,7 @@ public class Chest : MonoBehaviour
         int randomNum = UnityEngine.Random.Range(1, 3);
         if (randomNum == 1) { 
             _isLocked = true;
-            ChestText.text = "****LOCKED****";
+            _percentString += "****LOCKED****\n";
         }
     }
 
@@ -74,7 +77,6 @@ public class Chest : MonoBehaviour
         {
             dictLength += value;
         }
-        _percentString = "";
         foreach (KeyValuePair<string, float> keyValuePair in _itemChances)
         {
             _percentString += $"{keyValuePair.Key} : {Mathf.Round((keyValuePair.Value / dictLength) * 100)} % \n";
@@ -189,6 +191,10 @@ public class Chest : MonoBehaviour
     {
         if (collision.CompareTag("PlayerIsTrigger")) {
             if (_isLocked == true && PlayerController.instance.HasKey())
+            {
+                Open();
+            }
+            else if (_isLocked == false)
             {
                 Open();
             }

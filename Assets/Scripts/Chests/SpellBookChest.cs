@@ -21,7 +21,6 @@ public class SpellBookChest : Chest
     protected override void SetChestText()
     {
         float dictLength = _bookItemChances.Count;
-        _percentString = "";
         foreach (KeyValuePair<string, float> keyValuePair in _bookItemChances)
         {
             _percentString += $"{keyValuePair.Key} : {Mathf.Round((keyValuePair.Value / dictLength) * 100)} % \n";

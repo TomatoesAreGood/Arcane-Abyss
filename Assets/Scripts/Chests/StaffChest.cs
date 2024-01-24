@@ -30,7 +30,6 @@ public class StaffChest : Chest
     protected override void SetChestText()
     {
         float dictLength = _staffItemChances.Count;
-        _percentString = "";
         foreach (KeyValuePair<string, float> keyValuePair in _staffItemChances)
         {
             _percentString += $"{keyValuePair.Key} : {Mathf.Round((keyValuePair.Value / dictLength) * 100)} % \n";

@@ -28,7 +28,6 @@ public class PotionChest : Chest
     protected override void SetChestText()
     {
         float dictLength = _potionItemChances.Count;
-        _percentString = "";
         foreach (KeyValuePair<string, float> keyValuePair in _potionItemChances)
         {
             _percentString += $"{keyValuePair.Key} : {Mathf.Round((keyValuePair.Value / dictLength) * 100)} % \n";
