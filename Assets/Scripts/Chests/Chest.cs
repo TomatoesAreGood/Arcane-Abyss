@@ -14,20 +14,21 @@ public class Chest : MonoBehaviour
     protected string _percentString;
     protected List<Item> _pigeonItems;
     protected string _dropItem;
+    protected bool _isOpened = false;
 
     private int _invalidCount;
-    private Dictionary<string, float> _potionItemChances;
+    private Dictionary<string, float> _itemChances;
     private string[] itemTypes = { "Staff", "SpellBook", "Potion" };
 
     public Item[] ChestLibrary;
     public Sprite OpenSprite;
     public TextMeshProUGUI _chestText;
+    
 
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
-
         LibraryCleanUp();
         PigeonHoleSort();
         SetChestText();
@@ -50,30 +51,26 @@ public class Chest : MonoBehaviour
 
     //sort item types(staff, spellbook, potion) in # of frequincies with pigeonhole sort
 
-    private void CalcChancePercent()
+
+    protected virtual void SetChestText()
     {
         float dictLength = 0;
-        foreach(int value in _potionItemChances.Values)
+        foreach (int value in _itemChances.Values)
         {
             dictLength += value;
         }
         _percentString = "";
-        foreach(KeyValuePair<string, float> keyValuePair in _potionItemChances)
+        foreach (KeyValuePair<string, float> keyValuePair in _itemChances)
         {
             _percentString += $"{keyValuePair.Key} : {Mathf.Round((keyValuePair.Value / dictLength) * 100)} % \n";
         }
-    }
-
-    protected virtual void SetChestText()
-    {
-        CalcChancePercent();
         _chestText.text = _percentString;
     }
 
     //pigeonhole sort to sort throw an array of Items and add them to a Dictionary<Item, int> sorting by frequincy Items
     public virtual void PigeonHoleSort()
     {
-        _potionItemChances = new Dictionary<string, float>();
+        _itemChances = new Dictionary<string, float>();
         Dictionary<string, float> tempDict = new Dictionary<string, float>(); 
         for (int j = 0; j < itemTypes.Length; j++)
         {
@@ -81,24 +78,24 @@ public class Chest : MonoBehaviour
             {
                 if (FindName(ChestLibrary[i].GetType().Name, itemTypes[j]))
                 {
-                    if (_potionItemChances.ContainsKey(itemTypes[j]))
+                    if (_itemChances.ContainsKey(itemTypes[j]))
                     {
-                        _potionItemChances[itemTypes[j]]++;
+                        _itemChances[itemTypes[j]]++;
                     }
                     else
                     {
 /*                        Debug.Log("Added key");
-*/                        _potionItemChances.Add(itemTypes[j], 1);
+*/                        _itemChances.Add(itemTypes[j], 1);
                     }
                 }
             }
         }
 
-        while(_potionItemChances.Count > 0)
+        while(_itemChances.Count > 0)
         {
             float max = -1;
             string key = "";
-                foreach (KeyValuePair<string, float> kvp in _potionItemChances)
+                foreach (KeyValuePair<string, float> kvp in _itemChances)
                 {
                     if (kvp.Value > max)
                     {
@@ -107,10 +104,10 @@ public class Chest : MonoBehaviour
                     }
                 }
             tempDict.Add(key, max);
-            _potionItemChances.Remove(key);
+            _itemChances.Remove(key);
         }
-        _potionItemChances = tempDict;
-        Debug.Log(_potionItemChances);
+        _itemChances = tempDict;
+        Debug.Log(_itemChances);
     }
 
         
@@ -139,7 +136,7 @@ public class Chest : MonoBehaviour
     {
         _sr.sprite = OpenSprite;
         RandomSelect().Drop(transform.position);
-
+        _isOpened = true;
     }
 
     //removes objects with inherited class "SpellItem"
@@ -166,13 +163,21 @@ public class Chest : MonoBehaviour
         }
     }
 
-    public Item RandomSelect()
+    protected virtual Item RandomSelect()
     {
         int randomIndex = UnityEngine.Random.Range(0, ChestLibrary.Length);
         return ChestLibrary[randomIndex];
     }
 
+    protected void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("PlayerIsTrigger") && !_isOpened) {
+            Open();
+            Debug.Log("open");
+        }
 
+        
+    }
     // Update is called once per frame
     void Update()
     {
