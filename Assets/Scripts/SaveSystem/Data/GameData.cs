@@ -34,12 +34,11 @@ public class GameData
         maxHealth = 5;
         mana = 100;
         musicVolume = 0.5f;
-        SFXVolume = 0.4f;
+        SFXVolume = 0.5f;
+        coins = 0;
         itemsIDs[0] = 100;
         itemsIDs[1] = 200;
-
         spellsIDs[0] = 3;
         potionIDs[0] = 12;
-        coins = 0;
     }
 }

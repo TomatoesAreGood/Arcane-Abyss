@@ -169,12 +169,6 @@ public class PlayerController : MonoBehaviour, IDataPersistance
                 inventoryUI.equippedSpellsRenderer.SelectSlot(3);
             }
         }
-       
-        //debug
-        if(Input.GetKeyDown(KeyCode.Space)){
-            // inventoryUI.inventoryRenderer.MergeSortSortAlpha();
-            Debug.Break();
-        }
 
         //shooting spells
         if (Input.GetMouseButtonDown(0)){
@@ -189,7 +183,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
                     if(MousePointer.instance.selectedItem != null){
                         MousePointer.instance.selectedItem.SnapBack();
                     }
-                    equippedSpell = null;
+                    //equippedSpell = null;
                     inventoryUI.Disable();
                 }else{
                     inventoryUI.Enable();
@@ -211,10 +205,6 @@ public class PlayerController : MonoBehaviour, IDataPersistance
                 mana+= 0.1f;
 
             }        
-        }
-
-        if (Input.GetKeyDown(KeyCode.K)) {
-            health = -1;
         }
 
         if (health <= 0)
