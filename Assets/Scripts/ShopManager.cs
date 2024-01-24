@@ -13,7 +13,7 @@ public class ShopManager : MonoBehaviour
     public bool IsPaused;
     public TextMeshProUGUI Balance; 
     public ShopUI ShopUI;
-    public StaffShop StaffShop;
+   
   
 
     private void Start()
@@ -24,7 +24,6 @@ public class ShopManager : MonoBehaviour
         }else{
             Destroy(this);
         }
-        StaffShop.Disable();
         ShopUI.Disable();
         IsPaused = false;
     }
@@ -38,7 +37,6 @@ public class ShopManager : MonoBehaviour
             {
                 IsPaused = false;
                 ShopUI.Disable();
-                StaffShop.Disable();
                 PauseManager.instance.Resume();
             }
 
