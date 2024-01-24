@@ -27,7 +27,7 @@ public class SpellBookChest : Chest
             _percentString += $"{keyValuePair.Key} : {Mathf.Round((keyValuePair.Value / dictLength) * 100)} % \n";
 
         }
-        _chestText.text = _percentString;
+        ChestText.text = _percentString;
     }
 
     // Update is called once per frame

@@ -36,7 +36,7 @@ public class StaffChest : Chest
             _percentString += $"{keyValuePair.Key} : {Mathf.Round((keyValuePair.Value / dictLength) * 100)} % \n";
 
         }
-        _chestText.text = _percentString;
+        ChestText.text = _percentString;
     }
 
     //pigeonhole sort to sort throw an array of Items and add them to a Dictionary<Item, int> sorting by frequincy Items

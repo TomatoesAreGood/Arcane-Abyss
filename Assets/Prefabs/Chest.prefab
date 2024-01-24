@@ -338,7 +338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChestLibrary: []
   OpenSprite: {fileID: 21300000, guid: 90f0af5c6941cd54c9818a43db05af08, type: 3}
-  _chestText: {fileID: 0}
+  _chestText: {fileID: 7103427936299540967}
 --- !u!61 &7174014831043290460
 BoxCollider2D:
   m_ObjectHideFlags: 0

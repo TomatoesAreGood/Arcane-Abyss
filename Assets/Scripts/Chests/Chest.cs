@@ -17,11 +17,11 @@ public class Chest : MonoBehaviour
 
     private int _invalidCount;
     private Dictionary<string, float> _itemChances;
-    private string[] itemTypes = { "Staff", "SpellBook", "Potion" };
+    private string[] _itemTypes = { "Staff", "SpellBook", "Potion" };
 
     public Item[] ChestLibrary;
-    public Sprite OpenSprite;
-    public TextMeshProUGUI _chestText;
+    public Sprite OpenSprite;   
+    public TextMeshProUGUI ChestText;
     
 
 
@@ -63,7 +63,7 @@ public class Chest : MonoBehaviour
         {
             _percentString += $"{keyValuePair.Key} : {Mathf.Round((keyValuePair.Value / dictLength) * 100)} % \n";
         }
-        _chestText.text = _percentString;
+        ChestText.text = _percentString;
     }
 
     //pigeonhole sort to sort throw an array of Items and add them to a Dictionary<Item, int> sorting by frequincy Items
@@ -71,20 +71,20 @@ public class Chest : MonoBehaviour
     {
         _itemChances = new Dictionary<string, float>();
         Dictionary<string, float> tempDict = new Dictionary<string, float>(); 
-        for (int j = 0; j < itemTypes.Length; j++)
+        for (int j = 0; j < _itemTypes.Length; j++)
         {
             for (int i = 0; i < ChestLibrary.Length; i++)
             {
-                if (FindName(ChestLibrary[i].GetType().Name, itemTypes[j]))
+                if (FindName(ChestLibrary[i].GetType().Name, _itemTypes[j]))
                 {
-                    if (_itemChances.ContainsKey(itemTypes[j]))
+                    if (_itemChances.ContainsKey(_itemTypes[j]))
                     {
-                        _itemChances[itemTypes[j]]++;
+                        _itemChances[_itemTypes[j]]++;
                     }
                     else
                     {
 /*                        Debug.Log("Added key");
-*/                        _itemChances.Add(itemTypes[j], 1);
+*/                        _itemChances.Add(_itemTypes[j], 1);
                     }
                 }
             }
@@ -148,6 +148,7 @@ public class Chest : MonoBehaviour
                 _invalidCount++;
             }
         }
+
         ChestLibrary = new Item[ItemLibrary.instance.Library.Length - _invalidCount];
 
         int chestCursor = 0;
@@ -170,7 +171,7 @@ public class Chest : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("PlayerIsTrigger")) {
+        if (collision.CompareTag("PlayerIsTrigger")/* && PlayerController.instance.HasKey()*/) {
             Open();
             Debug.Log("open");
         }
