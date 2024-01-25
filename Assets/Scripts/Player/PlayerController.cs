@@ -419,4 +419,17 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         return false;
     }
 
+    public void RemoveKey()
+    {
+        for (int i = 0; i < inventory.items.Length; i++)
+        {
+            if (inventory.items[i] is Key)
+            {
+                inventory.items[i] = null;
+                inventoryUI.inventoryRenderer.RedrawMatrix();
+            }
+        }
+    }
+
+
 }
