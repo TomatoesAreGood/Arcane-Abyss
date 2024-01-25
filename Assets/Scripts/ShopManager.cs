@@ -9,8 +9,8 @@ using UnityEditor;
 
 public class ShopManager : MonoBehaviour
 {
-    public static ShopManager Instance;
-    private bool _isPaused;
+    public static ShopManager instance;
+    public bool IsPaused;
     public TextMeshProUGUI Balance; 
     public ShopUI ShopUI;
    
@@ -19,13 +19,13 @@ public class ShopManager : MonoBehaviour
     private void Start()
     {
         //Creates an instance that allows other scripts to refrence this class
-        if (Instance == null){
-            Instance = this;
+        if (instance == null){
+            instance = this;
         }else{
             Destroy(this);
         }
         ShopUI.Disable();
-        _isPaused = false;
+        IsPaused = false;
     }
     // Update is called once per frame
     private void Update()
@@ -33,9 +33,9 @@ public class ShopManager : MonoBehaviour
         Balance.text = "" + PlayerController.instance.coins;
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (_isPaused)
+            if (IsPaused)
             {
-                _isPaused = false;
+                IsPaused = false;
                 ShopUI.Disable();
                 PauseManager.instance.Resume();
             }
@@ -47,25 +47,20 @@ public class ShopManager : MonoBehaviour
 
     }
 
-    public bool GetPauseStatus()
-    {
-        return _isPaused;
-    }
-
-    public void SetPauseStatus(bool value)
-    {
-        this._isPaused = value;
-    }
-
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("PlayerIsTrigger"))
         {
-
-                _isPaused = true;
+            
+                IsPaused = true;
                 ShopUI.Enable();
                 PauseManager.instance.Pause();
             
+           
+
+
+
+
 
         }
     }
