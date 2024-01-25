@@ -193,6 +193,7 @@ public class Chest : MonoBehaviour
             if (_isLocked == true && PlayerController.instance.HasKey())
             {
                 Open();
+                PlayerController.instance.RemoveKey();
             }
             else if (_isLocked == false)
             {
