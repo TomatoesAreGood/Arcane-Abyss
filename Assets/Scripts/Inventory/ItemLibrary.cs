@@ -14,9 +14,6 @@ public class ItemLibrary : MonoBehaviour
     public static ItemLibrary instance;
     private Dictionary<Item, int> itemIDToReference;
     public GameObject coinPrefab;
-    public GameObject coinPouchPrefab;
-
-
     public SpellItem fireShot;
     public SpellItem iceShot;
     public SpellItem magicShot;
@@ -36,6 +33,7 @@ public class ItemLibrary : MonoBehaviour
     public StaffItem holyStaff;
     public StaffItem tridentStaff;
     public StaffItem undeadStaff;
+    public UsableItem orbofhoarding;
     public Key key;
 
     // Start is called before the first frame update
@@ -44,13 +42,13 @@ public class ItemLibrary : MonoBehaviour
             instance = this;
             Library = new Item[] { basicStaff, forestStaff, healthPotion, darkStaff, fireShotSpellBook, 
             smallHealthPot, iceStaff, demonicEyeStaff, holyStaff,tridentStaff,manaPotion,smallManaPot,
-            iceShotSpellBook, windShotSpellBook, key, undeadStaff
+            iceShotSpellBook, windShotSpellBook,orbofhoarding
             };
             itemIDToReference = new Dictionary<Item, int>{
                 {fireShot,1}, {iceShot,2},{magicShot,3},{windShot,4},{basicStaff,100},
                 {forestStaff,101},{healthPotion,10},{darkStaff,102},{fireShotSpellBook,20},{smallHealthPot,12} , 
                 {smallManaPot, 13}, {manaPotion, 11}, {iceShotSpellBook, 21}, {windShotSpellBook, 22}, {iceStaff, 103},
-                {demonicEyeStaff, 104}, {holyStaff, 105}, {tridentStaff, 106}, {undeadStaff, 107}, {key, 200}
+                {demonicEyeStaff, 104}, {holyStaff, 105}, {tridentStaff, 106}, {undeadStaff, 107}, {key, 200},{orbofhoarding,201}
             };
 
             InitalizeItemToArray();
