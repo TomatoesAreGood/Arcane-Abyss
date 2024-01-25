@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 910d81b4b0012794db9975be1006f807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaCost: 0
-  fireRate: 0
-  speed: 0
-  spellShot: {fileID: 1235089325048832802, guid: 59201bb3faac72649add0e89141c7fff, type: 3}
-  nextAvailFire: 0
+  ManaCost: 0
+  FireRate: 0
+  Speed: 0
+  SpellShot: {fileID: 1235089325048832802, guid: 59201bb3faac72649add0e89141c7fff, type: 3}
+  NextAvailFire: 0

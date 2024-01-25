@@ -9,13 +9,13 @@ public class MainMenu : MonoBehaviour
     public GameObject optionsMenu;
     public void NewGame()
     {
-        File.Delete(DataPersistanceManager.instance.dataHandler.fullPath);
+        File.Delete(DataPersistanceManager.Instance.DataHandler.fullPath);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
     }
     public void Load()
     {
-        DataPersistanceManager.instance.SaveGame();
+        DataPersistanceManager.Instance.SaveGame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
     }

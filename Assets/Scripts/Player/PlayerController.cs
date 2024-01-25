@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     public Staff equippedStaff;
     [HideInInspector] public Sprite equippedStaffSprite;
 
+    //Spells
     [HideInInspector]public Spell equippedSpell;
     private List<Spell> activeSpells;
 
@@ -195,18 +196,20 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         _movementDirection.y = Input.GetAxisRaw("Vertical");
         CharacterPos = transform.position; 
 
+        //increase max mana if player hasn't fired in a while
         if(equippedSpell == null){
             if(Mana < MaxMana){
                 Mana+= 0.1f;
 
             }
-        }else if(Time.time - equippedSpell.nextAvailFire > 1){
+        }else if(Time.time - equippedSpell.NextAvailFire > 1){
             if(Mana < MaxMana){
                 Mana+= 0.1f;
 
             }        
         }
 
+        //player death
         if (Health <= 0)
         {
             DeathManager.instance.isDead = true;
@@ -243,7 +246,6 @@ public class PlayerController : MonoBehaviour, IDataPersistance
             _sr.flipX = true;
         }
     }
-
 
     private bool CanMove(Vector2 direction){
         if (direction != Vector2.zero){
@@ -345,7 +347,8 @@ public class PlayerController : MonoBehaviour, IDataPersistance
             Mana += num;
         }
     }
-
+    
+    //when game starts up
     public void LoadData(GameData data){
         transform.position = data.playerPos;
         MaxHealth = data.maxHealth;
@@ -370,6 +373,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         
     }
 
+    //when game closes
     public void SaveData(ref GameData data){
         data.playerPos = transform.position;
         data.health = Health;
@@ -377,7 +381,6 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         data.health = Health;
         data.mana = Mana;
         data.coins = Coins;
-
 
         for(int i = 0; i < inventory.Items.Length; i++){
             if(inventory.Items[i] != null){

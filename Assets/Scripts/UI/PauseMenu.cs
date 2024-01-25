@@ -49,7 +49,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ReturntoMain()
     {
-        DataPersistanceManager.instance.SaveGame();
+        DataPersistanceManager.Instance.SaveGame();
         Time.timeScale = 1f;
         SceneManager.LoadScene("Menu");
     }

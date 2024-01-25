@@ -12,6 +12,6 @@ public class ReferencedItem : Item{
             throw new ArgumentException("no object reference attached to item");
         }   
         spriteImage = gameObject.GetComponent<Image>();
-        spriteImage.sprite = reference.GetComponent<Spell>().spellShot.GetComponent<SpriteRenderer>().sprite;
+        spriteImage.sprite = reference.GetComponent<Spell>().SpellShot.GetComponent<SpriteRenderer>().sprite;
     }
 }

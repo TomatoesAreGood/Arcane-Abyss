@@ -5,46 +5,46 @@ using UnityEngine;
 
 public class Spell : MonoBehaviour, IEquatable<Spell>
 {
-    public int manaCost;
-    public float fireRate;
-    public float speed;
-    [SerializeField] public GameObject spellShot;
-    public float nextAvailFire;
+    public int ManaCost;
+    public float FireRate;
+    public float Speed;
+    [SerializeField] public GameObject SpellShot;
+    public float NextAvailFire;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        nextAvailFire = Time.time;
-        fireRate = 2;
-        manaCost = 5;
-        speed = 15;
+        NextAvailFire = Time.time;
+        FireRate = 2;
+        ManaCost = 5;
+        Speed = 15;
     }
 
   
     public virtual void Fire() {
-        if(Time.time >= nextAvailFire && PlayerController.Mana - manaCost > 0){
+        if(Time.time >= NextAvailFire && PlayerController.Mana - ManaCost > 0){
             Vector3 muzzlePos = PlayerController.Instance.firePoint.position;
             Vector2 shootDirection = PlayerController.Instance.firePoint.right;
 
             float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
 
-            var magicShot = Instantiate(spellShot, muzzlePos, Quaternion.Euler(0f, 0f, angle));
+            var magicShot = Instantiate(SpellShot, muzzlePos, Quaternion.Euler(0f, 0f, angle));
 
             if(PlayerController.Instance.inventory.EquippedStaff != null){
                 magicShot.GetComponent<MagicShot>().AddDamage(PlayerController.Instance.inventory.EquippedStaff.damageBonus);
             }
 
-            magicShot.GetComponent<Rigidbody2D>().AddForce(shootDirection * speed, ForceMode2D.Impulse);
+            magicShot.GetComponent<Rigidbody2D>().AddForce(shootDirection * Speed, ForceMode2D.Impulse);
 
-            nextAvailFire = Time.time + 1/fireRate;
-            PlayerController.Mana -= manaCost;
+            NextAvailFire = Time.time + 1/FireRate;
+            PlayerController.Mana -= ManaCost;
         }
     }
 
     public bool Equals(Spell other)
     {
         // Would still want to check for null etc. first.
-        return this.spellShot == other.spellShot; 
+        return this.SpellShot == other.SpellShot; 
              
     }
 }

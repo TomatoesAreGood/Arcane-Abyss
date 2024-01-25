@@ -6,7 +6,7 @@ public class MagicShotSpell : Spell
 {
     public override void Fire()
     {
-        if (Time.time >= nextAvailFire && PlayerController.Mana - manaCost > 0)
+        if (Time.time >= NextAvailFire && PlayerController.Mana - ManaCost > 0)
         {
             SoundManager.instance.PlayMagicShotSFX();
 
@@ -15,17 +15,17 @@ public class MagicShotSpell : Spell
 
             float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
 
-            var magicShot = Instantiate(spellShot, muzzlePos, Quaternion.Euler(0f, 0f, angle));
+            var magicShot = Instantiate(SpellShot, muzzlePos, Quaternion.Euler(0f, 0f, angle));
 
             if (PlayerController.Instance.inventory.EquippedStaff != null)
             {
                 magicShot.GetComponent<MagicShot>().AddDamage(PlayerController.Instance.inventory.EquippedStaff.damageBonus);
             }
 
-            magicShot.GetComponent<Rigidbody2D>().AddForce(shootDirection * speed, ForceMode2D.Impulse);
+            magicShot.GetComponent<Rigidbody2D>().AddForce(shootDirection * Speed, ForceMode2D.Impulse);
 
-            nextAvailFire = Time.time + 1 / fireRate;
-            PlayerController.Mana -= manaCost;
+            NextAvailFire = Time.time + 1 / FireRate;
+            PlayerController.Mana -= ManaCost;
         }
     }
 }

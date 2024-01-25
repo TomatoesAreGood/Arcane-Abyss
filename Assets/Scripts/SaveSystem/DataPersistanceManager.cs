@@ -5,21 +5,22 @@ using System.Linq;
 
 public class DataPersistanceManager : MonoBehaviour
 {
-    [SerializeField] string fileName;
-    public FileDataHandler dataHandler;
-    public static DataPersistanceManager instance;
-    public GameData gameData;
-    private List<IDataPersistance> dataPersistanceObjects;
+    [SerializeField] private string _fileName;
+    public FileDataHandler DataHandler;
+    public static DataPersistanceManager Instance;
+    public GameData GameData;
+    private List<IDataPersistance> _dataPersistanceObjects;
     private void Awake(){
-        if(instance == null){
-            instance = this;
+        if(Instance == null){
+            Instance = this;
         }else{
             Destroy(gameObject);
         }
     }
     private void Start(){
-        dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
-        dataPersistanceObjects = FindAllSaveObjects();
+        //find all objects that need data loaded in, load in data
+        DataHandler = new FileDataHandler(Application.persistentDataPath, _fileName);
+        _dataPersistanceObjects = FindAllSaveObjects();
         LoadGame();
     }
 
@@ -30,37 +31,35 @@ public class DataPersistanceManager : MonoBehaviour
     public void LoadGame(){
         
         //retreives data
-        gameData = dataHandler.Load();
+        GameData = DataHandler.Load();
 
         //creates a new game if no gamedata
-        if(this.gameData == null){
+        if(this.GameData == null){
             NewGame();
         }
 
         //sets all loaded attributes of gameobjects
-        foreach(IDataPersistance obj in dataPersistanceObjects){
-            obj.LoadData(gameData);
+        foreach(IDataPersistance obj in _dataPersistanceObjects){
+            obj.LoadData(GameData);
         }
     }
 
     public void SaveGame(){
-        foreach(IDataPersistance obj in dataPersistanceObjects){
-            obj.SaveData(ref gameData);
+        foreach(IDataPersistance obj in _dataPersistanceObjects){
+            obj.SaveData(ref GameData);
         }
 
-        dataHandler.Save(gameData);
+        DataHandler.Save(GameData);
     }
 
     public void NewGame(){
-        Debug.Log("creating new game");
-        this.gameData = new GameData();
+        GameData = new GameData();
     }
 
     private List<IDataPersistance> FindAllSaveObjects(){
+        //finds all objects in scene that have saved data
         IEnumerable<IDataPersistance> dataPersistanceObjects = FindObjectsOfType<MonoBehaviour>().OfType<IDataPersistance>();
-        
         return new List<IDataPersistance>(dataPersistanceObjects);
-
     }
 
 

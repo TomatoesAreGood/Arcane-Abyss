@@ -24,6 +24,7 @@ public class Item : MonoBehaviour
     public int ItemID {get; set;}
 
     protected virtual void Awake(){
+        //set attributes as components
         Image = gameObject.GetComponent<Image>();
         _rectTransform = gameObject.GetComponent<RectTransform>();
         ParentAfterDrag = transform.parent;
@@ -31,13 +32,15 @@ public class Item : MonoBehaviour
         Inventory = PlayerController.Instance.inventory.Items;
     }    
     protected virtual void Start(){
+        //default item values if none are overriden
         Value = 0;
-        Desc = "bro forgor description";
+        Desc = "generic description";
         Title = GetType().Name;
         ItemID = 0;
     }
 
     protected virtual void Update(){
+        //only update when UI is open
         if(!PlayerController.Instance.inventoryUI.IsOpen){
             return;
         }
@@ -53,6 +56,7 @@ public class Item : MonoBehaviour
 
         //on click
         if(IsMouseOnItem && Input.GetMouseButtonDown(0)){
+            //gets coordinates relative to the matrix, and sets the selected item slot  to null
             Vector2 coords = Renderer.GetMatrixCoords(Renderer.BottomLeft, Input.mousePosition);
             int index = (int)coords.x*Renderer.Width + (int)coords.y;
             Renderer.GetSlot(index).item = null;
@@ -63,6 +67,7 @@ public class Item : MonoBehaviour
         }
         //on drag
         if(Input.GetMouseButton(0) && IsMouseOnItem){
+            //tell the mouspointer than the item it's hold is this
             if(MousePointer.instance.selectedItem == null){
                 MousePointer.instance.SelectItem(this);
             }
@@ -70,6 +75,7 @@ public class Item : MonoBehaviour
         }
         //on drop
         if(MousePointer.instance.IsSelected(this) && Input.GetMouseButtonUp(0)){
+            //gets coordinates based on matrix and sets the slot's item to this item
             Vector2 coords = Renderer.GetMatrixCoords(Renderer.BottomLeft, Input.mousePosition);
 
             if (!coords.Equals(Vector2.negativeInfinity)){
@@ -89,6 +95,7 @@ public class Item : MonoBehaviour
 
     }
 
+    //for edge case where player closes inventory while holding an item
     public void SnapBack(){
         transform.SetParent(ParentAfterDrag);
         transform.position = ParentAfterDrag.position;
@@ -96,7 +103,7 @@ public class Item : MonoBehaviour
         MousePointer.instance.DeSelectItem();
     }
 
-
+    
     public virtual void Drop(){
         GameObject obj = Instantiate(PickUpController.instance.defaultDropItem);
         obj.transform.position = PlayerController.CharacterPos;
@@ -104,13 +111,11 @@ public class Item : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public virtual void Drop(Vector2 location)
-    {
+    public virtual void Drop(Vector2 location){
         GameObject obj = Instantiate(PickUpController.instance.defaultDropItem);
         obj.transform.position = location;
         obj.GetComponent<PickupScript>().itemReference = ItemLibrary.instance.GetItemReference(this);
-/*        Destroy(gameObject);
-*/    }
+    }
 
     public void Sell(){
         PlayerController.Instance.Coins += Value;
