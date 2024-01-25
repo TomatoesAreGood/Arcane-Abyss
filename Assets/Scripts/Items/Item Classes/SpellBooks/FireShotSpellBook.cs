@@ -13,9 +13,9 @@ public class FireShotSpellBook : SpellBook
     protected override void Start()
     {
         base.Start();
-        value = 200;
-        desc = "Use to learn FireBall spell";
-        title = GetType().Name;
-        itemID = 20;
+        Value = 200;
+        Desc = "Use to learn FireBall spell";
+        Title = GetType().Name;
+        ItemID = 20;
     }
 }

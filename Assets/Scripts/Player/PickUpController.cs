@@ -39,17 +39,17 @@ public class PickUpController : MonoBehaviour{
         PlayerController playerController = PlayerController.Instance;
         playerController.inventoryUI.UpdateData();
 
-        if(item.itemType == Renderers.inventory){
-            for(int i = 0; i < inventory.items.Length; i++){
-                if(inventory.items[i] == null){
-                    playerController.inventoryUI.inventoryRenderer.InstantiateItem(item,i);
+        if(item.ItemType == Renderers.inventory){
+            for(int i = 0; i < inventory.Items.Length; i++){
+                if(inventory.Items[i] == null){
+                    playerController.inventoryUI.InventoryRenderer.InstantiateItem(item,i);
                     return true;
                 }
             }
-        }else if(item.itemType == Renderers.potion){
-            for(int i = 0; i < inventory.potions.Length; i++){
-                if(inventory.potions[i] == null){
-                    playerController.inventoryUI.potionBagRenderer.InstantiateItem(item,i);
+        }else if(item.ItemType == Renderers.potion){
+            for(int i = 0; i < inventory.Potions.Length; i++){
+                if(inventory.Potions[i] == null){
+                    playerController.inventoryUI.PotionBagRenderer.InstantiateItem(item,i);
                     return true;
                 }
             }
@@ -62,14 +62,14 @@ public class PickUpController : MonoBehaviour{
         PlayerController playerController = PlayerController.Instance;
         Inventory inventory = PlayerController.Instance.inventory;
 
-        if(item.itemType == Renderers.spells){
+        if(item.ItemType == Renderers.spells){
             if(playerController.FindSpellInInventory(item) > 0){
                 return false;
             }
-            for(int i = 0; i < inventory.spells.Length; i++){
-                if(inventory.spells[i] == null){
-                    playerController.inventoryUI.spellsRenderer.InstantiateItem(item,i);
-                    playerController.inventoryUI.spellsRenderer.UpdateData();
+            for(int i = 0; i < inventory.Spells.Length; i++){
+                if(inventory.Spells[i] == null){
+                    playerController.inventoryUI.SpellsRenderer.InstantiateItem(item,i);
+                    playerController.inventoryUI.SpellsRenderer.UpdateData();
                     return true;
                 }
             }

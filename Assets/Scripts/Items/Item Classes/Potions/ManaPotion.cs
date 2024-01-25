@@ -12,9 +12,9 @@ public class ManaPotion : PotionItem
     protected override void Start()
     {
         base.Start();
-        value = 25;
-        desc = "A extract of magical power which restores mana. Restores 50 mana";
-        title = GetType().Name;
-        itemID = 11;
+        Value = 25;
+        Desc = "A extract of magical power which restores mana. Restores 50 mana";
+        Title = GetType().Name;
+        ItemID = 11;
     }
 }

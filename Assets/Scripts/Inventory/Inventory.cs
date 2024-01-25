@@ -6,18 +6,18 @@ using UnityEngine.AI;
 
 public class Inventory 
 {  
-    public Item[] items;
-    public SpellItem[] spells;
-    public PotionItem[] potions;
+    public Item[] Items;
+    public SpellItem[] Spells;
+    public PotionItem[] Potions;
 
-    public StaffItem equippedStaff;
-    public SpellItem[] equippedSpells;
+    public StaffItem EquippedStaff;
+    public SpellItem[] EquippedSpells;
 
     public Inventory(int inventorySize, int spellSize, int potionBagSize){
-        items = new Item[inventorySize];
-        spells = new SpellItem[spellSize];
-        potions = new PotionItem[potionBagSize];
-        equippedSpells = new SpellItem[4];
+        Items = new Item[inventorySize];
+        Spells = new SpellItem[spellSize];
+        Potions = new PotionItem[potionBagSize];
+        EquippedSpells = new SpellItem[4];
         // for(int i = 0; i < items.Length; i++){
         //     items[i] = null;
         // }

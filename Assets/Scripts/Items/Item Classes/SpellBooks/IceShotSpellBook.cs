@@ -13,9 +13,9 @@ public class IceShotSpellBook : SpellBook
     protected override void Start()
     {
         base.Start();
-        value = 200;
-        desc = "Use to learn Icicle Spear spell";
-        title = GetType().Name;
-        itemID = 21;
+        Value = 200;
+        Desc = "Use to learn Icicle Spear spell";
+        Title = GetType().Name;
+        ItemID = 21;
     }
 }

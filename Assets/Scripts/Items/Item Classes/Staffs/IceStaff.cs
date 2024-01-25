@@ -8,9 +8,9 @@ public class IceStaff : StaffItem
     {
         base.Start();
         damageBonus = 3;
-        value = 85;
-        desc = "An eloquently carved staff of ice. The crystal at the top shines with power";
-        title = GetType().Name;
-        itemID = 103;
+        Value = 85;
+        Desc = "An eloquently carved staff of ice. The crystal at the top shines with power";
+        Title = GetType().Name;
+        ItemID = 103;
     }
 }

@@ -11,34 +11,34 @@ using System;
 [Serializable]
 public class Item : MonoBehaviour
 { 
-    public int value;
-    public string title;
-    public string desc;
-    public Renderers itemType;
-    [HideInInspector] public Transform parentAfterDrag;
-    [HideInInspector] public Image image;
-    private RectTransform rectTransform;
-    public bool IsMouseOnItem => RectTransformUtility.RectangleContainsScreenPoint(rectTransform, Input.mousePosition, Camera.main);
-    public new InventoryRenderer renderer;
-    public Item[] inventory;
-    public int itemID {get; set;}
+    public int Value;
+    public string Title;
+    public string Desc;
+    public Renderers ItemType;
+    [HideInInspector] public Transform ParentAfterDrag;
+    [HideInInspector] public Image Image;
+    private RectTransform _rectTransform;
+    public bool IsMouseOnItem => RectTransformUtility.RectangleContainsScreenPoint(_rectTransform, Input.mousePosition, Camera.main);
+    public InventoryRenderer Renderer;
+    public Item[] Inventory;
+    public int ItemID {get; set;}
 
     protected virtual void Awake(){
-        image = gameObject.GetComponent<Image>();
-        rectTransform = gameObject.GetComponent<RectTransform>();
-        parentAfterDrag = transform.parent;
-        renderer = PlayerController.Instance.inventoryUI.inventoryRenderer;
-        inventory = PlayerController.Instance.inventory.items;
+        Image = gameObject.GetComponent<Image>();
+        _rectTransform = gameObject.GetComponent<RectTransform>();
+        ParentAfterDrag = transform.parent;
+        Renderer = PlayerController.Instance.inventoryUI.InventoryRenderer;
+        Inventory = PlayerController.Instance.inventory.Items;
     }    
     protected virtual void Start(){
-        value = 0;
-        desc = "bro forgor description";
-        title = GetType().Name;
-        itemID = 0;
+        Value = 0;
+        Desc = "bro forgor description";
+        Title = GetType().Name;
+        ItemID = 0;
     }
 
     protected virtual void Update(){
-        if(!PlayerController.Instance.inventoryUI.isOpen){
+        if(!PlayerController.Instance.inventoryUI.IsOpen){
             return;
         }
 
@@ -53,13 +53,13 @@ public class Item : MonoBehaviour
 
         //on click
         if(IsMouseOnItem && Input.GetMouseButtonDown(0)){
-            Vector2 coords = renderer.GetMatrixCoords(renderer.bottomLeft, Input.mousePosition);
-            int index = (int)coords.x*renderer.width + (int)coords.y;
-            renderer.GetSlot(index).item = null;
+            Vector2 coords = Renderer.GetMatrixCoords(Renderer.BottomLeft, Input.mousePosition);
+            int index = (int)coords.x*Renderer.Width + (int)coords.y;
+            Renderer.GetSlot(index).item = null;
 
-            parentAfterDrag = transform.parent; 
-            image.raycastTarget = false;
-            renderer.UpdateData();
+            ParentAfterDrag = transform.parent; 
+            Image.raycastTarget = false;
+            Renderer.UpdateData();
         }
         //on drag
         if(Input.GetMouseButton(0) && IsMouseOnItem){
@@ -70,29 +70,29 @@ public class Item : MonoBehaviour
         }
         //on drop
         if(MousePointer.instance.IsSelected(this) && Input.GetMouseButtonUp(0)){
-            Vector2 coords = renderer.GetMatrixCoords(renderer.bottomLeft, Input.mousePosition);
+            Vector2 coords = Renderer.GetMatrixCoords(Renderer.BottomLeft, Input.mousePosition);
 
             if (!coords.Equals(Vector2.negativeInfinity)){
-                int index = (int)coords.x*renderer.width + (int)coords.y;
+                int index = (int)coords.x*Renderer.Width + (int)coords.y;
 
-                if(renderer.GetSlot(index).IsEmpty()){
-                    renderer.GetSlot(index).item = MousePointer.instance.selectedItem;
-                    parentAfterDrag = renderer.GetTransform(index);
+                if(Renderer.GetSlot(index).IsEmpty()){
+                    Renderer.GetSlot(index).item = MousePointer.instance.selectedItem;
+                    ParentAfterDrag = Renderer.GetTransform(index);
                 }
             }
-            transform.SetParent(parentAfterDrag);
-            transform.position = parentAfterDrag.position;
-            image.raycastTarget = false;
+            transform.SetParent(ParentAfterDrag);
+            transform.position = ParentAfterDrag.position;
+            Image.raycastTarget = false;
             MousePointer.instance.DeSelectItem();
-            renderer.UpdateData();
+            Renderer.UpdateData();
         }
 
     }
 
     public void SnapBack(){
-        transform.SetParent(parentAfterDrag);
-        transform.position = parentAfterDrag.position;
-        image.raycastTarget = false;
+        transform.SetParent(ParentAfterDrag);
+        transform.position = ParentAfterDrag.position;
+        Image.raycastTarget = false;
         MousePointer.instance.DeSelectItem();
     }
 
@@ -113,7 +113,7 @@ public class Item : MonoBehaviour
 */    }
 
     public void Sell(){
-        PlayerController.Instance.Coins += value;
+        PlayerController.Instance.Coins += Value;
         Destroy(gameObject);
         SoundManager.instance.PlaySellItemSFX();
     }
@@ -144,7 +144,7 @@ public class Item : MonoBehaviour
     //for PigeonholeSort
     public override int GetHashCode()             
     {  
-        return itemID; 
+        return ItemID; 
     }
 
    public override bool Equals(object obj) 

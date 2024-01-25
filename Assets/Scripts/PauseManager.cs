@@ -20,7 +20,7 @@ public class PauseManager : MonoBehaviour
     }
 
     public void Resume(){
-        if(PlayerController.Instance.inventoryUI.isOpen || PauseMenu.instance.isPaused || ShopManager.Instance.GetPauseStatus()){
+        if(PlayerController.Instance.inventoryUI.IsOpen || PauseMenu.instance.isPaused || ShopManager.Instance.GetPauseStatus()){
             return;
         }
         Time.timeScale = 1f;

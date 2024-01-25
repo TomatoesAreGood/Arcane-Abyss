@@ -6,41 +6,41 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    public InventoryRenderer inventoryRenderer;
-    public InventoryRenderer potionBagRenderer;
-    public InventoryRenderer spellsRenderer;
-    public InventoryRenderer equippedSpellsRenderer;
-    public bool isOpen;
-    [SerializeField] Image equippedStaff;
-    [SerializeField] TextMeshProUGUI damageBonus;
+    public InventoryRenderer InventoryRenderer;
+    public InventoryRenderer PotionBagRenderer;
+    public InventoryRenderer SpellsRenderer;
+    public InventoryRenderer EquippedSpellsRenderer;
+    public bool IsOpen;
+    [SerializeField] private Image _equippedStaff;
+    [SerializeField] private TextMeshProUGUI _damageBonus;
 
     // Start is called before the first frame update
     private void Awake()
     {
-        isOpen = false;
+        IsOpen = false;
 
-        inventoryRenderer.width = PlayerController.Instance.inventoryWidth;
-        inventoryRenderer.height = PlayerController.Instance.inventoryHeight;
+        InventoryRenderer.Width = PlayerController.Instance.inventoryWidth;
+        InventoryRenderer.Height = PlayerController.Instance.inventoryHeight;
 
-        potionBagRenderer.width = 1;
-        potionBagRenderer.height = PlayerController.Instance.potionBagSize;
+        PotionBagRenderer.Width = 1;
+        PotionBagRenderer.Height = PlayerController.Instance.potionBagSize;
 
-        spellsRenderer.width = PlayerController.Instance.spellInventorySize;
-        spellsRenderer.height = 1;
+        SpellsRenderer.Width = PlayerController.Instance.spellInventorySize;
+        SpellsRenderer.Height = 1;
 
-        equippedSpellsRenderer.width = 4;
-        equippedSpellsRenderer.height = 1;
+        EquippedSpellsRenderer.Width = 4;
+        EquippedSpellsRenderer.Height = 1;
     }
 
     private void Update() {    
-        if (isOpen){
-            if(PlayerController.Instance.inventory.equippedStaff != null){
-                equippedStaff.gameObject.SetActive(true);
-                equippedStaff.sprite = PlayerController.Instance.equippedStaff.GetComponent<SpriteRenderer>().sprite;        
-                damageBonus.text = "+" + PlayerController.Instance.inventory.equippedStaff.damageBonus + " Damage Bonus";   
+        if (IsOpen){
+            if(PlayerController.Instance.inventory.EquippedStaff != null){
+                _equippedStaff.gameObject.SetActive(true);
+                _equippedStaff.sprite = PlayerController.Instance.equippedStaff.GetComponent<SpriteRenderer>().sprite;        
+                _damageBonus.text = "+" + PlayerController.Instance.inventory.EquippedStaff.damageBonus + " Damage Bonus";   
             }else{
-                equippedStaff.gameObject.SetActive(false);
-                damageBonus.text = "+0 Damage Bonus";
+                _equippedStaff.gameObject.SetActive(false);
+                _damageBonus.text = "+0 Damage Bonus";
             }
             gameObject.SetActive(true);
         }else{
@@ -49,34 +49,34 @@ public class InventoryUI : MonoBehaviour
     }
 
     public void Enable(){
-        isOpen = true;
+        IsOpen = true;
         PauseManager.instance.Pause();
         gameObject.SetActive(true);
         UpdateData();
     }
 
     public void Disable(){
-        isOpen = false;
+        IsOpen = false;
         PauseManager.instance.Resume();
         gameObject.SetActive(false);
         UpdateData();
     }
     
     public void UpdateData(){
-        inventoryRenderer.UpdateData();
-        potionBagRenderer.UpdateData();
-        spellsRenderer.UpdateData();
+        InventoryRenderer.UpdateData();
+        PotionBagRenderer.UpdateData();
+        SpellsRenderer.UpdateData();
     }
 
     public void MergeSortSortAlpha(){
-        inventoryRenderer.MergeSortSortAlpha();
+        InventoryRenderer.MergeSortSortAlpha();
     }
     public void BubbleSortValue(){
-        inventoryRenderer.BubbleSortValue();
+        InventoryRenderer.BubbleSortValue();
     }
 
     public void PigeonHoleSortOcurrances(){
-        inventoryRenderer.PigeonHoleSortOcurrances();
+        InventoryRenderer.PigeonHoleSortOcurrances();
     }
 
    
