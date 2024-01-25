@@ -14,9 +14,6 @@ public class ItemLibrary : MonoBehaviour
     public static ItemLibrary instance;
     private Dictionary<Item, int> itemIDToReference;
     public GameObject coinPrefab;
-    public GameObject moneyPouchPrefab;
-
-
     public SpellItem fireShot;
     public SpellItem iceShot;
     public SpellItem magicShot;
@@ -44,7 +41,7 @@ public class ItemLibrary : MonoBehaviour
             instance = this;
             Library = new Item[] { basicStaff, forestStaff, healthPotion, darkStaff, fireShotSpellBook, 
             smallHealthPot, iceStaff, demonicEyeStaff, holyStaff,tridentStaff,manaPotion,smallManaPot,
-            iceShotSpellBook, windShotSpellBook, key, undeadStaff
+            iceShotSpellBook, windShotSpellBook
             };
             itemIDToReference = new Dictionary<Item, int>{
                 {fireShot,1}, {iceShot,2},{magicShot,3},{windShot,4},{basicStaff,100},
