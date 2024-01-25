@@ -8,9 +8,9 @@ public class ForestStaff : StaffItem
     {
         base.Start();
         damageBonus = 2;
-        value = 50;
-        desc = "A staff carved from high quality wood, and imbued with a shiny mana crystal at the top";
-        title = GetType().Name;
-        itemID = 101;
+        Value = 50;
+        Desc = "A staff carved from high quality wood, and imbued with a shiny mana crystal at the top";
+        Title = GetType().Name;
+        ItemID = 101;
     }
 }

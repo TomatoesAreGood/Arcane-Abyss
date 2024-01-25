@@ -39,7 +39,7 @@ public class InfoPanel : MonoBehaviour
     }
 
     public void OpenPanel(Item item){
-        UpdateInfo(item.title, item.desc, item.value);
+        UpdateInfo(item.Title, item.Desc, item.Value);
         ResetPos();
         gameObject.SetActive(true);
     }

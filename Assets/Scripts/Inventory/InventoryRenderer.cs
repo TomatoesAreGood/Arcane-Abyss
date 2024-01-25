@@ -14,21 +14,21 @@ public enum Renderers {
 
 public class InventoryRenderer : MonoBehaviour
 {
-    public Renderers rendererType;
+    public Renderers RendererType;
     public GameObject Slot;
-    public Vector2 bottomLeft;
-    public int width;
-    public int height;
-    private Item[] inventoryData;
+    public Vector2 BottomLeft;
+    public int Width;
+    public int Height;
+    private Item[] _inventoryData;
     
     //gets coords of a 2d array from a screenpoint
     public Vector2 GetMatrixCoords(Vector2 bottomLeft, Vector2 screenPoint){
         bottomLeft = new Vector2(bottomLeft.x -50 ,bottomLeft.y - 50);
 
-        if(screenPoint.x < bottomLeft.x || screenPoint.x > bottomLeft.x + width*100 ){
+        if(screenPoint.x < bottomLeft.x || screenPoint.x > bottomLeft.x + Width*100 ){
             return Vector2.negativeInfinity;
         }
-        if(screenPoint.y < bottomLeft.y || screenPoint.y > bottomLeft.y + height*100){
+        if(screenPoint.y < bottomLeft.y || screenPoint.y > bottomLeft.y + Height*100){
             return Vector2.negativeInfinity;
         }
 
@@ -39,17 +39,17 @@ public class InventoryRenderer : MonoBehaviour
 
     private void Start(){
         //set inventory data which it writes to/updates
-        bottomLeft = Camera.main.WorldToScreenPoint(transform.position);
-        if(rendererType == Renderers.inventory){
-            inventoryData = PlayerController.Instance.inventory.items;
-        }else if(rendererType == Renderers.spells){
-            inventoryData = PlayerController.Instance.inventory.spells;
-        }else if(rendererType == Renderers.potion){
-            inventoryData = PlayerController.Instance.inventory.potions;
-        }else if(rendererType == Renderers.equippedSpells){
-            inventoryData = PlayerController.Instance.inventory.equippedSpells;
+        BottomLeft = Camera.main.WorldToScreenPoint(transform.position);
+        if(RendererType == Renderers.inventory){
+            _inventoryData = PlayerController.Instance.inventory.Items;
+        }else if(RendererType == Renderers.spells){
+            _inventoryData = PlayerController.Instance.inventory.Spells;
+        }else if(RendererType == Renderers.potion){
+            _inventoryData = PlayerController.Instance.inventory.Potions;
+        }else if(RendererType == Renderers.equippedSpells){
+            _inventoryData = PlayerController.Instance.inventory.EquippedSpells;
         }
-        DrawMatrix(height,width);
+        DrawMatrix(Height,Width);
         //bring to the front
         transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 100);
     }
@@ -57,9 +57,9 @@ public class InventoryRenderer : MonoBehaviour
     private void Update(){
 
        // update equipped spell icons
-       if(PlayerController.Instance.inventoryUI.isOpen && rendererType == Renderers.equippedSpells){
+       if(PlayerController.Instance.inventoryUI.IsOpen && RendererType == Renderers.equippedSpells){
             for(int i = 0; i < 4; i++){
-                GetSlot(i).item = PlayerController.Instance.inventory.equippedSpells[i];
+                GetSlot(i).item = PlayerController.Instance.inventory.EquippedSpells[i];
             }
             RedrawMatrix();
        }
@@ -70,74 +70,74 @@ public class InventoryRenderer : MonoBehaviour
         for(int r = 0; r < height; r++){
             for(int c = 0; c < width; c++){
                 GameObject slot = Instantiate(Slot, transform);
-                slot.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(bottomLeft.x + 100*c, bottomLeft.y+ 100*r));
+                slot.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(BottomLeft.x + 100*c, BottomLeft.y+ 100*r));
                 int i = r*width + c;
 
-                if(inventoryData[i] == null){
+                if(_inventoryData[i] == null){
                     continue;
                 }
 
-                if(inventoryData[i].GetType() == typeof(BasicStaff)){
+                if(_inventoryData[i].GetType() == typeof(BasicStaff)){
                     GameObject obj = Instantiate(ItemLibrary.instance.basicStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if(inventoryData[i].GetType() == typeof(ForestStaff)){
+                }else if(_inventoryData[i].GetType() == typeof(ForestStaff)){
                     GameObject obj = Instantiate(ItemLibrary.instance.forestStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if(inventoryData[i].GetType() == typeof(FireSpellItem)){
+                }else if(_inventoryData[i].GetType() == typeof(FireSpellItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.fireShot.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if(inventoryData[i].GetType() == typeof(IceSpellItem)){
+                }else if(_inventoryData[i].GetType() == typeof(IceSpellItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.iceShot.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(DarkStaff)){
+                }else if (_inventoryData[i].GetType() == typeof(DarkStaff)){
                     GameObject obj = Instantiate(ItemLibrary.instance.darkStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(MagicSpellItem)){
+                }else if (_inventoryData[i].GetType() == typeof(MagicSpellItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.magicShot.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(HealthPotion)){
+                }else if (_inventoryData[i].GetType() == typeof(HealthPotion)){
                     GameObject obj = Instantiate(ItemLibrary.instance.healthPotion.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(FireShotSpellBook)){
+                }else if (_inventoryData[i].GetType() == typeof(FireShotSpellBook)){
                     GameObject obj = Instantiate(ItemLibrary.instance.fireShotSpellBook.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(WindSpellItem)){
+                }else if (_inventoryData[i].GetType() == typeof(WindSpellItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.windShot.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(SmallHealthPotion)){
+                }else if (_inventoryData[i].GetType() == typeof(SmallHealthPotion)){
                     GameObject obj = Instantiate(ItemLibrary.instance.smallHealthPot.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(SmallManaPotion)){
+                }else if (_inventoryData[i].GetType() == typeof(SmallManaPotion)){
                     GameObject obj = Instantiate(ItemLibrary.instance.smallManaPot.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(ManaPotion)){
+                }else if (_inventoryData[i].GetType() == typeof(ManaPotion)){
                     GameObject obj = Instantiate(ItemLibrary.instance.manaPotion.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(IceShotSpellBook)){
+                }else if (_inventoryData[i].GetType() == typeof(IceShotSpellBook)){
                     GameObject obj = Instantiate(ItemLibrary.instance.iceShotSpellBook.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(WindShotSpellBook)){
+                }else if (_inventoryData[i].GetType() == typeof(WindShotSpellBook)){
                     GameObject obj = Instantiate(ItemLibrary.instance.windShotSpellBook.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(IceStaff)){
+                }else if (_inventoryData[i].GetType() == typeof(IceStaff)){
                     GameObject obj = Instantiate(ItemLibrary.instance.iceStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(DemonicEyeStaff)){
+                }else if (_inventoryData[i].GetType() == typeof(DemonicEyeStaff)){
                     GameObject obj = Instantiate(ItemLibrary.instance.demonicEyeStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(HolyStaff)){
+                }else if (_inventoryData[i].GetType() == typeof(HolyStaff)){
                     GameObject obj = Instantiate(ItemLibrary.instance.holyStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(UndeadStaff)){
+                }else if (_inventoryData[i].GetType() == typeof(UndeadStaff)){
                     GameObject obj = Instantiate(ItemLibrary.instance.undeadStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(TridentStaff)){
+                }else if (_inventoryData[i].GetType() == typeof(TridentStaff)){
                     GameObject obj = Instantiate(ItemLibrary.instance.tridentStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(Key)){
+                }else if (_inventoryData[i].GetType() == typeof(Key)){
                     GameObject obj = Instantiate(ItemLibrary.instance.key.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(OrbOfHoarding)){
+                }else if (_inventoryData[i].GetType() == typeof(OrbOfHoarding)){
                     GameObject obj = Instantiate(ItemLibrary.instance.orbofhoarding.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
                 }
@@ -149,9 +149,9 @@ public class InventoryRenderer : MonoBehaviour
 
     //used if the data is updated & UI needs to be redrawn
     public void RedrawMatrix(){
-          for(int r = 0; r < height; r++){
-            for(int c = 0; c < width; c++){
-                int i = r*width + c;
+          for(int r = 0; r < Height; r++){
+            for(int c = 0; c < Width; c++){
+                int i = r*Width + c;
 
                 GameObject slot = GetTransform(i).gameObject;
 
@@ -159,71 +159,71 @@ public class InventoryRenderer : MonoBehaviour
                     Destroy(GetTransform(i).GetChild(0).gameObject);
                 }
                 
-                if(inventoryData[i] == null){
+                if(_inventoryData[i] == null){
                     continue;
                 }
 
-                if(inventoryData[i].GetType() == typeof(BasicStaff)){
+                if(_inventoryData[i].GetType() == typeof(BasicStaff)){
                     GameObject obj = Instantiate(ItemLibrary.instance.basicStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if(inventoryData[i].GetType() == typeof(ForestStaff)){
+                }else if(_inventoryData[i].GetType() == typeof(ForestStaff)){
                     GameObject obj = Instantiate(ItemLibrary.instance.forestStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if(inventoryData[i].GetType() == typeof(FireSpellItem)){
+                }else if(_inventoryData[i].GetType() == typeof(FireSpellItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.fireShot.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if(inventoryData[i].GetType() == typeof(IceSpellItem)){
+                }else if(_inventoryData[i].GetType() == typeof(IceSpellItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.iceShot.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(DarkStaff)){
+                }else if (_inventoryData[i].GetType() == typeof(DarkStaff)){
                     GameObject obj = Instantiate(ItemLibrary.instance.darkStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(MagicSpellItem)){
+                }else if (_inventoryData[i].GetType() == typeof(MagicSpellItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.magicShot.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(HealthPotion)){
+                }else if (_inventoryData[i].GetType() == typeof(HealthPotion)){
                     GameObject obj = Instantiate(ItemLibrary.instance.healthPotion.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(FireShotSpellBook)){
+                }else if (_inventoryData[i].GetType() == typeof(FireShotSpellBook)){
                     GameObject obj = Instantiate(ItemLibrary.instance.fireShotSpellBook.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(WindSpellItem)){
+                }else if (_inventoryData[i].GetType() == typeof(WindSpellItem)){
                     GameObject obj = Instantiate(ItemLibrary.instance.windShot.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(SmallHealthPotion)){
+                }else if (_inventoryData[i].GetType() == typeof(SmallHealthPotion)){
                     GameObject obj = Instantiate(ItemLibrary.instance.smallHealthPot.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(SmallManaPotion)){
+                }else if (_inventoryData[i].GetType() == typeof(SmallManaPotion)){
                     GameObject obj = Instantiate(ItemLibrary.instance.smallManaPot.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(ManaPotion)){
+                }else if (_inventoryData[i].GetType() == typeof(ManaPotion)){
                     GameObject obj = Instantiate(ItemLibrary.instance.manaPotion.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(IceShotSpellBook)){
+                }else if (_inventoryData[i].GetType() == typeof(IceShotSpellBook)){
                     GameObject obj = Instantiate(ItemLibrary.instance.iceShotSpellBook.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(WindShotSpellBook)){
+                }else if (_inventoryData[i].GetType() == typeof(WindShotSpellBook)){
                     GameObject obj = Instantiate(ItemLibrary.instance.windShotSpellBook.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(IceStaff)){
+                }else if (_inventoryData[i].GetType() == typeof(IceStaff)){
                     GameObject obj = Instantiate(ItemLibrary.instance.iceStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(DemonicEyeStaff)){
+                }else if (_inventoryData[i].GetType() == typeof(DemonicEyeStaff)){
                     GameObject obj = Instantiate(ItemLibrary.instance.demonicEyeStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(HolyStaff)){
+                }else if (_inventoryData[i].GetType() == typeof(HolyStaff)){
                     GameObject obj = Instantiate(ItemLibrary.instance.holyStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(UndeadStaff)){
+                }else if (_inventoryData[i].GetType() == typeof(UndeadStaff)){
                     GameObject obj = Instantiate(ItemLibrary.instance.undeadStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(TridentStaff)){
+                }else if (_inventoryData[i].GetType() == typeof(TridentStaff)){
                     GameObject obj = Instantiate(ItemLibrary.instance.tridentStaff.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(Key)){
+                }else if (_inventoryData[i].GetType() == typeof(Key)){
                     GameObject obj = Instantiate(ItemLibrary.instance.key.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
-                }else if (inventoryData[i].GetType() == typeof(OrbOfHoarding)){
+                }else if (_inventoryData[i].GetType() == typeof(OrbOfHoarding)){
                     GameObject obj = Instantiate(ItemLibrary.instance.orbofhoarding.gameObject, slot.transform);
                     obj.transform.position = slot.transform.position;
                 }
@@ -242,9 +242,9 @@ public class InventoryRenderer : MonoBehaviour
         for(int i = 0; i < transform.childCount; i++){
             GetSlot(i).UpdateData();
             if(GetSlot(i).IsEmpty()){
-                inventoryData[i] = null;
+                _inventoryData[i] = null;
             }else{
-                inventoryData[i] = GetSlot(i).item;
+                _inventoryData[i] = GetSlot(i).item;
             }
         }
     }
@@ -278,23 +278,23 @@ public class InventoryRenderer : MonoBehaviour
     public void BubbleSortValue(){
         UpdateData();
 
-        for (int j = 0; j < inventoryData.Length; j++){
-            for(int i = 0; i < inventoryData.Length-1; i++){
+        for (int j = 0; j < _inventoryData.Length; j++){
+            for(int i = 0; i < _inventoryData.Length-1; i++){
                 int value1 = 0;
                 int value2 = 0;
 
                 //if item == null, assign it a value of 0
-                if(inventoryData[i+1] != null){
-                    value2 = inventoryData[i+1].value;
+                if(_inventoryData[i+1] != null){
+                    value2 = _inventoryData[i+1].Value;
                 }
-                if(inventoryData[i] != null){
-                    value1 = inventoryData[i].value;
+                if(_inventoryData[i] != null){
+                    value1 = _inventoryData[i].Value;
                 }
 
                 if(value1 < value2){
-                    var temp = inventoryData[i];
-                    inventoryData[i] = inventoryData[i+1];
-                    inventoryData[i+1] = temp;
+                    var temp = _inventoryData[i];
+                    _inventoryData[i] = _inventoryData[i+1];
+                    _inventoryData[i+1] = temp;
                 }
             }
         }
@@ -318,16 +318,16 @@ public class InventoryRenderer : MonoBehaviour
 
         Dictionary<Item, int> itemCountDict = new Dictionary<Item, int>();
         
-        for(int i = 0; i < inventoryData.Length; i++){
-            if(inventoryData[i] == null){
+        for(int i = 0; i < _inventoryData.Length; i++){
+            if(_inventoryData[i] == null){
                 continue;
             }
-            if(ContainsKey(itemCountDict,inventoryData[i])){
-                itemCountDict[inventoryData[i]] += 1;
+            if(ContainsKey(itemCountDict,_inventoryData[i])){
+                itemCountDict[_inventoryData[i]] += 1;
             }else{
-                itemCountDict[inventoryData[i]] = 1;
+                itemCountDict[_inventoryData[i]] = 1;
             }
-            inventoryData[i] = null;
+            _inventoryData[i] = null;
         }
 
         int index = 0;
@@ -342,7 +342,7 @@ public class InventoryRenderer : MonoBehaviour
                 }
             }
             for(int i = 0; i < max; i++){
-                inventoryData[index] = key;
+                _inventoryData[index] = key;
                 index++;
             }
             itemCountDict.Remove(key);
@@ -353,7 +353,7 @@ public class InventoryRenderer : MonoBehaviour
 
     public void MergeSortSortAlpha(){
         UpdateData();
-        MergeSortSortAlpha(inventoryData);
+        MergeSortSortAlpha(_inventoryData);
         RedrawMatrix();
         UpdateData();
     }
@@ -388,10 +388,10 @@ public class InventoryRenderer : MonoBehaviour
 
 
             if(leftArr[i] != null){
-                leftString = leftArr[i].title;
+                leftString = leftArr[i].Title;
             }
             if(rightArr[j] != null){
-                rightString = rightArr[j].title;
+                rightString = rightArr[j].Title;
             }
 
             if(String.Compare(leftString, rightString) < 0){

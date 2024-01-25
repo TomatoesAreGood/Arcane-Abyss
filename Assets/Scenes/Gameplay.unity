@@ -2239,19 +2239,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6078fb37800a73488c0c189cfe3dbe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: data.game
-  gameData:
-    itemsIDs: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-    potionIDs: 00000000000000000000000000000000
-    spellsIDs: 0000000000000000000000000000000000000000000000000000000000000000
+  _fileName: 
+  GameData:
+    itemsIDs: 64000000c80000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    potionIDs: 0c000000000000000000000000000000
+    spellsIDs: 0300000000000000000000000000000000000000000000000000000000000000
     killedEnemies: []
     playerPos: {x: 0, y: 0, z: 0}
     enemyPositions: []
     enemyTypes: 
     health: 5
     mana: 100
-    musicVolume: 0.75
-    SFXVolume: 0.4
+    musicVolume: 0.5
+    SFXVolume: 0.5
     maxHealth: 5
     coins: 0
     waveNum: 0
@@ -3477,11 +3477,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fa491df071e934db2fd0530e3585ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rendererType: 3
+  RendererType: 3
   Slot: {fileID: 1649969560939154655, guid: 4a56cc43cb5605a42a7f0a8e686d812b, type: 3}
-  bottomLeft: {x: 0, y: 0}
-  width: 0
-  height: 0
+  BottomLeft: {x: 0, y: 0}
+  Width: 0
+  Height: 0
 --- !u!114 &614227414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11980,11 +11980,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fa491df071e934db2fd0530e3585ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rendererType: 1
+  RendererType: 1
   Slot: {fileID: 1649969560939154655, guid: 4a56cc43cb5605a42a7f0a8e686d812b, type: 3}
-  bottomLeft: {x: 0, y: 0}
-  width: 0
-  height: 0
+  BottomLeft: {x: 0, y: 0}
+  Width: 0
+  Height: 0
 --- !u!1001 &767827061
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13831,13 +13831,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08c25543d55b0c2488d277fc4a1383de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryRenderer: {fileID: 1150919901}
-  potionBagRenderer: {fileID: 1956652397}
-  spellsRenderer: {fileID: 756136337}
-  equippedSpellsRenderer: {fileID: 614227413}
-  isOpen: 0
-  equippedStaff: {fileID: 832247}
-  damageBonus: {fileID: 1082205241}
+  InventoryRenderer: {fileID: 1150919901}
+  PotionBagRenderer: {fileID: 1956652397}
+  SpellsRenderer: {fileID: 756136337}
+  EquippedSpellsRenderer: {fileID: 614227413}
+  IsOpen: 0
+  _equippedStaff: {fileID: 832247}
+  _damageBonus: {fileID: 1082205241}
 --- !u!1 &1031518702
 GameObject:
   m_ObjectHideFlags: 0
@@ -15104,11 +15104,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fa491df071e934db2fd0530e3585ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rendererType: 0
+  RendererType: 0
   Slot: {fileID: 1649969560939154655, guid: 4a56cc43cb5605a42a7f0a8e686d812b, type: 3}
-  bottomLeft: {x: 0, y: 0}
-  width: 0
-  height: 0
+  BottomLeft: {x: 0, y: 0}
+  Width: 0
+  Height: 0
 --- !u!1 &1177099157
 GameObject:
   m_ObjectHideFlags: 0
@@ -44354,11 +44354,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fa491df071e934db2fd0530e3585ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rendererType: 2
+  RendererType: 2
   Slot: {fileID: 1649969560939154655, guid: 4a56cc43cb5605a42a7f0a8e686d812b, type: 3}
-  bottomLeft: {x: 0, y: 0}
-  width: 0
-  height: 0
+  BottomLeft: {x: 0, y: 0}
+  Width: 0
+  Height: 0
 --- !u!1 &1959532004
 GameObject:
   m_ObjectHideFlags: 0

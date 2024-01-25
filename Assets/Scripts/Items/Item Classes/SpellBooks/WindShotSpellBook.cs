@@ -14,9 +14,9 @@ public class WindShotSpellBook : SpellBook
     protected override void Start()
     {
         base.Start();
-        value = 200;
-        desc = "Use to learn Wind Blade spell";
-        title = GetType().Name;
-        itemID = 22;
+        Value = 200;
+        Desc = "Use to learn Wind Blade spell";
+        Title = GetType().Name;
+        ItemID = 22;
     }
 }

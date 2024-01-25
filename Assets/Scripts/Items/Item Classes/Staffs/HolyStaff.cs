@@ -8,9 +8,9 @@ public class HolyStaff : StaffItem
     {
         base.Start();
         damageBonus = 4;
-        value = 100;
-        desc = "A divine staff that has wings sprouting from its sides";
-        title = GetType().Name;
-        itemID = 105;
+        Value = 100;
+        Desc = "A divine staff that has wings sprouting from its sides";
+        Title = GetType().Name;
+        ItemID = 105;
     }
 }
