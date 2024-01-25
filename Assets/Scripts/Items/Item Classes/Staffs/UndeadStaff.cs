@@ -8,9 +8,9 @@ public class UndeadStaff : StaffItem
     {
         base.Start();
         damageBonus = 3;
-        Value = 85;
-        Desc = "An ominous looking staff topped with a skull";
-        Title = GetType().Name;
-        ItemID = 107;
+        value = 85;
+        desc = "An ominous looking staff topped with a skull";
+        title = GetType().Name;
+        itemID = 107;
     }
 }

@@ -38,7 +38,7 @@ public class Slot : MonoBehaviour
     protected virtual void Update()
     {
         UpdateData();
-        if(PlayerController.Instance.inventoryUI.IsOpen){
+        if(PlayerController.Instance.inventoryUI.isOpen){
             if(IsMouseHovering){
                 Dim();
             }else{

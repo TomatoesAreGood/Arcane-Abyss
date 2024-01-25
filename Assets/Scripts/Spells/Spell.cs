@@ -30,8 +30,8 @@ public class Spell : MonoBehaviour, IEquatable<Spell>
 
             var magicShot = Instantiate(SpellShot, muzzlePos, Quaternion.Euler(0f, 0f, angle));
 
-            if(PlayerController.Instance.inventory.EquippedStaff != null){
-                magicShot.GetComponent<MagicShot>().AddDamage(PlayerController.Instance.inventory.EquippedStaff.damageBonus);
+            if(PlayerController.Instance.inventory.equippedStaff != null){
+                magicShot.GetComponent<MagicShot>().AddDamage(PlayerController.Instance.inventory.equippedStaff.damageBonus);
             }
 
             magicShot.GetComponent<Rigidbody2D>().AddForce(shootDirection * Speed, ForceMode2D.Impulse);

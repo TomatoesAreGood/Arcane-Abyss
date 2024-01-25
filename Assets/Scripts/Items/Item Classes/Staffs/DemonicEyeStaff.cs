@@ -9,9 +9,9 @@ public class DemonicEyeStaff : StaffItem
     {
         base.Start();
         damageBonus = 4;
-        Value = 100;
-        Desc = "A blood-red staff topped with a large pulsating eye that exudes magic";
-        Title = GetType().Name;
-        ItemID = 104;
+        value = 100;
+        desc = "A blood-red staff topped with a large pulsating eye that exudes magic";
+        title = GetType().Name;
+        itemID = 104;
     }
 }

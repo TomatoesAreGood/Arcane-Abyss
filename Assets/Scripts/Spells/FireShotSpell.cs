@@ -22,9 +22,9 @@ public class FireShotSpell : Spell
 
             var magicShot = Instantiate(SpellShot, muzzlePos, Quaternion.Euler(0f, 0f, angle));
 
-            if (PlayerController.Instance.inventory.EquippedStaff != null)
+            if (PlayerController.Instance.inventory.equippedStaff != null)
             {
-                magicShot.GetComponent<MagicShot>().AddDamage(PlayerController.Instance.inventory.EquippedStaff.damageBonus);
+                magicShot.GetComponent<MagicShot>().AddDamage(PlayerController.Instance.inventory.equippedStaff.damageBonus);
             }
 
             magicShot.GetComponent<Rigidbody2D>().AddForce(shootDirection * Speed, ForceMode2D.Impulse);

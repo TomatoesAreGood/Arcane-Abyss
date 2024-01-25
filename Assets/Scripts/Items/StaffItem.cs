@@ -22,8 +22,8 @@ public class StaffItem : Item
         GameObject obj = Instantiate(PickUpController.instance.defaultDropItem);
         obj.transform.position = PlayerController.CharacterPos;
         obj.GetComponent<PickupScript>().itemReference = ItemLibrary.instance.GetItemReference(this);
-        if(this == PlayerController.Instance.inventory.EquippedStaff){
-            PlayerController.Instance.inventory.EquippedStaff = null;
+        if(this == PlayerController.Instance.inventory.equippedStaff){
+            PlayerController.Instance.inventory.equippedStaff = null;
         }
         Destroy(gameObject);
     }

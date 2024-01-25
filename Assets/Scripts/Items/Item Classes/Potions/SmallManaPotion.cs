@@ -12,9 +12,9 @@ public class SmallManaPotion : PotionItem
     protected override void Start()
     {
         base.Start();
-        Value = 15;
-        Desc = "Contains a cool-looking blue liquid in a vial. Regenerates 25 mana.";
-        Title = GetType().Name;
-        ItemID = 13;
+        value = 15;
+        desc = "Contains a cool-looking blue liquid in a vial. Regenerates 25 mana.";
+        title = GetType().Name;
+        itemID = 13;
     }
 }

@@ -12,9 +12,9 @@ public class SmallHealthPotion : PotionItem
     protected override void Start()
     {
         base.Start();
-        Value = 10;
-        Desc = "Contains a vibrant, red liquid in a vial. Heals 1 heart.";
-        Title = GetType().Name;
-        ItemID = 12;
+        value = 10;
+        desc = "Contains a vibrant, red liquid in a vial. Heals 1 heart.";
+        title = GetType().Name;
+        itemID = 12;
     }
 }
