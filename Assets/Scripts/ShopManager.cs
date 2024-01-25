@@ -33,7 +33,7 @@ public class ShopManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        Balance.text = "" + PlayerController.instance.coins;
+        Balance.text = "" + PlayerController.Instance.Coins;
         if (Input.GetKeyDown(KeyCode.Q))
         {
             if (_isPaused)

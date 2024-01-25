@@ -36,7 +36,7 @@ public class EnemyShot : MonoBehaviour
         }
         if (other.CompareTag("PlayerIsTrigger") || other.CompareTag("Player")) 
         { 
-            PlayerController.instance.TakeDamage(damage);
+            PlayerController.Instance.TakeDamage(damage);
         }
         if(animator != null){
             animator.SetBool("OnDestroy", true);

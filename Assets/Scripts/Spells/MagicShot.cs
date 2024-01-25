@@ -13,7 +13,7 @@ public class MagicShot : MonoBehaviour
     }
 
     protected virtual void Update(){
-        Vector2 characterPos = PlayerController.instance.transform.position;
+        Vector2 characterPos = PlayerController.Instance.transform.position;
         float distance = Mathf.Sqrt(Mathf.Pow(characterPos.x - transform.position.x, 2) + Mathf.Pow(characterPos.y - transform.position.y, 2));
         if (distance > 35){
             Destroy(gameObject);

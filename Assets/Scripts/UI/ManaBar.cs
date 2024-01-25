@@ -26,6 +26,6 @@ public class ManaBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SetMana(PlayerController.mana);
+        SetMana(PlayerController.Mana);
     }
 }

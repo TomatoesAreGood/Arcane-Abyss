@@ -41,13 +41,13 @@ public class InventoryRenderer : MonoBehaviour
         //set inventory data which it writes to/updates
         bottomLeft = Camera.main.WorldToScreenPoint(transform.position);
         if(rendererType == Renderers.inventory){
-            inventoryData = PlayerController.instance.inventory.items;
+            inventoryData = PlayerController.Instance.inventory.items;
         }else if(rendererType == Renderers.spells){
-            inventoryData = PlayerController.instance.inventory.spells;
+            inventoryData = PlayerController.Instance.inventory.spells;
         }else if(rendererType == Renderers.potion){
-            inventoryData = PlayerController.instance.inventory.potions;
+            inventoryData = PlayerController.Instance.inventory.potions;
         }else if(rendererType == Renderers.equippedSpells){
-            inventoryData = PlayerController.instance.inventory.equippedSpells;
+            inventoryData = PlayerController.Instance.inventory.equippedSpells;
         }
         DrawMatrix(height,width);
         //bring to the front
@@ -57,9 +57,9 @@ public class InventoryRenderer : MonoBehaviour
     private void Update(){
 
        // update equipped spell icons
-       if(PlayerController.instance.inventoryUI.isOpen && rendererType == Renderers.equippedSpells){
+       if(PlayerController.Instance.inventoryUI.isOpen && rendererType == Renderers.equippedSpells){
             for(int i = 0; i < 4; i++){
-                GetSlot(i).item = PlayerController.instance.inventory.equippedSpells[i];
+                GetSlot(i).item = PlayerController.Instance.inventory.equippedSpells[i];
             }
             RedrawMatrix();
        }

@@ -19,13 +19,13 @@ public class InventoryUI : MonoBehaviour
     {
         isOpen = false;
 
-        inventoryRenderer.width = PlayerController.instance.inventoryWidth;
-        inventoryRenderer.height = PlayerController.instance.inventoryHeight;
+        inventoryRenderer.width = PlayerController.Instance.inventoryWidth;
+        inventoryRenderer.height = PlayerController.Instance.inventoryHeight;
 
         potionBagRenderer.width = 1;
-        potionBagRenderer.height = PlayerController.instance.potionBagSize;
+        potionBagRenderer.height = PlayerController.Instance.potionBagSize;
 
-        spellsRenderer.width = PlayerController.instance.spellInventorySize;
+        spellsRenderer.width = PlayerController.Instance.spellInventorySize;
         spellsRenderer.height = 1;
 
         equippedSpellsRenderer.width = 4;
@@ -34,10 +34,10 @@ public class InventoryUI : MonoBehaviour
 
     private void Update() {    
         if (isOpen){
-            if(PlayerController.instance.inventory.equippedStaff != null){
+            if(PlayerController.Instance.inventory.equippedStaff != null){
                 equippedStaff.gameObject.SetActive(true);
-                equippedStaff.sprite = PlayerController.instance.equippedStaff.GetComponent<SpriteRenderer>().sprite;        
-                damageBonus.text = "+" + PlayerController.instance.inventory.equippedStaff.damageBonus + " Damage Bonus";   
+                equippedStaff.sprite = PlayerController.Instance.equippedStaff.GetComponent<SpriteRenderer>().sprite;        
+                damageBonus.text = "+" + PlayerController.Instance.inventory.equippedStaff.damageBonus + " Damage Bonus";   
             }else{
                 equippedStaff.gameObject.SetActive(false);
                 damageBonus.text = "+0 Damage Bonus";

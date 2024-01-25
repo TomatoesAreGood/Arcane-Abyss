@@ -73,7 +73,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Start()
     {
-        Player = PlayerController.instance.gameObject;
+        Player = PlayerController.Instance.gameObject;
         coinPrefab = ItemLibrary.instance.coinPrefab;
         coinPouchPrefab = ItemLibrary.instance.coinPouchPrefab;
         _moveSpeed = 3;
@@ -243,7 +243,7 @@ public class Enemy : MonoBehaviour
         if (collision.CompareTag("PlayerIsTrigger"))
         {
             //Debug.Log("collision");
-            _playerScript = PlayerController.instance.gameObject.GetComponent<PlayerController>();
+            _playerScript = PlayerController.Instance.gameObject.GetComponent<PlayerController>();
             /*_player.GainHeart();*/
             Attack();
         }

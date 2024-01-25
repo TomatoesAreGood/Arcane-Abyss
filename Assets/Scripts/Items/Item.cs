@@ -27,8 +27,8 @@ public class Item : MonoBehaviour
         image = gameObject.GetComponent<Image>();
         rectTransform = gameObject.GetComponent<RectTransform>();
         parentAfterDrag = transform.parent;
-        renderer = PlayerController.instance.inventoryUI.inventoryRenderer;
-        inventory = PlayerController.instance.inventory.items;
+        renderer = PlayerController.Instance.inventoryUI.inventoryRenderer;
+        inventory = PlayerController.Instance.inventory.items;
     }    
     protected virtual void Start(){
         value = 0;
@@ -38,7 +38,7 @@ public class Item : MonoBehaviour
     }
 
     protected virtual void Update(){
-        if(!PlayerController.instance.inventoryUI.isOpen){
+        if(!PlayerController.Instance.inventoryUI.isOpen){
             return;
         }
 
@@ -99,7 +99,7 @@ public class Item : MonoBehaviour
 
     public virtual void Drop(){
         GameObject obj = Instantiate(PickUpController.instance.defaultDropItem);
-        obj.transform.position = PlayerController.characterPos;
+        obj.transform.position = PlayerController.CharacterPos;
         obj.GetComponent<PickupScript>().itemReference = ItemLibrary.instance.GetItemReference(this);
         Destroy(gameObject);
     }
@@ -113,7 +113,7 @@ public class Item : MonoBehaviour
 */    }
 
     public void Sell(){
-        PlayerController.instance.coins += value;
+        PlayerController.Instance.Coins += value;
         Destroy(gameObject);
         SoundManager.instance.PlaySellItemSFX();
     }

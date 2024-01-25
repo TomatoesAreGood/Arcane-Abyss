@@ -43,7 +43,7 @@ public class PickupScript : MonoBehaviour
                 PickUpController.instance.isPickingUp = false;
                 if(PickUpController.instance.TryPickUp(itemReference)){
                     Debug.Log("picked up: " + itemReference.ToString());
-                    PlayerController.instance.inventoryUI.UpdateData();
+                    PlayerController.Instance.inventoryUI.UpdateData();
 
                     SoundManager.instance.PlayItemPickUpSFX();
 
@@ -56,7 +56,7 @@ public class PickupScript : MonoBehaviour
     }
 
     private float DistFromPlayer(){
-        Vector2 difference = PlayerController.characterPos - transform.position;
+        Vector2 difference = PlayerController.CharacterPos - transform.position;
         return Mathf.Sqrt(Mathf.Pow(difference.x, 2) + Mathf.Pow(difference.y, 2));
     }
 

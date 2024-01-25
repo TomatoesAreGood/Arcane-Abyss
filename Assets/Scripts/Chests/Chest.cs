@@ -190,10 +190,10 @@ public class Chest : MonoBehaviour
     protected void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("PlayerIsTrigger")) {
-            if (_isLocked == true && PlayerController.instance.HasKey())
+            if (_isLocked == true && PlayerController.Instance.HasKey())
             {
                 Open();
-                PlayerController.instance.RemoveKey();
+                PlayerController.Instance.RemoveKey();
             }
             else if (_isLocked == false)
             {

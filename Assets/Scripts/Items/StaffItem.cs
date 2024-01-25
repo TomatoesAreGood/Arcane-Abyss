@@ -14,16 +14,16 @@ public class StaffItem : Item
     }
 
     public override void Equip(){
-        PlayerController.instance.EquipStaff(this);
+        PlayerController.Instance.EquipStaff(this);
     }
 
     public override void Drop()
     {
         GameObject obj = Instantiate(PickUpController.instance.defaultDropItem);
-        obj.transform.position = PlayerController.characterPos;
+        obj.transform.position = PlayerController.CharacterPos;
         obj.GetComponent<PickupScript>().itemReference = ItemLibrary.instance.GetItemReference(this);
-        if(this == PlayerController.instance.inventory.equippedStaff){
-            PlayerController.instance.inventory.equippedStaff = null;
+        if(this == PlayerController.Instance.inventory.equippedStaff){
+            PlayerController.Instance.inventory.equippedStaff = null;
         }
         Destroy(gameObject);
     }

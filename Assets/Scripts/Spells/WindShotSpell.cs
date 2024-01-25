@@ -13,26 +13,26 @@ public class WindShotSpell : Spell
 
     public override void Fire()
     {
-        if (Time.time >= nextAvailFire && PlayerController.mana - manaCost > 0)
+        if (Time.time >= nextAvailFire && PlayerController.Mana - manaCost > 0)
         {
             SoundManager.instance.PlayWindSpellSFX();
 
-            Vector3 muzzlePos = PlayerController.instance.firePoint.position;
-            Vector2 shootDirection = PlayerController.instance.firePoint.right;
+            Vector3 muzzlePos = PlayerController.Instance.firePoint.position;
+            Vector2 shootDirection = PlayerController.Instance.firePoint.right;
 
             float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
 
             var magicShot = Instantiate(spellShot, muzzlePos, Quaternion.Euler(0f, 0f, angle));
 
-            if (PlayerController.instance.inventory.equippedStaff != null)
+            if (PlayerController.Instance.inventory.equippedStaff != null)
             {
-                magicShot.GetComponent<MagicShot>().AddDamage(PlayerController.instance.inventory.equippedStaff.damageBonus);
+                magicShot.GetComponent<MagicShot>().AddDamage(PlayerController.Instance.inventory.equippedStaff.damageBonus);
             }
 
             magicShot.GetComponent<Rigidbody2D>().AddForce(shootDirection * speed, ForceMode2D.Impulse);
 
             nextAvailFire = Time.time + 1 / fireRate;
-            PlayerController.mana -= manaCost;
+            PlayerController.Mana -= manaCost;
         }
     }
 }

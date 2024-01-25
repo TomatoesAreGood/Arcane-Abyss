@@ -5,7 +5,7 @@ using UnityEngine;
 public class ManaPotion : PotionItem
 {
     public override void Use(){
-        PlayerController.instance.AddMana(50);
+        PlayerController.Instance.AddMana(50);
         Destroy(gameObject);
         base.Use();
     }

@@ -17,7 +17,7 @@ public class EnemyGFX : MonoBehaviour
     void Start()
     {
         SpriteRenderer = GetComponent<SpriteRenderer>();
-        Player = PlayerController.instance.gameObject;
+        Player = PlayerController.Instance.gameObject;
     }
 
     void Update()

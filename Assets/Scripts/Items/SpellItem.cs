@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public abstract class SpellItem : ReferencedItem{
     protected override void Awake(){
         base.Awake();
-        renderer = PlayerController.instance.inventoryUI.spellsRenderer;
-        inventory = PlayerController.instance.inventory.spells;
+        renderer = PlayerController.Instance.inventoryUI.spellsRenderer;
+        inventory = PlayerController.Instance.inventory.spells;
     }
     protected override void Start(){
         base.Start();
@@ -20,20 +20,20 @@ public abstract class SpellItem : ReferencedItem{
 
 
     public override void EquipSpellSlot1(){
-        PlayerController.instance.EquipSpell(this, 0);
+        PlayerController.Instance.EquipSpell(this, 0);
     }
     public override void EquipSpellSlot2(){
-        PlayerController.instance.EquipSpell(this, 1);        
+        PlayerController.Instance.EquipSpell(this, 1);        
 
 
     } 
     public override void EquipSpellSlot3(){
-        PlayerController.instance.EquipSpell(this, 2);       
+        PlayerController.Instance.EquipSpell(this, 2);       
 
 
     } 
     public override void EquipSpellSlot4(){
-        PlayerController.instance.EquipSpell(this, 3);        
+        PlayerController.Instance.EquipSpell(this, 3);        
 
 
     }

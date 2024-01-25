@@ -11,7 +11,7 @@ public class EnemyTank : Enemy
         base.Start();
         Health = 8;
         _moveSpeed = 2.5f;
-        Player = PlayerController.instance.gameObject;
+        Player = PlayerController.Instance.gameObject;
         _path.maxSpeed = _moveSpeed;
         EnemyID = 4;
     }

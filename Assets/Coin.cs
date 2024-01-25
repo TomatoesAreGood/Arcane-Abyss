@@ -8,7 +8,7 @@ public class Coin : MonoBehaviour
     {
         if (other.CompareTag("PlayerIsTrigger"))
         {
-            PlayerController.instance.coins += 1;
+            PlayerController.Instance.Coins += 1;
             Destroy(gameObject);
             SoundManager.instance.PlayCoinPickUpSFX();
         }

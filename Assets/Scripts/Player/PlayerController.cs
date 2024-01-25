@@ -10,28 +10,28 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour, IDataPersistance
 {   
     //SINGLETON
-    public static PlayerController instance;
+    public static PlayerController Instance;
 
     //Movement
-    public float moveSpeed;
-    private Vector2 movementDirection;
-    public ContactFilter2D contactFilter;
-    private float collisionOffset = 0.04f;
-    public static Vector3 characterPos; //used by enemy and bullet class 
+    public float _moveSpeed;
+    private Vector2 _movementDirection;
+    public ContactFilter2D ContactFilter;
+    private float _collisionOffset = 0.04f;
+    public static Vector3 CharacterPos; //used by enemy and bullet class 
 
     //Components
-    private SpriteRenderer sr;
-    private Animator animator;
-    private Rigidbody2D rb;
-    private List<RaycastHit2D> raycastHit2Ds;
+    private SpriteRenderer _sr;
+    private Animator _animator;
+    private Rigidbody2D _rb;
+    private List<RaycastHit2D> _raycastHit2Ds;
 
     //Player Stats
-    public static int maxHealth;
-    public static int health;
-    public static float maxMana = 100;
-    public static float mana;
+    public static int MaxHealth;
+    public static int Health;
+    public static float MaxMana = 100;
+    public static float Mana;
     private bool _isImmune;
-    public int coins;
+    public int Coins;
 
     //UI
     public HealthBarList HealthBarList;
@@ -59,49 +59,49 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     private void Awake(){
 
         //Singleton
-        if (instance == null){
-            instance = this;
+        if (Instance == null){
+            Instance = this;
         }else{
             Destroy(this);
         }
 
         //set default player stats
         activeSpells = new List<Spell>();
-        moveSpeed = 5f;
+        _moveSpeed = 5f;
         inventoryHeight = 4;
         inventoryWidth = 10;
         spellInventorySize = 8;
         potionBagSize = 4;
-        coins = 0;
+        Coins = 0;
 
         //creating data storage (for saving)
         inventory = new Inventory(inventoryWidth*inventoryHeight, spellInventorySize, potionBagSize);
 
         //components
-        rb = GetComponent<Rigidbody2D>();
-        raycastHit2Ds = new List<RaycastHit2D>(0);
-        sr = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
+        _rb = GetComponent<Rigidbody2D>();
+        _raycastHit2Ds = new List<RaycastHit2D>(0);
+        _sr = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
         equippedStaffSprite = equippedStaff.GetComponent<SpriteRenderer>().sprite;
 
         //for shooting magic
         pivot = transform.GetChild(0).gameObject.transform;
         firePoint = pivot.transform.GetChild(0);
         
-        maxMana = 100;
-        mana = maxMana;
+        MaxMana = 100;
+        Mana = MaxMana;
 
         // Mana Bar UI has same max mana as player stats
-        ManaBar.SetMaxMana(maxMana);
-        ManaBar.SetMana(maxMana);
+        ManaBar.SetMaxMana(MaxMana);
+        ManaBar.SetMana(MaxMana);
 
     }
     private void Start(){
         inventoryUI.UpdateData();
 
         // after increasing max health, set current health to max health
-        InstantiateHeart(maxHealth);
-        int difference = maxHealth - health;
+        InstantiateHeart(MaxHealth);
+        int difference = MaxHealth - Health;
         for (int i = 0; i < difference; i++) {
             HealthBarList.EmptyFullHeart();
         }
@@ -191,23 +191,23 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         }
         
         //movement
-        movementDirection.x = Input.GetAxisRaw("Horizontal");
-        movementDirection.y = Input.GetAxisRaw("Vertical");
-        characterPos = transform.position; 
+        _movementDirection.x = Input.GetAxisRaw("Horizontal");
+        _movementDirection.y = Input.GetAxisRaw("Vertical");
+        CharacterPos = transform.position; 
 
         if(equippedSpell == null){
-            if(mana < maxMana){
-                mana+= 0.1f;
+            if(Mana < MaxMana){
+                Mana+= 0.1f;
 
             }
         }else if(Time.time - equippedSpell.nextAvailFire > 1){
-            if(mana < maxMana){
-                mana+= 0.1f;
+            if(Mana < MaxMana){
+                Mana+= 0.1f;
 
             }        
         }
 
-        if (health <= 0)
+        if (Health <= 0)
         {
             DeathManager.instance.isDead = true;
         }
@@ -217,37 +217,37 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
     private void FixedUpdate() {
         //movement loop
-        if(movementDirection != Vector2.zero){
-            if(CanMove(movementDirection)){
-                rb.MovePosition(rb.position + movementDirection * moveSpeed * Time.fixedDeltaTime);
-                animator.SetBool("isWalking", true);
+        if(_movementDirection != Vector2.zero){
+            if(CanMove(_movementDirection)){
+                _rb.MovePosition(_rb.position + _movementDirection * _moveSpeed * Time.fixedDeltaTime);
+                _animator.SetBool("isWalking", true);
             }else{
-                if(CanMove(new Vector2(movementDirection.x, 0))){
-                    rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * new Vector2(movementDirection.x, 0));
-                    animator.SetBool("isWalking", true);
-                }else if(CanMove(new Vector2(0, movementDirection.y))){
-                        rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * new Vector2(0, movementDirection.y));
-                        animator.SetBool("isWalking", true);
+                if(CanMove(new Vector2(_movementDirection.x, 0))){
+                    _rb.MovePosition(_rb.position + _moveSpeed * Time.fixedDeltaTime * new Vector2(_movementDirection.x, 0));
+                    _animator.SetBool("isWalking", true);
+                }else if(CanMove(new Vector2(0, _movementDirection.y))){
+                        _rb.MovePosition(_rb.position + _moveSpeed * Time.fixedDeltaTime * new Vector2(0, _movementDirection.y));
+                        _animator.SetBool("isWalking", true);
                 }else{
-                    animator.SetBool("isWalking", false);
+                    _animator.SetBool("isWalking", false);
                 } 
             }
         }else{
-            animator.SetBool("isWalking", false); 
+            _animator.SetBool("isWalking", false); 
         }
 
         //flip the character sprite to face movement direction
-        if(movementDirection.x > 0){
-            sr.flipX = false;
-        }else if(movementDirection.x < 0){
-            sr.flipX = true;
+        if(_movementDirection.x > 0){
+            _sr.flipX = false;
+        }else if(_movementDirection.x < 0){
+            _sr.flipX = true;
         }
     }
 
 
     private bool CanMove(Vector2 direction){
         if (direction != Vector2.zero){
-            int raycastHits = rb.Cast(direction, contactFilter, raycastHit2Ds, moveSpeed * Time.fixedDeltaTime + collisionOffset);
+            int raycastHits = _rb.Cast(direction, ContactFilter, _raycastHit2Ds, _moveSpeed * Time.fixedDeltaTime + _collisionOffset);
             if(raycastHits == 0){
                 return true;
             }
@@ -294,7 +294,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
             for(int i = 0; i < damage; i++){
                 HealthBarList.EmptyFullHeart();
             }
-            health -= damage;
+            Health -= damage;
             SoundManager.instance.PlayPlayerDamageSFX();
         }
         StartCoroutine(ImmunityHandler());
@@ -308,7 +308,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
     public void IncreaseMaxHealth(){
         HealthBarList.InstantiateHeart();
-        maxHealth++;
+        MaxHealth++;
     }
 
     public void InstantiateHeart(int num) {
@@ -324,11 +324,11 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     }
 
     public void GainHeart(){
-        if (health < maxHealth)
+        if (Health < MaxHealth)
         {
             HealthBarList.FillEmptyHeart();
-            health += 1;
-            Debug.Log(health);
+            Health += 1;
+            Debug.Log(Health);
         }
     }
     public void GainHeart(int num){
@@ -339,19 +339,19 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
 
     public void AddMana(float num){
-        if(mana + num > maxMana){
-            mana = maxMana;
+        if(Mana + num > MaxMana){
+            Mana = MaxMana;
         }else{
-            mana += num;
+            Mana += num;
         }
     }
 
     public void LoadData(GameData data){
         transform.position = data.playerPos;
-        maxHealth = data.maxHealth;
-        health = data.health;
-        mana = data.mana;
-        coins = data.coins;
+        MaxHealth = data.maxHealth;
+        Health = data.health;
+        Mana = data.mana;
+        Coins = data.coins;
 
         int[] itemIDs = data.itemsIDs;
         for(int i = 0; i < itemIDs.Length; i++){
@@ -372,11 +372,11 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
     public void SaveData(ref GameData data){
         data.playerPos = transform.position;
-        data.health = health;
-        data.maxHealth = maxHealth;
-        data.health = health;
-        data.mana = mana;
-        data.coins = coins;
+        data.health = Health;
+        data.maxHealth = MaxHealth;
+        data.health = Health;
+        data.mana = Mana;
+        data.coins = Coins;
 
 
         for(int i = 0; i < inventory.items.Length; i++){
