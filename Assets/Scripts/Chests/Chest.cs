@@ -194,10 +194,12 @@ public class Chest : MonoBehaviour
             {
                 Open();
                 PlayerController.Instance.RemoveKey();
+                SoundManager.instance.PlayOpenLockedChestSFX();
             }
             else if (_isLocked == false)
             {
                 Open();
+                SoundManager.instance.PlayOpenUnlockedChestSFX();
             }
         }
 

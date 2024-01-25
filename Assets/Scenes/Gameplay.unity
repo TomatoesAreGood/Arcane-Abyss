@@ -44549,6 +44549,8 @@ MonoBehaviour:
   _sippingSFX: {fileID: 8300000, guid: 453ff0181a163e143a7989fa44c6978a, type: 3}
   _buyItemSFX: {fileID: 8300000, guid: 48a353205268ae441a51c68d395df2f2, type: 3}
   _sellItemSFX: {fileID: 8300000, guid: 10f960bdf4cbbe743b973b5e715a2a9e, type: 3}
+  _openLockedChestSFX: {fileID: 8300000, guid: e52f3121051568047b95d41cd80b8e4b, type: 3}
+  _openUnlockedChestSFX: {fileID: 8300000, guid: e4465ae1b51796846b2c26ed4467c960, type: 3}
 --- !u!4 &1964163795
 Transform:
   m_ObjectHideFlags: 0
