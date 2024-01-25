@@ -58,7 +58,7 @@ public class ShopUI : MonoBehaviour
 
     }
 
-    public void MergeSortButton()
+    public void MergeSort()
     {
         MergeSortSortAlphabetically(_shopItems);
         RedrawList();

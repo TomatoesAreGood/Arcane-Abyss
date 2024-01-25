@@ -14,7 +14,7 @@ public class OrbOfHoarding : UsableItem
     {
         base.Start();
         value = 300;
-        desc = "The God sees your greed and reward you for it";
+        desc = "The gods see your Greed and reward you for it";
         title = GetType().Name;
         itemID = 201;
     }
