@@ -48,8 +48,8 @@ public class ShopItem : MonoBehaviour
                 {
                     PlayerController.instance.coins -= itemPrices[itemRef.GetType().Name];
                     Debug.Log("bought item: " + itemRef.ToString());
-                    ShopManager.instance.ShopUI.RemoveItem(itemRef);
-                    ShopManager.instance.ShopUI.RedrawList();
+                    ShopManager.Instance.ShopUI.RemoveItem(itemRef);
+                    ShopManager.Instance.ShopUI.RedrawList();
                 }
             }
                
