@@ -19,6 +19,7 @@ public class InventoryUI : MonoBehaviour
     {
         IsOpen = false;
 
+        //declare sizes of inventory renderers based on variables set in PlayerController
         InventoryRenderer.Width = PlayerController.Instance.inventoryWidth;
         InventoryRenderer.Height = PlayerController.Instance.inventoryHeight;
 

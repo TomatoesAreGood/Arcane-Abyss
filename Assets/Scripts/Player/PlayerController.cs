@@ -13,11 +13,11 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     public static PlayerController Instance;
 
     //Movement
-    public float _moveSpeed;
+    public float MoveSpeed;
     private Vector2 _movementDirection;
     public ContactFilter2D ContactFilter;
     private float _collisionOffset = 0.04f;
-    public static Vector3 CharacterPos; //used by enemy and bullet class 
+    public static Vector3 CharacterPos; 
 
     //Components
     private SpriteRenderer _sr;
@@ -44,8 +44,8 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     [HideInInspector] public Sprite equippedStaffSprite;
 
     //Spells
-    [HideInInspector]public Spell equippedSpell;
-    private List<Spell> activeSpells;
+    [HideInInspector] public Spell equippedSpell;
+    private List<Spell> _activeSpells;
 
     //Inventory
     [HideInInspector] public Inventory inventory;
@@ -67,8 +67,8 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         }
 
         //set default player stats
-        activeSpells = new List<Spell>();
-        _moveSpeed = 5f;
+        _activeSpells = new List<Spell>();
+        MoveSpeed = 5f;
         inventoryHeight = 4;
         inventoryWidth = 10;
         spellInventorySize = 8;
@@ -124,11 +124,11 @@ public class PlayerController : MonoBehaviour, IDataPersistance
                 if(inventory.EquippedSpells[0] == null){
                     equippedSpell = null;
                 }else{
-                    if(activeSpells.Contains(inventory.EquippedSpells[0].reference.GetComponent<Spell>())){
-                        equippedSpell = activeSpells.Find(e => e.Equals(inventory.EquippedSpells[0].reference.GetComponent<Spell>()));
+                    if(_activeSpells.Contains(inventory.EquippedSpells[0].reference.GetComponent<Spell>())){
+                        equippedSpell = _activeSpells.Find(e => e.Equals(inventory.EquippedSpells[0].reference.GetComponent<Spell>()));
                     }else{
                         equippedSpell = Instantiate(inventory.EquippedSpells[0].reference).GetComponent<Spell>();
-                        activeSpells.Add(equippedSpell);
+                        _activeSpells.Add(equippedSpell);
                     }
                 }
                 inventoryUI.EquippedSpellsRenderer.SelectSlot(0);
@@ -136,11 +136,11 @@ public class PlayerController : MonoBehaviour, IDataPersistance
                 if(inventory.EquippedSpells[1] == null){
                     equippedSpell = null;
                 }else{
-                    if(activeSpells.Contains(inventory.EquippedSpells[1].reference.GetComponent<Spell>())){
-                        equippedSpell = activeSpells.Find(e => e.Equals(inventory.EquippedSpells[1].reference.GetComponent<Spell>()) );
+                    if(_activeSpells.Contains(inventory.EquippedSpells[1].reference.GetComponent<Spell>())){
+                        equippedSpell = _activeSpells.Find(e => e.Equals(inventory.EquippedSpells[1].reference.GetComponent<Spell>()) );
                     }else{
                         equippedSpell = Instantiate(inventory.EquippedSpells[1].reference).GetComponent<Spell>();
-                        activeSpells.Add(equippedSpell);
+                        _activeSpells.Add(equippedSpell);
                     }
                 }
                 inventoryUI.EquippedSpellsRenderer.SelectSlot(1);
@@ -148,11 +148,11 @@ public class PlayerController : MonoBehaviour, IDataPersistance
                 if(inventory.EquippedSpells[2] == null){
                     equippedSpell = null;
                 }else{
-                    if(activeSpells.Contains(inventory.EquippedSpells[2].reference.GetComponent<Spell>())){
-                        equippedSpell = activeSpells.Find(e => e.Equals(inventory.EquippedSpells[2].reference.GetComponent<Spell>()) );
+                    if(_activeSpells.Contains(inventory.EquippedSpells[2].reference.GetComponent<Spell>())){
+                        equippedSpell = _activeSpells.Find(e => e.Equals(inventory.EquippedSpells[2].reference.GetComponent<Spell>()) );
                     }else{
                         equippedSpell = Instantiate(inventory.EquippedSpells[2].reference).GetComponent<Spell>();
-                        activeSpells.Add(equippedSpell);
+                        _activeSpells.Add(equippedSpell);
                     }
                 }
                 inventoryUI.EquippedSpellsRenderer.SelectSlot(2);
@@ -160,11 +160,11 @@ public class PlayerController : MonoBehaviour, IDataPersistance
                 if(inventory.EquippedSpells[3] == null){
                     equippedSpell = null;
                 }else{
-                    if(activeSpells.Contains(inventory.EquippedSpells[3].reference.GetComponent<Spell>())){
-                        equippedSpell = activeSpells.Find(e => e.Equals(inventory.EquippedSpells[3].reference.GetComponent<Spell>()) );
+                    if(_activeSpells.Contains(inventory.EquippedSpells[3].reference.GetComponent<Spell>())){
+                        equippedSpell = _activeSpells.Find(e => e.Equals(inventory.EquippedSpells[3].reference.GetComponent<Spell>()) );
                     }else{
                         equippedSpell = Instantiate(inventory.EquippedSpells[3].reference).GetComponent<Spell>();
-                        activeSpells.Add(equippedSpell);
+                        _activeSpells.Add(equippedSpell);
                     }
                 }
                 inventoryUI.EquippedSpellsRenderer.SelectSlot(3);
@@ -222,14 +222,14 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         //movement loop
         if(_movementDirection != Vector2.zero){
             if(CanMove(_movementDirection)){
-                _rb.MovePosition(_rb.position + _movementDirection * _moveSpeed * Time.fixedDeltaTime);
+                _rb.MovePosition(_rb.position + _movementDirection * MoveSpeed * Time.fixedDeltaTime);
                 _animator.SetBool("isWalking", true);
             }else{
                 if(CanMove(new Vector2(_movementDirection.x, 0))){
-                    _rb.MovePosition(_rb.position + _moveSpeed * Time.fixedDeltaTime * new Vector2(_movementDirection.x, 0));
+                    _rb.MovePosition(_rb.position + MoveSpeed * Time.fixedDeltaTime * new Vector2(_movementDirection.x, 0));
                     _animator.SetBool("isWalking", true);
                 }else if(CanMove(new Vector2(0, _movementDirection.y))){
-                        _rb.MovePosition(_rb.position + _moveSpeed * Time.fixedDeltaTime * new Vector2(0, _movementDirection.y));
+                        _rb.MovePosition(_rb.position + MoveSpeed * Time.fixedDeltaTime * new Vector2(0, _movementDirection.y));
                         _animator.SetBool("isWalking", true);
                 }else{
                     _animator.SetBool("isWalking", false);
@@ -249,7 +249,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
     private bool CanMove(Vector2 direction){
         if (direction != Vector2.zero){
-            int raycastHits = _rb.Cast(direction, ContactFilter, _raycastHit2Ds, _moveSpeed * Time.fixedDeltaTime + _collisionOffset);
+            int raycastHits = _rb.Cast(direction, ContactFilter, _raycastHit2Ds, MoveSpeed * Time.fixedDeltaTime + _collisionOffset);
             if(raycastHits == 0){
                 return true;
             }

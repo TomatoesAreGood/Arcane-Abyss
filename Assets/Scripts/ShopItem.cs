@@ -10,7 +10,7 @@ public class ShopItem : MonoBehaviour
         {"BasicStaff", 10}, {"ForestStaff", 50},{"HealthPotion", 20},{"DarkStaff", 500},
         {"FireShotSpellBook", 200},{"IceShotSpellBook", 200},{"WindShotSpellBook", 200},{"SmallHealthPotion", 10},
         {"SmallManaPotion", 15},{"ManaPotion", 25},{"IceStaff", 85},{"DemonicEyeStaff", 100},{"HolyStaff", 100},{"UndeadStaff", 85},{"OrbOfHoarding",300},
-        {"TridentStaff", 300}
+        {"TridentStaff", 300}, {"Key", 50}
     };
     public bool IsMouseOnItem => RectTransformUtility.RectangleContainsScreenPoint(rectTransform, Input.mousePosition, Camera.main);
     private RectTransform rectTransform;
