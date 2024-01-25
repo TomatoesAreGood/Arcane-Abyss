@@ -6,6 +6,7 @@ using TMPro;
 
 public class DeathMenu : MonoBehaviour
 {
+    // [SerializeField] allows the texts to be pulled into the inspector so they could be updated
     [SerializeField] private TextMeshProUGUI _enemiesText;
     [SerializeField] private TextMeshProUGUI _wavesText;
     [SerializeField] private TextMeshProUGUI _timeText;
@@ -18,6 +19,7 @@ public class DeathMenu : MonoBehaviour
         gameObject.SetActive(false);
     }
     
+    // Code under the OnEnable() method runs when the death screen is set to active
     private void OnEnable() 
     {
         FinalStats.instance.PigeonHoleSort();

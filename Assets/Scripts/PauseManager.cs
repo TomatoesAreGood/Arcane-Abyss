@@ -15,6 +15,7 @@ public class PauseManager : MonoBehaviour
         }
     }
 
+    // Freezes the time
     public void Pause(){
         Time.timeScale = 0f;
     }

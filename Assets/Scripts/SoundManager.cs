@@ -11,9 +11,10 @@ public class SoundManager : MonoBehaviour, IDataPersistance
     public static SoundManager instance;
     public List<AudioSource> SFXSources;
     [SerializeField] private AudioSource BGMAudioSource;
+
+    // All of the audio clips
     [SerializeField] private AudioClip _playerDamageSFX, _fireBallSFX, _iceSpellSFX, _windSpellSFX, _magicShotSFX, _coinPickUpSFX, _itemPickUpSFX, _enemyDamageSFX, _enemyDeathSFX, _sippingSFX, _buyItemSFX, _sellItemSFX, _openLockedChestSFX, _openUnlockedChestSFX;
 
-    // Start is called before the first frame update
     private void Start()
     {
         if (instance == null) {
@@ -60,6 +61,8 @@ public class SoundManager : MonoBehaviour, IDataPersistance
         data.SFXVolume = SFXVolumeSlider.value;
     }
 
+
+    // Methods to play each sound effect
     public void PlayPlayerDamageSFX()
     {
         AudioSource audioSource = GetAvailAudioSource();
