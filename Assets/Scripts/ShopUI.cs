@@ -11,40 +11,31 @@ public class ShopUI : MonoBehaviour
     public Transform scrollableList;
     private int _numItems;
     public Item[] _itemlibrary;
-    
-    public virtual void Awake(){
 
+    public virtual void Awake()
+    {
+        // defines size of shop 
         _numItems = 15;
         _shopItems = new Item[_numItems];
         _itemlibrary = ItemLibrary.instance.Library;
 
     }
-      private void Start(){
-        for (int i = 0; i < _shopItems.Length; i++){
+    private void Start()
+    {
+        // Fills up the shop with random items until the array is full
+        for (int i = 0; i < _shopItems.Length; i++)
+        {
             int rand = Random.Range(0, _itemlibrary.Length);
-            bool isDupelicate = false;
-            while (_itemlibrary[rand] is SpellItem){
+            // spell items are exempt due to being sold through books
+            while (_itemlibrary[rand] is SpellItem)
+            {
                 rand = Random.Range(0, _itemlibrary.Length);
             }
-        
+
             _shopItems[i] = _itemlibrary[rand];
-            for(int j = 0;  j < _shopItems.Length; j++)
-            {
-                if (_shopItems[j] == _itemlibrary[rand])
-                {
-                    isDupelicate = true;
-                    if (isDupelicate)
-                    {
-                        rand = Random.Range(0, _itemlibrary.Length);
-                    }
-                    _shopItems[j] = _itemlibrary[rand];
-                    
 
-
-                }
-                break;
-            }
         }
+        // displays the shop items
         RedrawList();
     }
     //Sorts By Price
@@ -52,14 +43,14 @@ public class ShopUI : MonoBehaviour
     {
         for (int i = 0; i < _shopItems.Length; i++)
         {
-            for(int j = 0; j < _shopItems.Length-1; j++)
+            for (int j = 0; j < _shopItems.Length - 1; j++)
             {
-                
-                if (ShopItem.itemPrices[_shopItems[j].GetType().Name] > ShopItem.itemPrices[_shopItems[j +1].GetType().Name])
+
+                if (ShopItem.itemPrices[_shopItems[j].GetType().Name] > ShopItem.itemPrices[_shopItems[j + 1].GetType().Name])
                 {
                     Item value = _shopItems[j];
-                    _shopItems[j] = _shopItems[j +1];
-                    _shopItems[j +1] = value;
+                    _shopItems[j] = _shopItems[j + 1];
+                    _shopItems[j + 1] = value;
                 }
             }
         }
@@ -127,43 +118,56 @@ public class ShopUI : MonoBehaviour
 
     }
 
-    
 
-    public void RedrawList(){
-        for(int i = 0; i < scrollableList.childCount; i++){
+
+    public void RedrawList()
+    {
+        // Destroys all current objects attatched to the list
+        for (int i = 0; i < scrollableList.childCount; i++)
+        {
             Destroy(scrollableList.GetChild(i).gameObject);
         }
-        for(int i = 0; i < _shopItems.Length; i++){
-            if(_shopItems[i] != null){
+        // redisplays all the shop items 
+        for (int i = 0; i < _shopItems.Length; i++)
+        {
+            if (_shopItems[i] != null)
+            {
                 Instantiate(ShopItemPrefab, scrollableList).GetComponent<ShopItem>().itemRef = _shopItems[i];
             }
         }
     }
 
-    public void RemoveItem(Item item){
-        for(int i = 0; i < _shopItems.Length; i++){
-            if(_shopItems[i] == item){
+    public void RemoveItem(Item item)
+    {
+        // removes shop item when it is clicked and when player has enough money
+        for (int i = 0; i < _shopItems.Length; i++)
+        {
+            if (_shopItems[i] == item)
+            {
 
                 _shopItems[i] = null;
                 break;
-                
-               
+
+
             }
         }
     }
 
-     public void Enable(){
+    public void Enable()
+    {
         gameObject.SetActive(true);
     }
-    public void Disable(){
+    public void Disable()
+    {
         gameObject.SetActive(false);
     }
 
-    public void BackToGame(){
+    public void BackToGame()
+    {
         gameObject.SetActive(false);
         ShopManager.Instance.SetPauseStatus(false);
         PauseManager.instance.Resume();
     }
 
-    
+
 }
