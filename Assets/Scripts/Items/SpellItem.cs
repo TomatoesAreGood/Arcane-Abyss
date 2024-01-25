@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public abstract class SpellItem : ReferencedItem{
     protected override void Awake(){
         base.Awake();
-        Renderer = PlayerController.Instance.inventoryUI.SpellsRenderer;
-        Inventory = PlayerController.Instance.inventory.Spells;
+        renderer = PlayerController.Instance.inventoryUI.spellsRenderer;
+        inventory = PlayerController.Instance.inventory.spells;
     }
     protected override void Start(){
         base.Start();

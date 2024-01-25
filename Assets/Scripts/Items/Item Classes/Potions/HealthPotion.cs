@@ -12,10 +12,10 @@ public class HealthPotion : PotionItem
      protected override void Start()
     {
         base.Start();
-        Value = 20;
-        Desc = "A red-colored potion which restores vitality. Heal 2 hearts.";
-        Title = GetType().Name;
-        ItemID = 10;
+        value = 20;
+        desc = "A red-colored potion which restores vitality. Heal 2 hearts.";
+        title = GetType().Name;
+        itemID = 10;
     }
     
 }

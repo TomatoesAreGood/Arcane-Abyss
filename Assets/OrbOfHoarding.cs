@@ -13,10 +13,10 @@ public class OrbOfHoarding : UsableItem
     protected override void Start()
     {
         base.Start();
-        Value = 300;
-        Desc = "The gods see your Greed and reward you for it";
-        Title = GetType().Name;
-        ItemID = 201;
+        value = 300;
+        desc = "The God sees your greed and reward you for it";
+        title = GetType().Name;
+        itemID = 201;
     }
 
 

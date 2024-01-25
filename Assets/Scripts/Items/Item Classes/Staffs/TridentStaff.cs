@@ -8,9 +8,9 @@ public class TridentStaff : StaffItem
     {
         base.Start();
         damageBonus = 5;
-        Value = 300;
-        Desc = "A three-pronged staff that releases three times more magic";
-        Title = GetType().Name;
-        ItemID = 106;
+        value = 300;
+        desc = "A three-pronged staff that releases three times more magic";
+        title = GetType().Name;
+        itemID = 106;
     }
 }

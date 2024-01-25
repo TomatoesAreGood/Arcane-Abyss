@@ -7,8 +7,8 @@ public class MagicSpellItem : SpellItem
     protected override void Start()
     {
         base.Start();
-        ItemID = 3;
-        Desc = "The standard magic spell. Inflcits minor damage, no special effects";
-        Title = "Magic Missile";
+        itemID = 3;
+        desc = "The standard magic spell. Inflcits minor damage, no special effects";
+        title = "Magic Missile";
     }
 }

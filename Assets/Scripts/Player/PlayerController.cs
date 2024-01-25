@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
     private void Update(){
         //have to set this for equipped staff img in inventoryUI
-        if(inventory.EquippedStaff != null){
+        if(inventory.equippedStaff != null){
             equippedStaff.gameObject.SetActive(true);
             equippedStaffSprite = equippedStaff.GetComponent<SpriteRenderer>().sprite;
         }else{
@@ -118,55 +118,55 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         }   
 
         //Spell switching (pain)
-        if(!inventoryUI.IsOpen){
+        if(!inventoryUI.isOpen){
             if(Input.GetKeyDown(KeyCode.Alpha1)){
-                if(inventory.EquippedSpells[0] == null){
+                if(inventory.equippedSpells[0] == null){
                     equippedSpell = null;
                 }else{
-                    if(activeSpells.Contains(inventory.EquippedSpells[0].reference.GetComponent<Spell>())){
-                        equippedSpell = activeSpells.Find(e => e.Equals(inventory.EquippedSpells[0].reference.GetComponent<Spell>()));
+                    if(activeSpells.Contains(inventory.equippedSpells[0].reference.GetComponent<Spell>())){
+                        equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[0].reference.GetComponent<Spell>()));
                     }else{
-                        equippedSpell = Instantiate(inventory.EquippedSpells[0].reference).GetComponent<Spell>();
+                        equippedSpell = Instantiate(inventory.equippedSpells[0].reference).GetComponent<Spell>();
                         activeSpells.Add(equippedSpell);
                     }
                 }
-                inventoryUI.EquippedSpellsRenderer.SelectSlot(0);
+                inventoryUI.equippedSpellsRenderer.SelectSlot(0);
             }else if(Input.GetKeyDown(KeyCode.Alpha2)){
-                if(inventory.EquippedSpells[1] == null){
+                if(inventory.equippedSpells[1] == null){
                     equippedSpell = null;
                 }else{
-                    if(activeSpells.Contains(inventory.EquippedSpells[1].reference.GetComponent<Spell>())){
-                        equippedSpell = activeSpells.Find(e => e.Equals(inventory.EquippedSpells[1].reference.GetComponent<Spell>()) );
+                    if(activeSpells.Contains(inventory.equippedSpells[1].reference.GetComponent<Spell>())){
+                        equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[1].reference.GetComponent<Spell>()) );
                     }else{
-                        equippedSpell = Instantiate(inventory.EquippedSpells[1].reference).GetComponent<Spell>();
+                        equippedSpell = Instantiate(inventory.equippedSpells[1].reference).GetComponent<Spell>();
                         activeSpells.Add(equippedSpell);
                     }
                 }
-                inventoryUI.EquippedSpellsRenderer.SelectSlot(1);
+                inventoryUI.equippedSpellsRenderer.SelectSlot(1);
             }else if(Input.GetKeyDown(KeyCode.Alpha3)){
-                if(inventory.EquippedSpells[2] == null){
+                if(inventory.equippedSpells[2] == null){
                     equippedSpell = null;
                 }else{
-                    if(activeSpells.Contains(inventory.EquippedSpells[2].reference.GetComponent<Spell>())){
-                        equippedSpell = activeSpells.Find(e => e.Equals(inventory.EquippedSpells[2].reference.GetComponent<Spell>()) );
+                    if(activeSpells.Contains(inventory.equippedSpells[2].reference.GetComponent<Spell>())){
+                        equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[2].reference.GetComponent<Spell>()) );
                     }else{
-                        equippedSpell = Instantiate(inventory.EquippedSpells[2].reference).GetComponent<Spell>();
+                        equippedSpell = Instantiate(inventory.equippedSpells[2].reference).GetComponent<Spell>();
                         activeSpells.Add(equippedSpell);
                     }
                 }
-                inventoryUI.EquippedSpellsRenderer.SelectSlot(2);
+                inventoryUI.equippedSpellsRenderer.SelectSlot(2);
             }else if(Input.GetKeyDown(KeyCode.Alpha4)){
-                if(inventory.EquippedSpells[3] == null){
+                if(inventory.equippedSpells[3] == null){
                     equippedSpell = null;
                 }else{
-                    if(activeSpells.Contains(inventory.EquippedSpells[3].reference.GetComponent<Spell>())){
-                        equippedSpell = activeSpells.Find(e => e.Equals(inventory.EquippedSpells[3].reference.GetComponent<Spell>()) );
+                    if(activeSpells.Contains(inventory.equippedSpells[3].reference.GetComponent<Spell>())){
+                        equippedSpell = activeSpells.Find(e => e.Equals(inventory.equippedSpells[3].reference.GetComponent<Spell>()) );
                     }else{
-                        equippedSpell = Instantiate(inventory.EquippedSpells[3].reference).GetComponent<Spell>();
+                        equippedSpell = Instantiate(inventory.equippedSpells[3].reference).GetComponent<Spell>();
                         activeSpells.Add(equippedSpell);
                     }
                 }
-                inventoryUI.EquippedSpellsRenderer.SelectSlot(3);
+                inventoryUI.equippedSpellsRenderer.SelectSlot(3);
             }
         }
 
@@ -179,7 +179,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
         //inventory
         if(Input.GetKeyDown(KeyCode.E)){
-                if (inventoryUI.IsOpen){
+                if (inventoryUI.isOpen){
                     if(MousePointer.instance.selectedItem != null){
                         MousePointer.instance.selectedItem.SnapBack();
                     }
@@ -257,20 +257,20 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     }
 
     public void EquipStaff(StaffItem staff){
-        inventory.EquippedStaff = staff;
+        inventory.equippedStaff = staff;
         equippedStaff.GetComponent<SpriteRenderer>().sprite = staff.GetComponent<Image>().sprite;
     }
 
     public void EquipSpell(SpellItem spell, int spellIndex){
         if(FindEquippedSpell(spell) != -1){
-            inventory.EquippedSpells[FindEquippedSpell(spell)] = null;
+            inventory.equippedSpells[FindEquippedSpell(spell)] = null;
         }
-        inventory.EquippedSpells[spellIndex] = spell;
+        inventory.equippedSpells[spellIndex] = spell;
 
     }
     public int FindEquippedSpell(SpellItem spell){
         for(int i = 0 ; i < 4 ;i++){
-            if(inventory.EquippedSpells[i] == spell){
+            if(inventory.equippedSpells[i] == spell){
                 return i;
             }
         }
@@ -278,11 +278,11 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     }
 
     public int FindSpellInInventory(SpellItem spell){
-        for(int i = 0 ; i < inventory.Spells.Length ;i++){
-            if(inventory.Spells[i] == null){
+        for(int i = 0 ; i < inventory.spells.Length ;i++){
+            if(inventory.spells[i] == null){
                 continue;
             }   
-            if(inventory.Spells[i].GetType().Name == spell.GetType().Name){
+            if(inventory.spells[i].GetType().Name == spell.GetType().Name){
                 return i;
             }
         }
@@ -355,17 +355,17 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
         int[] itemIDs = data.itemsIDs;
         for(int i = 0; i < itemIDs.Length; i++){
-            inventory.Items[i] = itemLibrary.GetReferenceFromID(itemIDs[i]);
+            inventory.items[i] = itemLibrary.GetReferenceFromID(itemIDs[i]);
         }
 
         int[] potionIDs = data.potionIDs;
         for(int i = 0; i < potionIDs.Length; i++){
-            inventory.Potions[i] = (PotionItem)itemLibrary.GetReferenceFromID(potionIDs[i]);
+            inventory.potions[i] = (PotionItem)itemLibrary.GetReferenceFromID(potionIDs[i]);
         }
 
         int[] spellsIDs = data.spellsIDs;
         for(int i = 0; i < spellsIDs.Length; i++){
-            inventory.Spells[i] = (SpellItem)itemLibrary.GetReferenceFromID(spellsIDs[i]);
+            inventory.spells[i] = (SpellItem)itemLibrary.GetReferenceFromID(spellsIDs[i]);
         }
         
     }
@@ -379,27 +379,27 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         data.coins = Coins;
 
 
-        for(int i = 0; i < inventory.Items.Length; i++){
-            if(inventory.Items[i] != null){
-                int itemID = ItemLibrary.instance.GetIDFromReference(inventory.Items[i]);
+        for(int i = 0; i < inventory.items.Length; i++){
+            if(inventory.items[i] != null){
+                int itemID = ItemLibrary.instance.GetIDFromReference(inventory.items[i]);
                 data.itemsIDs[i] = itemID;
             }else{
                 data.itemsIDs[i] = 0;
             }
         }
 
-        for(int i = 0; i < inventory.Potions.Length; i++){
-            if(inventory.Potions[i] != null){
-                int itemID = ItemLibrary.instance.GetIDFromReference(inventory.Potions[i]);
+        for(int i = 0; i < inventory.potions.Length; i++){
+            if(inventory.potions[i] != null){
+                int itemID = ItemLibrary.instance.GetIDFromReference(inventory.potions[i]);
                 data.potionIDs[i] = itemID;
             }else{
                 data.potionIDs[i] = 0;
             }
         }
 
-        for(int i = 0; i < inventory.Spells.Length; i++){
-            if(inventory.Spells[i] != null){
-                int itemID = ItemLibrary.instance.GetIDFromReference(inventory.Spells[i]);
+        for(int i = 0; i < inventory.spells.Length; i++){
+            if(inventory.spells[i] != null){
+                int itemID = ItemLibrary.instance.GetIDFromReference(inventory.spells[i]);
                 data.spellsIDs[i] = itemID;
             }else{
                 data.spellsIDs[i] = 0;
@@ -409,9 +409,9 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
     public bool HasKey()
     {
-        for (int i = 0; i < inventory.Items.Length; i++)
+        for (int i = 0; i < inventory.items.Length; i++)
         {
-            if (inventory.Items[i] is Key)
+            if (inventory.items[i] is Key)
             {
                 return true;
             }
@@ -421,12 +421,12 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
     public void RemoveKey()
     {
-        for (int i = 0; i < inventory.Items.Length; i++)
+        for (int i = 0; i < inventory.items.Length; i++)
         {
-            if (inventory.Items[i] is Key)
+            if (inventory.items[i] is Key)
             {
-                inventory.Items[i] = null;
-                inventoryUI.InventoryRenderer.RedrawMatrix();
+                inventory.items[i] = null;
+                inventoryUI.inventoryRenderer.RedrawMatrix();
             }
         }
     }

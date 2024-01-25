@@ -7,9 +7,9 @@ public class WindSpellItem : SpellItem
     protected override void Start()
     {
         base.Start();
-        ItemID = 4;
-        Desc = "Summons a powerful gust of wind which stops enemies from moving.";
-        Title = "Wind Blade";
+        itemID = 4;
+        desc = "Summons a powerful gust of wind which stops enemies from moving.";
+        title = "Wind Blade";
 
     }
 }

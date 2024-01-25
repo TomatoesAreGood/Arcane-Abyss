@@ -4,8 +4,8 @@ public abstract class PotionItem : UsableItem{
     protected override void Awake()
     {
         base.Awake();
-        Renderer = PlayerController.Instance.inventoryUI.PotionBagRenderer;
-        Inventory = PlayerController.Instance.inventory.Potions;
+        renderer = PlayerController.Instance.inventoryUI.potionBagRenderer;
+        inventory = PlayerController.Instance.inventory.potions;
     }
     public override void Use()
     {
