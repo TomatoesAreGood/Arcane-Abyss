@@ -63,7 +63,7 @@ public class Chest : MonoBehaviour
 
     protected void RandomizeLock()
     {
-        int randomNum = UnityEngine.Random.Range(1, 3);
+        int randomNum = UnityEngine.Random.Range(1, 7);
         if (randomNum == 1) { 
             _isLocked = true;
             _percentString += "****LOCKED****\n";
@@ -189,20 +189,19 @@ public class Chest : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("PlayerIsTrigger")) {
-            if (_isLocked == true && PlayerController.Instance.HasKey())
+        if (collision.CompareTag("PlayerIsTrigger") || collision.CompareTag("Player")) {
+            if (_isLocked == true && PlayerController.instance.HasKey())
             {
                 Open();
-                PlayerController.Instance.RemoveKey();
             }
             else if (_isLocked == false)
             {
                 Open();
             }
         }
-
-        
     }
+
+
     // Update is called once per frame
     void Update()
     {
