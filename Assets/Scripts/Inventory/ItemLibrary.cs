@@ -14,6 +14,9 @@ public class ItemLibrary : MonoBehaviour
     public static ItemLibrary instance;
     private Dictionary<Item, int> itemIDToReference;
     public GameObject coinPrefab;
+    public GameObject coinPouchPrefab;
+
+
     public SpellItem fireShot;
     public SpellItem iceShot;
     public SpellItem magicShot;
@@ -42,7 +45,7 @@ public class ItemLibrary : MonoBehaviour
             instance = this;
             Library = new Item[] { basicStaff, forestStaff, healthPotion, darkStaff, fireShotSpellBook, 
             smallHealthPot, iceStaff, demonicEyeStaff, holyStaff,tridentStaff,manaPotion,smallManaPot,
-            iceShotSpellBook, windShotSpellBook,orbofhoarding
+            iceShotSpellBook, windShotSpellBook,orbofhoarding, undeadStaff, key
             };
             itemIDToReference = new Dictionary<Item, int>{
                 {fireShot,1}, {iceShot,2},{magicShot,3},{windShot,4},{basicStaff,100},
@@ -137,6 +140,8 @@ public class ItemLibrary : MonoBehaviour
             return undeadStaff;
         }else if (item.GetType() == typeof(Key)){
             return key;
+        }else if (item.GetType() == typeof(OrbOfHoarding)){
+            return orbofhoarding;
         }
         throw new ArgumentException("Could not find item reference");
     }

@@ -6,7 +6,7 @@ public class OrbOfHoarding : UsableItem
 {
     public override void Use()
     {
-        PlayerController.instance.coins *= 2;
+        PlayerController.Instance.Coins *= 2;
         Destroy(gameObject);
     }
 
