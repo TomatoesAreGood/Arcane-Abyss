@@ -15,6 +15,7 @@ public class StaffItem : Item
 
     public override void Equip(){
         PlayerController.Instance.EquipStaff(this);
+        SoundManager.instance.PlayEquipSFX();
     }
 
     public override void Drop()
@@ -25,6 +26,7 @@ public class StaffItem : Item
         if(this == PlayerController.Instance.inventory.EquippedStaff){
             PlayerController.Instance.inventory.EquippedStaff = null;
         }
+        SoundManager.instance.PlayItemPickUpSFX();
         Destroy(gameObject);
     }
 

@@ -7,6 +7,7 @@ public class IceShotSpellBook : SpellBook
     public override void Use()
     {
         if(PickUpController.instance.TryAddSpell(ItemLibrary.instance.iceShot)){
+            SoundManager.instance.PlayPageFlipSFX();
             Destroy(gameObject);
         }
     }

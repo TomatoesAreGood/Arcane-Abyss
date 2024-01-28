@@ -13206,7 +13206,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -44563,6 +44563,8 @@ MonoBehaviour:
   _sellItemSFX: {fileID: 8300000, guid: 10f960bdf4cbbe743b973b5e715a2a9e, type: 3}
   _openLockedChestSFX: {fileID: 8300000, guid: e52f3121051568047b95d41cd80b8e4b, type: 3}
   _openUnlockedChestSFX: {fileID: 8300000, guid: e4465ae1b51796846b2c26ed4467c960, type: 3}
+  _pageFlipSFX: {fileID: 8300000, guid: baa97e36eb024a140bfea9b8831a69cb, type: 3}
+  _itemEquipSFX: {fileID: 8300000, guid: b283d94cc2324a4499c25e29ae04e627, type: 3}
 --- !u!4 &1964163795
 Transform:
   m_ObjectHideFlags: 0

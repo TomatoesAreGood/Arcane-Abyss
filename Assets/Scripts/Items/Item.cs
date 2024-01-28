@@ -108,6 +108,7 @@ public class Item : MonoBehaviour
         GameObject obj = Instantiate(PickUpController.instance.defaultDropItem);
         obj.transform.position = PlayerController.CharacterPos;
         obj.GetComponent<PickupScript>().itemReference = ItemLibrary.instance.GetItemReference(this);
+        SoundManager.instance.PlayItemPickUpSFX();
         Destroy(gameObject);
     }
 

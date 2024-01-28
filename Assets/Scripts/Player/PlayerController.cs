@@ -173,7 +173,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
         //shooting spells
         if (Input.GetMouseButtonDown(0)){
-                if(equippedSpell != null){
+                if(equippedSpell != null && Time.timeScale != 0f){
                     equippedSpell.Fire();
                 }
         }

@@ -6,8 +6,8 @@ public class WindShotSpellBook : SpellBook
 {
     public override void Use()
     {
-        if (PickUpController.instance.TryAddSpell(ItemLibrary.instance.windShot))
-        {
+        if (PickUpController.instance.TryAddSpell(ItemLibrary.instance.windShot)){            
+            SoundManager.instance.PlayPageFlipSFX();
             Destroy(gameObject);
         }
     }
