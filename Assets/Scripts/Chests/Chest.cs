@@ -63,7 +63,7 @@ public class Chest : MonoBehaviour
 
     protected void RandomizeLock()
     {
-        int randomNum = UnityEngine.Random.Range(1, 3);
+        int randomNum = UnityEngine.Random.Range(1, 7);
         if (randomNum == 1) { 
             _isLocked = true;
             _percentString += "****LOCKED****\n";

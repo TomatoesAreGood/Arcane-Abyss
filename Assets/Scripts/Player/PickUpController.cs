@@ -35,6 +35,7 @@ public class PickUpController : MonoBehaviour{
     }
     
     public bool TryPickUp(Item item){
+        Debug.Log(item.ToString());
         Inventory inventory = PlayerController.Instance.inventory;
         PlayerController playerController = PlayerController.Instance;
         playerController.inventoryUI.UpdateData();

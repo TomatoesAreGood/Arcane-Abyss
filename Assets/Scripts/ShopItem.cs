@@ -43,13 +43,13 @@ public class ShopItem : MonoBehaviour
         if(IsMouseOnItem && Input.GetMouseButtonDown(0)){
             if(PlayerController.Instance.Coins > itemPrices[itemRef.GetType().Name])
             {
-
                 if (PickUpController.instance.TryPickUp(itemRef))
                 {
                     PlayerController.Instance.Coins -= itemPrices[itemRef.GetType().Name];
                     Debug.Log("bought item: " + itemRef.ToString());
                     ShopManager.Instance.ShopUI.RemoveItem(itemRef);
                     ShopManager.Instance.ShopUI.RedrawList();
+                    SoundManager.instance.PlayBuyItemSFX();
                 }
             }
                

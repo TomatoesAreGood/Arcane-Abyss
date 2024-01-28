@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8926528712826563816}
   - component: {fileID: 2252611249437986749}
   - component: {fileID: 7739989819145104210}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 4472480822067376750}
   - component: {fileID: 8964312032345815369}
   - component: {fileID: 5950233345866539085}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: -847809218055291472}
   - component: {fileID: -1150921028591540123}
   - component: {fileID: -2059776336118750751}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SpellBookChest
   m_TagString: Untagged
   m_Icon: {fileID: 0}

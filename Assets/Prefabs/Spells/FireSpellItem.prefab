@@ -88,12 +88,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b92938a1ec4d0874799e93d5e79b01c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 0
-  title: 
-  desc: 
-  itemType: 1
-  parentAfterDrag: {fileID: 0}
-  image: {fileID: 0}
-  renderer: {fileID: 0}
-  inventory: []
+  Value: 0
+  Title: 
+  Desc: 
+  ItemType: 1
+  ParentAfterDrag: {fileID: 0}
+  Image: {fileID: 0}
+  Renderer: {fileID: 0}
+  Inventory: []
   reference: {fileID: 8815488306100796859, guid: 0d9f7151c6ab415418370e5e058a9226, type: 3}

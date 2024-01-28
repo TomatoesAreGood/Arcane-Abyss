@@ -15,7 +15,7 @@ public class ShopUI : MonoBehaviour
     public virtual void Awake()
     {
         // defines size of shop 
-        _numItems = 150;
+        _numItems = 20;
         _shopItems = new Item[_numItems];
         _itemlibrary = ItemLibrary.instance.Library;
 
@@ -164,8 +164,8 @@ public class ShopUI : MonoBehaviour
 
     public void BackToGame()
     {
-        gameObject.SetActive(false);
         ShopManager.Instance.SetPauseStatus(false);
+        gameObject.SetActive(false);
         PauseManager.instance.Resume();
     }
 

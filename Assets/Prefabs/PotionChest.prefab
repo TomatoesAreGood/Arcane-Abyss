@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2491695989191158181}
   - component: {fileID: 4807265416537716945}
   - component: {fileID: 2672536793616190219}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 1972917000052808250}
   - component: {fileID: 7129134794104266504}
   - component: {fileID: 6677094481863226472}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 2551667228750922426}
   - component: {fileID: -3867850664552535107}
   - component: {fileID: -6341124285989312316}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PotionChest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
