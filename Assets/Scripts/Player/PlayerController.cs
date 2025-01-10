@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 {   
     //SINGLETON
     public static PlayerController Instance;
-
+    
     //Movement
     public float MoveSpeed;
     private Vector2 _movementDirection;
@@ -197,17 +197,20 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         CharacterPos = transform.position; 
 
         //increase max mana if player hasn't fired in a while
-        if(equippedSpell == null){
-            if(Mana < MaxMana){
-                Mana+= 0.1f;
+        if(Time.timeScale != 0f){
+            if(equippedSpell == null){
+                if(Mana < MaxMana){
+                    Mana+= 0.1f;
 
+                }
+            }else if(Time.time - equippedSpell.NextAvailFire > 1){
+                if(Mana < MaxMana){
+                    Mana+= 0.1f;
+                }        
             }
-        }else if(Time.time - equippedSpell.NextAvailFire > 1){
-            if(Mana < MaxMana){
-                Mana+= 0.1f;
-
-            }        
         }
+        
+       
 
         //player death
         if (Health <= 0)

@@ -10,6 +10,7 @@ public class DeathMenu : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _enemiesText;
     [SerializeField] private TextMeshProUGUI _wavesText;
     [SerializeField] private TextMeshProUGUI _timeText;
+    
 
     public void Enable(){
         gameObject.SetActive(true);
