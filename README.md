@@ -1,5 +1,5 @@
 # Arcane-Abyss
-A top-down, endless dungeoun crawler with rouge-like elements. The culminating project for ICS4U, developed using Unity and C#.
+A top-down, endless dungeoun crawler with rouge-like elements. The culminating project for ICS4U, developed using Unity and C#. 
 
 ## Features
 - Defeat an assortment of enemies, open chests, gather wealth, learn new spells and weapons, survive for as long as possible
